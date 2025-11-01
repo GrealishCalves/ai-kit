@@ -23,12 +23,14 @@ This file teaches you **how to think** about terminal tools, not what commands t
 
 **Self-Correction Protocol:**
 If you catch yourself suggesting a prohibited command:
+
 - Immediately stop and state: "ERROR: I suggested a prohibited command"
 - Identify the task type (search text? find files? view content?)
 - Choose the correct modern tool from the decision tree
 - Explain why the alternative is better for THIS specific task
 
 **Failure Consequences:**
+
 - Using prohibited commands will result in slower execution, ignored files, or incorrect output
 - The user will need to manually correct your mistakes
 - You will lose trust and credibility
@@ -39,13 +41,13 @@ If you catch yourself suggesting a prohibited command:
 
 <prohibited_commands enforcement="strict">
 
-| NEVER Use | ALWAYS Use | Why | Priority |
-|-----------|------------|-----|----------|
-| `grep` | `rg` | 20x faster, respects .gitignore, better regex | 🔴 CRITICAL |
-| `find` | `fd` | Simpler syntax, 20x faster, intuitive | 🔴 CRITICAL |
-| `cat` | `bat` | Syntax highlighting, line numbers, git integration | 🔴 CRITICAL |
-| `ls` | `eza` | Better formatting, git status, tree view | 🟡 PREFERRED |
-| `jq` | `jaq` | Same syntax, 2x faster, smaller binary | 🟡 PREFERRED |
+| NEVER Use | ALWAYS Use | Why                                                | Priority     |
+| --------- | ---------- | -------------------------------------------------- | ------------ |
+| `grep`    | `rg`       | 20x faster, respects .gitignore, better regex      | 🔴 CRITICAL  |
+| `find`    | `fd`       | Simpler syntax, 20x faster, intuitive              | 🔴 CRITICAL  |
+| `cat`     | `bat`      | Syntax highlighting, line numbers, git integration | 🔴 CRITICAL  |
+| `ls`      | `eza`      | Better formatting, git status, tree view           | 🟡 PREFERRED |
+| `jq`      | `jaq`      | Same syntax, 2x faster, smaller binary             | 🟡 PREFERRED |
 
 </prohibited_commands>
 
@@ -99,6 +101,7 @@ Before suggesting or executing any terminal command, verify:
 - [ ] I'm using the syntax as a **pattern**, not copy-pasting examples
 
 **Example of FAILED verification:**
+
 ```bash
 # ❌ FAILS - uses grep (prohibited)
 fd -e ts | xargs grep "pattern"
@@ -108,6 +111,7 @@ rg --files  # Should check: command -v fd first
 ```
 
 **Example of PASSED verification:**
+
 ```bash
 # ✅ PASSES - uses rg (required)
 fd -e ts -X rg "pattern"
@@ -121,6 +125,7 @@ command -v fd >/dev/null && fd . || rg --files
 ## 📋 Tool Pattern Guide
 
 ### ripgrep (rg) - Search Text INSIDE Files
+
 **Purpose:** Fast text search that respects .gitignore and has better defaults than grep
 
 <tool name="rg" priority="critical">
@@ -131,6 +136,7 @@ command -v fd >/dev/null && fd . || rg --files
 </tool>
 
 **Core Syntax Patterns:**
+
 ```bash
 # Basic pattern
 rg "PATTERN"                    # Search current directory
@@ -156,6 +162,7 @@ rg "PATTERN" --replace 'TEXT'   # Replace matches in output
 **Common Use Cases (Learn the Pattern, Not the Command):**
 
 **Pattern 1: Search for specific content**
+
 ```bash
 # Template: rg "YOUR_SEARCH_TERM" [--type FILE_TYPE] [-i for case-insensitive]
 # Example: Find React hooks
@@ -163,6 +170,7 @@ rg "useState|useEffect" --type ts
 ```
 
 **Pattern 2: Find files containing pattern**
+
 ```bash
 # Template: rg "PATTERN" -l [--type TYPE]
 # Example: Find files that import a module
@@ -170,6 +178,7 @@ rg "import.*from.*react" -l --type ts
 ```
 
 **Pattern 3: Extract specific parts with regex**
+
 ```bash
 # Template: rg 'REGEX_WITH_CAPTURE' -oN --replace '$1'
 # Example: Extract function names
@@ -177,6 +186,7 @@ rg 'function (\w+)' -oN --replace '$1'
 ```
 
 **Pattern 4: Combine with other tools**
+
 ```bash
 # Template: rg "PATTERN" -l | xargs COMMAND
 # Example: Search and view results
@@ -184,6 +194,7 @@ rg "TODO" -l | xargs bat
 ```
 
 **Anti-Patterns (Learn What NOT to Do):**
+
 ```bash
 # ❌ WRONG: Using grep
 grep -r "pattern" .
@@ -204,6 +215,7 @@ rg "YOUR_SEARCH_TERMS" -C 2  # Think about what YOU need
 ---
 
 ### fd - Find Files BY NAME
+
 **Purpose:** Simple and fast alternative to find with intuitive syntax and smart defaults
 
 <tool name="fd" priority="critical">
@@ -236,6 +248,7 @@ fd file1; fd file2; fd file3
 ---
 
 **Core Syntax Patterns:**
+
 ```bash
 # Basic search
 fd PATTERN                      # Find files/dirs matching pattern (simple regex)
@@ -260,6 +273,7 @@ fd PATTERN -X COMMAND           # Execute command on all results (batched)
 **Common Use Cases (Learn the Pattern, Not the Command):**
 
 **Pattern 1: Find files by extension**
+
 ```bash
 # Template: fd -e EXTENSION [SEARCH_PATH]
 # Example: Find all TypeScript files
@@ -267,6 +281,7 @@ fd -e ts
 ```
 
 **Pattern 2: Find files by name pattern**
+
 ```bash
 # Template: fd "NAME_PATTERN" [PATH]
 # Example: Find config files
@@ -274,6 +289,7 @@ fd "config"
 ```
 
 **Pattern 3: Find and process files**
+
 ```bash
 # Template: fd PATTERN | xargs COMMAND
 # Example: Find and view files
@@ -281,6 +297,7 @@ fd "config" | xargs bat
 ```
 
 **Pattern 4: Execute command on each file**
+
 ```bash
 # Template: fd PATTERN -x COMMAND {}
 # Example: Run command on each file
@@ -288,6 +305,7 @@ fd -e json -x jaq '.name' {}
 ```
 
 **Fallback Protocol:**
+
 ```bash
 # ✅ CORRECT: Verify fd availability before fallback
 command -v fd >/dev/null && fd . || rg --files
@@ -297,6 +315,7 @@ rg --files  # Don't do this without checking!
 ```
 
 **Anti-Patterns (Learn What NOT to Do):**
+
 ```bash
 # ❌ WRONG: Using find
 find . -name "*.ts"
@@ -322,6 +341,7 @@ command -v fd >/dev/null && fd . || rg --files
 ---
 
 ### bat - View Files WITH Syntax Highlighting
+
 **Purpose:** Cat clone with syntax highlighting, line numbers, and git integration
 
 <tool name="bat" priority="critical">
@@ -332,6 +352,7 @@ command -v fd >/dev/null && fd . || rg --files
 </tool>
 
 **Core Syntax Patterns:**
+
 ```bash
 # Basic viewing
 bat FILE                        # View with syntax highlighting
@@ -356,6 +377,7 @@ bat -l LANGUAGE FILE            # Force specific syntax highlighting
 **Common Use Cases (Learn the Pattern, Not the Command):**
 
 **Pattern 1: View file with syntax highlighting**
+
 ```bash
 # Template: bat FILE
 # Example: View TypeScript file
@@ -363,6 +385,7 @@ bat src/index.ts
 ```
 
 **Pattern 2: View specific line range**
+
 ```bash
 # Template: bat -r START:END FILE
 # Example: View lines 50-100
@@ -370,6 +393,7 @@ bat -r 50:100 src/index.ts
 ```
 
 **Pattern 3: Combine with search results**
+
 ```bash
 # Template: rg "PATTERN" -l | xargs bat
 # Example: Search and view matching files
@@ -377,6 +401,7 @@ rg "useState" -l | xargs bat
 ```
 
 **Anti-Patterns (Learn What NOT to Do):**
+
 ```bash
 # ❌ WRONG: Using cat
 cat file.ts
@@ -397,6 +422,7 @@ bat --paging=never file.ts | head -10
 ---
 
 ### eza - List Directory Contents
+
 **Purpose:** Modern ls replacement with git integration, colors, and tree view
 
 <tool name="eza" priority="preferred">
@@ -407,6 +433,7 @@ bat --paging=never file.ts | head -10
 </tool>
 
 **Core Syntax Patterns:**
+
 ```bash
 # Basic listing
 eza                             # Simple list
@@ -436,6 +463,7 @@ eza --only-files                # Show only files
 **Common Use Cases (Learn the Pattern, Not the Command):**
 
 **Pattern 1: Inspect directory structure**
+
 ```bash
 # Template: eza -la [--git] [PATH]
 # Example: View current directory with git status
@@ -443,6 +471,7 @@ eza -la --git
 ```
 
 **Pattern 2: Tree view of project**
+
 ```bash
 # Template: eza --tree --level=NUM [PATH]
 # Example: View 2-level tree
@@ -450,6 +479,7 @@ eza --tree --level=2 src/
 ```
 
 **Pattern 3: Sort by specific criteria**
+
 ```bash
 # Template: eza -l[SORT_FLAG]
 # Example: Sort by modification time
@@ -457,6 +487,7 @@ eza -lt
 ```
 
 **Anti-Patterns (Learn What NOT to Do):**
+
 ```bash
 # ❌ WRONG: Using ls
 ls -la
@@ -477,6 +508,7 @@ rg "TODO"
 ---
 
 ### jaq - Parse/Query JSON
+
 **Purpose:** Faster jq alternative with identical syntax for parsing and querying JSON
 
 <tool name="jaq" priority="preferred">
@@ -487,6 +519,7 @@ rg "TODO"
 </tool>
 
 **Core Syntax Patterns:**
+
 ```bash
 # Basic operations
 jaq '.' FILE                    # Pretty print JSON
@@ -515,6 +548,7 @@ jaq '.field | keys' FILE        # Chain operations
 **Common Use Cases (Learn the Pattern, Not the Command):**
 
 **Pattern 1: Extract specific field**
+
 ```bash
 # Template: jaq -r '.FIELD_PATH' FILE
 # Example: Get package version
@@ -522,6 +556,7 @@ jaq -r '.version' package.json
 ```
 
 **Pattern 2: Filter array by condition**
+
 ```bash
 # Template: jaq '.[] | select(.FIELD == "VALUE")' FILE
 # Example: Find active items
@@ -529,6 +564,7 @@ jaq '.[] | select(.active == true)' data.json
 ```
 
 **Pattern 3: Process multiple JSON files**
+
 ```bash
 # Template: fd -e json | xargs jaq 'QUERY'
 # Example: Extract names from all JSON files
@@ -536,6 +572,7 @@ fd -e json | xargs jaq -r '.name'
 ```
 
 **Anti-Patterns (Learn What NOT to Do):**
+
 ```bash
 # ❌ WRONG: Using jq
 jq '.field' file.json
@@ -558,6 +595,7 @@ rg "pattern" --type json
 ## 🔄 Learning & Self-Correction Loop
 
 **If a command fails:**
+
 1. **Identify the task** - What am I trying to do? (search text / find files / view content / etc.)
 2. **Check the decision tree** - Did I use the right tool for this task?
 3. **Verify syntax** - Does my syntax match the patterns in this file?
@@ -565,12 +603,14 @@ rg "pattern" --type json
 5. **Verify tool availability** - Did I check if fd exists before using rg --files?
 
 **If output is unexpected:**
+
 1. **Re-read the task** - Am I solving the right problem?
 2. **Check tool choice** - Did I use rg for text search and fd for file discovery?
 3. **Verify flags** - Are my flags correct for this tool?
 4. **Check pipes** - Are all tools in the pipe chain modern tools?
 
 **Remember:**
+
 - These are **patterns and guidelines**, not commands to copy-paste
 - **Think about your specific task** and adapt the patterns
 - **Verify tool availability** before using fallbacks
@@ -623,13 +663,12 @@ Process JSON data?
 
 ## 🤔 fd vs rg: When to Use Which?
 
-| Task | Tool | Example | Why |
-|------|------|---------|-----|
-| Find files by **name pattern** | `fd` | `fd "config"` | Faster, simpler syntax |
-| Find files by **extension** | `fd` | `fd -e ts` | Built-in extension filtering |
-| Find files by **type** (file/dir) | `fd` | `fd -t d` | Built-in type filtering |
-| Find files by **content** | `rg` | `rg "pattern" --type ts` | Searches inside files |
-| Find files matching **multiple patterns** (OR) | `rg --files \| rg` | `rg --files \| rg "file1\|file2"` | fd doesn't support \| alternation |
-| Find files and **execute command** | `fd -x` or `fd -X` | `fd -e ts -X bat` | Built-in execution |
-| List **all files** (no pattern) | `fd .` or `rg --files` | `fd .` | Either works, fd preferred |
-
+| Task                                           | Tool                   | Example                           | Why                               |
+| ---------------------------------------------- | ---------------------- | --------------------------------- | --------------------------------- |
+| Find files by **name pattern**                 | `fd`                   | `fd "config"`                     | Faster, simpler syntax            |
+| Find files by **extension**                    | `fd`                   | `fd -e ts`                        | Built-in extension filtering      |
+| Find files by **type** (file/dir)              | `fd`                   | `fd -t d`                         | Built-in type filtering           |
+| Find files by **content**                      | `rg`                   | `rg "pattern" --type ts`          | Searches inside files             |
+| Find files matching **multiple patterns** (OR) | `rg --files \| rg`     | `rg --files \| rg "file1\|file2"` | fd doesn't support \| alternation |
+| Find files and **execute command**             | `fd -x` or `fd -X`     | `fd -e ts -X bat`                 | Built-in execution                |
+| List **all files** (no pattern)                | `fd .` or `rg --files` | `fd .`                            | Either works, fd preferred        |
