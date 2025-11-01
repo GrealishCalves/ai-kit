@@ -1,5 +1,6 @@
 ---
-type: "always_apply"
+type: "Tool"
+description: "Etherscan API blockchain interaction tool documentation."
 ---
 
 # Etherscan API Tool
