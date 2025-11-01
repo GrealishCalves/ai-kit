@@ -136,7 +136,6 @@ Dead code detection tools (like Knip) CANNOT detect:
 
 - **knip** (PRIMARY): Dead code detection - monorepo-aware, framework-aware, plugin-based
 - **ripgrep** (SECONDARY): Fast text search and cross-validation of Knip findings
-- **jscpd** (OPTIONAL): Semantic code duplication detection - use only when analyzing duplication
 - **git** (OPTIONAL): History analysis and change tracking - use only when analyzing git state
 
 **Multi-Tool Cross-Validation Workflow:**

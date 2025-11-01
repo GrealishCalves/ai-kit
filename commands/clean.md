@@ -29,26 +29,24 @@ Confirm the intended scope before triggering heavy tools so you do not accidenta
 
 - Primary: knip (scoped to the workspace for dead code detection)
 - Secondary: ripgrep (cross-validation of Knip findings)
-- Optional: jscpd (if analyzing duplication), git (if checking history)
+- Optional: git (if checking history)
 
 **For Conceptual Domain** (e.g., `authentication`, `payment-flow`):
 
 - Primary: ripgrep (pattern discovery across codebase)
-- Optional: jscpd (duplicated logic), git (change history)
+- Optional: git (change history)
 - Skip: knip (not effective for conceptual analysis)
 
 **For Git State** (e.g., `uncommitted`, `modified-files`):
 
 - Primary: git (list uncommitted/modified files)
 - Secondary: ripgrep (inspect changes)
-- Optional: jscpd (duplicate detection in new code)
 - Skip: knip (not relevant to git state)
 
 **For Pattern-Based** (e.g., `*.test.ts`, `*-helpers.ts`):
 
 - Primary: ripgrep (find pattern matches)
 - Secondary: knip (verify unused exports in matched files)
-- Optional: jscpd (duplicated test setup)
 
 **Remember**: These are suggestions, not rules. Use your judgment based on the specific cleanup goals.
 
@@ -60,7 +58,6 @@ REQUIRED: Execute these view commands simultaneously to understand available cap
 
 - read("ai-kit/personas/cleaner_persona.md", type="file"): Risk assessment framework and decision-making principles
 - read("ai-kit/tools/knip.md", type="file"): Dead code detection for monorepos (PRIMARY TOOL)
-- read("ai-kit/tools/jscpd.md", type="file"): Semantic code duplication detection (optional)
 
 **Terminal Tools:**
 
@@ -79,7 +76,7 @@ REQUIRED: Execute these view commands simultaneously to understand available cap
 4. Knip is the PRIMARY and ONLY tool for dead code detection
 5. Use terminal tools (ripgrep, jaq, fd, bat, eza) for all file operations and data processing
 6. NEVER use deprecated commands: grep, jq, find, cat, ls
-7. Use jscpd and git only when specifically needed for duplication or history analysis
+7. Use git only when specifically needed for history analysis
 
 ## Analysis Instructions
 
@@ -112,7 +109,7 @@ After conducting a thorough analysis of the current codebase state, please confi
 **Available Analysis Tools:**
 
 - **knip** (PRIMARY): Dead code detection - unused files, exports, dependencies (monorepo-aware, framework-aware)
-- **jscpd** (OPTIONAL): Semantic code duplication detection (AST-based) - use only when analyzing duplication
+- **ripgrep** (SECONDARY): Fast text search, pattern detection, cross-validation of Knip findings
 - **git** (OPTIONAL): History analysis, blame, uncommitted changes - use only when analyzing git state
 
 **Required Terminal Tools (see ai-kit/tools/ for usage):**
@@ -227,11 +224,6 @@ Report findings from the tools you actually used. Adapt the structure based on w
 - Unimported files: [count and paths]
 - Unused npm packages: [package names]
 
-**If analyzing duplication:**
-
-- Code duplication blocks: [count, percentage, file locations]
-- Semantic similarity: [files with similar logic]
-
 **If analyzing code quality:**
 
 - Skipped tests: [count and locations]
@@ -293,7 +285,6 @@ Impact: [complexity reduction, coupling improvement]
 ### 6. Consolidations (DRY)
 
 Files: [list of files with duplication]
-Duplication: [jscpd output showing duplicated blocks]
 Proposed: [how to consolidate]
 Risk: [0-10] - [justification]
 Impact: [LOC reduction, maintainability improvement]

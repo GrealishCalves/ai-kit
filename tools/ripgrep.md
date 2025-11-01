@@ -15,7 +15,6 @@
 - **Pattern detection:** Find TODOs, console.logs, hardcoded values, magic numbers
 - **Cross-validation:** Verify findings from dead code detection tools (Knip)
 - **Regex support:** Powerful pattern matching with regular expressions
-- **Text-based search:** Complements semantic tools like jscpd for different use cases
 - **File discovery:** Replaces `find`, `ls`, and `view` tool for searching
 - **Extract & transform:** Capture groups with `--replace` for data extraction
 
