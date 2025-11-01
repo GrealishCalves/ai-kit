@@ -25,24 +25,30 @@ Confirm the intended scope before triggering heavy tools so you do not accidenta
 
 ### Domain-Specific Tool Selection Examples
 
-**For File/Directory Path** (e.g., `apps/hardhat/contracts`):
+**For File/Directory Path** (e.g., `apps/contracts`, `src/components`):
 
-- Consider: knip (scoped to the workspace), jscpd (duplication)
-- Skip: git analysis (unless checking history)
+- Primary: knip (scoped to the workspace for dead code detection)
+- Secondary: ripgrep (cross-validation of Knip findings)
+- Optional: jscpd (if analyzing duplication), git (if checking history)
 
-**For Conceptual Domain** (e.g., `authentication`):
+**For Conceptual Domain** (e.g., `authentication`, `payment-flow`):
 
-- Consider: ripgrep (pattern discovery), jscpd (duplicated logic)
-- Skip: knip (too broad for conceptual work)
+- Primary: ripgrep (pattern discovery across codebase)
+- Optional: jscpd (duplicated logic), git (change history)
+- Skip: knip (not effective for conceptual analysis)
 
-**For Git State** (e.g., `uncommitted`):
+**For Git State** (e.g., `uncommitted`, `modified-files`):
 
-- Consider: git (to list uncommitted files), ripgrep (change inspection), jscpd (duplicate detection in new code)
+- Primary: git (list uncommitted/modified files)
+- Secondary: ripgrep (inspect changes)
+- Optional: jscpd (duplicate detection in new code)
 - Skip: knip (not relevant to git state)
 
-**For Pattern-Based** (e.g., `*.test.ts`):
+**For Pattern-Based** (e.g., `*.test.ts`, `*-helpers.ts`):
 
-- Consider: ripgrep (find matches), knip (verify unused helpers), jscpd (duplicated setup)
+- Primary: ripgrep (find pattern matches)
+- Secondary: knip (verify unused exports in matched files)
+- Optional: jscpd (duplicated test setup)
 
 **Remember**: These are suggestions, not rules. Use your judgment based on the specific cleanup goals.
 
@@ -50,18 +56,30 @@ Confirm the intended scope before triggering heavy tools so you do not accidenta
 
 REQUIRED: Execute these view commands simultaneously to understand available capabilities:
 
+**Persona & Analysis Tools:**
+
 - read("ai-kit/personas/cleaner_persona.md", type="file"): Risk assessment framework and decision-making principles
-- read("ai-kit/tools/knip.md", type="file"): Modern dead code detection for monorepos (RECOMMENDED)
-- read("ai-kit/tools/ripgrep.md", type="file"): Text pattern search and cross-validation capabilities
-- read("ai-kit/tools/jscpd.md", type="file"): Semantic code duplication detection
-- read("ai-kit/tools/git.md", type="file"): Git operations and history analysis
+- read("ai-kit/tools/knip.md", type="file"): Dead code detection for monorepos (PRIMARY TOOL)
+- read("ai-kit/tools/jscpd.md", type="file"): Semantic code duplication detection (optional)
+
+**Terminal Tools:**
+
+- read("ai-kit/tools/ripgrep.md", type="file"): Fast text search, pattern detection, cross-validation (REQUIRED)
+- read("ai-kit/tools/jaq.md", type="file"): JSON querying and transformation (REQUIRED for processing tool outputs)
+- read("ai-kit/tools/fd.md", type="file"): Fast file discovery (REQUIRED for file listing)
+- read("ai-kit/tools/bat.md", type="file"): Enhanced file viewer with syntax highlighting (REQUIRED for code inspection)
+- read("ai-kit/tools/eza.md", type="file"): Modern directory listings with tree views (REQUIRED for structure inspection)
+- read("ai-kit/tools/git.md", type="file"): Git operations and history analysis (optional)
 
 **Critical Instructions:**
 
 1. Read and internalize cleaner_persona.md risk framework (0-10 scale)
-2. Review ALL tool documentation to understand their full capabilities
+2. Review ALL tool documentation to understand capabilities before use
 3. Intelligently select which tools are necessary based on the domain and cleanup scope
-4. Reference tool guides before using them to understand their complete feature set
+4. Knip is the PRIMARY and ONLY tool for dead code detection
+5. Use terminal tools (ripgrep, jaq, fd, bat, eza) for all file operations and data processing
+6. NEVER use deprecated commands: grep, jq, find, cat, ls
+7. Use jscpd and git only when specifically needed for duplication or history analysis
 
 ## Analysis Instructions
 
@@ -79,22 +97,31 @@ After conducting a thorough analysis of the current codebase state, please confi
 
 **Tool Selection Principles:**
 
-- Never use `jq`; always use `jaq` for JSON processing (faster, same syntax)
-- Never use `grep`; always use `rg` (ripgrep) for text patterns
-- Use `fd` for file discovery; if unavailable fall back to `rg --files`; never use `find`
-- Never use `cat`; always use `bat` for file viewing with syntax highlighting
-- Prefer `eza` over `ls` for directory listings and structure inspection
-- Default to Knip for dead-code detection (only tool for this purpose)
+- **NEVER** use deprecated commands: `jq`, `grep`, `find`, `cat`, `ls`
+- **ALWAYS** use modern terminal tools (see ai-kit/tools/ for full documentation):
+  - `jaq` for JSON processing (faster than jq, same syntax)
+  - `rg` (ripgrep) for text search and pattern detection
+  - `fd` for file discovery (fallback: `rg --files` if fd unavailable)
+  - `bat` for file viewing with syntax highlighting
+  - `eza` for directory listings and tree structure inspection
+- Use Knip as the PRIMARY and ONLY tool for dead code detection
 - Intelligently select analysis tools based on domain scope and cleanup goals
-- Reference tool documentation to understand full capabilities before use
+- Reference tool documentation (ai-kit/tools/\*.md) to understand full capabilities before use
 - All tool outputs should be saved to `/temp` directory to keep project root clean
 
-**Available Analysis Tools (Select Based on Need):**
+**Available Analysis Tools:**
 
-- **knip** (PRIMARY): Modern dead code detection - unused files, exports, dependencies (monorepo-aware)
-- **ripgrep**: Fast text pattern search, file listing, and cross-validation of tool findings
-- **jscpd**: Semantic code duplication detection (AST-based)
-- **git**: History analysis, blame, uncommitted changes
+- **knip** (PRIMARY): Dead code detection - unused files, exports, dependencies (monorepo-aware, framework-aware)
+- **jscpd** (OPTIONAL): Semantic code duplication detection (AST-based) - use only when analyzing duplication
+- **git** (OPTIONAL): History analysis, blame, uncommitted changes - use only when analyzing git state
+
+**Required Terminal Tools (see ai-kit/tools/ for usage):**
+
+- **ripgrep** (`rg`): Fast text search, pattern detection, cross-validation of Knip findings
+- **jaq**: JSON querying and transformation for processing tool outputs (Knip JSON, package.json, etc.)
+- **fd**: Fast file discovery and listing (replaces `find`)
+- **bat**: Enhanced file viewer with syntax highlighting (replaces `cat`)
+- **eza**: Modern directory listings with tree views and git status (replaces `ls`)
 
 **Evidence-Based Analysis:**
 
@@ -116,21 +143,21 @@ To reduce false positives and increase confidence in findings, use multi-tool ve
    # Monorepo sweep
    npx knip --reporter json > temp/knip.json
 
-   # Single workspace (faster)
-   npx knip --workspace apps/hardhat --reporter json > temp/knip-hardhat.json
+   # Single workspace (faster, replace <workspace-name> with actual workspace)
+   npx knip --workspace <workspace-name> --reporter json > temp/knip-workspace.json
    ```
 
 2. **Secondary Verification** - Use ripgrep to verify findings
 
    ```bash
-   # Extract unused files from Knip
-   cat temp/knip.json | jaq -r '.files[] | .filePath' > temp/knip-unused.txt
+   # Extract unused files from Knip using jaq (NOT jq)
+   jaq -r '.files[] | .filePath' temp/knip.json > temp/knip-unused.txt
 
    # Verify with ripgrep (files with no imports)
-   rg --files-without-match "import.*from|require\(" apps/TARGET > temp/rg-no-imports.txt
+   rg --files-without-match "import.*from|require\(" <target-directory> > temp/rg-no-imports.txt
    ```
 
-   If the candidate file is excluded by `.gitignore` (for example `apps/web/src/routeTree.gen.ts`), rerun ripgrep with `--no-ignore` so generated artifacts are still inspected.
+   If the candidate file is excluded by `.gitignore`, rerun ripgrep with `--no-ignore` so generated artifacts are still inspected.
 
 3. **Calculate Confidence Scores**
 
@@ -150,6 +177,9 @@ To reduce false positives and increase confidence in findings, use multi-tool ve
 
    # Check if exports are used
    rg "exportName" .
+
+   # View file with syntax highlighting using bat (NOT cat)
+   bat path/to/suspicious-file.ts
    ```
 
 **Confidence Thresholds:**
@@ -165,13 +195,17 @@ To reduce false positives and increase confidence in findings, use multi-tool ve
 
 ```bash
 # Knip says: "config/index.ts is unused"
-# Verify with ripgrep:
+
+# Step 1: Verify with ripgrep for static imports
 rg "from.*config/index" .
 # Output: (empty) = No static imports
 
-# Check for dynamic usage:
+# Step 2: Check for dynamic usage
 rg "getNetworkConfig|getContractsForEnvironment" .
 # Output: scripts/deploy-wizard.js:17 = Exports ARE used!
+
+# Step 3: Inspect the file using bat (NOT cat)
+bat config/index.ts
 
 # Conclusion: FALSE POSITIVE - keep the file
 # Confidence: 20% (Knip flagged, but ripgrep found usage)
@@ -211,25 +245,27 @@ Report findings from the tools you actually used. Adapt the structure based on w
 Before recommending anything at ≥70% confidence, simulate the change and run the workspace build:
 
 ```bash
-# Contracts & scripts
-pnpm --filter hardhat build
+# Example build commands (adapt to your project's package manager and workspace names)
+pnpm --filter <workspace-name> build
+npm run build --workspace=<workspace-name>
+yarn workspace <workspace-name> build
 
-# Goldsky subgraph
-pnpm --filter production-lottery-enhanced-subgraph build
+# If using monorepo tools like Turbo
+pnpm turbo build --filter=<workspace-name>
 
-# Next.js docs
-pnpm --filter docs build
-
-# Vite trivia app
-pnpm --filter web build
-
-# Express API
-pnpm --filter server build
+# Single-repo projects
+pnpm build
+npm run build
+yarn build
 ```
 
-- Remove or stub the flagged file locally before running the build.
-- If a workspace lacks a build script, run its strongest verification command (tests, lint) and record that evidence.
-- Capture logs for failures and note any auto-generated artifacts that must be preserved.
+**Build Verification Steps:**
+
+1. Remove or stub the flagged file locally before running the build
+2. Run the build command for the affected workspace(s)
+3. If a workspace lacks a build script, run its strongest verification command (tests, lint, typecheck)
+4. Capture logs for failures and note any auto-generated artifacts that must be preserved
+5. Restore the file if build fails
 
 ### 4. Deletions
 

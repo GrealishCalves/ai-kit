@@ -94,22 +94,22 @@ Safe                                       Dangerous
 **Dead vs. Dormant Code:**
 | Dead (Candidate for Deletion) | Dormant (Keep) | False Positive (Keep) |
 |-------------------------------|----------------|----------------------|
-| Provably unreachable | Feature-flagged | File-based routing (TanStack Router, Next.js) |
+| Provably unreachable | Feature-flagged | File-based routing (framework-specific patterns) |
 | No callers found | Conditionally used | Re-exported modules |
 | Superseded by new code | Plugin/API endpoints | Type-only imports |
 | Unused imports | Future-proofing code | Generated files |
-| | | Pure export files (queries, constants) |
+| | | Pure export files (queries, constants, types) |
 
 **CRITICAL: Static Analysis Blind Spots**
 
-Tools like Knip CANNOT detect:
+Dead code detection tools (like Knip) CANNOT detect:
 
-- **File-based routing** (TanStack Router `src/routes/*.tsx`, Next.js `pages/*.tsx`)
-- **Re-export patterns** (`helpers.ts` → `index.ts` → `test.ts`)
+- **File-based routing** (framework-specific patterns: Next.js `pages/*.tsx`, TanStack Router `routes/*.tsx`, SvelteKit `routes/`, etc.)
+- **Re-export patterns** (`helpers.ts` → `index.ts` → `consumer.ts`)
 - **Type-only imports** (`import type { X } from 'file'`)
-- **Generated files** (`routeTree.gen.ts`, `*.generated.ts`)
+- **Generated files** (`*.gen.ts`, `*.generated.ts`, build artifacts)
 - **Dynamic imports** (`import('./module')`, `require(variable)`)
-- **Runtime usage** (reflection, string-based lookups)
+- **Runtime usage** (reflection, string-based lookups, plugin systems)
 
 **Always verify flagged files manually before recommending deletion.**
 
@@ -134,10 +134,10 @@ Tools like Knip CANNOT detect:
 
 **Available tools** (see `ai-kit/tools/` for full documentation):
 
-- **knip** (RECOMMENDED): Modern dead code detection, monorepo-aware
-- **ripgrep**: Fast text search and cross-validation of tool findings
-- **jscpd**: Semantic code duplication detection
-- **git**: History analysis and change tracking
+- **knip** (PRIMARY): Dead code detection - monorepo-aware, framework-aware, plugin-based
+- **ripgrep** (SECONDARY): Fast text search and cross-validation of Knip findings
+- **jscpd** (OPTIONAL): Semantic code duplication detection - use only when analyzing duplication
+- **git** (OPTIONAL): History analysis and change tracking - use only when analyzing git state
 
 **Multi-Tool Cross-Validation Workflow:**
 
@@ -329,21 +329,21 @@ Tools like Knip CANNOT detect:
 
 1. **Framework-Specific Patterns Not Recognized:**
 
-   - TanStack Router file-based routing (`src/routes/**/*.tsx`)
-   - Next.js pages directory
-   - Generated files (`routeTree.gen.ts`)
+   - File-based routing (framework-dependent patterns)
+   - Framework-specific conventions (pages, routes, layouts, etc.)
+   - Generated files (build artifacts, auto-generated code)
 
 2. **Re-Export Patterns Not Traced:**
 
-   - `token-helpers.ts` → `lottery-helpers.ts` → `test.ts`
-   - Knip sees no direct imports to intermediate file
+   - `helpers.ts` → `index.ts` → `consumer.ts`
+   - Tool sees no direct imports to intermediate file
    - Flags intermediate file as unused
 
 3. **Type-Only Imports Missed:**
 
-   - `import type { getRouter } from './router.tsx'`
+   - `import type { TypeName } from './types'`
    - File used only for types
-   - Flagged as unused by Knip
+   - Flagged as unused by static analysis
 
 4. **Pure Export Files Misidentified:**
    - Query files, constant files, type definitions
@@ -352,10 +352,10 @@ Tools like Knip CANNOT detect:
 
 **Fixes Applied:**
 
-1. Added `src/routes/**/*.tsx` to Knip entry points
-2. Added test infrastructure to ignore list
-3. Implemented multi-tool cross-validation
-4. Added build verification requirement
+1. Added framework-specific entry points to tool configuration
+2. Added test infrastructure and helpers to ignore list
+3. Implemented multi-tool cross-validation workflow
+4. Added mandatory build verification requirement
 5. Reduced false positives from 93.75% to ~40%
 
 **Key Takeaways:**
@@ -368,14 +368,15 @@ Tools like Knip CANNOT detect:
 
 **Production-Ready Workflow:**
 
-1. Run Knip with framework-specific configuration
-2. Cross-validate with ripgrep (check for imports/usage)
-3. Test build without flagged files
-4. Manual review for medium-confidence findings
-5. Present recommendations (NEVER auto-delete)
-6. User explicitly approves each deletion
-7. Run tests after deletion
-8. Monitor for issues
+1. Configure dead code detection tool with framework-specific settings
+2. Run primary analysis (Knip) with appropriate scope
+3. Cross-validate findings with ripgrep (check for imports/usage)
+4. Test build without flagged files (mandatory for ≥70% confidence)
+5. Manual review for medium-confidence findings
+6. Present recommendations with evidence (NEVER auto-delete)
+7. User explicitly approves each deletion
+8. Run tests after deletion
+9. Monitor for issues
 
 ---
 
