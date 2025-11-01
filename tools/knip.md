@@ -2,7 +2,7 @@
 
 ### **What It Does**
 
-- Finds unused files, dependencies, and exports (combines ts-prune + unimported functionality)
+- Finds unused files, dependencies, and exports
 - Monorepo-aware with workspace support (designed for Turborepo, pnpm workspaces)
 - Detects unused dependencies, devDependencies, and peer dependencies
 - Identifies duplicate exports and type definitions
@@ -20,27 +20,18 @@
 - `temp/knip-unused-files.txt` - List of unused files only
 - `temp/knip-unused-deps.txt` - List of unused dependencies only
 
-### **Why Use Knip Over ts-prune/unimported**
-
-| Feature               | Knip       | ts-prune            | unimported |
-| --------------------- | ---------- | ------------------- | ---------- |
-| Monorepo support      | ✅         | ❌                  | ❌         |
-| Unused exports        | ✅         | ✅                  | ❌         |
-| Unused dependencies   | ✅         | ❌                  | ✅         |
-| Unused files          | ✅         | ❌                  | ✅         |
-| Active maintenance    | ✅         | ⚠️ Maintenance mode | ✅         |
-| Entry point detection | ✅✅ Smart | ⚠️ Manual           | ⚠️ Manual  |
-| Workspace-aware       | ✅         | ❌                  | ❌         |
-| Duplicate detection   | ✅         | ❌                  | ❌         |
-| Production mode       | ✅         | ❌                  | ❌         |
+### **Why Use Knip**
 
 **Key Advantages:**
 
 - **Better Entry Point Detection:** Automatically detects test files, scripts, and build entry points
 - **Workspace-Aware:** Understands monorepo structure (Turborepo, pnpm workspaces, Nx)
-- **Comprehensive:** Single tool replaces ts-prune + unimported
+- **Comprehensive:** Single tool for all dead code detection needs
 - **Lower False Positives:** Smarter analysis reduces manual review time significantly
 - **Active Development:** Regular updates, bug fixes, new features
+- **Monorepo Support:** Native support for monorepo workspaces
+- **Duplicate Detection:** Identifies duplicate exports and type definitions
+- **Production Mode:** Can analyze production-only code separately
 
 ### **Essential Commands**
 
@@ -179,21 +170,6 @@ npx knip --reporter json | jaq 'group_by(.workspace) | map({workspace: .[0].work
 
 # Find files with most unused exports
 npx knip --reporter json | jaq '.exports | group_by(.filePath) | map({file: .[0].filePath, count: length}) | sort_by(.count) | reverse | .[0:10]'
-```
-
-### **Migration from ts-prune + unimported**
-
-```bash
-# Old workflow (2 tools, high false positives)
-npx ts-prune > temp/ts-prune.txt
-npx unimported > temp/unimported.txt
-# Manual cross-reference required
-# ~94% false positive rate on test helpers
-
-# New workflow (1 tool, lower false positives)
-npx knip --reporter json > temp/knip.json
-# Single source of truth
-# ~10% false positive rate (properly configured)
 ```
 
 ### **Handling False Positives**

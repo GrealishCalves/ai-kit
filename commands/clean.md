@@ -11,7 +11,7 @@ The **$ARGUMENTS** parameter is flexible and can represent:
 2. **Conceptual Domain**: `authentication`, `payment-flow`, `user-management`
 3. **Git State**: `uncommitted`, `unstaged`, `modified-files`
 4. **Pattern-Based**: `*-helpers.ts`, `*.test.ts`
-5. **Monorepo-Wide Sweep** *(omit the argument or pass `all`)*: Run the workflow across every workspace
+5. **Monorepo-Wide Sweep** _(omit the argument or pass `all`)_: Run the workflow across every workspace
 
 **Your Task**: Interpret the domain argument intelligently and adapt tool usage accordingly.
 
@@ -27,23 +27,22 @@ Confirm the intended scope before triggering heavy tools so you do not accidenta
 
 **For File/Directory Path** (e.g., `apps/hardhat/contracts`):
 
-- Consider: knip (scoped to the workspace), dependency-cruiser (module structure), jscpd (duplication)
-- Skip: unimported (unless checking entire app), git analysis (unless checking history)
+- Consider: knip (scoped to the workspace), jscpd (duplication)
+- Skip: git analysis (unless checking history)
 
 **For Conceptual Domain** (e.g., `authentication`):
 
-- Consider: ripgrep (pattern discovery), dependency-cruiser (coupling), jscpd (duplicated logic)
-- Skip: ts-prune/unimported (too broad for conceptual work)
+- Consider: ripgrep (pattern discovery), jscpd (duplicated logic)
+- Skip: knip (too broad for conceptual work)
 
 **For Git State** (e.g., `uncommitted`):
 
 - Consider: git (to list uncommitted files), ripgrep (change inspection), jscpd (duplicate detection in new code)
-- Skip: dependency-cruiser (too heavy), unimported (not relevant to git state)
+- Skip: knip (not relevant to git state)
 
 **For Pattern-Based** (e.g., `*.test.ts`):
 
 - Consider: ripgrep (find matches), knip (verify unused helpers), jscpd (duplicated setup)
-- Skip: dependency-cruiser (unless checking test dependencies), unimported (tests are often isolated)
 
 **Remember**: These are suggestions, not rules. Use your judgment based on the specific cleanup goals.
 
@@ -54,9 +53,6 @@ REQUIRED: Execute these view commands simultaneously to understand available cap
 - read("ai-kit/personas/cleaner_persona.md", type="file"): Risk assessment framework and decision-making principles
 - read("ai-kit/tools/knip.md", type="file"): Modern dead code detection for monorepos (RECOMMENDED)
 - read("ai-kit/tools/ripgrep.md", type="file"): Text pattern search and cross-validation capabilities
-- read("ai-kit/tools/dependency-cruiser.md", type="file"): Dependency analysis and architectural validation
-- read("ai-kit/tools/ts-prune.md", type="file"): Legacy unused export detection (review only if Knip cannot run)
-- read("ai-kit/tools/unimported.md", type="file"): Legacy orphaned file detector (review only if Knip cannot run)
 - read("ai-kit/tools/jscpd.md", type="file"): Semantic code duplication detection
 - read("ai-kit/tools/git.md", type="file"): Git operations and history analysis
 
@@ -88,23 +84,17 @@ After conducting a thorough analysis of the current codebase state, please confi
 - Use `fd` for file discovery; if unavailable fall back to `rg --files`; never use `find`
 - Never use `cat`; always use `bat` for file viewing with syntax highlighting
 - Prefer `eza` over `ls` for directory listings and structure inspection
-- Default to Knip for dead-code detection; treat ts-prune/unimported as last-resort legacy tools
+- Default to Knip for dead-code detection (only tool for this purpose)
 - Intelligently select analysis tools based on domain scope and cleanup goals
 - Reference tool documentation to understand full capabilities before use
 - All tool outputs should be saved to `/temp` directory to keep project root clean
 
 **Available Analysis Tools (Select Based on Need):**
 
-- **knip** (PRIMARY): Modern dead code detection - unused files, exports, dependencies (monorepo-aware, replaces ts-prune + unimported)
+- **knip** (PRIMARY): Modern dead code detection - unused files, exports, dependencies (monorepo-aware)
 - **ripgrep**: Fast text pattern search, file listing, and cross-validation of tool findings
 - **jscpd**: Semantic code duplication detection (AST-based)
-- **dependency-cruiser**: Dependency analysis, circular dependencies, architectural violations, coupling metrics
 - **git**: History analysis, blame, uncommitted changes
-
-**Legacy Tools (Opt-In):**
-
-- **ts-prune**: Unused export detection when Knip cannot parse a project
-- **unimported**: Orphaned file detection for non-workspace Node projects
 
 **Evidence-Based Analysis:**
 

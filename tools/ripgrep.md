@@ -13,7 +13,7 @@
 - **Lightning fast:** Search entire codebase in milliseconds
 - **Smart defaults:** Automatically ignores node_modules, respects .gitignore
 - **Pattern detection:** Find TODOs, console.logs, hardcoded values, magic numbers
-- **Cross-validation:** Verify findings from dead code detection tools (Knip, ts-prune)
+- **Cross-validation:** Verify findings from dead code detection tools (Knip)
 - **Regex support:** Powerful pattern matching with regular expressions
 - **Text-based search:** Complements semantic tools like jscpd for different use cases
 - **File discovery:** Replaces `find`, `ls`, and `view` tool for searching
@@ -292,7 +292,7 @@ rg '"name":\s*"([^"]+)"' package.json --replace '$1' -oN | \
 
 ### **Cross-Validation with Dead Code Tools**
 
-ripgrep excels at verifying findings from static analysis tools like Knip, ts-prune, and unimported:
+ripgrep excels at verifying findings from static analysis tools like Knip:
 
 ```bash
 # Verify Knip's "unused file" claim
@@ -304,7 +304,7 @@ rg "import.*from|require\(" suspected-unused-file.ts
 rg --no-ignore "from.*types|getTypes" src
 # Finds type-only imports inside generated files
 
-# Verify ts-prune's "unused export" claim
+# Verify Knip's "unused export" claim
 # Search for export usage across codebase
 rg "import.*\{.*exportName.*\}" .
 # No matches = HIGH confidence export is unused
@@ -349,7 +349,7 @@ bat temp/medium-confidence.txt
 
 **Confidence Matrix:**
 
-| ripgrep Result   | Knip/ts-prune Result      | Confidence | Action                    |
+| ripgrep Result   | Knip Result               | Confidence | Action                    |
 | ---------------- | ------------------------- | ---------- | ------------------------- |
 | No imports found | Flagged as unused         | 95%        | **DELETE**                |
 | Imports found    | Flagged as unused         | 20%        | **KEEP** (false positive) |

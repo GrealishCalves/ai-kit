@@ -102,7 +102,7 @@ Safe                                       Dangerous
 
 **CRITICAL: Static Analysis Blind Spots**
 
-Tools like Knip/ts-prune/unimported CANNOT detect:
+Tools like Knip CANNOT detect:
 
 - **File-based routing** (TanStack Router `src/routes/*.tsx`, Next.js `pages/*.tsx`)
 - **Re-export patterns** (`helpers.ts` → `index.ts` → `test.ts`)
@@ -134,13 +134,10 @@ Tools like Knip/ts-prune/unimported CANNOT detect:
 
 **Available tools** (see `ai-kit/tools/` for full documentation):
 
-- **knip** (RECOMMENDED): Modern dead code detection, monorepo-aware, replaces ts-prune + unimported
+- **knip** (RECOMMENDED): Modern dead code detection, monorepo-aware
 - **ripgrep**: Fast text search and cross-validation of tool findings
 - **jscpd**: Semantic code duplication detection
-- **dependency-cruiser**: Dependency analysis and architectural validation
 - **git**: History analysis and change tracking
-- **ts-prune** (LEGACY): Consider using Knip instead
-- **unimported** (LEGACY): Use only for dependency checking, not file analysis
 
 **Multi-Tool Cross-Validation Workflow:**
 
@@ -175,13 +172,12 @@ Tools like Knip/ts-prune/unimported CANNOT detect:
 
 **Confidence Scoring Matrix (Multi-Tool Verification):**
 
-| Evidence                         | Confidence | Action                       | Risk    |
-| -------------------------------- | ---------- | ---------------------------- | ------- |
-| Knip + ripgrep + build passes    | 95%        | RECOMMEND deletion           | 0-1/10  |
-| Knip + unimported + build passes | 85%        | RECOMMEND deletion           | 1-2/10  |
-| Knip only + build passes         | 70%        | RECOMMEND review             | 3-5/10  |
-| Knip + ripgrep (no build test)   | 40%        | RECOMMEND review             | 5-7/10  |
-| Knip only (no build test)        | 20%        | KEEP (likely false positive) | 8-10/10 |
+| Evidence                       | Confidence | Action                       | Risk    |
+| ------------------------------ | ---------- | ---------------------------- | ------- |
+| Knip + ripgrep + build passes  | 95%        | RECOMMEND deletion           | 0-1/10  |
+| Knip only + build passes       | 70%        | RECOMMEND review             | 3-5/10  |
+| Knip + ripgrep (no build test) | 40%        | RECOMMEND review             | 5-7/10  |
+| Knip only (no build test)      | 20%        | KEEP (likely false positive) | 8-10/10 |
 
 **CRITICAL:** Build verification is MANDATORY for 70%+ confidence recommendations.
 
