@@ -1,4 +1,8 @@
 ---
+type: "always_apply"
+---
+
+---
 type: "always_apply"---
 
 # Tool Usage Rules - STRICT ENFORCEMENT

@@ -1,6 +1,6 @@
 ---
 type: "agent_requested"
-description: "Example description"
+description: "Trivia context foramt and question define playbook."
 ---
 
 # Universal Trivia Explanation Formatting Playbook
