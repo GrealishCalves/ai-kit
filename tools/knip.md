@@ -7,6 +7,7 @@
 Finds unused files, dependencies, exports, and types in JavaScript/TypeScript projects.
 
 **Key Features:**
+
 - ✅ Unused files, dependencies, exports, types, class/enum members
 - ✅ Monorepo support (pnpm, Yarn, Nx, Turborepo)
 - ✅ 115+ framework plugins (auto-detects entry points)
@@ -45,6 +46,9 @@ pnpm dlx knip
 ```bash
 # Run analysis
 pnpm knip
+
+# Run with caching (10-40% faster on consecutive runs)
+pnpm knip --cache
 
 # Help & version
 pnpm knip --help
@@ -126,6 +130,7 @@ pnpm knip --fix --include dependencies
 ```
 
 **Auto-fix removes:**
+
 - ✅ Unused files (deletes files) - requires `--allow-remove-files`
 - ✅ Unused dependencies (removes from package.json)
 - ✅ Unused exports (removes export statements)
@@ -144,10 +149,7 @@ Knip works with zero config. Default entry points:
 
 ```json
 {
-  "entry": [
-    "{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}",
-    "src/{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"
-  ],
+  "entry": ["{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}", "src/{index,cli,main}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
   "project": ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}!"]
 }
 ```
@@ -183,18 +185,8 @@ pnpm knip --config path/to/knip.json
 ```json
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": [
-    "src/index.{ts,tsx,js,jsx}",
-    "src/main.{ts,tsx,js,jsx}",
-    "src/app.{ts,tsx,js,jsx}"
-  ],
-  "project": [
-    "src/**/*.{ts,tsx,js,jsx}",
-    "!src/**/*.test.{ts,tsx,js,jsx}",
-    "!src/**/*.spec.{ts,tsx,js,jsx}",
-    "!src/**/__tests__/**",
-    "!src/**/test-helpers/**"
-  ],
+  "entry": ["src/index.{ts,tsx,js,jsx}", "src/main.{ts,tsx,js,jsx}", "src/app.{ts,tsx,js,jsx}"],
+  "project": ["src/**/*.{ts,tsx,js,jsx}", "!src/**/*.test.{ts,tsx,js,jsx}", "!src/**/*.spec.{ts,tsx,js,jsx}", "!src/**/__tests__/**", "!src/**/test-helpers/**"],
   "ignore": ["src/generated/**"]
 }
 ```
@@ -228,12 +220,7 @@ pnpm knip --config path/to/knip.json
 
 ```json
 {
-  "ignore": [
-    "**/*.test.ts",
-    "**/__tests__/**",
-    "**/dist/**",
-    "scripts/legacy/**"
-  ],
+  "ignore": ["**/*.test.ts", "**/__tests__/**", "**/dist/**", "scripts/legacy/**"],
   "ignoreFiles": ["src/generated/**"],
   "ignoreDependencies": ["@types/*"],
   "ignoreWorkspaces": ["packages/deprecated"],
@@ -248,14 +235,15 @@ Control how issue types are reported:
 ```json
 {
   "rules": {
-    "files": "error",       // Counted & printed (default)
-    "dependencies": "warn",  // Printed in gray, not counted
-    "exports": "off"        // Not printed or counted
+    "files": "error", // Counted & printed (default)
+    "dependencies": "warn", // Printed in gray, not counted
+    "exports": "off" // Not printed or counted
   }
 }
 ```
 
 **Rule values:**
+
 - `"error"` - Printed & counted toward exit code (default)
 - `"warn"` - Printed in faded/gray color, not counted
 - `"off"` - Not printed or counted (same as `--exclude`)
@@ -264,28 +252,30 @@ Control how issue types are reported:
 
 ## Issue Types
 
-| Type | Description | Auto-fix | Default |
-|------|-------------|----------|---------|
-| `files` | Unused files | ✅ | ✅ |
-| `dependencies` | Unused dependencies | ✅ | ✅ |
-| `devDependencies` | Unused dev dependencies | ✅ | ✅ |
-| `unlisted` | Used but not listed in package.json | ❌ | ✅ |
-| `binaries` | Unused binaries | ❌ | ✅ |
-| `unresolved` | Unresolved imports | ❌ | ✅ |
-| `exports` | Unused exports | ✅ | ✅ |
-| `types` | Unused exported types | ✅ | ✅ |
-| `nsExports` | Unused namespace exports | ✅ | 🟠 Opt-in |
-| `nsTypes` | Unused namespace types | ✅ | 🟠 Opt-in |
-| `enumMembers` | Unused enum members | ✅ | ✅ |
-| `classMembers` | Unused class members | ✅ | 🟠 Opt-in |
-| `duplicates` | Duplicate exports | ❌ | ✅ |
+| Type              | Description                         | Auto-fix | Default   |
+| ----------------- | ----------------------------------- | -------- | --------- |
+| `files`           | Unused files                        | ✅       | ✅        |
+| `dependencies`    | Unused dependencies                 | ✅       | ✅        |
+| `devDependencies` | Unused dev dependencies             | ✅       | ✅        |
+| `unlisted`        | Used but not listed in package.json | ❌       | ✅        |
+| `binaries`        | Unused binaries                     | ❌       | ✅        |
+| `unresolved`      | Unresolved imports                  | ❌       | ✅        |
+| `exports`         | Unused exports                      | ✅       | ✅        |
+| `types`           | Unused exported types               | ✅       | ✅        |
+| `nsExports`       | Unused namespace exports            | ✅       | 🟠 Opt-in |
+| `nsTypes`         | Unused namespace types              | ✅       | 🟠 Opt-in |
+| `enumMembers`     | Unused enum members                 | ✅       | ✅        |
+| `classMembers`    | Unused class members                | ✅       | 🟠 Opt-in |
+| `duplicates`      | Duplicate exports                   | ❌       | ✅        |
 
 **Legend:**
+
 - ✅ = Included/supported by default
 - 🟠 = Opt-in (use `--include` to enable)
 - ❌ = Not auto-fixable
 
 **Enable opt-in types:**
+
 ```bash
 # Enable namespace exports
 pnpm knip --include nsExports,nsTypes
@@ -405,6 +395,7 @@ export const customIgnored = () => {};
 ```
 
 **Use custom tags with CLI:**
+
 ```bash
 # Exclude tagged exports from report
 pnpm knip --tags -lintignore,-internal
@@ -414,6 +405,7 @@ pnpm knip --tags +lintignore
 ```
 
 **Or in config:**
+
 ```json
 {
   "tags": ["-lintignore", "-internal"]
@@ -545,8 +537,8 @@ pnpm knip --preprocessor ./preproc.ts --preprocessor-options '{"key":"value"}'
     "config": "config/mocha.config.js",
     "entry": ["**/*.spec.js"]
   },
-  "playwright": true,   // Force enable
-  "webpack": false      // Disable
+  "playwright": true, // Force enable
+  "webpack": false // Disable
 }
 ```
 
@@ -575,12 +567,14 @@ bunx --bun knip
 ### Compilers
 
 Knip has built-in compilers for:
+
 - `.astro` - Astro components
 - `.mdx` - MDX files
 - `.svelte` - Svelte components
 - `.vue` - Vue components
 
 **Custom compilers:**
+
 ```json
 {
   "compilers": {
@@ -596,33 +590,38 @@ Knip has built-in compilers for:
 ### Standard Tags
 
 **`@public`** - Mark as public API (won't be reported as unused)
+
 ```ts
 /** @public */
 export const publicAPI = () => {};
 ```
 
 **`@internal`** - Mark as internal (ignored in `--production` mode)
+
 ```ts
 /** @internal */
 export const internalUtil = () => {};
 ```
 
 **`@beta`** - Mark as beta feature
+
 ```ts
 /** @beta */
 export const betaFeature = () => {};
 ```
 
 **`@alpha`** - Mark as alpha feature
+
 ```ts
 /** @alpha */
 export const alphaFeature = () => {};
 ```
 
 **`@alias`** - Handle duplicate exports
+
 ```ts
 /** @alias */
-export { default as AliasName } from './module';
+export { default as AliasName } from "./module";
 ```
 
 ### Custom Tags
@@ -638,6 +637,7 @@ export const experimentalFeature = () => {};
 ```
 
 **Filter by tags:**
+
 ```bash
 # Exclude tagged exports
 pnpm knip --tags -lintignore,-internal
@@ -647,6 +647,7 @@ pnpm knip --tags +experimental
 ```
 
 **In config:**
+
 ```json
 {
   "tags": ["-lintignore", "-internal", "+experimental"]
@@ -705,6 +706,7 @@ pnpm knip --include-libs --include exports,types
 ## Best Practices for LLM Agents
 
 ### 1. Always Review Before Auto-Fix
+
 ```bash
 # ✅ CORRECT: Review first
 pnpm knip --reporter json > temp/knip.json
@@ -716,6 +718,7 @@ pnpm knip --fix
 ```
 
 ### 2. Start with Safest Fixes
+
 ```bash
 # Safest: dependencies only
 pnpm knip --fix-type dependencies
@@ -728,6 +731,7 @@ pnpm knip --fix --allow-remove-files --include files
 ```
 
 ### 3. Use Production Mode for Shipping Code
+
 ```bash
 # Analyze only production code
 pnpm knip --production
@@ -737,6 +741,7 @@ pnpm knip --strict
 ```
 
 ### 4. Debug False Positives
+
 ```bash
 # Understand what Knip sees
 pnpm knip --debug
@@ -749,6 +754,7 @@ pnpm knip --include-libs
 ```
 
 ### 5. Optimize Performance
+
 ```bash
 # Enable caching for faster runs
 pnpm knip --cache
@@ -761,6 +767,7 @@ pnpm knip --performance
 ```
 
 ### 6. Handle False Positives Gracefully
+
 ```bash
 # Use rules to downgrade to warnings
 # In knip.json:
