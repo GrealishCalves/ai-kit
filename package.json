@@ -1,0 +1,22 @@
+{
+  "name": "@grealishcalves/ai-kit",
+  "version": "1.0.0",
+  "description": "Reusable AI configuration, tools, and commands for multiple projects",
+  "main": "index.js",
+  "files": [
+    "ai-kit/**/*"
+  ],
+  "keywords": [
+    "ai",
+    "configuration",
+    "tools",
+    "commands"
+  ],
+  "author": "GrealishCalves",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GrealishCalves/ai-kit.git"
+  }
+}
+
