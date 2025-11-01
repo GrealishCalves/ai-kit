@@ -641,8 +641,8 @@ EXPLORER=https://sepolia.basescan.org
 
 ## Additional Resources
 
-- **Official Docs**: https://docs.etherscan.io
+- **Official Docs**: ./context/etherscan.md
 - **Base Sepolia Explorer**: https://sepolia.basescan.org
 - **Supported Chains**: https://docs.etherscan.io/supported-chains
 - **Rate Limits**: https://docs.etherscan.io/resources/rate-limits
-- **API Plans**: https://etherscan.io/apis
+
