@@ -13,6 +13,8 @@ Real-world scenarios demonstrating Linear workflow patterns for software develop
 5. [Scenario 5: API Rate Limiting](#scenario-5-api-rate-limiting)
 6. [Scenario 6: Cross-Component Feature](#scenario-6-cross-component-feature)
 7. [Scenario 7: Blocking Dependencies](#scenario-7-blocking-dependencies)
+8. [Scenario 8: Smart Contract Deployment](#scenario-8-smart-contract-deployment)
+9. [Scenario 9: Web3 Integration Feature](#scenario-9-web3-integration-feature)
 
 ---
 
@@ -293,6 +295,105 @@ Create issue relation with:
 
 ---
 
-**Last Updated:** 2025-10-31  
+## Scenario 8: Smart Contract Deployment
+
+### Context
+
+Deploy a new ERC-20 token contract to testnet and mainnet.
+
+### Create Feature
+
+**Title:** `Contract - Deploy ERC-20 token contract`
+
+**Labels:** `Feature`, `contract`, `infrastructure`
+
+**Using Linear MCP:**
+
+```
+Create issue with:
+- title: "Contract - Deploy ERC-20 token contract"
+- description: "Deploy MyToken ERC-20 contract to Sepolia testnet and Ethereum mainnet"
+- teamId: "team-uuid"
+- priority: 2
+- labelIds: ["Feature-uuid", "contract-uuid", "infrastructure-uuid"]
+```
+
+---
+
+### Key Takeaways
+
+✅ **Smart contract features:**
+- Use `contract` component label
+- Include `infrastructure` for deployment-related work
+- Specify testnet and mainnet deployment steps
+- Include security audit requirements
+
+---
+
+## Scenario 9: Web3 Integration Feature
+
+### Context
+
+Implement wallet connection and token balance display in the frontend.
+
+### Create Feature with Sub-tasks
+
+**Title:** `Web3 Integration - Add wallet connection and token balance`
+
+**Labels:** `Feature`, `frontend`, `contract`
+
+**Using Linear MCP:**
+
+```
+Create issue with:
+- title: "Web3 Integration - Add wallet connection and token balance"
+- description: "Allow users to connect their Web3 wallet and view their token balance"
+- teamId: "team-uuid"
+- priority: 2
+- labelIds: ["Feature-uuid", "frontend-uuid", "contract-uuid"]
+```
+
+### Create Sub-tasks
+
+**Sub-task 1: Wallet Connection**
+
+```
+Create issue with:
+- title: "Implement wallet connection UI"
+- parentId: "parent-uuid"
+- labelIds: ["Feature-uuid", "frontend-uuid"]
+```
+
+**Sub-task 2: Contract Integration**
+
+```
+Create issue with:
+- title: "Integrate token contract for balance queries"
+- parentId: "parent-uuid"
+- labelIds: ["Feature-uuid", "contract-uuid"]
+```
+
+**Sub-task 3: Balance Display**
+
+```
+Create issue with:
+- title: "Display token balance in UI"
+- parentId: "parent-uuid"
+- labelIds: ["Feature-uuid", "frontend-uuid"]
+```
+
+---
+
+### Key Takeaways
+
+✅ **Web3 features:**
+- Use both `frontend` and `contract` labels for cross-component work
+- Break down into frontend and contract sub-tasks
+- Include wallet connection, contract interaction, and UI display
+- Consider testnet testing before mainnet
+
+---
+
+**Last Updated:** 2025-11-02
 **Maintained By:** R&D Team
 

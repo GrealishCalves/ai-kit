@@ -33,7 +33,9 @@
 ### Label Selection Algorithm
 
 1. Type: `Bug` (required)
-2. Component: At least ONE from `frontend`, `backend`, `database`, `infrastructure`, `mobile`, `api`, `other`
+2. Component: At least ONE from:
+   - **Core:** `frontend`, `backend`, `contract`
+   - **Additional:** `database`, `infrastructure`, `api`, `documentation`, `testing`, `security`, `performance`, `other`
 3. Bug Category: ONE from `logic-error`, `display-error`, `query-error`, `state-sync`, `performance`, `security`, `other`
 4. Domain: Optional, project-specific (e.g., `user-management`, `payments`, `analytics`)
 

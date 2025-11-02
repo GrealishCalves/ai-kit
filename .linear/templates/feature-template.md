@@ -33,7 +33,9 @@
 ### Label Selection Algorithm
 
 1. Type: `Feature` (required)
-2. Component: At least ONE from `frontend`, `backend`, `database`, `infrastructure`, `mobile`, `api`, `other`
+2. Component: At least ONE from:
+   - **Core:** `frontend`, `backend`, `contract`
+   - **Additional:** `database`, `infrastructure`, `api`, `documentation`, `testing`, `security`, `performance`, `other`
 3. Domain: Optional, project-specific (e.g., `user-management`, `payments`, `analytics`)
 
 ### Sub-tasks vs Related Issues
@@ -106,12 +108,19 @@ Brief description of the implementation strategy.
 
 Choose at least ONE:
 
-- `frontend` - Web app, mobile app, UI components
-- `backend` - API, services, workers
+**Core Components:**
+- `frontend` - Web app, UI components, client-side logic
+- `backend` - API, services, workers, server-side logic
+- `contract` - Smart contracts, blockchain interactions
+
+**Additional Components:**
 - `database` - Schema, queries, migrations
 - `infrastructure` - CI/CD, monitoring, hosting
-- `mobile` - iOS, Android apps
 - `api` - REST, GraphQL, webhooks
+- `documentation` - README, API docs, guides
+- `testing` - Test frameworks, CI tests
+- `security` - Auth, permissions, encryption
+- `performance` - Optimization, caching
 - `other` - Specify in description
 
 **Example:**
@@ -119,6 +128,12 @@ Choose at least ONE:
 - `frontend` - Login UI, OAuth callback handling
 - `backend` - OAuth provider integration, token management
 - `database` - User schema updates for OAuth fields
+
+**Example (Web3):**
+
+- `frontend` - Wallet connection UI
+- `contract` - Token contract deployment
+- `backend` - Blockchain event indexing
 
 ### Key Changes
 

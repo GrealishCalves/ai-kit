@@ -55,7 +55,9 @@ Complete guide for using Linear with AI agents via MCP (Model Context Protocol).
 Every issue MUST have:
 
 1. **ONE type label:** `Feature`, `Bug`, or `Improvement`
-2. **AT LEAST ONE component label:** `frontend`, `backend`, `database`, `infrastructure`, `mobile`, `api`, `other`
+2. **AT LEAST ONE component label:**
+   - **Core components:** `frontend`, `backend`, `contract`
+   - **Additional components:** `database`, `infrastructure`, `api`, `documentation`, `testing`, `security`, `performance`, `other`
 
 ### Optional Labels
 

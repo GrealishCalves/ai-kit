@@ -32,7 +32,9 @@
 ### Label Selection Algorithm
 
 1. Type: `Improvement` (required)
-2. Component: At least ONE from `frontend`, `backend`, `database`, `infrastructure`, `mobile`, `api`, `other`
+2. Component: At least ONE from:
+   - **Core:** `frontend`, `backend`, `contract`
+   - **Additional:** `database`, `infrastructure`, `api`, `documentation`, `testing`, `security`, `performance`, `other`
 3. Domain: Optional, project-specific (e.g., `user-management`, `payments`, `analytics`)
 
 ### Validation Checklist

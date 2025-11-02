@@ -37,13 +37,20 @@ Every issue MUST have exactly ONE type label.
 
 Every issue MUST have AT LEAST ONE component label. Multiple components allowed.
 
+### Core Components (Aligned with Projects)
+
+| Label      | Description                      | Examples                                    |
+| ---------- | -------------------------------- | ------------------------------------------- |
+| `frontend` | User-facing interface            | Web app, UI components, client-side logic   |
+| `backend`  | Server-side logic                | API, services, workers, server-side logic   |
+| `contract` | Smart contracts & blockchain     | Solidity contracts, blockchain interactions |
+
+### Additional Components (Optional)
+
 | Label            | Description             | Examples                           |
 | ---------------- | ----------------------- | ---------------------------------- |
-| `frontend`       | User-facing interface   | Web app, mobile app, UI components |
-| `backend`        | Server-side logic       | API, services, workers             |
 | `database`       | Data storage layer      | Schema, queries, migrations        |
 | `infrastructure` | Deployment & operations | CI/CD, monitoring, hosting         |
-| `mobile`         | Mobile-specific         | iOS, Android, React Native         |
 | `api`            | API layer               | REST, GraphQL, webhooks            |
 | `documentation`  | Documentation           | README, API docs, guides           |
 | `testing`        | Testing infrastructure  | Test frameworks, CI tests          |
@@ -55,6 +62,8 @@ Every issue MUST have AT LEAST ONE component label. Multiple components allowed.
 
 - ✅ `frontend` - React component rendering issue
 - ✅ `backend` + `database` - API endpoint with slow query
+- ✅ `contract` - Smart contract deployment issue
+- ✅ `frontend` + `contract` - Web3 wallet integration
 - ✅ `infrastructure` - CI/CD pipeline failing
 
 ---
@@ -212,19 +221,23 @@ AI agents can infer labels from issue descriptions using keyword matching.
 
 **Keyword Mapping:**
 
-- **frontend:** ui, button, form, page, component, react, vue, angular, svelte
-- **backend:** api, server, endpoint, service, worker, controller, middleware
+- **frontend:** ui, button, form, page, component, react, vue, angular, svelte, web, client
+- **backend:** api, server, endpoint, service, worker, controller, middleware, database
+- **contract:** smart contract, solidity, blockchain, web3, ethereum, token, nft, defi
 - **database:** query, schema, migration, table, sql, postgres, mongodb
-- **mobile:** ios, android, mobile, app, native, react-native
 - **infrastructure:** deploy, ci/cd, docker, kubernetes, aws, hosting, devops
 - **api:** rest, graphql, webhook, endpoint, request, response
 - **performance:** slow, performance, memory, cpu, optimization, cache
 
 **Example:**
 
-- Description: "Login button not responding on mobile"
-- Keywords found: "button" (frontend), "mobile" (mobile)
-- Inferred components: ["frontend", "mobile"]
+- Description: "Login button not responding on web app"
+- Keywords found: "button" (frontend), "web" (frontend)
+- Inferred components: ["frontend"]
+
+- Description: "Smart contract deployment failing on testnet"
+- Keywords found: "smart contract" (contract), "deployment" (infrastructure)
+- Inferred components: ["contract", "infrastructure"]
 
 ### Bug Category Inference Guidelines
 
@@ -267,7 +280,7 @@ AI agents must validate labels before creating Linear issues.
 
 **Validation 2: Component Label Count**
 
-- Filter labels to find component labels (frontend, backend, database, infrastructure, mobile, api, other)
+- Filter labels to find component labels (frontend, backend, contract, database, infrastructure, api, other)
 - **Rule:** At least 1 component label must be present
 - **Error if violated:** "At least 1 component label is required"
 
@@ -320,11 +333,11 @@ Issue
 │   ├── Bug
 │   └── Improvement
 ├── Component (required, AT LEAST ONE)
-│   ├── frontend
-│   ├── backend
+│   ├── frontend (core)
+│   ├── backend (core)
+│   ├── contract (core)
 │   ├── database
 │   ├── infrastructure
-│   ├── mobile
 │   ├── api
 │   └── other
 ├── Domain (optional, project-specific)
