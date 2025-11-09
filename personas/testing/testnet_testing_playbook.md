@@ -665,7 +665,7 @@ const { lotteryId, hash } = await createLotteryWithPermit(
     pickRange: 10,
     duration: 3600,
   },
-  chainId // Always pass chainId from testEnv
+  chainId, // Always pass chainId from testEnv
 );
 ```
 
@@ -690,7 +690,7 @@ const buyTx = await buyTicketsWithPermit(
   lotteryId,
   [1, 2, 3], // ticket numbers
   undefined, // options (optional)
-  chainId
+  chainId,
 );
 ```
 
@@ -710,7 +710,7 @@ const permitSignature = await generatePermitSignature(
   contracts.lottery.address,
   totalCost,
   undefined, // deadline (optional)
-  chainId
+  chainId,
 );
 
 const buyTx = await contracts.lottery.write.buyTicketsPackedNoReferral([lotteryId, packedNumbers, permitSignature], {

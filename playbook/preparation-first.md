@@ -77,6 +77,7 @@ jaq '.field' config.json
 ### Phase 2: Documentation
 
 Document findings with:
+
 - File paths (exact locations)
 - Line numbers (specific references)
 - Patterns found (exact matches)
@@ -86,6 +87,7 @@ Document findings with:
 ### Phase 3: Planning
 
 Create implementation plan with:
+
 - Clear objectives
 - Success criteria
 - Security controls
@@ -95,6 +97,7 @@ Create implementation plan with:
 ### Phase 4: Verification
 
 Before proceeding:
+
 - ✅ All official docs mastered
 - ✅ Current implementation audited
 - ✅ Security requirements defined
@@ -105,6 +108,7 @@ Before proceeding:
 ## Anti-Patterns
 
 ❌ **Don't:**
+
 - Rush to implementation without investigation
 - Assume you understand the system
 - Skip official documentation
@@ -112,6 +116,7 @@ Before proceeding:
 - Use grep/find/cat instead of rg/fd/bat
 
 ✅ **Do:**
+
 - Invest time in preparation phase
 - Use terminal tools for evidence-based investigation
 - Document findings with line numbers and file paths
@@ -182,4 +187,3 @@ Before proceeding:
 4. **Master official docs** - Single source of truth for best practices
 5. **Security upfront** - Define controls before implementation
 6. **Verify before proceeding** - Complete all prerequisites before planning
-

@@ -41,31 +41,34 @@ Do I need to interact with a CLI tool?
 ### 1. Use Official CLI Commands
 
 ❌ **Don't:**
+
 ```javascript
 // Custom CLI parsing
-const output = execSync('goldsky subgraph list').toString();
-const lines = output.split('\n');
+const output = execSync("goldsky subgraph list").toString();
+const lines = output.split("\n");
 const versions = lines
-  .filter(line => line.includes('│'))
-  .map(line => {
-    const parts = line.split('│');
+  .filter((line) => line.includes("│"))
+  .map((line) => {
+    const parts = line.split("│");
     return {
       version: parts[1].trim(),
-      status: parts[2].trim()
+      status: parts[2].trim(),
     };
   });
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Use native CLI with --json flag
-const output = execSync('goldsky subgraph list --json').toString();
+const output = execSync("goldsky subgraph list --json").toString();
 const versions = JSON.parse(output);
 ```
 
 ### 2. Leverage Native Flags
 
 Official CLIs often provide:
+
 - `--json` - JSON output (structured data)
 - `--filter` - Filter results (avoid custom filtering)
 - `--summary` - Summary output (avoid custom aggregation)
@@ -73,23 +76,24 @@ Official CLIs often provide:
 - `--verbose` - Detailed output (avoid custom logging)
 
 ❌ **Don't:**
+
 ```javascript
 // Custom filtering
-const allVersions = execSync('goldsky subgraph list').toString();
-const filteredVersions = allVersions
-  .split('\n')
-  .filter(line => line.includes('production'));
+const allVersions = execSync("goldsky subgraph list").toString();
+const filteredVersions = allVersions.split("\n").filter((line) => line.includes("production"));
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Use native --filter flag
-const versions = execSync('goldsky subgraph list --filter production').toString();
+const versions = execSync("goldsky subgraph list --filter production").toString();
 ```
 
 ### 3. Thin Wrappers Only
 
 Wrappers should ONLY:
+
 - Load environment variables (.env)
 - Inject dynamic configuration (from config files)
 - Provide user-friendly prompts (Clack UI)
@@ -97,6 +101,7 @@ Wrappers should ONLY:
 - Add timeout protection
 
 ❌ **Don't:**
+
 ```javascript
 // 1050-line custom wizard with:
 // - Custom CLI parsing
@@ -107,54 +112,55 @@ Wrappers should ONLY:
 ```
 
 ✅ **Do:**
+
 ```javascript
 // 50-line thin wrapper
-import { spawn } from 'node:child_process';
-import { loadEnvironment } from './utils/environment.js';
-import { getSubgraphNetwork } from '../../config/index.js';
+import { spawn } from "node:child_process";
+import { loadEnvironment } from "./utils/environment.js";
+import { getSubgraphNetwork } from "../../config/index.js";
 
 async function deploy() {
   // Load environment
   const env = loadEnvironment();
-  
+
   // Get dynamic config
   const network = getSubgraphNetwork(env.NETWORK);
-  
+
   // Call native CLI
-  const args = [
-    'subgraph', 'deploy',
-    network,
-    '--path', './subgraph.yaml'
-  ];
-  
-  spawn('goldsky', args, { stdio: 'inherit' });
+  const args = ["subgraph", "deploy", network, "--path", "./subgraph.yaml"];
+
+  spawn("goldsky", args, { stdio: "inherit" });
 }
 ```
 
 ### 4. Use Native Node.js APIs
 
 ❌ **Don't:**
+
 ```javascript
 // Custom command execution with string interpolation
 const result = execSync(`goldsky subgraph deploy ${name} --path ${path}`);
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Native spawn() with array arguments (prevents command injection)
-const args = ['subgraph', 'deploy', name, '--path', path];
-const result = spawn('goldsky', args, { stdio: 'inherit' });
+const args = ["subgraph", "deploy", name, "--path", path];
+const result = spawn("goldsky", args, { stdio: "inherit" });
 ```
 
 ### 5. Future-Proof Against Changes
 
 Native CLI commands are:
+
 - Maintained by official teams
 - Documented in official docs
 - Versioned with semantic versioning
 - Backward compatible (usually)
 
 Custom implementations are:
+
 - Maintained by you
 - Fragile (break on CLI changes)
 - Require constant updates
@@ -165,63 +171,70 @@ Custom implementations are:
 ### 1. Custom CLI Parsing
 
 ❌ **Don't:**
+
 ```javascript
 // Fragile regex-based parsing
-const output = execSync('goldsky subgraph list').toString();
+const output = execSync("goldsky subgraph list").toString();
 const versionMatch = output.match(/Version:\s+(\S+)/);
 const version = versionMatch ? versionMatch[1] : null;
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Use --json flag
-const output = execSync('goldsky subgraph list --json').toString();
+const output = execSync("goldsky subgraph list --json").toString();
 const { version } = JSON.parse(output);
 ```
 
 ### 2. ANSI Escape Code Stripping
 
 ❌ **Don't:**
+
 ```javascript
 // Custom ANSI stripping
 function stripAnsi(str) {
-  return str.replace(/\x1b\[[0-9;]*m/g, '');
+  return str.replace(/\x1b\[[0-9;]*m/g, "");
 }
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Use --no-color flag
-const output = execSync('goldsky subgraph list --no-color').toString();
+const output = execSync("goldsky subgraph list --no-color").toString();
 ```
 
 ### 3. Custom Version Management
 
 ❌ **Don't:**
+
 ```javascript
 // Custom version parsing and comparison
 function getLatestVersion(versions) {
   return versions
-    .map(v => v.split('.').map(Number))
+    .map((v) => v.split(".").map(Number))
     .sort((a, b) => {
       for (let i = 0; i < 3; i++) {
         if (a[i] !== b[i]) return b[i] - a[i];
       }
       return 0;
     })[0]
-    .join('.');
+    .join(".");
 }
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Use native CLI version management
-const latest = execSync('goldsky subgraph list --latest').toString();
+const latest = execSync("goldsky subgraph list --latest").toString();
 ```
 
 ### 4. Custom Deployment Logic
 
 ❌ **Don't:**
+
 ```javascript
 // Custom deployment with manual steps
 async function deploy() {
@@ -236,11 +249,12 @@ async function deploy() {
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Use native CLI deploy command
 async function deploy() {
-  const args = ['subgraph', 'deploy', name, '--path', './subgraph.yaml'];
-  spawn('goldsky', args, { stdio: 'inherit' });
+  const args = ["subgraph", "deploy", name, "--path", "./subgraph.yaml"];
+  spawn("goldsky", args, { stdio: "inherit" });
 }
 ```
 
@@ -269,21 +283,17 @@ async function deploy() {
 
 ```javascript
 // 50-line thin wrapper
-import { spawn } from 'node:child_process';
-import { loadEnvironment } from './utils/environment.js';
-import { getSubgraphNetwork } from '../../config/index.js';
+import { spawn } from "node:child_process";
+import { loadEnvironment } from "./utils/environment.js";
+import { getSubgraphNetwork } from "../../config/index.js";
 
 async function deploy() {
   const env = loadEnvironment();
   const network = getSubgraphNetwork(env.NETWORK);
-  
-  const args = [
-    'subgraph', 'deploy',
-    network,
-    '--path', './subgraph.yaml'
-  ];
-  
-  spawn('goldsky', args, { stdio: 'inherit' });
+
+  const args = ["subgraph", "deploy", network, "--path", "./subgraph.yaml"];
+
+  spawn("goldsky", args, { stdio: "inherit" });
 }
 ```
 
@@ -324,4 +334,3 @@ Before implementing custom CLI wrapper:
 - Native Node.js APIs (child_process.spawn)
 - Security best practices (avoid command injection)
 - DRY principle (don't duplicate CLI logic)
-

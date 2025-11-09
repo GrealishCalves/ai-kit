@@ -124,4 +124,3 @@ fd -e png 'playwright-report' | sort
 - Prefer `--glob` when translating shell wildcards (`fd --glob '*.graphql'`)
 - Use `fd --debug 'pattern'` to see why paths were skipped
 - Paths with spaces? Pair with `-0` and `xargs -0` to avoid splitting issues
-

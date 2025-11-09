@@ -18,8 +18,8 @@ When you make a new subgraph on Goldsky, by default it's hosted on our highly re
 
 The platform is fully autoscaling, with a re-engineered RPC and storage layer, and is tuned for fast indexing across the majority of use-cases. It's also completely backwards compatible and runs the same WASM engine as the vanilla open-source graph-node engine.
 
-* Optimized RPC multi-provider layer with a global cache that uses a combination of dedicated and commercial RPC APIs for uptime
-* I/O optimized database with under 1ms average commit times
+- Optimized RPC multi-provider layer with a global cache that uses a combination of dedicated and commercial RPC APIs for uptime
+- I/O optimized database with under 1ms average commit times
 
 ## Dedicated subgraph indexers
 
@@ -27,13 +27,13 @@ When you need improved customizability and performance, Goldsky offers dedicated
 
 ### Indexing enhancements
 
-* support for any EVM-compatible private chain or app chain
-* custom RPC layer optimizations methods based on subgraph needs to improve indexing speed
+- support for any EVM-compatible private chain or app chain
+- custom RPC layer optimizations methods based on subgraph needs to improve indexing speed
 
 ### Querying enhancements
 
-* enable caching with custom rules
-* custom database optimizations to speed up specific query patterns, bringing expensive queries down from seconds to milliseconds
+- enable caching with custom rules
+- custom database optimizations to speed up specific query patterns, bringing expensive queries down from seconds to milliseconds
 
 To launch a dedicated indexer, please contact us via email at [sales@goldsky.com](mailto:sales@goldsky.com) to get started within one business day.
 
@@ -56,93 +56,78 @@ By default, dedicated indexers are disconnected from Goldsky's [Mirror](mirror/s
 
 ## Walkthrough
 
+If the contract you’re interested in indexing is a contract you deployed, then you’ll have the contract address and ABI handy. Otherwise, you can use a mix of public explorer tools to find this information. For example, if we’re interested in indexing the [friend.tech](http://friend.tech) contract…
 
+1.  Find the contract address from [Dappradar](https://dappradar.com/)
+2.  Click through to the [block explorer](https://basescan.org/address/0xcf205808ed36593aa40a44f10c7f7c2f67d4a4d4#code) where the ABI can be found under the `Contract ABI` section.
 
+Save the ABI to your local file system and make a note of the contract address. Also make a note of the block number the contract was deployed at, you’ll need this at a later step.
 
+The next step is to create the Instant Subgraph configuration file (e.g. `friendtech-config.json`). This file consists of five key sections:
 
+1.  Config version number
+2.  Config name
+3.  ABIs
+4.  Chains
+5.  Contract instances
 
- If the contract you’re interested in indexing is a contract you deployed, then you’ll have the contract address and ABI handy. Otherwise, you can use a mix of public explorer tools to find this information. For example, if we’re interested in indexing the [friend.tech](http://friend.tech) contract…
+### Version number
 
- 1. Find the contract address from [Dappradar](https://dappradar.com/)
- 2. Click through to the [block explorer](https://basescan.org/address/0xcf205808ed36593aa40a44f10c7f7c2f67d4a4d4#code) where the ABI can be found under the `Contract ABI` section.
+As of October 2023, our Instant Subgraph configuration system is on version 1.
+This may change in the future. This is **not the version number of your
+subgraph**, but of Goldsky's configuration file format.
 
- Save the ABI to your local file system and make a note of the contract address. Also make a note of the block number the contract was deployed at, you’ll need this at a later step.
+### Config name
 
+This is a name of your choice that helps you understand what this config is for. It is only used for internal debugging. For this guide, we'll use `friendtech`.
 
+### ABIs, chains, and contract instances
 
- The next step is to create the Instant Subgraph configuration file (e.g. `friendtech-config.json`). This file consists of five key sections:
+These three sections are interconnected.
 
- 1. Config version number
- 2. Config name
- 3. ABIs
- 4. Chains
- 5. Contract instances
+1.  Name your ABI and enter the path to the ABI file you saved earlier (relative to where this config file is located). In this case, `ftshares` and `abi.json`.
+2.  Write out the contract instance, referencing the ABI you named earlier, address it's deployed at, chain it's on, the start block.
 
- ### Version number
+```json friendtech-config.json theme={null}
+{
+  "version": "1",
+  "name": "friendtech",
+  "abis": {
+    "ftshares": {
+      "path": "./abi.json"
+    }
+  },
+  "instances": [
+    {
+      "abi": "ftshares",
+      "address": "0xCF205808Ed36593aa40a44F10c7f7C2F67d4A4d4",
+      "startBlock": 2430440,
+      "chain": "base"
+    }
+  ]
+}
+```
 
+The abi name in `instances` should match a key in `abis`, in this example,
+`ftshares`. It is possible to have more than one `chains` and more than one
+ABI. Multiple chains will result in multiple subgraphs. The file `abi.json` in
+this example should contain the friendtech ABI [downloaded from
+here](https://api.basescan.org/api?module=contract&action=getabi&address=0xcf205808ed36593aa40a44f10c7f7c2f67d4a4d4&format=raw).
 
- As of October 2023, our Instant Subgraph configuration system is on version 1.
- This may change in the future. This is **not the version number of your
- subgraph**, but of Goldsky's configuration file format.
+This configuration can handle multiple contracts with distinct ABIs, the same contract across multiple chains, or multiple contracts with distinct ABIs on multiple chains.
 
+**For a complete reference of the various properties, please see the [Instant Subgraphs references docs](/reference/config-file/instant-subgraph)**
 
- ### Config name
+With your configuration file ready, it's time to deploy the subgraph.
 
- This is a name of your choice that helps you understand what this config is for. It is only used for internal debugging. For this guide, we'll use `friendtech`.
-
- ### ABIs, chains, and contract instances
-
- These three sections are interconnected.
-
- 1. Name your ABI and enter the path to the ABI file you saved earlier (relative to where this config file is located). In this case, `ftshares` and `abi.json`.
- 2. Write out the contract instance, referencing the ABI you named earlier, address it's deployed at, chain it's on, the start block.
-
- ```json friendtech-config.json theme={null}
- {
- "version": "1",
- "name": "friendtech",
- "abis": {
- "ftshares": {
- "path": "./abi.json"
- }
- },
- "instances": [
- {
- "abi": "ftshares",
- "address": "0xCF205808Ed36593aa40a44F10c7f7C2F67d4A4d4",
- "startBlock": 2430440,
- "chain": "base"
- }
- ]
- }
- ```
-
-
- The abi name in `instances` should match a key in `abis`, in this example,
- `ftshares`. It is possible to have more than one `chains` and more than one
- ABI. Multiple chains will result in multiple subgraphs. The file `abi.json` in
- this example should contain the friendtech ABI [downloaded from
- here](https://api.basescan.org/api?module=contract\&action=getabi\&address=0xcf205808ed36593aa40a44f10c7f7c2f67d4a4d4\&format=raw).
-
-
- This configuration can handle multiple contracts with distinct ABIs, the same contract across multiple chains, or multiple contracts with distinct ABIs on multiple chains.
-
- **For a complete reference of the various properties, please see the [Instant Subgraphs references docs](/reference/config-file/instant-subgraph)**
-
-
-
- With your configuration file ready, it's time to deploy the subgraph.
-
- 1. Open the CLI and log in to your Goldsky account with the command: `goldsky login`.
- 2. Deploy the subgraph using the command: `goldsky subgraph deploy name/version --from-abi
+1.  Open the CLI and log in to your Goldsky account with the command: `goldsky login`.
+2.  Deploy the subgraph using the command: `goldsky subgraph deploy name/version --from-abi
 
 `, then pass in the path to the config file you created. Note - do NOT pass in the ABI itself, but rather the config file defined above. Example: `goldsky subgraph deploy friendtech/1.0 --from-abi friendtech-config.json`
 
- Goldsky will generate all the necessary subgraph code, deploy it, and return an endpoint that you can start querying.
+Goldsky will generate all the necessary subgraph code, deploy it, and return an endpoint that you can start querying.
 
- Clicking the endpoint link takes you to a web client where you can browse the schema and draft queries to integrate into your app.
-
-
+Clicking the endpoint link takes you to a web client where you can browse the schema and draft queries to integrate into your app.
 
 ## Extending your subgraph with enrichments
 
@@ -152,21 +137,21 @@ See the [enrichments configuration reference](/reference/config-file/instant-sub
 
 ### Concepts
 
-* Enrichments are defined at the instance level, and executed at the trigger handler level. This means that you can have different enrichments for different data sources or templates and that all enrichment executions are isolated to the handler they are being called from.
- * any additional imports from `@graphprotocol/graph-ts` beyond `BigInt`, `Bytes`, and `store` can be declared in the `options.imports` field of the enrichment (e.g., `BigDecimal`).
-* Enrichments always begin by performing all eth calls first, if any eth calls are aborted then the enrichment as a whole is aborted.
- * calls marked as `required` or having another call declare them as a `depends_on` dependency will abort if the call is not successful, otherwise the call output value will remain as `null`.
- * calls marked as `declared` will configure the subgraph to execute the call prior to invoking the mapping handler. This can be useful for performance reasons, but only works for eth calls that have no mapping handler dependencies.
- * calls support `pre` and `post` expressions for `conditions` to test before and after the call, if either fails the call is aborted. Since these are expressions, they can be dynamic or constant values.
- * call `source` is an expression and therefore allows for dynamic values using math or concatenations. If the `source` is simply a contract address then it will be automatically converted to an `Address` type.
- * call `params` is an expression list and can also be dynamic values or constants.
-* Enrichments support defining new entities as well as updating existing entities. If the entity name matches the trigger entity name, then the entity field mappings will be applied to the existing entity.
- * entity names should be singular and capitalized, this will ensure that the generated does not produce naming conflicts.
- * entity field mapping values are expressions and can be dynamic or constant values.
- * new enrichment entities are linked to the parent (trigger) entity that created them, with the parent (trigger) entity also linking to the new entity or entities in the opposite direction (always a collection type).
- * note that while you can define existing entities that are not the trigger entity, you may not update existing entities only create new instances of that entity.
- * entities support being created multiple times in a single enrichment, but require a unique `id` expression to be defined for each entity, `id` can by a dynamic value or a constant. this `id` is appended to the parent entity `id` to create a unique `id` for each enrichment entity in the list.
- * entities can be made mutable by setting the `explicit_id` flag to `true`, this will use the value of `id` without appending it to the parent entity `id`, creating an addressable entity that can be updated.
+- Enrichments are defined at the instance level, and executed at the trigger handler level. This means that you can have different enrichments for different data sources or templates and that all enrichment executions are isolated to the handler they are being called from.
+- any additional imports from `@graphprotocol/graph-ts` beyond `BigInt`, `Bytes`, and `store` can be declared in the `options.imports` field of the enrichment (e.g., `BigDecimal`).
+- Enrichments always begin by performing all eth calls first, if any eth calls are aborted then the enrichment as a whole is aborted.
+- calls marked as `required` or having another call declare them as a `depends_on` dependency will abort if the call is not successful, otherwise the call output value will remain as `null`.
+- calls marked as `declared` will configure the subgraph to execute the call prior to invoking the mapping handler. This can be useful for performance reasons, but only works for eth calls that have no mapping handler dependencies.
+- calls support `pre` and `post` expressions for `conditions` to test before and after the call, if either fails the call is aborted. Since these are expressions, they can be dynamic or constant values.
+- call `source` is an expression and therefore allows for dynamic values using math or concatenations. If the `source` is simply a contract address then it will be automatically converted to an `Address` type.
+- call `params` is an expression list and can also be dynamic values or constants.
+- Enrichments support defining new entities as well as updating existing entities. If the entity name matches the trigger entity name, then the entity field mappings will be applied to the existing entity.
+- entity names should be singular and capitalized, this will ensure that the generated does not produce naming conflicts.
+- entity field mapping values are expressions and can be dynamic or constant values.
+- new enrichment entities are linked to the parent (trigger) entity that created them, with the parent (trigger) entity also linking to the new entity or entities in the opposite direction (always a collection type).
+- note that while you can define existing entities that are not the trigger entity, you may not update existing entities only create new instances of that entity.
+- entities support being created multiple times in a single enrichment, but require a unique `id` expression to be defined for each entity, `id` can by a dynamic value or a constant. this `id` is appended to the parent entity `id` to create a unique `id` for each enrichment entity in the list.
+- entities can be made mutable by setting the `explicit_id` flag to `true`, this will use the value of `id` without appending it to the parent entity `id`, creating an addressable entity that can be updated.
 
 ### Snippets
 
@@ -353,10 +338,8 @@ Here we are creating an entity that is addressable by an explicit id. This means
  ]
 ```
 
-
- *We must use an array for our entity definition to allow setting the
- `explicit_id` flag.*
-
+_We must use an array for our entity definition to allow setting the
+`explicit_id` flag._
 
 ## Examples
 
@@ -370,45 +353,45 @@ This is a basic instant subgraph configuration, a great starting point for learn
 
 ```json5 simple-nouns-config.json theme={null}
 {
- version: "1",
- name: "nouns/1.0.0",
- abis: {
- nouns: [
- {
- anonymous: false,
- inputs: [
- {
- indexed: true,
- internalType: "address",
- name: "from",
- type: "address",
- },
- {
- indexed: true,
- internalType: "address",
- name: "to",
- type: "address",
- },
- {
- indexed: true,
- internalType: "uint256",
- name: "tokenId",
- type: "uint256",
- },
- ],
- name: "Transfer",
- type: "event",
- },
- ],
- },
- instances: [
- {
- abi: "nouns",
- address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
- startBlock: 12985438,
- chain: "mainnet",
- },
- ],
+  version: "1",
+  name: "nouns/1.0.0",
+  abis: {
+    nouns: [
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: true,
+            internalType: "address",
+            name: "from",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "to",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256",
+          },
+        ],
+        name: "Transfer",
+        type: "event",
+      },
+    ],
+  },
+  instances: [
+    {
+      abi: "nouns",
+      address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
+      startBlock: 12985438,
+      chain: "mainnet",
+    },
+  ],
 }
 ```
 
@@ -418,71 +401,71 @@ This example describes a very simple enrichment that adds a `balance` field to a
 
 ```json5 nouns-balance-config.json theme={null}
 {
- version: "1",
- name: "nouns/1.0.0",
- abis: {
- nouns: [
- {
- anonymous: false,
- inputs: [
- {
- indexed: true,
- internalType: "address",
- name: "from",
- type: "address",
- },
- {
- indexed: true,
- internalType: "address",
- name: "to",
- type: "address",
- },
- {
- indexed: true,
- internalType: "uint256",
- name: "tokenId",
- type: "uint256",
- },
- ],
- name: "Transfer",
- type: "event",
- },
- {
- inputs: [{ internalType: "address", name: "owner", type: "address" }],
- name: "balanceOf",
- outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
- stateMutability: "view",
- type: "function",
- },
- ],
- },
- instances: [
- {
- abi: "nouns",
- address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
- startBlock: 12985438,
- chain: "mainnet",
- enrich: {
- handlers: {
- "Transfer(indexed address,indexed address,indexed uint256)": {
- calls: {
- balance: {
- name: "balanceOf",
- params: "event.params.to",
- required: true,
- },
- },
- entities: {
- Balance: {
- "owner address": "event.params.to.toHexString()",
- "balance uint256": "calls.balance",
- },
- },
- },
- },
- },
- },
- ],
+  version: "1",
+  name: "nouns/1.0.0",
+  abis: {
+    nouns: [
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: true,
+            internalType: "address",
+            name: "from",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "to",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256",
+          },
+        ],
+        name: "Transfer",
+        type: "event",
+      },
+      {
+        inputs: [{ internalType: "address", name: "owner", type: "address" }],
+        name: "balanceOf",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+      },
+    ],
+  },
+  instances: [
+    {
+      abi: "nouns",
+      address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
+      startBlock: 12985438,
+      chain: "mainnet",
+      enrich: {
+        handlers: {
+          "Transfer(indexed address,indexed address,indexed uint256)": {
+            calls: {
+              balance: {
+                name: "balanceOf",
+                params: "event.params.to",
+                required: true,
+              },
+            },
+            entities: {
+              Balance: {
+                "owner address": "event.params.to.toHexString()",
+                "balance uint256": "calls.balance",
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
 }
 ```
 
@@ -492,80 +475,80 @@ This example alters our previous example by capturing the `balance` field on bot
 
 ```json5 nouns-balance-config-2.json theme={null}
 {
- version: "1",
- name: "nouns/1.0.0",
- abis: {
- nouns: [
- {
- anonymous: false,
- inputs: [
- {
- indexed: true,
- internalType: "address",
- name: "from",
- type: "address",
- },
- {
- indexed: true,
- internalType: "address",
- name: "to",
- type: "address",
- },
- {
- indexed: true,
- internalType: "uint256",
- name: "tokenId",
- type: "uint256",
- },
- ],
- name: "Transfer",
- type: "event",
- },
- {
- inputs: [{ internalType: "address", name: "owner", type: "address" }],
- name: "balanceOf",
- outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
- stateMutability: "view",
- type: "function",
- },
- ],
- },
- instances: [
- {
- abi: "nouns",
- address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
- startBlock: 12985438,
- chain: "mainnet",
- enrich: {
- handlers: {
- "Transfer(indexed address,indexed address,indexed uint256)": {
- calls: {
- from_balance: {
- name: "balanceOf",
- params: "event.params.from",
- required: true,
- },
- to_balance: {
- name: "balanceOf",
- params: "event.params.to",
- required: true,
- },
- },
- entities: {
- FromBalance: {
- "owner address": "event.params.from.toHexString()",
- "balance uint256": "calls.from_balance",
- },
- ToBalance: {
- "owner address": "event.params.to.toHexString()",
- "balance uint256": "calls.to_balance",
- },
- },
- },
- },
- },
- },
- ],
+  version: "1",
+  name: "nouns/1.0.0",
+  abis: {
+    nouns: [
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: true,
+            internalType: "address",
+            name: "from",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "to",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256",
+          },
+        ],
+        name: "Transfer",
+        type: "event",
+      },
+      {
+        inputs: [{ internalType: "address", name: "owner", type: "address" }],
+        name: "balanceOf",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+      },
+    ],
+  },
+  instances: [
+    {
+      abi: "nouns",
+      address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
+      startBlock: 12985438,
+      chain: "mainnet",
+      enrich: {
+        handlers: {
+          "Transfer(indexed address,indexed address,indexed uint256)": {
+            calls: {
+              from_balance: {
+                name: "balanceOf",
+                params: "event.params.from",
+                required: true,
+              },
+              to_balance: {
+                name: "balanceOf",
+                params: "event.params.to",
+                required: true,
+              },
+            },
+            entities: {
+              FromBalance: {
+                "owner address": "event.params.from.toHexString()",
+                "balance uint256": "calls.from_balance",
+              },
+              ToBalance: {
+                "owner address": "event.params.to.toHexString()",
+                "balance uint256": "calls.to_balance",
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
 }
 ```
 
@@ -575,103 +558,101 @@ This example alters our previous example balance entities to become a single mut
 
 ```json5 nouns-mutable-balance-config.json theme={null}
 {
- version: "1",
- name: "nouns/1.0.0",
- abis: {
- nouns: [
- {
- anonymous: false,
- inputs: [
- {
- indexed: true,
- internalType: "address",
- name: "from",
- type: "address",
- },
- {
- indexed: true,
- internalType: "address",
- name: "to",
- type: "address",
- },
- {
- indexed: true,
- internalType: "uint256",
- name: "tokenId",
- type: "uint256",
- },
- ],
- name: "Transfer",
- type: "event",
- },
- {
- inputs: [{ internalType: "address", name: "owner", type: "address" }],
- name: "balanceOf",
- outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
- stateMutability: "view",
- type: "function",
- },
- ],
- },
- instances: [
- {
- abi: "nouns",
- address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
- startBlock: 12985438,
- chain: "mainnet",
- enrich: {
- handlers: {
- "Transfer(indexed address,indexed address,indexed uint256)": {
- calls: {
- from_balance: {
- name: "balanceOf",
- params: "event.params.from",
- required: true,
- },
- to_balance: {
- name: "balanceOf",
- params: "event.params.to",
- required: true,
- },
- },
- entities: {
- Balance: [
- {
- id: "event.params.from.toHexString()",
- explicit_id: true,
- mapping: {
- "balance uint256": "calls.from_balance",
- },
- },
- {
- id: "event.params.to.toHexString()",
- explicit_id: true,
- mapping: {
- "balance uint256": "calls.to_balance",
- },
- },
- ],
- },
- },
- },
- },
- },
- ],
+  version: "1",
+  name: "nouns/1.0.0",
+  abis: {
+    nouns: [
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: true,
+            internalType: "address",
+            name: "from",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "to",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256",
+          },
+        ],
+        name: "Transfer",
+        type: "event",
+      },
+      {
+        inputs: [{ internalType: "address", name: "owner", type: "address" }],
+        name: "balanceOf",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+      },
+    ],
+  },
+  instances: [
+    {
+      abi: "nouns",
+      address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
+      startBlock: 12985438,
+      chain: "mainnet",
+      enrich: {
+        handlers: {
+          "Transfer(indexed address,indexed address,indexed uint256)": {
+            calls: {
+              from_balance: {
+                name: "balanceOf",
+                params: "event.params.from",
+                required: true,
+              },
+              to_balance: {
+                name: "balanceOf",
+                params: "event.params.to",
+                required: true,
+              },
+            },
+            entities: {
+              Balance: [
+                {
+                  id: "event.params.from.toHexString()",
+                  explicit_id: true,
+                  mapping: {
+                    "balance uint256": "calls.from_balance",
+                  },
+                },
+                {
+                  id: "event.params.to.toHexString()",
+                  explicit_id: true,
+                  mapping: {
+                    "balance uint256": "calls.to_balance",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  ],
 }
 ```
 
+We can now query the `Balance` entity by the owner address (`id`) to see the current balance.
 
- We can now query the `Balance` entity by the owner address (`id`) to see the current balance.
-
- ```graphql theme={null}
- {
- balance(id: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03") {
- id
- balance
- }
- }
- ```
-
+```graphql theme={null}
+{
+  balance(id: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03") {
+    id
+    balance
+  }
+}
+```
 
 ### NOUNS enrichment with declared eth call
 
@@ -679,90 +660,90 @@ This example alters our previous example by adding the `declared` flag to boost 
 
 ```json5 nouns-declared-calls-config.json theme={null}
 {
- version: "1",
- name: "nouns/1.0.0",
- abis: {
- nouns: [
- {
- anonymous: false,
- inputs: [
- {
- indexed: true,
- internalType: "address",
- name: "from",
- type: "address",
- },
- {
- indexed: true,
- internalType: "address",
- name: "to",
- type: "address",
- },
- {
- indexed: true,
- internalType: "uint256",
- name: "tokenId",
- type: "uint256",
- },
- ],
- name: "Transfer",
- type: "event",
- },
- {
- inputs: [{ internalType: "address", name: "owner", type: "address" }],
- name: "balanceOf",
- outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
- stateMutability: "view",
- type: "function",
- },
- ],
- },
- instances: [
- {
- abi: "nouns",
- address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
- startBlock: 12985438,
- chain: "mainnet",
- enrich: {
- handlers: {
- "Transfer(indexed address,indexed address,indexed uint256)": {
- calls: {
- from_balance: {
- name: "balanceOf",
- params: "event.params.from",
- required: true,
- declared: true,
- },
- to_balance: {
- name: "balanceOf",
- params: "event.params.to",
- required: true,
- declared: true,
- },
- },
- entities: {
- Balance: [
- {
- id: "event.params.from.toHexString()",
- explicit_id: true,
- mapping: {
- "balance uint256": "calls.from_balance",
- },
- },
- {
- id: "event.params.to.toHexString()",
- explicit_id: true,
- mapping: {
- "balance uint256": "calls.to_balance",
- },
- },
- ],
- },
- },
- },
- },
- },
- ],
+  version: "1",
+  name: "nouns/1.0.0",
+  abis: {
+    nouns: [
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: true,
+            internalType: "address",
+            name: "from",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "to",
+            type: "address",
+          },
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256",
+          },
+        ],
+        name: "Transfer",
+        type: "event",
+      },
+      {
+        inputs: [{ internalType: "address", name: "owner", type: "address" }],
+        name: "balanceOf",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+      },
+    ],
+  },
+  instances: [
+    {
+      abi: "nouns",
+      address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
+      startBlock: 12985438,
+      chain: "mainnet",
+      enrich: {
+        handlers: {
+          "Transfer(indexed address,indexed address,indexed uint256)": {
+            calls: {
+              from_balance: {
+                name: "balanceOf",
+                params: "event.params.from",
+                required: true,
+                declared: true,
+              },
+              to_balance: {
+                name: "balanceOf",
+                params: "event.params.to",
+                required: true,
+                declared: true,
+              },
+            },
+            entities: {
+              Balance: [
+                {
+                  id: "event.params.from.toHexString()",
+                  explicit_id: true,
+                  mapping: {
+                    "balance uint256": "calls.from_balance",
+                  },
+                },
+                {
+                  id: "event.params.to.toHexString()",
+                  explicit_id: true,
+                  mapping: {
+                    "balance uint256": "calls.to_balance",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  ],
 }
 ```
 
@@ -776,149 +757,129 @@ This example alters our previous example by adding the `declared` flag to boost 
 
 > Use Mirror to sync multiple subgraphs to one table.
 
-You can use subgraphs as a pipeline source, allowing you to combine the flexibility of subgraph indexing with the expressiveness of the database of your choice. **You can also push data from *multiple subgraphs* with the same schema into the same sink, allowing you to merge subgraphs across chains.**
+You can use subgraphs as a pipeline source, allowing you to combine the flexibility of subgraph indexing with the expressiveness of the database of your choice. **You can also push data from _multiple subgraphs_ with the same schema into the same sink, allowing you to merge subgraphs across chains.**
 
 ## What you'll need
 
 1. One or more subgraphs in your project - this can be from community subgraphs, a deployed subgraph, or a [no-code subgraph](/subgraphs/guides/create-a-no-code-subgraph).
 
+{" "}
 
- {" "}
-
- If more than one subgraph is desired, they need to have the same graphql schema.
- You can use [this tool](https://www.npmjs.com/package/graphql-schema-diff) to
- compare schemas.
-
+If more than one subgraph is desired, they need to have the same graphql schema.
+You can use [this tool](https://www.npmjs.com/package/graphql-schema-diff) to
+compare schemas.
 
 2. A working database supported by Mirror. For more information on setting up a sink, see the [sink documentation](/mirror/sinks/).
 
 ## Walkthrough
 
+`goldsky secret list` will show you the database secrets available on your active project.
 
+If you need to setup a secret, you can use `goldsky secret create -h`. [Here](/mirror/manage-secrets) is an example.
 
- `goldsky secret list` will show you the database secrets available on your active project.
+Open the [Subgraphs Dashboard](https://app.goldsky.com/subgraphs) and find the deployment IDs of each subgraph you would like to use as a source.
 
- If you need to setup a secret, you can use `goldsky secret create -h`. [Here](/mirror/manage-secrets) is an example.
+Run the following query against the subgraph to get the deployment ID.
 
+```graphql theme={null}
+query {
+  _meta {
+    deployment
+  }
+}
+```
 
+Open a text editor create your definition, using the `subgraphEntity` source. In this example we will use subgraphs on Optimism and on BSC:
 
- Open the [Subgraphs Dashboard](https://app.goldsky.com/subgraphs) and find the deployment IDs of each subgraph you would like to use as a source.
+- `qidao-optimism` (`QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr`)
+- `qidao-bsc` (`QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS`)
 
- Run the following query against the subgraph to get the deployment ID.
+They have the same schema, and we will be syncing the `account` and `event` entities from each.
 
- ```graphql theme={null}
- query {
- _meta {
- deployment
- }
- }
- ```
+Entities may be camelCased in the GraphQL API, but here they must be
+snake_cased. For example, `dailySnapshot` will be `daily_snapshot` here.
 
+```yaml qidao-crosschain.yaml theme={null}
+sources:
+- type: subgraphEntity
+# The deployment IDs you gathered above. If you put multiple,
+# they must have the same schema
+deployments:
+- id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
+- id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
+# A reference name, referred to later in the `sourceStreamName` of either a transformation or a sink.
+referenceName: account
+entity:
+# The name of the entities
+name: account
+- type: subgraphEntity
+deployments:
+- id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
+- id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
+referenceName: market_daily_snapshot
+entity:
+name: market_daily_snapshot
+# We are just replicating data, so we don't need any SQL transforms.
+transforms: []
+sinks:
+# In this example, we're using a postgres secret called SUPER_SECRET_SECRET.
+# Feel free to change this out with any other type of sink.
+- type: postgres
+# The sourceStreamName matches the above `referenceNames`
+sourceStreamName: account
+table: qidao_accounts
+schema: public
+secretName: SUPER_SECRET_SECRET
+- type: postgres
+sourceStreamName: market_daily_snapshot
+table: qidao_market_daily_snapshot
+schema: public
+secretName: SUPER_SECRET_SECRET
+```
 
+```shell theme={null}
+goldsky pipeline create qidao-crosschain --definition-path qidao-crosschain.yaml --status ACTIVE
+```
 
- Open a text editor create your definition, using the `subgraphEntity` source. In this example we will use subgraphs on Optimism and on BSC:
+You should see a response from the server like:
 
- * `qidao-optimism` (`QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr`)
- * `qidao-bsc` (`QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS`)
+```
+◇ Successfully validated --definition-path file
+✔ Created pipeline with name: qidao-crosschain
+name: qidao-crosschain
+version: 1
+project_id: project_cl8ylkiw00krx0hvza0qw17vn
+status: INACTIVE
+resource_size: s
+is_deleted: false
+created_at: 1697696162607
+updated_at: 1697696162607
+definition:
+sources:
+- type: subgraphEntity
+entity:
+name: account
+referenceName: account
+deployments:
+- id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
+- id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
+- type: subgraphEntity
+entity:
+name: market_daily_snapshot
+referenceName: market_daily_snapshot
+deployments:
+- id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
+- id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
+...
+```
 
- They have the same schema, and we will be syncing the `account` and `event` entities from each.
+Monitor the pipeline with `goldsky pipeline monitor qidao-crosschain`. The status should change from `STARTING` to `RUNNING` in a minute or so, and data will start appearing in your postgresql database.
 
+Once you have multiple subgraphs being written into one destination database, you can set up a GraphQL API server with this database as a source; there are many options to do this:
 
- Entities may be camelCased in the GraphQL API, but here they must be
- snake\_cased. For example, `dailySnapshot` will be `daily_snapshot` here.
-
-
-
- ```yaml qidao-crosschain.yaml theme={null}
- sources:
- - type: subgraphEntity
- # The deployment IDs you gathered above. If you put multiple,
- # they must have the same schema
- deployments:
- - id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
- - id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
- # A reference name, referred to later in the `sourceStreamName` of either a transformation or a sink.
- referenceName: account
- entity:
- # The name of the entities
- name: account
- - type: subgraphEntity
- deployments:
- - id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
- - id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
- referenceName: market_daily_snapshot
- entity:
- name: market_daily_snapshot
- # We are just replicating data, so we don't need any SQL transforms.
- transforms: []
- sinks:
- # In this example, we're using a postgres secret called SUPER_SECRET_SECRET.
- # Feel free to change this out with any other type of sink.
- - type: postgres
- # The sourceStreamName matches the above `referenceNames`
- sourceStreamName: account
- table: qidao_accounts
- schema: public
- secretName: SUPER_SECRET_SECRET
- - type: postgres
- sourceStreamName: market_daily_snapshot
- table: qidao_market_daily_snapshot
- schema: public
- secretName: SUPER_SECRET_SECRET
- ```
-
-
-
-
- ```shell theme={null}
- goldsky pipeline create qidao-crosschain --definition-path qidao-crosschain.yaml --status ACTIVE
- ```
-
- You should see a response from the server like:
-
- ```
- ◇ Successfully validated --definition-path file
- ✔ Created pipeline with name: qidao-crosschain
- name: qidao-crosschain
- version: 1
- project_id: project_cl8ylkiw00krx0hvza0qw17vn
- status: INACTIVE
- resource_size: s
- is_deleted: false
- created_at: 1697696162607
- updated_at: 1697696162607
- definition:
- sources:
- - type: subgraphEntity
- entity:
- name: account
- referenceName: account
- deployments:
- - id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
- - id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
- - type: subgraphEntity
- entity:
- name: market_daily_snapshot
- referenceName: market_daily_snapshot
- deployments:
- - id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
- - id: QmWgW69CaTwJYwcSdu36mkXgwWY11RjvX1oMGykrxT3wDS
- ...
- ```
-
-
-
- Monitor the pipeline with `goldsky pipeline monitor qidao-crosschain`. The status should change from `STARTING` to `RUNNING` in a minute or so, and data will start appearing in your postgresql database.
-
-
-
- Once you have multiple subgraphs being written into one destination database, you can set up a GraphQL API server with this database as a source; there are many options to do this:
-
- * [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
- * [Express GraphQL](https://graphql.org/graphql-js/running-an-express-graphql-server/)
- * [Hasura](https://hasura.io/) [recommended for quick-start]
-
-
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
+- [Express GraphQL](https://graphql.org/graphql-js/running-an-express-graphql-server/)
+- [Hasura](https://hasura.io/) [recommended for quick-start]
 
 Can't find what you're looking for? Reach out to us at [support@goldsky.com](mailto:support@goldsky.com) for help.
 
@@ -944,47 +905,35 @@ Let's speed-run a simple example of a webhook. We'll create a webhook that sends
 
 ## Walkthrough
 
+Use Messari's [x2y2](https://thegraph.com/hosted-service/subgraph/messari/x2y2-ethereum) subgraph to the x2y2 exchange.
 
+```shell theme={null}
+> goldsky subgraph deploy x2y2/v1 --from-ipfs-hash Qmaj3MHPQ5AecbPuzUyLo9rFvuQwcAYpkXrf3dTUPV8rRu
+Deploying Subgraph:
+✔ Downloading subgraph from IPFS (This can take a while)
+✔ Validating build path
+✔ Packaging deployment bundle from /var/folders/p5/7qc7spd57jbfv00n84yzc97h0000gn/T/goldsky-deploy-Qmaj3MHPQ5AecbPuzUyLo9rFvuQwcAYpkXrf3dTUPV8rRu
+```
 
- Use Messari's [x2y2](https://thegraph.com/hosted-service/subgraph/messari/x2y2-ethereum) subgraph to the x2y2 exchange.
+Let's use a pre-made webhook handler by going to [webhook.site](https://webhook.site) and copying the URL. It may look like something like `https://webhook.site/`
 
- ```shell theme={null}
- > goldsky subgraph deploy x2y2/v1 --from-ipfs-hash Qmaj3MHPQ5AecbPuzUyLo9rFvuQwcAYpkXrf3dTUPV8rRu
- Deploying Subgraph:
- ✔ Downloading subgraph from IPFS (This can take a while)
- ✔ Validating build path
- ✔ Packaging deployment bundle from /var/folders/p5/7qc7spd57jbfv00n84yzc97h0000gn/T/goldsky-deploy-Qmaj3MHPQ5AecbPuzUyLo9rFvuQwcAYpkXrf3dTUPV8rRu
- ```
+Don't use format `https://webhook.site/#!/`
 
+Any new webhook can be sent to this URL and we'll be able to see and inspect the request body.
 
+Create a webhook to receive x2y2 trades.
 
- Let's use a pre-made webhook handler by going to [webhook.site](https://webhook.site) and copying the URL. It may look like something like `https://webhook.site/`
+```shell theme={null}
+> goldsky subgraph webhook create x2y2/v1 --name x2y2-trade-webhook --entity trade --url https://webhook.site/
+✔ Creating webhook
 
+Webhook 'x2y2-trade-webhook' created.
+Make sure calls to your endpoint have the following value for the 'goldsky-webhook-secret' header: whs_01GNV4RMJCFVH14S4YAFW7RGQK
+```
 
- Don't use format `https://webhook.site/#!/`
+A secret will be generated for you to use in your webhook handler. This secret is used to authenticate the webhook request. You can ignore it for the purposes for this speed run.
 
-
- Any new webhook can be sent to this URL and we'll be able to see and inspect the request body.
-
-
-
- Create a webhook to receive x2y2 trades.
-
- ```shell theme={null}
- > goldsky subgraph webhook create x2y2/v1 --name x2y2-trade-webhook --entity trade --url https://webhook.site/
- ✔ Creating webhook
-
- Webhook 'x2y2-trade-webhook' created.
- Make sure calls to your endpoint have the following value for the 'goldsky-webhook-secret' header: whs_01GNV4RMJCFVH14S4YAFW7RGQK
- ```
-
- A secret will be generated for you to use in your webhook handler. This secret is used to authenticate the webhook request. You can ignore it for the purposes for this speed run.
-
-
-
- Inspect the webhook.site URL (or your custom handler) again, you should see events start to stream in.
-
-
+Inspect the webhook.site URL (or your custom handler) again, you should see events start to stream in.
 
 Can't find what you're looking for? Reach out to us at [support@goldsky.com](mailto:support@goldsky.com) for help.
 
@@ -1005,7 +954,6 @@ subgraphs and their tags.
 For example, in the Goldsky managed community project there exists the `uniswap-v3-base/1.0.0` subgraph with a tag of `prod`.
 This subgraph has a [public endpoint](https://api.goldsky.com/api/public/project_cl8ylkiw00krx0hvza0qw17vn/subgraphs/uniswap-v3-base/1.0.0/gn)
 and the tag `prod` also has a [public endpoint](https://api.goldsky.com/api/public/project_cl8ylkiw00krx0hvza0qw17vn/subgraphs/uniswap-v3-base/prod/gn).
-
 
 In general, public endpoints come in the form of `https://api.goldsky.com/api/public/
 
@@ -1031,7 +979,6 @@ private endpoints for your subgraph. For example, you can have a public endpoint
 for a specific tag.
 
 Here's an example of how to access a private endpoint using the GraphiQL interface:
-
 
 Private subgraphs endpoints follow the same format as public subgraph endpoints except they start with `/api/private`
 instead of `/api/public`. For example, the private endpoint for the `prod` tag of the `uniswap-v3-base/1.0.0` subgraph
@@ -1083,80 +1030,78 @@ Currently there is only a single configuration schema, [version 1](#version-1). 
 
 ### Version 1
 
-* **[REQUIRED]** `version` (`string`, must be `"1"`) - The version of the configuration schema.
-* ***[OPTIONAL]*** `name` (`string`) - The name of the subgraph.
-* **[REQUIRED]** `abis` (map of `object`) - A map of ABI names to ABI source configurations.
- * **[REQUIRED]** `path` (`string`) - The path to the ABI source, relative to the configuration file.
-* **[REQUIRED]** `instances` (array of `object`) - A list of data source or data template instances to index.
-* ***[OPTIONAL]*** `enableCallHandlers` (`boolean`) - Whether to enable call handler indexing for the subgraph
+- **[REQUIRED]** `version` (`string`, must be `"1"`) - The version of the configuration schema.
+- **_[OPTIONAL]_** `name` (`string`) - The name of the subgraph.
+- **[REQUIRED]** `abis` (map of `object`) - A map of ABI names to ABI source configurations.
+- **[REQUIRED]** `path` (`string`) - The path to the ABI source, relative to the configuration file.
+- **[REQUIRED]** `instances` (array of `object`) - A list of data source or data template instances to index.
+- **_[OPTIONAL]_** `enableCallHandlers` (`boolean`) - Whether to enable call handler indexing for the subgraph
 
-
- *Note that `abis` also supports inline ABI definitions, either as the raw ABI
- array or as the JSON string.*
-
+  _Note that `abis` also supports inline ABI definitions, either as the raw ABI
+  array or as the JSON string._
 
 #### Data source instance
 
 Data sources are instances derived from a single contract address.
 
-* **[REQUIRED]** `abi` (`string`) - The name of the ABI source.
-* **[REQUIRED]** `address` (`string`) - The contract address to index.
-* **[REQUIRED]** `startBlock` (`number`) - The block to start indexing from.
-* **[REQUIRED]** `chain` (`string`) - The chain to index on.
-* ***[OPTIONAL]*** `enrich` (`object`) - An object containing enrichment configurations.
+- **[REQUIRED]** `abi` (`string`) - The name of the ABI source.
+- **[REQUIRED]** `address` (`string`) - The contract address to index.
+- **[REQUIRED]** `startBlock` (`number`) - The block to start indexing from.
+- **[REQUIRED]** `chain` (`string`) - The chain to index on.
+- **_[OPTIONAL]_** `enrich` (`object`) - An object containing enrichment configurations.
 
 #### Data template instance
 
 Data templates are instances derived from an event emitted by a contract. The event signature must include an address parameter that contains the contract address that will be indexed.
 
-* **[REQUIRED]** `abi` (`string`) - The name of the ABI data template instance (e.g., the pool).
-* **[REQUIRED]** `source` (`object`) - The source event details to create a new data template instance.
- * **[REQUIRED]** `abi` (`string`) - The name of the ABI data template source (e.g., the factory).
- * **[REQUIRED]** `eventSignature` (`string`) - The event signature to listen for.
- * **[REQUIRED]** `addressParam` (`string`) - The parameter to extract the contract address from.
-* ***[OPTIONAL]*** `enrich` (`object`) - An object containing enrichment configurations.
+- **[REQUIRED]** `abi` (`string`) - The name of the ABI data template instance (e.g., the pool).
+- **[REQUIRED]** `source` (`object`) - The source event details to create a new data template instance.
+- **[REQUIRED]** `abi` (`string`) - The name of the ABI data template source (e.g., the factory).
+- **[REQUIRED]** `eventSignature` (`string`) - The event signature to listen for.
+- **[REQUIRED]** `addressParam` (`string`) - The parameter to extract the contract address from.
+- **_[OPTIONAL]_** `enrich` (`object`) - An object containing enrichment configurations.
 
 #### Instance enrichment
 
 Enrichments allow data source and template instances to be enriched by performing eth calls and mapping the outputs to one or more fields and/or entities.
 
-* ***[OPTIONAL]*** `options` (`object`) - enrichment options.
- * ***[OPTIONAL]*** `debugging` (`boolean`) - Flag to emit debugging logs.
- * ***[OPTIONAL]*** `imports` (array of `string`) - List of additional imports to include in the generated mapping file. You only need to include additional imports if you are using those types within your configuration.
-* **[REQUIRED]** `handlers` (map of `object`) - A map of trigger signatures to enrichment handler configurations (signature must be defined in the instance abi).
- * ***[OPTIONAL]*** `calls` (map of `object`) - A map of call reference names to eth call configurations. This can be omitted if mapping expressions do not require any eth calls.
- * **[REQUIRED]** `entities` (map of `object`) - A map of entity names to entity configurations.
+- **_[OPTIONAL]_** `options` (`object`) - enrichment options.
+- **_[OPTIONAL]_** `debugging` (`boolean`) - Flag to emit debugging logs.
+- **_[OPTIONAL]_** `imports` (array of `string`) - List of additional imports to include in the generated mapping file. You only need to include additional imports if you are using those types within your configuration.
+- **[REQUIRED]** `handlers` (map of `object`) - A map of trigger signatures to enrichment handler configurations (signature must be defined in the instance abi).
+- **_[OPTIONAL]_** `calls` (map of `object`) - A map of call reference names to eth call configurations. This can be omitted if mapping expressions do not require any eth calls.
+- **[REQUIRED]** `entities` (map of `object`) - A map of entity names to entity configurations.
 
 #### Enrichment call configuration
 
 Enrichment call configurations capture all information required to perform an eth call within the context of an existing event or call handler mapping function.
 
-* ***[OPTIONAL]*** `abi` (`string`) - The name of the abi defining the call to perform (if omitted then we'll use the instance abi).
-* ***[OPTIONAL]*** `source` (`string`) - The contract address source [expression](#enrichment-expressions) to use for the call (if omitted then we'll use the current instance source).
-* **[REQUIRED]** `name` (`string`) - The name of the eth call to perform. Note that this must be the exact name as defined in the ABI. The eth call invoker will actually call the `try_` function to safely handle a potential revert and prevent any errors in the subgraph due to an invalid eth call. If the eth call is required then the subgraph will result in an error state.
-* ***[OPTIONAL]*** `params` (`string`) - The parameter [expression](#enrichment-expressions) to use when performing the eth call (this can be omitted if the eth call requires no parameters, and must include all parameters separated by commas otherwise). e.g., `"event.params.owner, event.params.tokenId"`.
-* ***[OPTIONAL]*** `depends_on` (array of `string`) - List of call reference names that this call depends on (this should be used if a parameter is derived from a previously defined call).
-* ***[OPTIONAL]*** `required` (`boolean`) - Flag to indicate that the call must succeed for the enrichment to take place (if the call does not succeed then the enrichment is aborted and no enrichment entity mapping will take place).
-* ***[OPTIONAL]*** `declared` (`boolean`) - Flag to indicate that the call should be marked as declared, meaning that the call will be executed and the result cached prior to the mapping handler function being invoked.
-* ***[OPTIONAL]*** `conditions` (`object`) - Optional condition [expressions](#enrichment-expressions) to test before and after performing the call (if either condition fails then the enrichment is aborted and no enrichment entity mapping will take place).
- * ***[OPTIONAL]*** `pre` (`string`) - The condition to test before performing the call.
- * ***[OPTIONAL]*** `post` (`string`) - The condition to test after performing the call.
+- **_[OPTIONAL]_** `abi` (`string`) - The name of the abi defining the call to perform (if omitted then we'll use the instance abi).
+- **_[OPTIONAL]_** `source` (`string`) - The contract address source [expression](#enrichment-expressions) to use for the call (if omitted then we'll use the current instance source).
+- **[REQUIRED]** `name` (`string`) - The name of the eth call to perform. Note that this must be the exact name as defined in the ABI. The eth call invoker will actually call the `try_` function to safely handle a potential revert and prevent any errors in the subgraph due to an invalid eth call. If the eth call is required then the subgraph will result in an error state.
+- **_[OPTIONAL]_** `params` (`string`) - The parameter [expression](#enrichment-expressions) to use when performing the eth call (this can be omitted if the eth call requires no parameters, and must include all parameters separated by commas otherwise). e.g., `"event.params.owner, event.params.tokenId"`.
+- **_[OPTIONAL]_** `depends_on` (array of `string`) - List of call reference names that this call depends on (this should be used if a parameter is derived from a previously defined call).
+- **_[OPTIONAL]_** `required` (`boolean`) - Flag to indicate that the call must succeed for the enrichment to take place (if the call does not succeed then the enrichment is aborted and no enrichment entity mapping will take place).
+- **_[OPTIONAL]_** `declared` (`boolean`) - Flag to indicate that the call should be marked as declared, meaning that the call will be executed and the result cached prior to the mapping handler function being invoked.
+- **_[OPTIONAL]_** `conditions` (`object`) - Optional condition [expressions](#enrichment-expressions) to test before and after performing the call (if either condition fails then the enrichment is aborted and no enrichment entity mapping will take place).
+- **_[OPTIONAL]_** `pre` (`string`) - The condition to test before performing the call.
+- **_[OPTIONAL]_** `post` (`string`) - The condition to test after performing the call.
 
 #### Enrichment entity configuration
 
 Enrichement entity configurations are a map of field name and type to field value expressions. The configuration supports both a simplified single configuration and a multi-instance configuration. The single configuration is most likely all that is needed for most use cases, but if the need arises to describe an enriched entity where multiple instances are created within a single mapping (think of creating the same entity with different ids for the same event or call handler), then we can describe the entity as an array of configurations where each also includes an `id` expression for determining the unique `id` suffix.
 
-* An entity field mapping key looks like ` `, e.g., `tokenId uint256`
- * the field name can be any valid GraphQL schema field identifier, typically this would either be a *camelCase* or *snake\_case* string
- * the field type can be any valid ABI type name
-* An entity field mapping value is an [expression](#enrichment-expressions), e.g., `calls.owner.toHexString()`
- * it must return a value of the type specified in the field mapping key (i.e., `address` must be converted to `string` using `.toHexString()`)
+- An entity field mapping key looks like ` `, e.g., `tokenId uint256`
+- the field name can be any valid GraphQL schema field identifier, typically this would either be a _camelCase_ or _snake_case_ string
+- the field type can be any valid ABI type name
+- An entity field mapping value is an [expression](#enrichment-expressions), e.g., `calls.owner.toHexString()`
+- it must return a value of the type specified in the field mapping key (i.e., `address` must be converted to `string` using `.toHexString()`)
 
 When configuring an entity for multiple instances, the configuration takes the following form
 
-* **[REQUIRED]** `id` (`string`) - The [expression](#enrichment-expressions) to determine the unique id suffix for the entity instance.
-* ***[OPTIONAL]*** `explicit_id` (`boolean`) - Flag to indicate that the id expression should be used as the explicit id for the entity instance (if omitted then the `id` expression will be appended to the parent entity `id`).
-* **[REQUIRED]** `mapping` (map of `object`) - A map of field name and type to field value expressions (as described above).
+- **[REQUIRED]** `id` (`string`) - The [expression](#enrichment-expressions) to determine the unique id suffix for the entity instance.
+- **_[OPTIONAL]_** `explicit_id` (`boolean`) - Flag to indicate that the id expression should be used as the explicit id for the entity instance (if omitted then the `id` expression will be appended to the parent entity `id`).
+- **[REQUIRED]** `mapping` (map of `object`) - A map of field name and type to field value expressions (as described above).
 
 #### Enrichment expressions
 
@@ -1164,9 +1109,9 @@ Enrichment expressions are AssemblyScript expressions that can be used to produc
 
 Below each of the runtime context elements are described in more detail:
 
-* `event` and `call` - The incoming event/call object to the mapping handler function. The parameters to this object will already be converted to the entity fields, one for each parameter defined in the corresponding ABI file.
-* `entity` - The parent entity object to the mapping handler function, this entity will have already been saved before enrichment begins.
-* `calls` - The object containing all previously executed eth calls. This object is used to reference the results of previous calls in the current call configuration. Calls not yet executed can still be referenced but they will be `null` until the call is invoked. Any calls that are marked `required` (or marked as a dependency of another call) will throw an error if accessed before the call is invoked.
+- `event` and `call` - The incoming event/call object to the mapping handler function. The parameters to this object will already be converted to the entity fields, one for each parameter defined in the corresponding ABI file.
+- `entity` - The parent entity object to the mapping handler function, this entity will have already been saved before enrichment begins.
+- `calls` - The object containing all previously executed eth calls. This object is used to reference the results of previous calls in the current call configuration. Calls not yet executed can still be referenced but they will be `null` until the call is invoked. Any calls that are marked `required` (or marked as a dependency of another call) will throw an error if accessed before the call is invoked.
 
 ## Explanation of common patterns
 
@@ -1174,31 +1119,31 @@ Below each of the runtime context elements are described in more detail:
 
 ```json5 theme={null}
 {
- version: "1",
- name: "TokenDeployed",
- abis: {
- TokenRegistry: {
- path: "./path/to/your/abi.json",
- },
- },
- instances: [
- {
- abi: "TokenRegistry",
- address: "0x...",
- startBlock: 13983724,
- chain: "your_chain",
- },
- ],
+  version: "1",
+  name: "TokenDeployed",
+  abis: {
+    TokenRegistry: {
+      path: "./path/to/your/abi.json",
+    },
+  },
+  instances: [
+    {
+      abi: "TokenRegistry",
+      address: "0x...",
+      startBlock: 13983724,
+      chain: "your_chain",
+    },
+  ],
 }
 ```
 
-* `"version": "1"`: The version of this config, we only support a value of "1" right now.
-* `"name": "TokenDeployed"`: The name of the event you want to track as specified in the ABI file.
-* `"abis": { "TokenRegistry": { "path": "./path/to/your/abi.json" } }`: Mapping of ABIs names (can be anything you want) to ABI files.
-* `"abi": "TokenRegistry"`: The ABI you want to track. This name must match a key in the `abis` object above.
-* `"address": "0x...",`: The address of the contract.
-* `"startBlock": 13983724`: The block from which you want your subgraph to start indexing (in most cases, this is the block that deployed your contract)
-* `"chain": "your_chain"`: The chain you want to track this contract on
+- `"version": "1"`: The version of this config, we only support a value of "1" right now.
+- `"name": "TokenDeployed"`: The name of the event you want to track as specified in the ABI file.
+- `"abis": { "TokenRegistry": { "path": "./path/to/your/abi.json" } }`: Mapping of ABIs names (can be anything you want) to ABI files.
+- `"abi": "TokenRegistry"`: The ABI you want to track. This name must match a key in the `abis` object above.
+- `"address": "0x...",`: The address of the contract.
+- `"startBlock": 13983724`: The block from which you want your subgraph to start indexing (in most cases, this is the block that deployed your contract)
+- `"chain": "your_chain"`: The chain you want to track this contract on
 
 ### Factory pattern
 
@@ -1206,41 +1151,41 @@ Some contracts create other child contracts, which then emit events that you nee
 
 ```json5 theme={null}
 {
- version: "1",
- name: "TokenDeployed",
- abis: {
- Factory: {
- path: "./abis/factory.json",
- },
- Pool: {
- path: "./abis/pool.json",
- },
- },
- instances: [
- {
- abi: "Factory",
- address: "0xa98242820EBF3a405D265CCd22A4Ea8F64AFb281",
- startBlock: 16748800,
- chain: "bsc",
- },
- {
- abi: "Pool",
- source: {
- abi: "Factory",
- eventSignature: "PoolCreated(address,address,bool)",
- addressParam: "pool",
- },
- },
- ],
+  version: "1",
+  name: "TokenDeployed",
+  abis: {
+    Factory: {
+      path: "./abis/factory.json",
+    },
+    Pool: {
+      path: "./abis/pool.json",
+    },
+  },
+  instances: [
+    {
+      abi: "Factory",
+      address: "0xa98242820EBF3a405D265CCd22A4Ea8F64AFb281",
+      startBlock: 16748800,
+      chain: "bsc",
+    },
+    {
+      abi: "Pool",
+      source: {
+        abi: "Factory",
+        eventSignature: "PoolCreated(address,address,bool)",
+        addressParam: "pool",
+      },
+    },
+  ],
 }
 ```
 
-* `"Factory": { "path": "./abis/factory.json" }`: The path to the ABI for the Factory contract
-* `"Pool": { "path": "./abis/pool.json"` }: The path the ABI for the contract deployed by the Factory contract
-* `{ "abi": "Pool" }`: This is the main difference between the configuration for factory vs non-factory applications. In this example, the Factory contract makes new Pool contracts and the below configuration specifies that with this `source` object.
-* `"source": { "abi": "Factory" }`: The ABI name which creates this contract.
-* `"eventSignature": "PoolCreated(address,address,bool)",`: This is the signature of the event from the Factory contract which indicates that this contract was created.
-* `"addressParam": "pool"`: The name of the parameter from the Factory contract's event that contains the new address to track.
+- `"Factory": { "path": "./abis/factory.json" }`: The path to the ABI for the Factory contract
+- `"Pool": { "path": "./abis/pool.json"` }: The path the ABI for the contract deployed by the Factory contract
+- `{ "abi": "Pool" }`: This is the main difference between the configuration for factory vs non-factory applications. In this example, the Factory contract makes new Pool contracts and the below configuration specifies that with this `source` object.
+- `"source": { "abi": "Factory" }`: The ABI name which creates this contract.
+- `"eventSignature": "PoolCreated(address,address,bool)",`: This is the signature of the event from the Factory contract which indicates that this contract was created.
+- `"addressParam": "pool"`: The name of the parameter from the Factory contract's event that contains the new address to track.
 
 In this pattern, there is a defined factory contract that makes many pools, and each pool needs to be tracked. We have two ABIs and the last `instance` entry looks for any `PoolCreated` event in the `Factory` ABI, gets a parameter from it, and uses that as a data source to watch for future `Pool` events in the `Pool` ABI.
 
@@ -1282,15 +1227,15 @@ In this pattern, there is a defined factory contract that makes many pools, and 
 }
 ```
 
-* `"Minted(address)"`: the event signature (as defined in the `TokenRegistry` ABI) to perform the enrichment within.
-* `"balance"`: the name of the call reference.
-* `"name": "balanceOf"`: the name of the eth call to perform.
-* `"params": "event.params.owner"`: the parameter to pass to the `balanceOf` eth call. `event` represents the incoming event object to the `Minted(address)` mapping handler function.
-* `"Balance"`: the new enrichment entity name to create.
-* `"owner address"`: the first field name and type for the entity. In this case we would see `Balance.owner` defined as a `String` in the generated schema because the `address` type serializes to a `String`.
-* `"event.params.owner.toHexString()"`: the expression to determine the value for the `owner` field. `event` represents the incoming event object to the `Minted(address)` mapping handler function. Since `event.params.owner` is an `address` type, we need to convert it to a `String` using the `.toHexString()` method.
-* `"balance uint256"`: the second field name and type for the entity. In this case we would see `Balance.balance` defined as a `BigInt` in the generated schema.
-* `"calls.balance"`: the expression to determine the value for the `balance` field. `calls` represents the object containing all previously executed eth calls and `balance` refers to our call reference name.
+- `"Minted(address)"`: the event signature (as defined in the `TokenRegistry` ABI) to perform the enrichment within.
+- `"balance"`: the name of the call reference.
+- `"name": "balanceOf"`: the name of the eth call to perform.
+- `"params": "event.params.owner"`: the parameter to pass to the `balanceOf` eth call. `event` represents the incoming event object to the `Minted(address)` mapping handler function.
+- `"Balance"`: the new enrichment entity name to create.
+- `"owner address"`: the first field name and type for the entity. In this case we would see `Balance.owner` defined as a `String` in the generated schema because the `address` type serializes to a `String`.
+- `"event.params.owner.toHexString()"`: the expression to determine the value for the `owner` field. `event` represents the incoming event object to the `Minted(address)` mapping handler function. Since `event.params.owner` is an `address` type, we need to convert it to a `String` using the `.toHexString()` method.
+- `"balance uint256"`: the second field name and type for the entity. In this case we would see `Balance.balance` defined as a `BigInt` in the generated schema.
+- `"calls.balance"`: the expression to determine the value for the `balance` field. `calls` represents the object containing all previously executed eth calls and `balance` refers to our call reference name.
 
 ## Examples
 
@@ -1300,44 +1245,44 @@ This example shows how to define multiple chains with many addresses.
 
 ```json theme={null}
 {
- "name": "TokenDeployed",
- "abis": {
- "TokenRegistry": {
- "path": "./abis/tokenRegistryAbi.json"
- }
- },
- "instances": [
- {
- "abi": "TokenRegistry",
- "address": "0x0A6f564C5c9BeBD66F1595f1B51D1F3de6Ef3b79",
- "startBlock": 13983724,
- "chain": "mainnet"
- },
- {
- "abi": "TokenRegistry",
- "address": "0x2d6775C1673d4cE55e1f827A0D53e62C43d1F304",
- "startBlock": 13718798,
- "chain": "avalanche"
- },
- {
- "abi": "TokenRegistry",
- "address": "0x10B84C73001745D969e7056D7ca474ce1D959FE8",
- "startBlock": 59533,
- "chain": "evmos"
- },
- {
- "abi": "TokenRegistry",
- "address": "0xa7E4Fea3c1468D6C1A3A77e21e6e43Daed855C1b",
- "startBlock": 171256,
- "chain": "moonbeam"
- },
- {
- "abi": "TokenRegistry",
- "address": "0x19d4b0F5871913c714554Bbb457F2a1549f52E04",
- "startBlock": 1356181,
- "chain": "milkomedac1"
- }
- ]
+  "name": "TokenDeployed",
+  "abis": {
+    "TokenRegistry": {
+      "path": "./abis/tokenRegistryAbi.json"
+    }
+  },
+  "instances": [
+    {
+      "abi": "TokenRegistry",
+      "address": "0x0A6f564C5c9BeBD66F1595f1B51D1F3de6Ef3b79",
+      "startBlock": 13983724,
+      "chain": "mainnet"
+    },
+    {
+      "abi": "TokenRegistry",
+      "address": "0x2d6775C1673d4cE55e1f827A0D53e62C43d1F304",
+      "startBlock": 13718798,
+      "chain": "avalanche"
+    },
+    {
+      "abi": "TokenRegistry",
+      "address": "0x10B84C73001745D969e7056D7ca474ce1D959FE8",
+      "startBlock": 59533,
+      "chain": "evmos"
+    },
+    {
+      "abi": "TokenRegistry",
+      "address": "0xa7E4Fea3c1468D6C1A3A77e21e6e43Daed855C1b",
+      "startBlock": 171256,
+      "chain": "moonbeam"
+    },
+    {
+      "abi": "TokenRegistry",
+      "address": "0x19d4b0F5871913c714554Bbb457F2a1549f52E04",
+      "startBlock": 1356181,
+      "chain": "milkomedac1"
+    }
+  ]
 }
 ```
 
@@ -1347,41 +1292,41 @@ This configuration results in multiple deployed subgraphs, each with an identica
 
 ```json5 theme={null}
 {
- version: "1",
- name: "nouns/1.0.0",
- abis: {
- nouns: {
- path: "./abis/nouns.json",
- },
- },
- instances: [
- {
- abi: "nouns",
- address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
- startBlock: 12985438,
- chain: "mainnet",
- enrich: {
- handlers: {
- "Transfer(indexed address,indexed address,indexed uint256)": {
- calls: {
- nouns_balance: {
- name: "balanceOf",
- params: "event.params.to",
- },
- },
- entities: {
- EnrichmentBalance: {
- "tokenId uint256": "event.params.tokenId",
- "previousOwner address": "event.params.from.toHexString()",
- "owner address": "event.params.to.toHexString()",
- "nouns uint256": "calls.nouns_balance",
- },
- },
- },
- },
- },
- },
- ],
+  version: "1",
+  name: "nouns/1.0.0",
+  abis: {
+    nouns: {
+      path: "./abis/nouns.json",
+    },
+  },
+  instances: [
+    {
+      abi: "nouns",
+      address: "0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03",
+      startBlock: 12985438,
+      chain: "mainnet",
+      enrich: {
+        handlers: {
+          "Transfer(indexed address,indexed address,indexed uint256)": {
+            calls: {
+              nouns_balance: {
+                name: "balanceOf",
+                params: "event.params.to",
+              },
+            },
+            entities: {
+              EnrichmentBalance: {
+                "tokenId uint256": "event.params.tokenId",
+                "previousOwner address": "event.params.from.toHexString()",
+                "owner address": "event.params.to.toHexString()",
+                "nouns uint256": "calls.nouns_balance",
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
 }
 ```
 
@@ -1389,30 +1334,30 @@ This configuration will create a new `EnrichmentBalance` entity that contains a 
 
 ```graphql theme={null}
 query NounsTransfersAndBalancesDemo {
- enrichmentBalances(first: 1, orderBy: timestamp_, orderDirection: desc) {
- id
- timestamp_
- tokenId
- previousOwner
- owner
- nouns
- transfer {
- id
- transactionHash_
- }
- }
- transfers(first: 1, orderBy: timestamp_, orderDirection: desc) {
- id
- transactionHash_
- timestamp_
- tokenId
- from
- to
- enrichmentBalances {
- id
- nouns
- }
- }
+  enrichmentBalances(first: 1, orderBy: timestamp_, orderDirection: desc) {
+    id
+    timestamp_
+    tokenId
+    previousOwner
+    owner
+    nouns
+    transfer {
+      id
+      transactionHash_
+    }
+  }
+  transfers(first: 1, orderBy: timestamp_, orderDirection: desc) {
+    id
+    transactionHash_
+    timestamp_
+    tokenId
+    from
+    to
+    enrichmentBalances {
+      id
+      nouns
+    }
+  }
 }
 ```
 
@@ -1433,427 +1378,346 @@ query NounsTransfersAndBalancesDemo {
 
 We're going to build a subgraph to track the [Nouns contract](https://etherscan.io/address/0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03) on `mainnet`.
 
+```
+goldsky subgraph init
+```
 
+_Remember to run `goldsky login` first if you haven't already authenticated
+with Goldsky._
 
+This will launch the wizard and guide you through the process of deploying a subgraph on Goldsky.
 
+```
+┍ Goldsky Subgraph configuration wizard
+```
 
+The name must start with a letter and contain only letters, numbers, underscores, and hyphens.
 
- ```
- goldsky subgraph init
- ```
+e.g., `nouns-demo`
 
+```
+│
+◆ Subgraph name
+│ nouns-demo
+┕
+```
 
- *Remember to run `goldsky login` first if you haven't already authenticated
- with Goldsky.*
+_see [related argument documentation](#nameandversion-positional-argument)_
 
+This will default to `1.0.0`, but you can change this to anything as long as it starts with a letter or number and contains only letters, numbers, underscores, hyphens, pluses, and periods.
 
- This will launch the wizard and guide you through the process of deploying a subgraph on Goldsky.
+e.g., `1.0.0-demo+docs`
 
- ```
- ┍ Goldsky Subgraph configuration wizard
- ```
+```
+│
+◆ Subgraph version
+│ 1.0.0-demo+docs
+┕
+```
 
+_see [related argument documentation](#nameandversion-positional-argument)_
 
+This must be any valid path on your system, and will default to subgraph name and version as parent and child directories respectively. The target path is where the no-code subgraph configuration will be written, as well as where any remotely fetched files will be saved. Target path is expanded, with `~` (user home directory) and environment variables being replaced accordingly.
 
- The name must start with a letter and contain only letters, numbers, underscores, and hyphens.
+_If you have already run through this guide, or you already have created
+`~/my-subgraphs/nouns-demo/1.0.0-demo+docs` then this step will be followed
+with a prompt to confirm overwriting existing files._
 
- e.g., `nouns-demo`
+e.g., `~/my-subgraphs/nouns-demo/1.0.0-demo+docs`
 
- ```
- │
- ◆ Subgraph name
- │ nouns-demo
- ┕
- ```
+```
+│
+◇ Subgraph path
+│ ~/my-subgraphs/nouns-demo/1.0.0-demo+docs
+┕
+```
 
+_see [related argument documentation](#target-path)_
 
- *see [related argument documentation](#nameandversion-positional-argument)*
+In most cases this can be left blank so that we automatically source ABIs from local and remote sources. If you have local path(s) that contain various ABIs, you can specify them here.
 
+e.g., `~/my-subgraphs/abis`
 
+_In this case, we'll leave this blank here because we haven't saved any ABIs
+locally to `~/my-subgraphs/abis` yet._
 
+```
+│
+◆ Contract ABI source
+│ path/to/abi, leave blank to skip
+┕
+```
 
- This will default to `1.0.0`, but you can change this to anything as long as it starts with a letter or number and contains only letters, numbers, underscores, hyphens, pluses, and periods.
+_see [related argument documentation](#abi)_
 
- e.g., `1.0.0-demo+docs`
+You can add any number of contract addresses here (as long as you add at least one). After entering all details about a contract, you'll be asked if you want to add another contract. Contract addresses must begin with a `0x` and be exactly `42` characters long.
 
- ```
- │
- ◆ Subgraph version
- │ 1.0.0-demo+docs
- ┕
- ```
+e.g., `0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03`
 
+```
+│
+◆ Contract address
+│ 0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03
+┕
+```
 
- *see [related argument documentation](#nameandversion-positional-argument)*
+_see [related argument documentation](#contract)_
 
+Decide which network you would like to index for this contract, refer to our [supported networks](/chains/supported-networks) for the full list of available options. If the wrong network is selected, your contract may not exist on that network and no data will indexed.
 
+e.g., `mainnet`
 
+```
+│
+◆ Contract network
+│ mainnet
+┕
+```
 
- This must be any valid path on your system, and will default to subgraph name and version as parent and child directories respectively. The target path is where the no-code subgraph configuration will be written, as well as where any remotely fetched files will be saved. Target path is expanded, with `~` (user home directory) and environment variables being replaced accordingly.
+_see [related argument documentation](#network)_
 
+The start block will be automatically determined based on the network you specified in the previous step. A remote source is interrogated to determine this start block, but not all remote sources are able to respond with a valid start block value. If the remote source is unable to acquire a valid start block then the prompt will fallback to `0` and you'll be able to manually enter a start block. If you are unsure what the start block might be, using `0` is a safe bet but may result in a longer indexing time before any data is available.
 
- *If you have already run through this guide, or you already have created
- `~/my-subgraphs/nouns-demo/1.0.0-demo+docs` then this step will be followed
- with a prompt to confirm overwriting existing files.*
+e.g., `12985438`
 
+_In this case, the wizard should have automatically determined the start block
+for our contract on `mainnet`. If there is a networking issue and the start
+block is not fetched automatically, please enter `12985438` manually._
 
- e.g., `~/my-subgraphs/nouns-demo/1.0.0-demo+docs`
-
- ```
- │
- ◇ Subgraph path
- │ ~/my-subgraphs/nouns-demo/1.0.0-demo+docs
- ┕
- ```
-
- *see [related argument documentation](#target-path)*
-
-
-
- In most cases this can be left blank so that we automatically source ABIs from local and remote sources. If you have local path(s) that contain various ABIs, you can specify them here.
-
- e.g., `~/my-subgraphs/abis`
-
-
- *In this case, we'll leave this blank here because we haven't saved any ABIs
- locally to `~/my-subgraphs/abis` yet.*
-
-
- ```
- │
- ◆ Contract ABI source
- │ path/to/abi, leave blank to skip
- ┕
- ```
-
- *see [related argument documentation](#abi)*
-
-
-
- You can add any number of contract addresses here (as long as you add at least one). After entering all details about a contract, you'll be asked if you want to add another contract. Contract addresses must begin with a `0x` and be exactly `42` characters long.
-
- e.g., `0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03`
-
- ```
- │
- ◆ Contract address
- │ 0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03
- ┕
- ```
-
- *see [related argument documentation](#contract)*
-
-
-
- Decide which network you would like to index for this contract, refer to our [supported networks](/chains/supported-networks) for the full list of available options. If the wrong network is selected, your contract may not exist on that network and no data will indexed.
-
- e.g., `mainnet`
-
- ```
- │
- ◆ Contract network
- │ mainnet
- ┕
- ```
-
- *see [related argument documentation](#network)*
-
-
-
- The start block will be automatically determined based on the network you specified in the previous step. A remote source is interrogated to determine this start block, but not all remote sources are able to respond with a valid start block value. If the remote source is unable to acquire a valid start block then the prompt will fallback to `0` and you'll be able to manually enter a start block. If you are unsure what the start block might be, using `0` is a safe bet but may result in a longer indexing time before any data is available.
-
- e.g., `12985438`
-
-
- *In this case, the wizard should have automatically determined the start block
- for our contract on `mainnet`. If there is a networking issue and the start
- block is not fetched automatically, please enter `12985438` manually.*
-
-
-
- *On some networks, contracts deployed more than a year ago may not be possible
- to automatically determine the start block due to a default configuration
- option in a common RPC provider software.*
-
-
- ```
- │
- ◇ Found start block: 12985438
- │
- ◆ Start block
- │ 12985438
- ┕
- ```
-
- *see [related argument documentation](#start-block)*
-
-
-
- In some cases, you may want to index the same contract on multiple networks. If this is the case, you can choose `Yes` and add another network here to repeat the past `2` steps for another network. If you only want to index this contract on one network, you can choose `No` and move on to the next step.
-
-
- *In this case, we only want to index this contract on the `mainnet` network,
- so we'll choose `No`.*
-
-
- ```
- │
- ◆ Add another network?
- │ ○ Yes / ● No
- ┕
- ```
-
-
-
- The contract name will be used to produce generated subgraph code files. This should be a human-readable name that describes the contract you're indexing and must begin with a letter and contain ony letters, numbers, hypens, underscores, and spaces.
-
- e.g., `NOUNS`
-
-
- *The contract name does not need to be all caps, this is just a convention
- used in this example.*
-
-
- ```
- │
- ◆ Contract name
- │ NOUNS
- ┕
- ```
-
- *see [related argument documentation](#contract-name)*
-
-
-
- In some cases, you may want to index multiple contracts in the same subgraph. If this is the case, you can choose `Yes` and add another contract here to repeat all past steps since previously entering a contract for a new contract. If you only want to index this one contract, you can choose `No` and move on to the next step.
-
-
- *In this case, we only want to index this one contract, so we'll choose `No`.*
-
-
- ```
- │
- ◆ Add another contract?
- │ ○ Yes / ● No
- ┕
- ```
-
-
-
- The subgraph description is only for your own reference and will not be used in the generated subgraph code. This can be any text you like, or left empty if no description is desired. The wizard will start with a generic default description.
-
- e.g., `Goldsky Instant Subgraph for NOUNS`
-
- *In this case, we'll accept the generic default description.*
-
- ```
- │
- ◆ Subgraph description
- │ Goldsky Instant Subgraph for NOUNS
- ┕
- ```
-
- *see [related argument documentation](#description)*
-
-
-
- By enabling call handlers, the subgraph will index all contract calls in addition to events. This will increase the amount of data indexed and may result in a longer indexing time. Choose `Yes` to include calls, otherwise if you only want to index contract events you can choose `No` and move on to the next step.
-
-
- *In this case, we will include call handlers, so we'll choose `Yes`.*
-
-
- ```
- │
- ◆ Enable subgraph call handlers?
- │ ● Yes / ○ No
- ┕
- ```
-
- *see [related argument documentation](#call-handlers)*
-
-
-
- We've finished collecting all the necessary information to initialize your subgraph. A brief summary of all your choices as well as a note on whether build and/or deploy is enabled by default is displayed (you will still have an option to cancel before building or deploying). If you're ready to proceed, choose `Yes` to generate the no-code subgraph configuration file. If anything doesn't look quite right you can choose `No` to abort the wizard and start over.
-
-
- *In this case, we're happy with all our choices and will choose `Yes` to
- proceed.*
-
-
- ```
- │
- ◇ Subgraph configuration summary
- │
- │ Build and deploy will be performed
- │
- │ Name: nouns-demo
- │ Description: Goldsky Instant Subgraph for NOUNS
- │ Version: 1.0.0-demo+docs
- │ TargetPath: /Users/someone/my-subgraphs/nouns-demo/1.0.0-demo+docs
- │ CallHandlers: enabled
- │ AbiSources:
- │ - /Users/someone/my-subgraphs/nouns-demo/1.0.0-demo+docs/abis
- │ Contracts:
- │ - Address: 0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03
- │ Name: NOUNS
- │ Networks:
- │ - Network: mainnet
- │ StartBlock: 12985438
- │
- ┝━━━
- │
- ◆ Proceed with subgraph initialization?
- │ ● Yes / ○ No
- ┕
- ```
-
- This step is where we fetch any missing ABI's from remote sources.
-
-
-
- Once all no-code subgraph configuration files have been written to the target path, the wizard will ask if you would like to proceed with the build stage. This will compile the generated subgraph(s) into a deployable artifact. If you choose `Yes`, the wizard will run the build stage. If you choose `No`, the wizard will exit and all configuration files will remain in the target path.
-
-
- *In this case, we will choose `Yes` to proceed with the build stage.*
-
-
-
- *If you haven't yet logged in with `goldsky login`, the build step will abort
- with guidance to login first.*
-
-
- ```
- │
- ┕ Subgraph configuration complete!
-
- ┍ Initializing subgraph nouns-demo/1.0.0-demo+docs
- │
- ◇ Writing subgraph files to '/Users/someone/my-subgraphs/nouns-demo/1.0.0-demo+docs': All subgraph configuration files written!
- │
- ◆ Proceed with subgraph build?
- │ ● Yes / ○ No
- ┕
- ```
-
-
-
- Once the build stage has completed, the wizard will ask if you would like to proceed with the deploy stage. This will deploy the built subgraph(s) to Goldsky for the networks configured (1 subgraph per network). If you choose `Yes`, the wizard will run the deploy stage. If you choose `No`, the wizard will exit and all configuration files will remain in the target path.
-
-
- *In this case, we will choose `Yes` to proceed with the deploy stage.*
-
-
- ```
- │
- ◇ Building subgraphs: 1 subgraph built!
- │
- ◆ Proceed with subgraph deploy?
- │ ● Yes / ○ No
- ┕
- ```
-
-
-
- Our subgraph has now been successfully deployed to Goldsky. The wizard provides a summary of the files written locally, the builds and deploys that were performed, and links to the subgraph dashboard and the GraphiQL web interface to query the subgraph data.
-
- ```
- │
- ◇ Deploying 1 subgraphs
- │
- ◇ nouns-demo-mainnet/1.0.0-demo+docs deployed
- │
- ◇ Subgraph initialization summary
- │
- │ Configuration files:
- │
- │ • …/nouns-demo/1.0.0-demo+docs/abis/nouns.json
- │ • …/nouns-demo/1.0.0-demo+docs/nouns-demo-mainnet-subgraph.json
- │
- │ Build:
- │
- │ ✔ BUILT mainnet
- │
- │ Deploy:
- │
- │ ✔ DEPLOYED nouns-demo-mainnet/1.0.0-demo+docs
- │
- ┝━━━
- │
- ◇ Deployed subgraph summary
- │
- │ nouns-demo-mainnet/1.0.0-demo+docs
- │
- │ • Dashboard: https://app.goldsky.com/…/dashboard/subgraphs/nouns-demo-mainnet/1.0.0-demo+docs
- │ • Queries : https://api.goldsky.com/api/public/…/subgraphs/nouns-demo-mainnet/1.0.0-demo+docs/gn
- │
- ┝━━━
- │
- ┕ Subgraph initialization complete!
- ```
-
-
- *Most terminals will allow you to `Cmd+click` or `Ctrl+click` on the links to
- open them in your default browser.*
-
-
-
-
- With our subgraph deployed we can now monitor its indexing progress and stats using the Goldsky Subgraph *Dashboard* link provided by the wizard. Over the next few minutes our subgraph will reach the edge of mainnet and our queryable data will be fully up to date.
-
-
-
- *It could take up to a few hours for this subgraph to fully index.*
-
-
-
- We can now use the GraphiQL *Queries* web interface link provided by the wizard to query the subgraph data. The GraphiQL web interface allows us to test out queries and inspect the indexed data for our the subgraph. The GraphiQL link is also available from the Goldsky Subgraph dashboard. We can use the following query to monitor the latest (`5`) Nouns minted as the subgraph data is indexed.
-
- ```graphql theme={null}
- query LatestNouns($count: Int = 5) {
- nounCreateds(first: $count, orderBy: tokenId, orderDirection: desc) {
- id
- block_number
- transactionHash_
- timestamp_
- tokenId
- seed_background
- seed_body
- seed_accessory
- seed_head
- seed_glasses
- }
- }
- ```
-
-
- *We can query the data as it is being indexed, however until our indexing
- reaches the edge of the chain we won't be able to see the most recent on-chain
- data.*
-
-
-
+_On some networks, contracts deployed more than a year ago may not be possible
+to automatically determine the start block due to a default configuration
+option in a common RPC provider software._
+
+```
+│
+◇ Found start block: 12985438
+│
+◆ Start block
+│ 12985438
+┕
+```
+
+_see [related argument documentation](#start-block)_
+
+In some cases, you may want to index the same contract on multiple networks. If this is the case, you can choose `Yes` and add another network here to repeat the past `2` steps for another network. If you only want to index this contract on one network, you can choose `No` and move on to the next step.
+
+_In this case, we only want to index this contract on the `mainnet` network,
+so we'll choose `No`._
+
+```
+│
+◆ Add another network?
+│ ○ Yes / ● No
+┕
+```
+
+The contract name will be used to produce generated subgraph code files. This should be a human-readable name that describes the contract you're indexing and must begin with a letter and contain ony letters, numbers, hypens, underscores, and spaces.
+
+e.g., `NOUNS`
+
+_The contract name does not need to be all caps, this is just a convention
+used in this example._
+
+```
+│
+◆ Contract name
+│ NOUNS
+┕
+```
+
+_see [related argument documentation](#contract-name)_
+
+In some cases, you may want to index multiple contracts in the same subgraph. If this is the case, you can choose `Yes` and add another contract here to repeat all past steps since previously entering a contract for a new contract. If you only want to index this one contract, you can choose `No` and move on to the next step.
+
+_In this case, we only want to index this one contract, so we'll choose `No`._
+
+```
+│
+◆ Add another contract?
+│ ○ Yes / ● No
+┕
+```
+
+The subgraph description is only for your own reference and will not be used in the generated subgraph code. This can be any text you like, or left empty if no description is desired. The wizard will start with a generic default description.
+
+e.g., `Goldsky Instant Subgraph for NOUNS`
+
+_In this case, we'll accept the generic default description._
+
+```
+│
+◆ Subgraph description
+│ Goldsky Instant Subgraph for NOUNS
+┕
+```
+
+_see [related argument documentation](#description)_
+
+By enabling call handlers, the subgraph will index all contract calls in addition to events. This will increase the amount of data indexed and may result in a longer indexing time. Choose `Yes` to include calls, otherwise if you only want to index contract events you can choose `No` and move on to the next step.
+
+_In this case, we will include call handlers, so we'll choose `Yes`._
+
+```
+│
+◆ Enable subgraph call handlers?
+│ ● Yes / ○ No
+┕
+```
+
+_see [related argument documentation](#call-handlers)_
+
+We've finished collecting all the necessary information to initialize your subgraph. A brief summary of all your choices as well as a note on whether build and/or deploy is enabled by default is displayed (you will still have an option to cancel before building or deploying). If you're ready to proceed, choose `Yes` to generate the no-code subgraph configuration file. If anything doesn't look quite right you can choose `No` to abort the wizard and start over.
+
+_In this case, we're happy with all our choices and will choose `Yes` to
+proceed._
+
+```
+│
+◇ Subgraph configuration summary
+│
+│ Build and deploy will be performed
+│
+│ Name: nouns-demo
+│ Description: Goldsky Instant Subgraph for NOUNS
+│ Version: 1.0.0-demo+docs
+│ TargetPath: /Users/someone/my-subgraphs/nouns-demo/1.0.0-demo+docs
+│ CallHandlers: enabled
+│ AbiSources:
+│ - /Users/someone/my-subgraphs/nouns-demo/1.0.0-demo+docs/abis
+│ Contracts:
+│ - Address: 0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03
+│ Name: NOUNS
+│ Networks:
+│ - Network: mainnet
+│ StartBlock: 12985438
+│
+┝━━━
+│
+◆ Proceed with subgraph initialization?
+│ ● Yes / ○ No
+┕
+```
+
+This step is where we fetch any missing ABI's from remote sources.
+
+Once all no-code subgraph configuration files have been written to the target path, the wizard will ask if you would like to proceed with the build stage. This will compile the generated subgraph(s) into a deployable artifact. If you choose `Yes`, the wizard will run the build stage. If you choose `No`, the wizard will exit and all configuration files will remain in the target path.
+
+_In this case, we will choose `Yes` to proceed with the build stage._
+
+_If you haven't yet logged in with `goldsky login`, the build step will abort
+with guidance to login first._
+
+```
+│
+┕ Subgraph configuration complete!
+
+┍ Initializing subgraph nouns-demo/1.0.0-demo+docs
+│
+◇ Writing subgraph files to '/Users/someone/my-subgraphs/nouns-demo/1.0.0-demo+docs': All subgraph configuration files written!
+│
+◆ Proceed with subgraph build?
+│ ● Yes / ○ No
+┕
+```
+
+Once the build stage has completed, the wizard will ask if you would like to proceed with the deploy stage. This will deploy the built subgraph(s) to Goldsky for the networks configured (1 subgraph per network). If you choose `Yes`, the wizard will run the deploy stage. If you choose `No`, the wizard will exit and all configuration files will remain in the target path.
+
+_In this case, we will choose `Yes` to proceed with the deploy stage._
+
+```
+│
+◇ Building subgraphs: 1 subgraph built!
+│
+◆ Proceed with subgraph deploy?
+│ ● Yes / ○ No
+┕
+```
+
+Our subgraph has now been successfully deployed to Goldsky. The wizard provides a summary of the files written locally, the builds and deploys that were performed, and links to the subgraph dashboard and the GraphiQL web interface to query the subgraph data.
+
+```
+│
+◇ Deploying 1 subgraphs
+│
+◇ nouns-demo-mainnet/1.0.0-demo+docs deployed
+│
+◇ Subgraph initialization summary
+│
+│ Configuration files:
+│
+│ • …/nouns-demo/1.0.0-demo+docs/abis/nouns.json
+│ • …/nouns-demo/1.0.0-demo+docs/nouns-demo-mainnet-subgraph.json
+│
+│ Build:
+│
+│ ✔ BUILT mainnet
+│
+│ Deploy:
+│
+│ ✔ DEPLOYED nouns-demo-mainnet/1.0.0-demo+docs
+│
+┝━━━
+│
+◇ Deployed subgraph summary
+│
+│ nouns-demo-mainnet/1.0.0-demo+docs
+│
+│ • Dashboard: https://app.goldsky.com/…/dashboard/subgraphs/nouns-demo-mainnet/1.0.0-demo+docs
+│ • Queries : https://api.goldsky.com/api/public/…/subgraphs/nouns-demo-mainnet/1.0.0-demo+docs/gn
+│
+┝━━━
+│
+┕ Subgraph initialization complete!
+```
+
+_Most terminals will allow you to `Cmd+click` or `Ctrl+click` on the links to
+open them in your default browser._
+
+With our subgraph deployed we can now monitor its indexing progress and stats using the Goldsky Subgraph _Dashboard_ link provided by the wizard. Over the next few minutes our subgraph will reach the edge of mainnet and our queryable data will be fully up to date.
+
+_It could take up to a few hours for this subgraph to fully index._
+
+We can now use the GraphiQL _Queries_ web interface link provided by the wizard to query the subgraph data. The GraphiQL web interface allows us to test out queries and inspect the indexed data for our the subgraph. The GraphiQL link is also available from the Goldsky Subgraph dashboard. We can use the following query to monitor the latest (`5`) Nouns minted as the subgraph data is indexed.
+
+```graphql theme={null}
+query LatestNouns($count: Int = 5) {
+  nounCreateds(first: $count, orderBy: tokenId, orderDirection: desc) {
+    id
+    block_number
+    transactionHash_
+    timestamp_
+    tokenId
+    seed_background
+    seed_body
+    seed_accessory
+    seed_head
+    seed_glasses
+  }
+}
+```
+
+_We can query the data as it is being indexed, however until our indexing
+reaches the edge of the chain we won't be able to see the most recent on-chain
+data._
 
 ## Wizard CLI arguments
 
 The wizard CLI has many optional arguments that you can use to reduce the amount of manual input required. If sufficient arguments are provided, the wizard will run in non-interactive mode and automatically generate the no-code subgraph configuration file without any prompting. If some arguments are provided but not enough for non-interactive mode, the wizard will run in interactive mode and prompt you for any missing information but automatically prepare the default response with any arguments provided so that you may hit enter to use your supplied argument value.
 
-
- All arguments are optional, if none are supplied then all information will be
- collected interactively.
-
+All arguments are optional, if none are supplied then all information will be
+collected interactively.
 
 ### `nameAndVersion` positional argument
 
 This is the only positional argument in the format `name`/`version`. It can be omitted completely, provided as only a `name`, or provided as the full `name` and `version` pair. If only the `name` is provided then the `/` should be omitted. It is not possible to only provide a `version` without a `name`.
 
-* The `name` must start with a letter and contain only letters, numbers, underscores, and hyphens for the name portion.
-* The `version` must start with a letter or number and contain only letters, numbers, underscores, hyphens, pluses, and periods
+- The `name` must start with a letter and contain only letters, numbers, underscores, and hyphens for the name portion.
+- The `version` must start with a letter or number and contain only letters, numbers, underscores, hyphens, pluses, and periods
 
 #### Examples
 
-* `my-subgraph_2024/1.0.0`
-* `my-subgraph_2024`
+- `my-subgraph_2024/1.0.0`
+- `my-subgraph_2024`
 
 ### `--target-path`
 
@@ -1863,10 +1727,10 @@ The target path can be an absolute or relative path to a local directory. If the
 
 All of these examples should result in the same target path (for a user named `someone`).
 
-* `~/my-subgraphs`
-* `$HOME/my-subgraphs`
-* `/Users/someone/my-subgraphs`
-* `$(pwd)/my-subgraphs`
+- `~/my-subgraphs`
+- `$HOME/my-subgraphs`
+- `/Users/someone/my-subgraphs`
+- `$(pwd)/my-subgraphs`
 
 ### `--force`
 
@@ -1874,8 +1738,8 @@ This switch prevents the wizard from prompting you to confirm overwriting existi
 
 #### Examples
 
-* `--force` or `--force true` to overwrite
-* `--no-force` or `--force false` avoid overwriting
+- `--force` or `--force true` to overwrite
+- `--no-force` or `--force false` avoid overwriting
 
 ### `--from-config`
 
@@ -1883,8 +1747,8 @@ If you already have an existing no-code configuration file, you can provide the 
 
 #### Examples
 
-* `~/my-subgraphs/my-subgraph_2024/1.0/subgraph_config.json`
-* `~/my-subgraphs/my-subgraph_2024/1.0/subgraph_config.yaml`
+- `~/my-subgraphs/my-subgraph_2024/1.0/subgraph_config.json`
+- `~/my-subgraphs/my-subgraph_2024/1.0/subgraph_config.yaml`
 
 ### `--abi`
 
@@ -1892,8 +1756,8 @@ This argument provides the ABI sources, multiple sources can be provided by join
 
 #### Examples
 
-* `~/my-subgraphs/abis`
-* `~/my-subgraphs/abis,~/my-abis`
+- `~/my-subgraphs/abis`
+- `~/my-subgraphs/abis,~/my-abis`
 
 ### `--contract`
 
@@ -1901,8 +1765,8 @@ This argument provides the contract address or addresses to index, multiple addr
 
 #### Examples
 
-* `0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03`
-* `0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03,0xA178b166bea52449d56895231Bb1194f20c2f102`
+- `0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03`
+- `0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03,0xA178b166bea52449d56895231Bb1194f20c2f102`
 
 ### `--contract-events`
 
@@ -1910,8 +1774,8 @@ This argument provides the contract events to index, multiple events can be prov
 
 #### Examples
 
-* `NounCreated`
-* `NounCreated,NounBurned`
+- `NounCreated`
+- `NounCreated,NounBurned`
 
 ### `--contract-calls`
 
@@ -1919,8 +1783,8 @@ This argument provides the contract calls to index, multiple calls can be provid
 
 #### Examples
 
-* `approve`
-* `approve,burn`
+- `approve`
+- `approve,burn`
 
 ### `--network`
 
@@ -1928,9 +1792,9 @@ This argument provides the network to index the contract on. The network must be
 
 #### Examples
 
-* `mainnet`
-* `mainnet,xdai` *(for a single contract, means 2 networks for the same contract are indexed)*
-* `mainnet,xdai` *(for two contracts, means 2 contracts for each network, 4 contracts total indexed, 2 per network)*
+- `mainnet`
+- `mainnet,xdai` _(for a single contract, means 2 networks for the same contract are indexed)_
+- `mainnet,xdai` _(for two contracts, means 2 contracts for each network, 4 contracts total indexed, 2 per network)_
 
 ### `--start-block`
 
@@ -1938,9 +1802,9 @@ This argument provides the start block to index from, multiple start blocks can 
 
 #### Examples
 
-* `12985438`
-* `12985438,20922867`
-* `12985438,,20922867` *(for 2 contracts and 2 networks, where we know the start blocks for both contracts on the 1st network but not the 2nd network)*
+- `12985438`
+- `12985438,20922867`
+- `12985438,,20922867` _(for 2 contracts and 2 networks, where we know the start blocks for both contracts on the 1st network but not the 2nd network)_
 
 ### `--contract-name`
 
@@ -1948,10 +1812,10 @@ This argument provides the contract name to use in the generated subgraph code, 
 
 #### Examples
 
-* `My-Subgraph_Data`
-* `"My Subgraph Data"`
-* `"My Subgraph Data,My Other Subgraph Data"`
-* `subgraph1,subgraph2`
+- `My-Subgraph_Data`
+- `"My Subgraph Data"`
+- `"My Subgraph Data,My Other Subgraph Data"`
+- `subgraph1,subgraph2`
 
 ### `--description`
 
@@ -1963,8 +1827,8 @@ This switch enables call handlers for the subgraph. By default, call handlers ar
 
 #### Examples
 
-* `--call-handlers` or `--call-handlers true` to enable
-* `--no-call-handlers` or `--call-handlers false` to disable
+- `--call-handlers` or `--call-handlers true` to enable
+- `--no-call-handlers` or `--call-handlers false` to disable
 
 ### `--build`
 
@@ -1972,8 +1836,8 @@ This switch enables the build stage after the wizard has completed writing the c
 
 #### Examples
 
-* `--build` or `--build true` to enable
-* `--no-build` or `--build false` to disable
+- `--build` or `--build true` to enable
+- `--no-build` or `--build false` to disable
 
 ### `--deploy`
 
@@ -1981,8 +1845,8 @@ This switch enables the deploy stage after the wizard has completed building the
 
 #### Examples
 
-* `--deploy` or `--deploy true` to enable
-* `--no-deploy` or `--deploy false` to disable
+- `--deploy` or `--deploy true` to enable
+- `--no-deploy` or `--deploy false` to disable
 
 ## Non-interactive mode
 
@@ -2126,7 +1990,7 @@ Similar to updates, entity removal in a subgraph mapping handler simply involves
 
 Entities with a "closed" block range (e.g., [123, 1234)) can be removed if they aren't needed for historical state.
 
-It is recommended to maintain a "deleted\_at" and "updated\_at" timestamp in the local representation of the entity and keep them updated accordingly.
+It is recommended to maintain a "deleted_at" and "updated_at" timestamp in the local representation of the entity and keep them updated accordingly.
 
 ### Tracking the latest state
 
@@ -2136,7 +2000,7 @@ If your goal is to track the latest state of an entity for the most recent block
 
 It is important to note that there is no guarantee of ordering between the insert and update operation webhooks, as they are part of the same atomic operation when a subgraph mapping handler runs.
 
-An effective strategy involves utilizing the "deleted\_at" and "updated\_at" flags in the local representation to manage any potential race conditions.
+An effective strategy involves utilizing the "deleted_at" and "updated_at" flags in the local representation to manage any potential race conditions.
 
 ## Reference
 
@@ -2270,37 +2134,33 @@ Like before, you should see the GraphQL endpoint after running this command, and
 
 Goldsky provides a one-step migration for your subgraphs on TheGraph's decentralized network. This is a **drop-in replacement** with the following benefits:
 
-* The same subgraph API that your apps already use, allowing for seamless, zero-downtime migration
-* A load-balanced network of third-party and on-prem RPC nodes to improve performance and reliability
-* Tagging and versioning to hotswap subgraphs, allowing for seamless updates on your frontend
-* Alerts and auto-recovery in case of subgraph data consistency issues due to corruption from re-orgs or other issues
-* A world-class team who monitors your subgraphs 24/7, with on-call engineering support to help troubleshoot any issues
+- The same subgraph API that your apps already use, allowing for seamless, zero-downtime migration
+- A load-balanced network of third-party and on-prem RPC nodes to improve performance and reliability
+- Tagging and versioning to hotswap subgraphs, allowing for seamless updates on your frontend
+- Alerts and auto-recovery in case of subgraph data consistency issues due to corruption from re-orgs or other issues
+- A world-class team who monitors your subgraphs 24/7, with on-call engineering support to help troubleshoot any issues
 
 ## Migrate subgraphs to Goldsky
 
+1.  Install the Goldsky CLI:
 
- 1. Install the Goldsky CLI:
+**For macOS/Linux:**
 
- **For macOS/Linux:**
+```shell theme={null}
+curl https://goldsky.com | sh
+```
 
- ```shell theme={null}
- curl https://goldsky.com | sh
- ```
+**For Windows:**
 
- **For Windows:**
+```shell theme={null}
+npm install -g @goldskycom/cli
+```
 
- ```shell theme={null}
- npm install -g @goldskycom/cli
- ```
+Windows users need to have Node.js and npm installed first. Download from [nodejs.org](https://nodejs.org) if not already installed. 2. Go to your [Project Settings](https://app.goldsky.com/dashboard/settings) page and create an API key. 3. Back in your Goldsky CLI, log into your Project by running the command `goldsky login` and paste your API key. 4. Now that you are logged in, run `goldsky` to get started:
 
- Windows users need to have Node.js and npm installed first. Download from [nodejs.org](https://nodejs.org) if not already installed.
- 2. Go to your [Project Settings](https://app.goldsky.com/dashboard/settings) page and create an API key.
- 3. Back in your Goldsky CLI, log into your Project by running the command `goldsky login` and paste your API key.
- 4. Now that you are logged in, run `goldsky` to get started:
- ```shell theme={null}
- goldsky
- ```
-
+```shell theme={null}
+goldsky
+```
 
 Use the following command to seamlessly migrate your subgraph to Goldsky via IPFS hash(visible on The Graph's Explorer page for the specified subgraph):
 
@@ -2336,7 +2196,6 @@ Alternatively, navigate to [app.goldsky.com](https://app.goldsky.com) to see you
 
 # Deploy a subgraph
 
-
 There are three primary ways to deploy a subgraph on Goldsky:
 
 1. From source code
@@ -2345,29 +2204,25 @@ There are three primary ways to deploy a subgraph on Goldsky:
 
 For any of the above, you'll need to have the Goldsky CLI installed and be logged in; you can do this by following the instructions below.
 
+1.  Install the Goldsky CLI:
 
- 1. Install the Goldsky CLI:
+**For macOS/Linux:**
 
- **For macOS/Linux:**
+```shell theme={null}
+curl https://goldsky.com | sh
+```
 
- ```shell theme={null}
- curl https://goldsky.com | sh
- ```
+**For Windows:**
 
- **For Windows:**
+```shell theme={null}
+npm install -g @goldskycom/cli
+```
 
- ```shell theme={null}
- npm install -g @goldskycom/cli
- ```
+Windows users need to have Node.js and npm installed first. Download from [nodejs.org](https://nodejs.org) if not already installed. 2. Go to your [Project Settings](https://app.goldsky.com/dashboard/settings) page and create an API key. 3. Back in your Goldsky CLI, log into your Project by running the command `goldsky login` and paste your API key. 4. Now that you are logged in, run `goldsky` to get started:
 
- Windows users need to have Node.js and npm installed first. Download from [nodejs.org](https://nodejs.org) if not already installed.
- 2. Go to your [Project Settings](https://app.goldsky.com/dashboard/settings) page and create an API key.
- 3. Back in your Goldsky CLI, log into your Project by running the command `goldsky login` and paste your API key.
- 4. Now that you are logged in, run `goldsky` to get started:
- ```shell theme={null}
- goldsky
- ```
-
+```shell theme={null}
+goldsky
+```
 
 For these examples we'll use the Ethereum contract for [POAP](https://poap.xyz).
 
@@ -2397,16 +2252,13 @@ goldsky subgraph deploy poap-subgraph/1.0.0 --path .
 
 # From The Graph or another host
 
-
- For a detailed walkthrough, follow our [dedicated
- guide](/subgraphs/migrate-from-the-graph).
-
+For a detailed walkthrough, follow our [dedicated
+guide](/subgraphs/migrate-from-the-graph).
 
 # Via instant, no-code subgraphs
 
-
- For a detailed walkthrough, follow our [dedicated
- guide](/subgraphs/guides/create-a-no-code-subgraph).
+For a detailed walkthrough, follow our [dedicated
+guide](/subgraphs/guides/create-a-no-code-subgraph).
 
 ---
 
@@ -2421,44 +2273,39 @@ goldsky subgraph deploy poap-subgraph/1.0.0 --path .
 -
 -
 - (function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c
- document.addEventListener('DOMContentLoaded', () => {
- const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
- link.rel = 'stylesheet';
- });
-
+  document.addEventListener('DOMContentLoaded', () => {
+  const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
+  link.rel = 'stylesheet';
+  });
 
 ((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","isDarkMode","system",null,["dark","light","true","false","system"],{"true":"dark","false":"light","dark":"dark","light":"light"},true,true):root {
- --primary: 255 173 51;
- --primary-light: 255 191 96;
- --primary-dark: 255 173 51;
- --background-light: 255 255 255;
- --background-dark: 14 13 13;
- --gray-50: 250 248 244;
- --gray-100: 245 243 239;
- --gray-200: 230 227 224;
- --gray-300: 213 211 207;
- --gray-400: 166 163 160;
- --gray-500: 119 117 113;
- --gray-600: 87 85 81;
- --gray-700: 70 67 64;
- --gray-800: 45 42 38;
- --gray-900: 30 28 24;
- --gray-950: 17 15 11;
- }
-
+--primary: 255 173 51;
+--primary-light: 255 191 96;
+--primary-dark: 255 173 51;
+--background-light: 255 255 255;
+--background-dark: 14 13 13;
+--gray-50: 250 248 244;
+--gray-100: 245 243 239;
+--gray-200: 230 227 224;
+--gray-300: 213 211 207;
+--gray-400: 166 163 160;
+--gray-500: 119 117 113;
+--gray-600: 87 85 81;
+--gray-700: 70 67 64;
+--gray-800: 45 42 38;
+--gray-900: 30 28 24;
+--gray-950: 17 15 11;
+}
 
 Access Restricted
 
 To gain access to this doc, provide your access code below.
 
-
 Enter access code
-
 
 Access
 
-
-(self.__next_f=self.__next_f||[]).push([0])self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[47132,[],\"\"]\n3:I[55983,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8039\",\"static/chunks/app/error-b040d5f8cf841de1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n4:I[75082,[],\"\"]\n"])self.__next_f.push([1,"5:I[85506,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1725\",\"static/chunks/d30757c7-de787cbe1c08669b.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7545\",\"static/chunks/7545-60869a4114f7ae15.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"6527\",\"static/chunks/6527-0cfb2d96505d7cbd.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9242\",\"static/chunks/9242-3e34f8ac634357ac.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2864\",\"static/chunks/2864-04288363fc5c3c65.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3258\",\"static/chunks/3258-4939df85402d2773.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7498\",\"static/chunks/7498-99247f6c149997d0.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8083\",\"static/chunks/8083-d1cd2287cdfdb928.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5042\",\"static/chunks/5042-b0c5439e99785afa.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9319\",\"static/chunks/9319-5d740d5b4131bcc5.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1750\",\"static/chunks/1750-b8d62ab6b08d4eba.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8047\",\"static/chunks/8047-d0623440424c2cb7.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5456\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(multitenant)/layout-d6018563a37b4650.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"ThemeProvider\"]\n"])self.__next_f.push([1,"6:I[89481,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2967\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/not-found-def8880edfc41373.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"RecommendedPagesList\"]\nd:I[71256,[],\"\"]\n:HL[\"/mintlify-assets/_next/static/media/bb3ef058b751a6ad-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n:HL[\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n"])self.__next_f.push([1,"0:{\"P\":null,\"b\":\"CimFi6HHLm2JdddW11G9U\",\"p\":\"/mintlify-assets\",\"c\":[\"\",\"_sites\",\"docs.goldsky.com\",\"_hidden-login-pages\",\"login\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"%5Fsites\",{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],{\"children\":[\"(login)\",{\"children\":[\"%5Fhidden-login-pages\",{\"children\":[\"login\",{\"children\":[\"__PAGE__\",{}]}]}]}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"suppressHydrationWarning\":true,\"lang\":\"en\",\"className\":\"__variable_8c6b06 __variable_3bbdad dark\",\"data-banner-state\":\"visible\",\"data-page-mode\":\"none\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"dangerouslySetInnerHTML\":{\"__html\":\"(function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c\u003clocalStorage.length;c++){let e=localStorage.key(c);if(e?.endsWith(`-${b}`)\u0026\u0026(d=localStorage.getItem(e),null!=d)){localStorage.setItem(a,d),localStorage.setItem(e,d);break}}let e=document.getElementById(\\\"banner\\\")?.innerText,f=null==d||!!e\u0026\u0026d!==e;document.documentElement.setAttribute(c,f?\\\"visible\\\":\\\"hidden\\\")}catch(a){console.error(a),document.documentElement.setAttribute(c,\\\"hidden\\\")}})(\\n \\\"__mintlify-bannerDismissed\\\",\\n \\\"bannerDismissed\\\",\\n \\\"data-banner-state\\\",\\n)\"}}],[\"$\",\"link\",null,{\"rel\":\"preload\",\"href\":\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\",\"as\":\"style\"}],[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"children\":\"\\n document.addEventListener('DOMContentLoaded', () =\u003e {\\n const link = document.querySelector('link[href=\\\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\\\"]');\\n link.rel = 'stylesheet';\\n });\\n \"}]]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$3\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],null]}]]}]]}],{\"children\":[\"%5Fsites\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],\"$L7\",{\"children\":[\"(login)\",\"$L8\",{\"children\":[\"%5Fhidden-login-pages\",\"$L9\",{\"children\":[\"login\",\"$La\",{\"children\":[\"__PAGE__\",\"$Lb\",{},null,false]},null,false]},null,false]},null,false]},null,false]},null,false]},null,false],\"$Lc\",false]],\"m\":\"$undefined\",\"G\":[\"$d\",[]],\"s\":false,\"S\":true}\n"])self.__next_f.push([1,"e:I[81925,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9249\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/error-bee1299859815f18.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n10:I[50700,[],\"OutletBoundary\"]\n12:I[87748,[],\"AsyncMetadataOutlet\"]\n14:I[50700,[],\"ViewportBoundary\"]\n16:I[50700,[],\"MetadataBoundary\"]\n17:\"$Sreact.suspense\"\n"])self.__next_f.push([1,"7:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$e\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n"])self.__next_f.push([1,"8:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n9:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\na:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\nb:[\"$\",\"$1\",\"c\",{\"children\":[\"$Lf\",null,[\"$\",\"$L10\",null,{\"children\":[\"$L11\",[\"$\",\"$L12\",null,{\"promise\":\"$@13\"}]]}]]}]\nc:[\"$\",\"$1\",\"h\",{\"children\":[null,[[\"$\",\"$L14\",null,{\"children\":\"$L15\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]],[\"$\",\"$L16\",null,{\"children\":[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$17\",null,{\"fallback\":null,\"children\":\"$L18\"}]}]}]]}]\n"])self.__next_f.push([1,"15:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n11:null\n"])self.__next_f.push([1,"13:{\"metadata\":[],\"error\":null,\"digest\":\"$undefined\"}\n"])self.__next_f.push([1,"18:\"$13:metadata\"\n"])self.__next_f.push([1,"19:I[5947,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5715\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(login)/%255Fhidden-login-pages/login/page-c53c4924f574dfeb.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"LoginComponent\",1]\n"])self.__next_f.push([1,"f:[\"$\",\"$L19\",null,{\"docsConfig\":{\"name\":\"Goldsky\",\"logo\":{\"light\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/light.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=33b340d73ed215a5536d400e3d607cb3\",\"dark\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/dark.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=eddd3726aa53fad9b3361c401056302e\"},\"favicon\":\"/images/favicon.svg\",\"colors\":{\"primary\":\"#FFAD33\",\"light\":\"#FFBF60\",\"dark\":\"#FFAD33\"},\"navigation\":[]},\"favicons\":{\"icons\":[{\"rel\":\"apple-touch-icon\",\"sizes\":\"180x180\",\"type\":\"image/png\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/apple-touch-icon.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=09996433c8201e0a5eb43f8d8b4f4c9c\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=522a08e0ddb5a6acc9fcf33696751827\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=6040c9e88bce5763db673bc2291eaa3e\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=3b89f06df79a32c9f08298c5058fc14f\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=d37aca0145322b46c2444222e2723b4a\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=07bf28f7a5f633613713acfe9f912881\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=1ba2820bf5f50836f071b29e31c5c2df\"}],\"browserconfig\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/browserconfig.xml?n=2G5ZPIp8LG_P-NaW\u0026s=d8b37c4f486be14a74e54063080ca70f\"},\"subdomain\":\"goldsky-38\"}]\n"])
+(self.**next_f=self.**next_f||[]).push([0])self.**next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[47132,[],\"\"]\n3:I[55983,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8039\",\"static/chunks/app/error-b040d5f8cf841de1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n4:I[75082,[],\"\"]\n"])self.**next_f.push([1,"5:I[85506,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1725\",\"static/chunks/d30757c7-de787cbe1c08669b.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7545\",\"static/chunks/7545-60869a4114f7ae15.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"6527\",\"static/chunks/6527-0cfb2d96505d7cbd.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9242\",\"static/chunks/9242-3e34f8ac634357ac.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2864\",\"static/chunks/2864-04288363fc5c3c65.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3258\",\"static/chunks/3258-4939df85402d2773.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7498\",\"static/chunks/7498-99247f6c149997d0.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8083\",\"static/chunks/8083-d1cd2287cdfdb928.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5042\",\"static/chunks/5042-b0c5439e99785afa.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9319\",\"static/chunks/9319-5d740d5b4131bcc5.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1750\",\"static/chunks/1750-b8d62ab6b08d4eba.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8047\",\"static/chunks/8047-d0623440424c2cb7.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5456\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(multitenant)/layout-d6018563a37b4650.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"ThemeProvider\"]\n"])self.**next_f.push([1,"6:I[89481,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2967\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/not-found-def8880edfc41373.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"RecommendedPagesList\"]\nd:I[71256,[],\"\"]\n:HL[\"/mintlify-assets/_next/static/media/bb3ef058b751a6ad-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n:HL[\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n"])self.**next_f.push([1,"0:{\"P\":null,\"b\":\"CimFi6HHLm2JdddW11G9U\",\"p\":\"/mintlify-assets\",\"c\":[\"\",\"_sites\",\"docs.goldsky.com\",\"_hidden-login-pages\",\"login\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"%5Fsites\",{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],{\"children\":[\"(login)\",{\"children\":[\"%5Fhidden-login-pages\",{\"children\":[\"login\",{\"children\":[\"__PAGE__\",{}]}]}]}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"suppressHydrationWarning\":true,\"lang\":\"en\",\"className\":\"__variable_8c6b06 __variable_3bbdad dark\",\"data-banner-state\":\"visible\",\"data-page-mode\":\"none\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"dangerouslySetInnerHTML\":{\"__html\":\"(function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c\u003clocalStorage.length;c++){let e=localStorage.key(c);if(e?.endsWith(`-${b}`)\u0026\u0026(d=localStorage.getItem(e),null!=d)){localStorage.setItem(a,d),localStorage.setItem(e,d);break}}let e=document.getElementById(\\\"banner\\\")?.innerText,f=null==d||!!e\u0026\u0026d!==e;document.documentElement.setAttribute(c,f?\\\"visible\\\":\\\"hidden\\\")}catch(a){console.error(a),document.documentElement.setAttribute(c,\\\"hidden\\\")}})(\\n \\\"__mintlify-bannerDismissed\\\",\\n \\\"bannerDismissed\\\",\\n \\\"data-banner-state\\\",\\n)\"}}],[\"$\",\"link\",null,{\"rel\":\"preload\",\"href\":\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\",\"as\":\"style\"}],[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"children\":\"\\n document.addEventListener('DOMContentLoaded', () =\u003e {\\n const link = document.querySelector('link[href=\\\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\\\"]');\\n link.rel = 'stylesheet';\\n });\\n \"}]]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$3\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],null]}]]}]]}],{\"children\":[\"%5Fsites\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],\"$L7\",{\"children\":[\"(login)\",\"$L8\",{\"children\":[\"%5Fhidden-login-pages\",\"$L9\",{\"children\":[\"login\",\"$La\",{\"children\":[\"__PAGE__\",\"$Lb\",{},null,false]},null,false]},null,false]},null,false]},null,false]},null,false]},null,false],\"$Lc\",false]],\"m\":\"$undefined\",\"G\":[\"$d\",[]],\"s\":false,\"S\":true}\n"])self.__next_f.push([1,"e:I[81925,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9249\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/error-bee1299859815f18.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n10:I[50700,[],\"OutletBoundary\"]\n12:I[87748,[],\"AsyncMetadataOutlet\"]\n14:I[50700,[],\"ViewportBoundary\"]\n16:I[50700,[],\"MetadataBoundary\"]\n17:\"$Sreact.suspense\"\n"])self.**next_f.push([1,"7:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$e\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n"])self.**next_f.push([1,"8:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n9:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\na:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\nb:[\"$\",\"$1\",\"c\",{\"children\":[\"$Lf\",null,[\"$\",\"$L10\",null,{\"children\":[\"$L11\",[\"$\",\"$L12\",null,{\"promise\":\"$@13\"}]]}]]}]\nc:[\"$\",\"$1\",\"h\",{\"children\":[null,[[\"$\",\"$L14\",null,{\"children\":\"$L15\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]],[\"$\",\"$L16\",null,{\"children\":[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$17\",null,{\"fallback\":null,\"children\":\"$L18\"}]}]}]]}]\n"])self.**next_f.push([1,"15:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n11:null\n"])self.**next_f.push([1,"13:{\"metadata\":[],\"error\":null,\"digest\":\"$undefined\"}\n"])self.__next_f.push([1,"18:\"$13:metadata\"\n"])self.__next_f.push([1,"19:I[5947,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5715\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(login)/%255Fhidden-login-pages/login/page-c53c4924f574dfeb.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"LoginComponent\",1]\n"])self.__next_f.push([1,"f:[\"$\",\"$L19\",null,{\"docsConfig\":{\"name\":\"Goldsky\",\"logo\":{\"light\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/light.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=33b340d73ed215a5536d400e3d607cb3\",\"dark\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/dark.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=eddd3726aa53fad9b3361c401056302e\"},\"favicon\":\"/images/favicon.svg\",\"colors\":{\"primary\":\"#FFAD33\",\"light\":\"#FFBF60\",\"dark\":\"#FFAD33\"},\"navigation\":[]},\"favicons\":{\"icons\":[{\"rel\":\"apple-touch-icon\",\"sizes\":\"180x180\",\"type\":\"image/png\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/apple-touch-icon.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=09996433c8201e0a5eb43f8d8b4f4c9c\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=522a08e0ddb5a6acc9fcf33696751827\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=6040c9e88bce5763db673bc2291eaa3e\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=3b89f06df79a32c9f08298c5058fc14f\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=d37aca0145322b46c2444222e2723b4a\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=07bf28f7a5f633613713acfe9f912881\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=1ba2820bf5f50836f071b29e31c5c2df\"}],\"browserconfig\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/browserconfig.xml?n=2G5ZPIp8LG_P-NaW\u0026s=d8b37c4f486be14a74e54063080ca70f\"},\"subdomain\":\"goldsky-38\"}]\n"])
 
 ---
 
@@ -2470,27 +2317,17 @@ Access
 
 Goldsky provides a completely backwards-compatible subgraph indexing solution. The core of the indexing uses exactly the same WASM processing layer, but in addition, Goldsky offers:
 
-* a rewritten RPC layer, autoscaling query layer, and storage optimizations to improve reliability (99.9%+ uptime) and performance (up to 6x faster)
-* webhooks support out-the-box to enable notifications, messaging, and other push-based use cases
-* support for custom EVM chains so you can index your own rollup or private blockchain seamlessly
+- a rewritten RPC layer, autoscaling query layer, and storage optimizations to improve reliability (99.9%+ uptime) and performance (up to 6x faster)
+- webhooks support out-the-box to enable notifications, messaging, and other push-based use cases
+- support for custom EVM chains so you can index your own rollup or private blockchain seamlessly
 
+Deploy a subgraph to Goldsky's shared indexing infrastructure in a number of different ways.
 
+Migrate a subgraph from The Graph's hosted service or any other subgraph host.
 
- Deploy a subgraph to Goldsky's shared indexing infrastructure in a number of different ways.
+Use Tags to manage your subgraph endpoints and swap them in/out seamlessly.
 
-
-
- Migrate a subgraph from The Graph's hosted service or any other subgraph host.
-
-
-
- Use Tags to manage your subgraph endpoints and swap them in/out seamlessly.
-
-
-
- Learn the pros and cons of Goldsky's dedicated indexing infrastructure.
-
-
+Learn the pros and cons of Goldsky's dedicated indexing infrastructure.
 
 Can't find what you're looking for? Reach out to us at [support@goldsky.com](mailto:support@goldsky.com) for help.
 
@@ -2504,7 +2341,7 @@ Can't find what you're looking for? Reach out to us at [support@goldsky.com](mai
 
 > Improve your subgraph performance by declaring eth_calls
 
-[Declarative eth\_calls](https://thegraph.com/docs/en/subgraphs/developing/creating/advanced/#declared-eth_call) allow eth\_calls to be executed ahead of time which significantly improves the indexing performance.
+[Declarative eth_calls](https://thegraph.com/docs/en/subgraphs/developing/creating/advanced/#declared-eth_call) allow eth_calls to be executed ahead of time which significantly improves the indexing performance.
 Check out [this example](https://github.com/goldsky-io/documentation-examples/tree/main/goldsky-subgraphs/declared-eth-call-subgraph) for a practical implementation of this method using an ERC-20 subgraph on the Taiko network
 
 ---
@@ -2517,7 +2354,6 @@ Check out [this example](https://github.com/goldsky-io/documentation-examples/tr
 
 > Step by step instructions on how to create a Goldsky Mirror pipeline.
 
-
 You have two options to create a Goldsky Mirror pipeline:
 
 1. **[Goldsky Flow](/mirror/create-a-pipeline#goldsky-flow)**: With a guided web experience in the dashboard
@@ -2527,12 +2363,9 @@ You have two options to create a Goldsky Mirror pipeline:
 
 Flow allows you to deploy pipelines by simply dragging and dropping its component into a canvas. You can open up Flow by going to the [Pipelines page](https://app.goldsky.com/dashboard/pipelines) on the dashboard and clicking on the `New pipeline` button.
 
-
 You'll be redirected to Goldsky Flow, which starts with an empty canvas representing the initial state.
 
-
 The draggable components that will make up the pipeline are located on the left side menu.
-
 
 Let's now look at how we can deploy a simple pipeline; in the following section we are going to see the steps needed to stream Ethereum raw logs into a ClickHouse database. Since the steps are the same for any pipeline, feel free to adapt the components to fit your specific use case.
 
@@ -2540,34 +2373,28 @@ Let's now look at how we can deploy a simple pipeline; in the following section 
 
 Start by dragging and dropping a `Data Source` card onto the canvas. Once you do that, you'll to need select the chain you are interested in. We currently support [100+ chains](/chains/supported-networks). For this example we are going to choose `Ethereum`.
 
-
 Next, we need to define the type of data source we want to use:
 
-* Onchain datasets: these are [Direct Indexing datasets](/mirror/sources/direct-indexing) representing both raw data (e.g. Raw Blocks) as well as curated datasets (e.g. ERC-20 Transfers)
-* [Subgraphs](/mirror/sources/subgraphs): this can be community subgraphs or existing subgraphs in your project for the choosen network
+- Onchain datasets: these are [Direct Indexing datasets](/mirror/sources/direct-indexing) representing both raw data (e.g. Raw Blocks) as well as curated datasets (e.g. ERC-20 Transfers)
+- [Subgraphs](/mirror/sources/subgraphs): this can be community subgraphs or existing subgraphs in your project for the choosen network
 
 For this example, we are going to choose `Raw Logs`.
 
-
 After selecting the data source, you have some optional configuration fields to use, in the case of `Onchain Datasets` you can configure:
 
-* `Start indexing at`: here you can define whether you want to do a full backfill (`Beginning`) or read from edge (`Current`)
-* `Filter by contract address`: optional contract address (in lowercase) to filter from
-* `Filter by topics`: optional list of topics (in lowercase) to filter from, separated by commas.
-* `View Schema`: view the data schema to get a better idea of the shape of the data as well as see some sample records.
-
+- `Start indexing at`: here you can define whether you want to do a full backfill (`Beginning`) or read from edge (`Current`)
+- `Filter by contract address`: optional contract address (in lowercase) to filter from
+- `Filter by topics`: optional list of topics (in lowercase) to filter from, separated by commas.
+- `View Schema`: view the data schema to get a better idea of the shape of the data as well as see some sample records.
 
 2. **(Optional) Select a Transform**
 
 Optionally select a Transform for your data by clicking on the `+` button at the top right edge of the `Data Source` card and you'll have the option to add a Transform or a Sink.
 
-
 Tranforms are optional intermediate compute processors that allow you to modify the original data (you can find more information on the support Transform types [here](/mirror/transforms/transforms-overview)). For this example, we are going to create a simple SQL transform to select a subset of the available
 data in the source. To do that, select `Custom SQL`.
 
-
 Click on the `Query` field of the card to bring up the SQL editor.
-
 
 In this inline editor you can define the logic of your transformation and run the
 SQL code at the top right corner to experiment with the data and see the result of your queries. For this example we are adding `SELECT id, block_number, transaction_hash, data FROM source_1`
@@ -2578,10 +2405,8 @@ If you click on the `Run` button on the top right corner you'll see a preview of
 
 The last pipeline component to define is the [Sink](/mirror/sinks/supported-sinks), this is, the destination of our data. Click on the `+` button at the top right edge of the `Transform Card` and select a Sink.
 
-
 If you already have configured any sinks previously (for more information, see [Mirror Secrets](/mirror/manage-secrets)) you'll be able to
 choose it from the list. Alternatively, you'll need to create a new sink by creating its corresponding secret. In our example, we’ll use an existing sink to a ClickHouse database.
-
 
 Once you select the sink, you'll have some configuration options available to define how the data will be written into your database as well as anoter `Preview Output` button to see the what the final shape of the data will be; this is a very convenient utility
 in cases where you might have multiple sources and transforms in your pipeline and you want to iterate on its logic without having to redeploy the actual pipeline every time.
@@ -2591,12 +2416,9 @@ in cases where you might have multiple sources and transforms in your pipeline a
 Last but not least, we need to define a name for the pipeline. You can do that at the top center input of your screen. For this example, we are going to call it `ethereum-raw-logs`
 Up to this point, your canvas should look similar to this:
 
-
 Click on the `Deploy` button on the top right corner and specify the [resource size](/mirror/about-pipeline#resource-sizing); for this example you can choose the default `Small`.
 
-
 You should now be redirected to the pipelines details page
-
 
 Congratulations, you just deployed your first pipeline using Goldsky Flow! 🥳
 
@@ -2605,50 +2427,44 @@ Assuming the sink is properly configured you should start seeing data flowing in
 If you would like to update the components of your pipeline and deploy a newer version (more on this topic [here](/mirror/about-pipeline))
 you can click on the `Update Pipeline` button on the top right corner of the page and it will take you back onto the Flow canvas so you can do any updates on it.
 
-
 There's a couple of things about Flow worth highlighting:
 
-* Pipelines are formally defined using [configuration files](/reference/config-file/pipeline) in YAML. Goldsky Flow abstract that complexity for us so that we can just
- create the pipeline by dragging and dropping its components. You can at any time see the current configuration definition of the pipeline by switching the view to `YAML` on the top left corner. This is quite useful
- in cases where you'd like to version control your pipeline logic and/or automate its deployment via CI/CD using the CLI (as explained in next section)
+- Pipelines are formally defined using [configuration files](/reference/config-file/pipeline) in YAML. Goldsky Flow abstract that complexity for us so that we can just
+  create the pipeline by dragging and dropping its components. You can at any time see the current configuration definition of the pipeline by switching the view to `YAML` on the top left corner. This is quite useful
+  in cases where you'd like to version control your pipeline logic and/or automate its deployment via CI/CD using the CLI (as explained in next section)
 
-
-* Pipeline components are interconnected via reference names: in our example, the source has a default reference name of `source_1`; the transform (`sql_1`) reads from `source_1` in its SQL query; the sink (`sink_1`)
- reads the result from the transform (see its `Input source` value) to finally emit the data into the destination. You can modify the reference names of every component of the pipeline on the canvas, just bear in mind
- the connecting role these names play.
+- Pipeline components are interconnected via reference names: in our example, the source has a default reference name of `source_1`; the transform (`sql_1`) reads from `source_1` in its SQL query; the sink (`sink_1`)
+  reads the result from the transform (see its `Input source` value) to finally emit the data into the destination. You can modify the reference names of every component of the pipeline on the canvas, just bear in mind
+  the connecting role these names play.
 
 Read on the following sections if you would like to know how to deploy pipelines using the CLI.
 
 ## Goldsky CLI
 
+1.  Install the Goldsky CLI:
 
- 1. Install the Goldsky CLI:
+**For macOS/Linux:**
 
- **For macOS/Linux:**
+```shell theme={null}
+curl https://goldsky.com | sh
+```
 
- ```shell theme={null}
- curl https://goldsky.com | sh
- ```
+**For Windows:**
 
- **For Windows:**
+```shell theme={null}
+npm install -g @goldskycom/cli
+```
 
- ```shell theme={null}
- npm install -g @goldskycom/cli
- ```
+Windows users need to have Node.js and npm installed first. Download from [nodejs.org](https://nodejs.org) if not already installed. 2. Go to your [Project Settings](https://app.goldsky.com/dashboard/settings) page and create an API key. 3. Back in your Goldsky CLI, log into your Project by running the command `goldsky login` and paste your API key. 4. Now that you are logged in, run `goldsky` to get started:
 
- Windows users need to have Node.js and npm installed first. Download from [nodejs.org](https://nodejs.org) if not already installed.
- 2. Go to your [Project Settings](https://app.goldsky.com/dashboard/settings) page and create an API key.
- 3. Back in your Goldsky CLI, log into your Project by running the command `goldsky login` and paste your API key.
- 4. Now that you are logged in, run `goldsky` to get started:
- ```shell theme={null}
- goldsky
- ```
-
+```shell theme={null}
+goldsky
+```
 
 There are two ways in which you can create pipelines with the CLI:
 
-* Interactive
-* Non-Interactive
+- Interactive
+- Non-Interactive
 
 ### Guided CLI experience
 
@@ -2680,43 +2496,39 @@ Full configuration details for Pipelines is available in the [reference](/refere
 
 As an example, see below a pipeline configuration which uses the Ethereum Decoded Logs dataset as source, uses a transform to select specific data fields and sinks that data into a Postgres database whose connection details are stored within the `A_POSTGRESQL_SECRET` secret:
 
+```yaml pipeline.yaml theme={null}
+name: ethereum-decoded-logs
+apiVersion: 3
+sources:
+ethereum_decoded_logs:
+dataset_name: ethereum.decoded_logs
+version: 1.0.0
+type: dataset
+start_at: latest
 
+transforms:
+select_relevant_fields:
+sql: |
+SELECT
+id,
+address,
+event_signature,
+event_params,
+raw_log.block_number as block_number,
+raw_log.block_hash as block_hash,
+raw_log.transaction_hash as transaction_hash
+FROM
+ethereum_decoded_logs
+primary_key: id
 
- ```yaml pipeline.yaml theme={null}
- name: ethereum-decoded-logs
- apiVersion: 3
- sources:
- ethereum_decoded_logs:
- dataset_name: ethereum.decoded_logs
- version: 1.0.0
- type: dataset
- start_at: latest
-
- transforms:
- select_relevant_fields:
- sql: |
- SELECT
- id,
- address,
- event_signature,
- event_params,
- raw_log.block_number as block_number,
- raw_log.block_hash as block_hash,
- raw_log.transaction_hash as transaction_hash
- FROM
- ethereum_decoded_logs
- primary_key: id
-
- sinks:
- postgres:
- type: postgres
- table: eth_logs
- schema: goldsky
- secret_name: A_POSTGRESQL_SECRET
- from: select_relevant_fields
- ```
-
-
+sinks:
+postgres:
+type: postgres
+table: eth_logs
+schema: goldsky
+secret_name: A_POSTGRESQL_SECRET
+from: select_relevant_fields
+```
 
 Note that to create a pipeline from configuration that sinks to your datastore, you need to have a [secret](/mirror/manage-secrets) already configured on your Goldsky project and reference it in the sink configuration.
 
@@ -2732,7 +2544,7 @@ If you want to monitor an existing pipeline at a later time, use the `goldsky pi
 
 Or you may monitor in the Pipeline Dashboard page at `https://app.goldsky.com/dashboard/pipelines/stream/
 
-/` where you can see the pipeline's `status`, `logs`, `metrics`.
+/`where you can see the pipeline's`status`, `logs`, `metrics`.
 
 ---
 
@@ -2744,77 +2556,62 @@ Or you may monitor in the Pipeline Dashboard page at `https://app.goldsky.com/da
 
 > Schema details for pipeline configurations
 
-
- We recently released v3 of pipeline configurations which uses a more intuitive
- and user friendly format to define and configure pipelines using a yaml file.
- For backward compatibility purposes, we will still support the previous v2
- format. This is why you will find references to each format in each yaml file
- presented across the documentation. Feel free to use whichever is more
- comfortable for you but we encourage you to start migrating to v3 format.
-
+We recently released v3 of pipeline configurations which uses a more intuitive
+and user friendly format to define and configure pipelines using a yaml file.
+For backward compatibility purposes, we will still support the previous v2
+format. This is why you will find references to each format in each yaml file
+presented across the documentation. Feel free to use whichever is more
+comfortable for you but we encourage you to start migrating to v3 format.
 
 This page includes info on the full Pipeline configuration schema. For conceuptal learning about Pipelines, please refer to the [about Pipeline](/mirror/about-pipeline) page.
 
+Name of the pipeline. Must only contain lowercase letters, numbers, hyphens
+and should be less than 50 characters.
 
- Name of the pipeline. Must only contain lowercase letters, numbers, hyphens
- and should be less than 50 characters.
+[Sources](/reference/config-file#sources) represent origin of the data into the pipeline.
 
+Supported source types:
 
- [Sources](/reference/config-file#sources) represent origin of the data into the pipeline.
+- [Subgraph Entities](/reference/config-file/pipeline#subgraphentity)
+- [Datasets](/reference/config-file/pipeline#dataset)
 
- Supported source types:
+[Transforms](/reference/config-file#transforms) represent data transformation logic to be applied to either a source and/or transform in the pipeline.
+If your pipeline does not need to transform data, this attribute can be an empty object.
 
- * [Subgraph Entities](/reference/config-file/pipeline#subgraphentity)
- * [Datasets](/reference/config-file/pipeline#dataset)
+Supported transform types:
 
+- [SQL](/reference/config-file/pipeline#sql)
+- [Handler](/reference/config-file/pipeline#handler)
 
- [Transforms](/reference/config-file#transforms) represent data transformation logic to be applied to either a source and/or transform in the pipeline.
- If your pipeline does not need to transform data, this attribute can be an empty object.
+[Sinks](/reference/config-file#sinks) represent destination for source and/or transform data out of the pipeline.
 
- Supported transform types:
+Supported sink types:
 
- * [SQL](/reference/config-file/pipeline#sql)
- * [Handler](/reference/config-file/pipeline#handler)
+- [PostgreSQL](/reference/config-file/pipeline#postgresql)
+- [Clickhouse](/reference/config-file/pipeline#clickhouse)
+- [MySQL](/reference/config-file/pipeline#mysql)
+- [Elastic Search](/reference/config-file/pipeline#elasticsearch)
+- [Open Search](/reference/config-file/pipeline#opensearch)
+- [Kafka](/reference/config-file/pipeline#kafka)
+- [File](/reference/config-file/pipeline#file)
+- [SQS](/reference/config-file/pipeline#sqs)
+- [DynamoDb](/reference/config-file/pipeline#dynamodb)
+- [Webhook](/reference/config-file/pipeline#webhook)
 
+It defines the amount of compute power to add to the pipeline. It can take one
+of the following values: "s", "m", "l", "xl", "xxl". For new pipeline
+creation, it defaults to "s". For updates, it defaults to the current
+resource_size of the pipeline.
 
- [Sinks](/reference/config-file#sinks) represent destination for source and/or transform data out of the pipeline.
-
- Supported sink types:
-
- * [PostgreSQL](/reference/config-file/pipeline#postgresql)
- * [Clickhouse](/reference/config-file/pipeline#clickhouse)
- * [MySQL](/reference/config-file/pipeline#mysql)
- * [Elastic Search](/reference/config-file/pipeline#elasticsearch)
- * [Open Search](/reference/config-file/pipeline#opensearch)
- * [Kafka](/reference/config-file/pipeline#kafka)
- * [File](/reference/config-file/pipeline#file)
- * [SQS](/reference/config-file/pipeline#sqs)
- * [DynamoDb](/reference/config-file/pipeline#dynamodb)
- * [Webhook](/reference/config-file/pipeline#webhook)
-
-
- It defines the amount of compute power to add to the pipeline. It can take one
- of the following values: "s", "m", "l", "xl", "xxl". For new pipeline
- creation, it defaults to "s". For updates, it defaults to the current
- resource\_size of the pipeline.
-
-
- Description of the pipeline.
-
+Description of the pipeline.
 
 ## Sources
 
 Represents the origin of the data into the pipeline. Each source has a unique name to be used as a reference in transforms/sinks.
 
+`sources.` is used as the referenceable name in other transforms and sinks.
 
-
- `sources.` is used as the referenceable name in other transforms and sinks.
-
-
-
- `definition.sources[idx].referenceName` is used as the referenceable name in other transforms and sinks.
-
-
+`definition.sources[idx].referenceName` is used as the referenceable name in other transforms and sinks.
 
 ### Subgraph Entity
 
@@ -2822,187 +2619,140 @@ Use your [subgraph](/mirror/sources/subgraphs) as a source for your pipeline.
 
 #### Example
 
+In the sources section of your pipeline configuration, you can add a `subgraph_entity` per subgraph entity that you want to use.
 
+```yaml theme={null}
+sources:
+subgraph_account:
+type: subgraph_entity
+name: account
+subgraphs:
+- name: qidao-optimism
+version: 1.1.0
+subgraph_market_daily_snapshot:
+type: subgraph_entity
+name: market_daily_snapshot
+subgraphs:
+- name: qidao-optimism
+version: 1.1.0
+```
 
- In the sources section of your pipeline configuration, you can add a `subgraph_entity` per subgraph entity that you want to use.
+In the sources section of your pipeline definition, you can add a `subgraphEntity` per subgraph entity that you want to use.
 
-
-
- ```yaml theme={null}
- sources:
- subgraph_account:
- type: subgraph_entity
- name: account
- subgraphs:
- - name: qidao-optimism
- version: 1.1.0
- subgraph_market_daily_snapshot:
- type: subgraph_entity
- name: market_daily_snapshot
- subgraphs:
- - name: qidao-optimism
- version: 1.1.0
- ```
-
-
-
-
-
- In the sources section of your pipeline definition, you can add a `subgraphEntity` per subgraph entity that you want to use.
-
-
-
- ```yaml theme={null}
- sources:
- - type: subgraphEntity
- # The deployment IDs you gathered above. If you put multiple,
- # they must have the same schema
- deployments:
- - id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
- # A name, referred to later in the `sourceStreamName` of a transformation or sink
- referenceName: account
- entity:
- # The name of the entities
- name: account
- - type: subgraphEntity
- deployments:
- - id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
- referenceName: market_daily_snapshot
- entity:
- name: market_daily_snapshot
- ```
-
-
-
-
+```yaml theme={null}
+sources:
+- type: subgraphEntity
+# The deployment IDs you gathered above. If you put multiple,
+# they must have the same schema
+deployments:
+- id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
+# A name, referred to later in the `sourceStreamName` of a transformation or sink
+referenceName: account
+entity:
+# The name of the entities
+name: account
+- type: subgraphEntity
+deployments:
+- id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
+referenceName: market_daily_snapshot
+entity:
+name: market_daily_snapshot
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the source. This is a user provided value.
 
+Defines the type of the source, for Subgraph Entity sources, it is always `subgraph_entity`.
 
- " type="string" required>
- Unique name of the source. This is a user provided value.
+Description of the source
 
+Entity `name` in your subgraph.
 
+`earliest` processes data from the first block.
 
- Defines the type of the source, for Subgraph Entity sources, it is always `subgraph_entity`.
+`latest` processes data from the latest block at pipeline start time.
 
+Defaults to `latest`
 
+Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
 
- Description of the source
+Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
 
+```yaml theme={null}
+address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500
+```
 
+References deployed subgraphs(s) that have the entity mentioned in the `name` attribute.
 
- Entity `name` in your subgraph.
+```yaml theme={null}
+subgraphs:
+  - name: polymarket
+version: 1.0.0
+```
 
+Supports subgraphs deployed across multiple chains aka cross-chain usecase.
 
+```yaml theme={null}
+subgraphs:
+- name: polymarket
+version: 1.0.0
+- name: base
+version: 1.1.0
+```
 
- `earliest` processes data from the first block.
+[Cross-chain subgraph full example](/mirror/guides/merging-crosschain-subgraphs)
 
- `latest` processes data from the latest block at pipeline start time.
+Unique name of the source. This is a user provided value.
 
- Defaults to `latest`
+Defines the type of the source, for Subgraph Entity sources, it is always `subgraphEntity`.
 
+Description of the source
 
+`earliest` processes data from the first block.
 
- Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
+`latest` processes data from the latest block at pipeline start time.
 
- Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
+Defaults to `latest`
 
- ```yaml theme={null}
- address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500
- ```
+Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
 
+Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
 
+```yaml theme={null}
+address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500
+```
 
- References deployed subgraphs(s) that have the entity mentioned in the `name` attribute.
+References the entity of the deployed subgraph.
 
- ```yaml theme={null}
- subgraphs:
- - name: polymarket
- version: 1.0.0
- ```
+```yaml theme={null}
+entity:
+name: fixed_product_market_maker
+```
 
- Supports subgraphs deployed across multiple chains aka cross-chain usecase.
+References deployed subgraphs(s) that have the entity mentioned in the `entity.name` attribute.
 
- ```yaml theme={null}
- subgraphs:
- - name: polymarket
- version: 1.0.0
- - name: base
- version: 1.1.0
- ```
+The value for the `id` is the ipfs hash of the subgraph.
 
- [Cross-chain subgraph full example](/mirror/guides/merging-crosschain-subgraphs)
+```yaml theme={null}
+deployments:
+  - id: QmVcgRByfiFSzZfi7RZ21gkJoGKG2jeRA1DrpvCQ6ficNb
+```
 
+Supports subgraphs deployed across multiple chains aka cross-chain usecase:
 
+```yaml theme={null}
+deployments:
+  - id: QmVcgRByfiFSzZfi7RZ21gkJoGKG2jeRA1DrpvCQ6ficNb
+  - id: QmaA9c8QcavxHJ7iZw6om2GHnmisBJFrnRm8E1ihBoAYjX
+```
 
-
-
- Unique name of the source. This is a user provided value.
-
-
-
- Defines the type of the source, for Subgraph Entity sources, it is always `subgraphEntity`.
-
-
-
- Description of the source
-
-
-
- `earliest` processes data from the first block.
-
- `latest` processes data from the latest block at pipeline start time.
-
- Defaults to `latest`
-
-
-
- Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
-
- Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
-
- ```yaml theme={null}
- address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500
- ```
-
-
-
- References the entity of the deployed subgraph.
-
- ```yaml theme={null}
- entity:
- name: fixed_product_market_maker
- ```
-
-
-
- References deployed subgraphs(s) that have the entity mentioned in the `entity.name` attribute.
-
- The value for the `id` is the ipfs hash of the subgraph.
-
- ```yaml theme={null}
- deployments:
- - id: QmVcgRByfiFSzZfi7RZ21gkJoGKG2jeRA1DrpvCQ6ficNb
- ```
-
- Supports subgraphs deployed across multiple chains aka cross-chain usecase:
-
- ```yaml theme={null}
- deployments:
- - id: QmVcgRByfiFSzZfi7RZ21gkJoGKG2jeRA1DrpvCQ6ficNb
- - id: QmaA9c8QcavxHJ7iZw6om2GHnmisBJFrnRm8E1ihBoAYjX
- ```
-
- [Cross-chain subgraph full example](/mirror/guides/merging-crosschain-subgraphs)
-
-
-
+[Cross-chain subgraph full example](/mirror/guides/merging-crosschain-subgraphs)
 
 ### Dataset
 
@@ -3010,110 +2760,73 @@ Dataset lets you define [Direct Indexing](/mirror/sources/direct-indexing) sourc
 
 #### Example
 
+```yaml theme={null}
+sources:
+base_logs:
+type: dataset
+dataset_name: base.logs
+version: 1.0.0
+```
 
-
- ```yaml theme={null}
- sources:
- base_logs:
- type: dataset
- dataset_name: base.logs
- version: 1.0.0
- ```
-
-
-
- ```
- sources:
- - type: dataset
- referenceName: base.logs
- version: 1.0.0
- ```
-
-
+```
+sources:
+- type: dataset
+referenceName: base.logs
+version: 1.0.0
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the source. This is a user provided value.
 
+Defines the type of the source, for Dataset sources, it is always `dataset`
 
- " type="string" required>
- Unique name of the source. This is a user provided value.
+Description of the source
 
+Name of a goldsky dataset. Please use `goldsky dataset list` and select your chain of choice.
 
+Please refer to [supported chains](/mirror/sources/direct-indexing#supported-chains) for an overview of what data is available for individual chains.
 
- Defines the type of the source, for Dataset sources, it is always `dataset`
+Version of the goldsky dataset in `dataset_name`.
 
+`earliest` processes data from the first block.
 
+`latest` processes data from the latest block at pipeline start time.
 
- Description of the source
+Defaults to `latest`
 
+Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
 
+Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
 
- Name of a goldsky dataset. Please use `goldsky dataset list` and select your chain of choice.
+```yaml theme={null}
+address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500
+```
 
- Please refer to [supported chains](/mirror/sources/direct-indexing#supported-chains) for an overview of what data is available for individual chains.
+Unique name of the source. This is a user provided value.
 
+Defines the type of the source, for Dataset sources, it is always `dataset`
 
+Description of the source
 
- Version of the goldsky dataset in `dataset_name`.
+Version of the goldsky dataset in `dataset_name`.
 
+`earliest` processes data from the first block.
 
+`latest` processes data from the latest block at pipeline start time.
 
- `earliest` processes data from the first block.
+Defaults to `latest`
 
- `latest` processes data from the latest block at pipeline start time.
+Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
 
- Defaults to `latest`
+Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
 
-
-
- Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
-
- Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
-
- ```yaml theme={null}
- address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500
- ```
-
-
-
-
-
- Unique name of the source. This is a user provided value.
-
-
-
- Defines the type of the source, for Dataset sources, it is always `dataset`
-
-
-
- Description of the source
-
-
-
- Version of the goldsky dataset in `dataset_name`.
-
-
-
- `earliest` processes data from the first block.
-
- `latest` processes data from the latest block at pipeline start time.
-
- Defaults to `latest`
-
-
-
- Filter expression that does a [fast scan](/reference/config-file/pipeline#fast-scan) on the dataset. Only useful when `start_at` is set to `earliest`.
-
- Expression follows the SQL standard for what comes after the WHERE clause. Few examples:
-
- * `address = '0x21552aeb494579c772a601f655e9b3c514fda960'`
- * `address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'`
- * `address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500`
-
-
-
+- `address = '0x21552aeb494579c772a601f655e9b3c514fda960'`
+- `address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' OR address = '0x21552aeb494579c772a601f655e9b3c514fda960'`
+- `address = '0xb794f5ea0ba39494ce839613ff2qasdf34353dga' AND amount > 500`
 
 #### Fast Scan
 
@@ -3125,42 +2838,30 @@ The filter is pre-applied at the source level; making the initial ingestion of h
 
 See example below where we pre-apply a filter based on contract address:
 
+```yaml theme={null}
+sources:
+base_logs:
+type: dataset
+dataset_name: base.logs
+version: 1.0.0
+filter: address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+```
 
-
- ```yaml theme={null}
- sources:
- base_logs:
- type: dataset
- dataset_name: base.logs
- version: 1.0.0
- filter: address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- ```
-
-
-
- ```
- sources:
- - type: dataset
- referenceName: base.logs
- version: 1.0.0
- filter: address = '0x21552aeb494579c772a601f655e9b3c514fda960'
- ```
-
-
+```
+sources:
+- type: dataset
+referenceName: base.logs
+version: 1.0.0
+filter: address = '0x21552aeb494579c772a601f655e9b3c514fda960'
+```
 
 ## Transforms
 
 Represents data transformation logic to be applied to either a source and/or transform in the pipeline. Each transform has a unique name to be used as a reference in transforms/sinks.
 
+`transforms.` is used as the referenceable name in other transforms and sinks.
 
-
- `transforms.` is used as the referenceable name in other transforms and sinks.
-
-
-
- `definition.transforms[idx].referenceName` is used as the referenceable name in other transforms and sinks.
-
-
+`definition.transforms[idx].referenceName` is used as the referenceable name in other transforms and sinks.
 
 ### SQL
 
@@ -3168,64 +2869,40 @@ SQL query that transforms or filters the data from a `source` or another `transf
 
 #### Example
 
+```yaml theme={null}
+transforms:
+negative_fpmm_scaled_liquidity_parameter:
+sql: SELECT id FROM polymarket.fixed_product_market_maker WHERE scaled_liquidity_parameter
+```
 
+transforms:
 
- ```yaml theme={null}
- transforms:
- negative_fpmm_scaled_liquidity_parameter:
- sql: SELECT id FROM polymarket.fixed_product_market_maker WHERE scaled_liquidity_parameter
-
-
- ```
- transforms:
- - referenceName: negative_fpmm_scaled_liquidity_parameter
- type: sql
- sql: SELECT id FROM polygon.fixed_product_market_maker WHERE scaled_liquidity_parameter
-
+- referenceName: negative_fpmm_scaled_liquidity_parameter
+  type: sql
+  sql: SELECT id FROM polygon.fixed_product_market_maker WHERE scaled_liquidity_parameter
 
 #### Schema
 
+" type="string" required>
+Unique name of the transform. This is a user provided value.
 
+Defines the type of the transform, for SQL transforms it is always `sql`
 
- " type="string" required>
- Unique name of the transform. This is a user provided value.
+The SQL query to be executed on either source or transform in the pipeline.
 
+The source data for sql transform is determined by the `FROM ` part of the query. Any source or transform can be referenced as SQL table.
 
+The primary key for the transformation. If there are any two rows with the same primary_key, the pipeline will override it with the latest value.
 
- Defines the type of the transform, for SQL transforms it is always `sql`
+Unique name of the transform. This is a user provided value.
 
+Defines the type of the transform, for SQL transforms it is always `sql`
 
+The SQL query to be executed on either source or transform in the pipeline.
 
- The SQL query to be executed on either source or transform in the pipeline.
+The source data for sql transform is determined by the `FROM ` part of the query. Any source or transform can be referenced as SQL table.
 
- The source data for sql transform is determined by the `FROM ` part of the query. Any source or transform can be referenced as SQL table.
-
-
-
- The primary key for the transformation. If there are any two rows with the same primary\_key, the pipeline will override it with the latest value.
-
-
-
-
-
- Unique name of the transform. This is a user provided value.
-
-
-
- Defines the type of the transform, for SQL transforms it is always `sql`
-
-
-
- The SQL query to be executed on either source or transform in the pipeline.
-
- The source data for sql transform is determined by the `FROM ` part of the query. Any source or transform can be referenced as SQL table.
-
-
-
- The primary key for the transformation. If there are any two rows with the same primaryKey, the pipeline will override it with the latest value.
-
-
-
+The primary key for the transformation. If there are any two rows with the same primaryKey, the pipeline will override it with the latest value.
 
 ### Handler
 
@@ -3233,108 +2910,73 @@ Lets you transform data by sending data to a [handler](/mirror/transforms/extern
 
 #### Example
 
-
- ```yaml theme={null}
- transforms:
- my_external_handler_transform:
- type: handler
- primary_key: id
- url: http://example-url/example-transform-route
- from: ethereum.raw_blocks
- ```
-
+```yaml theme={null}
+transforms:
+my_external_handler_transform:
+type: handler
+primary_key: id
+url: http://example-url/example-transform-route
+from: ethereum.raw_blocks
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the transform. This is a user provided value.
 
+Defines the type of the transform, for Handler transforms it is always `handler`
 
- " type="string" required>
- Unique name of the transform. This is a user provided value.
+Endpoint to send the data for transformation.
 
+Data source for the transform. Reference a source/transform defined in this pipeline.
 
+Data sent to your handler will have the same schema as this source/transform.
 
- Defines the type of the transform, for Handler transforms it is always `handler`
+The primary key for the transformation. If there are any two rows with the same primary_key, the pipeline will override it with the latest value.
 
+The primary key for the transformation. If there are any two rows with the same primary_key, the pipeline will override it with the latest value.
 
+Allows overriding the schema of the response data returned by the handler. Default is to expect the same schema as `source|transform` referenced in the `from` attribute.
 
- Endpoint to send the data for transformation.
+A map of column names to Flink SQL datatypes. If the handler response schema changes the pipeline needs to be re-deployed with this attribute updated.
 
+To add a new attribute: `new_attribute_name: datatype`
+To remove an existing attribute: `existing_attribute_name: null`
+To change an existing attribute's datatype: `existing_attribute_name: datatype`
 
+| Data Type     | Notes                               |
+| ------------- | ----------------------------------- |
+| STRING        |                                     |
+| BOOLEAN       |                                     |
+| BYTE          |                                     |
+| DECIMAL       | Supports fixed precision and scale. |
+| SMALLINT      |                                     |
+| INTEGER       |                                     |
+| BIGINT        |                                     |
+| FLOAT         |                                     |
+| DOUBLE        |                                     |
+| TIME          | Supports only a precision of 0.     |
+| TIMESTAMP     |                                     |
+| TIMESTAMP_LTZ |                                     |
+| ARRAY         |                                     |
+| ROW           |                                     |
 
- Data source for the transform. Reference a source/transform defined in this pipeline.
+Headers to be sent in the request from the pipeline to the handler endpoint.
 
- Data sent to your handler will have the same schema as this source/transform.
+A common use case is to pass any tokens your server requires for authentication or any metadata.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the handler.
+For handler transform, use the `httpauth` secret type.
 
+Unique name of the transform. This is a user provided value.
 
- The primary key for the transformation. If there are any two rows with the same primary\_key, the pipeline will override it with the latest value.
+Defines the type of the transform, for SQL transforms it is always `sql`
 
+The SQL query to be executed on either source or transform in the pipeline.
 
+The source data for sql transform is determined by the `FROM ` part of the query. Any source or transform can be referenced as SQL table.
 
- The primary key for the transformation. If there are any two rows with the same primary\_key, the pipeline will override it with the latest value.
-
-
-
- Allows overriding the schema of the response data returned by the handler. Default is to expect the same schema as `source|transform` referenced in the `from` attribute.
-
- A map of column names to Flink SQL datatypes. If the handler response schema changes the pipeline needs to be re-deployed with this attribute updated.
-
- To add a new attribute: `new_attribute_name: datatype`
- To remove an existing attribute: `existing_attribute_name: null`
- To change an existing attribute's datatype: `existing_attribute_name: datatype`
-
-
- | Data Type | Notes |
- | -------------- | ----------------------------------- |
- | STRING | |
- | BOOLEAN | |
- | BYTE | |
- | DECIMAL | Supports fixed precision and scale. |
- | SMALLINT | |
- | INTEGER | |
- | BIGINT | |
- | FLOAT | |
- | DOUBLE | |
- | TIME | Supports only a precision of 0. |
- | TIMESTAMP | |
- | TIMESTAMP\_LTZ | |
- | ARRAY | |
- | ROW | |
-
-
-
-
- Headers to be sent in the request from the pipeline to the handler endpoint.
-
- A common use case is to pass any tokens your server requires for authentication or any metadata.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the handler.
- For handler transform, use the `httpauth` secret type.
-
-
-
-
-
- Unique name of the transform. This is a user provided value.
-
-
-
- Defines the type of the transform, for SQL transforms it is always `sql`
-
-
-
- The SQL query to be executed on either source or transform in the pipeline.
-
- The source data for sql transform is determined by the `FROM ` part of the query. Any source or transform can be referenced as SQL table.
-
-
-
- The primary key for the transformation. If there are any two rows with the same primaryKey, the pipeline will override it with the latest value.
-
-
-
+The primary key for the transformation. If there are any two rows with the same primaryKey, the pipeline will override it with the latest value.
 
 ## Sinks
 
@@ -3350,131 +2992,76 @@ Lets you sink data to a [PostgreSQL](/mirror/sinks/postgres) table.
 
 #### Example
 
+```yaml theme={null}
+sinks:
+postgres_test_negative_fpmm_scaled_liquidity_parameter:
+type: postgres
+from: negative_fpmm_scaled_liquidity_parameter
+table: test_negative_fpmm_scaled_liquidity_parameter
+schema: public
+secret_name: API_POSTGRES_CREDENTIALS
+```
 
-
- ```yaml theme={null}
- sinks:
- postgres_test_negative_fpmm_scaled_liquidity_parameter:
- type: postgres
- from: negative_fpmm_scaled_liquidity_parameter
- table: test_negative_fpmm_scaled_liquidity_parameter
- schema: public
- secret_name: API_POSTGRES_CREDENTIALS
- ```
-
-
-
- ```
- sinks:
- - type: postgres
- sourceStreamName: negative_fpmm_scaled_liquidity_parameter
- referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
- table: test_negative_fpmm_scaled_liquidity_parameter
- schema: public
- secretName: API_POSTGRES_CREDENTIALS
- ```
-
-
+```
+sinks:
+- type: postgres
+sourceStreamName: negative_fpmm_scaled_liquidity_parameter
+referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
+table: test_negative_fpmm_scaled_liquidity_parameter
+schema: public
+secretName: API_POSTGRES_CREDENTIALS
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for postgresql it is always `postgressql`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
 
- Defines the type of the sink, for postgresql it is always `postgressql`
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For postgres sink, use the `jdbc` secret type.
 
+The number of records the pipeline will send together in a batch. Default `100`
 
+The maximum time the pipeline will batch records before flushing to sink. Default: '1s'
 
- User provided description.
+Enables auto commit. Default: `true`
 
+Rewrite individual insert statements into multi-value insert statements. Default `true`
 
+Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
+The column must be numeric.
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for postgresql it is always `postgressql`
 
+User provided description.
 
- The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For postgres sink, use the `jdbc` secret type.
 
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For postgres sink, use the `jdbc` secret type.
+The maximum time (in milliseconds) the pipeline will batch events. Default `100`
 
+The maximum time the pipeline will batch events before flushing to sink. Default: '1s'
 
+Enables auto commit. Default: `true`
 
- The number of records the pipeline will send together in a batch. Default `100`
+Rewrite individual insert statements into multi-value insert statements. Default `true`
 
-
-
- The maximum time the pipeline will batch records before flushing to sink. Default: '1s'
-
-
-
- Enables auto commit. Default: `true`
-
-
-
- Rewrite individual insert statements into multi-value insert statements. Default `true`
-
-
-
- Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
- The column must be numeric.
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for postgresql it is always `postgressql`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For postgres sink, use the `jdbc` secret type.
-
-
-
- The maximum time (in milliseconds) the pipeline will batch events. Default `100`
-
-
-
- The maximum time the pipeline will batch events before flushing to sink. Default: '1s'
-
-
-
- Enables auto commit. Default: `true`
-
-
-
- Rewrite individual insert statements into multi-value insert statements. Default `true`
-
-
-
- Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
- The column must be numeric.
-
-
-
+Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
+The column must be numeric.
 
 ### Clickhouse
 
@@ -3482,129 +3069,70 @@ Lets you sink data to a [Clickhouse](/mirror/sinks/clickhouse) table.
 
 #### Example
 
+v3 example
 
-
- v3 example
-
-
-
- to do v2 example
-
-
+to do v2 example
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Clickhouse it is always `clickhouse`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For postgres sink, use the `jdbc` secret type.
 
- Defines the type of the sink, for Clickhouse it is always `clickhouse`
+The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
 
+The maximum time (in milliseconds) the pipeline will batch records. Default `1000`
 
+The maximum time the pipeline will batch records before flushing to sink. Default: '1s'
 
- User provided description.
+Only do inserts on the table and not update or delete.
+Increases insert speed and reduces Flush exceptions (which happen when too many mutations are queued up).
+More details in the [Clickhouse](/mirror/sinks/clickhouse#append-only-mode) guide. Default `true`.
 
+Column name to be used as a version number. Only used in `append_only_mode = true`.
 
+Use a different primary key than the one that automatically inferred from the source and/or transform.
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
+Ability to override the automatic schema propagation from the pipeline to Clickhouse. Map of `column_name -> clickhouse_datatype`
 
+Useful in situations when data type is incompatible between the pipeline and Clickhouse. Or when wanting to use specific type for a column.
 
+Unique name of the sink. This is a user provided value.
 
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For postgres sink, use the `jdbc` secret type.
+Defines the type of the sink, for Clickhouse it is always `clickhouse`
 
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
- The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For postgres sink, use the `jdbc` secret type.
 
+The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
 
+The maximum time (in milliseconds) the pipeline will batch records. Default `1000`
 
- The maximum time (in milliseconds) the pipeline will batch records. Default `1000`
+The maximum time the pipeline will batch records before flushing to sink. Default: '1s'
 
+Only do inserts on the table and not update or delete.
+Increases insert speed and reduces Flush exceptions (which happen when too many mutations are queued up).
+More details in the [Clickhouse](/mirror/sinks/clickhouse#append-only-mode) guide. Default `true`.
 
+Column name to be used as a version number. Only used in `append_only_mode = true`.
 
- The maximum time the pipeline will batch records before flushing to sink. Default: '1s'
+Use a different primary key than the one that automatically inferred from the source and/or transform.
 
+Ability to override the automatic schema propagation from the pipeline to Clickhouse. Map of `column_name -> clickhouse_datatype`
 
-
- Only do inserts on the table and not update or delete.
- Increases insert speed and reduces Flush exceptions (which happen when too many mutations are queued up).
- More details in the [Clickhouse](/mirror/sinks/clickhouse#append-only-mode) guide. Default `true`.
-
-
-
- Column name to be used as a version number. Only used in `append_only_mode = true`.
-
-
-
- Use a different primary key than the one that automatically inferred from the source and/or transform.
-
-
-
- Ability to override the automatic schema propagation from the pipeline to Clickhouse. Map of `column_name -> clickhouse_datatype`
-
- Useful in situations when data type is incompatible between the pipeline and Clickhouse. Or when wanting to use specific type for a column.
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for Clickhouse it is always `clickhouse`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For postgres sink, use the `jdbc` secret type.
-
-
-
- The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
-
-
-
- The maximum time (in milliseconds) the pipeline will batch records. Default `1000`
-
-
-
- The maximum time the pipeline will batch records before flushing to sink. Default: '1s'
-
-
-
- Only do inserts on the table and not update or delete.
- Increases insert speed and reduces Flush exceptions (which happen when too many mutations are queued up).
- More details in the [Clickhouse](/mirror/sinks/clickhouse#append-only-mode) guide. Default `true`.
-
-
-
- Column name to be used as a version number. Only used in `append_only_mode = true`.
-
-
-
- Use a different primary key than the one that automatically inferred from the source and/or transform.
-
-
-
- Ability to override the automatic schema propagation from the pipeline to Clickhouse. Map of `column_name -> clickhouse_datatype`
-
- Useful in situations when data type is incompatible between the pipeline and Clickhouse. Or when wanting to use specific type for a column.
-
-
-
+Useful in situations when data type is incompatible between the pipeline and Clickhouse. Or when wanting to use specific type for a column.
 
 ### MySQL
 
@@ -3612,139 +3140,81 @@ Lets you sink data to a [MySQL](/mirror/sinks/mysql) table.
 
 #### Example
 
+```yaml theme={null}
+sinks:
+postgres_test_negative_fpmm_scaled_liquidity_parameter:
+type: postgres
+from: negative_fpmm_scaled_liquidity_parameter
+table: test_negative_fpmm_scaled_liquidity_parameter
+schema: public
+secret_name: API_POSTGRES_CREDENTIALS
+```
 
-
- ```yaml theme={null}
- sinks:
- postgres_test_negative_fpmm_scaled_liquidity_parameter:
- type: postgres
- from: negative_fpmm_scaled_liquidity_parameter
- table: test_negative_fpmm_scaled_liquidity_parameter
- schema: public
- secret_name: API_POSTGRES_CREDENTIALS
- ```
-
-
-
- ```
- sinks:
- - type: postgres
- sourceStreamName: negative_fpmm_scaled_liquidity_parameter
- referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
- table: test_negative_fpmm_scaled_liquidity_parameter
- schema: public
- secretName: API_POSTGRES_CREDENTIALS
- ```
-
-
+```
+sinks:
+- type: postgres
+sourceStreamName: negative_fpmm_scaled_liquidity_parameter
+referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
+table: test_negative_fpmm_scaled_liquidity_parameter
+schema: public
+secretName: API_POSTGRES_CREDENTIALS
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for postgresql it is always `postgressql`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Database name
 
- Defines the type of the sink, for postgresql it is always `postgressql`
+The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For postgres sink, use the `jdbc` secret type.
 
+The maximum time (in milliseconds) the pipeline will batch events. Default `100`
 
- User provided description.
+The maximum time the pipeline will batch events before flushing to sink. Default: '1s'
 
+Enables auto commit. Default: `true`
 
+Rewrite individual insert statements into multi-value insert statements. Default `true`
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
+Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
+The column must be numeric.
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for postgresql it is always `postgressql`
 
- Database name
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Database name
 
- The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
+The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For postgres sink, use the `jdbc` secret type.
 
+The maximum time (in milliseconds) the pipeline will batch events. Default `100`
 
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For postgres sink, use the `jdbc` secret type.
+The maximum time the pipeline will batch events before flushing to sink. Default: '1s'
 
+Enables auto commit. Default: `true`
 
+Rewrite individual insert statements into multi-value insert statements. Default `true`
 
- The maximum time (in milliseconds) the pipeline will batch events. Default `100`
-
-
-
- The maximum time the pipeline will batch events before flushing to sink. Default: '1s'
-
-
-
- Enables auto commit. Default: `true`
-
-
-
- Rewrite individual insert statements into multi-value insert statements. Default `true`
-
-
-
- Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
- The column must be numeric.
-
-
-
-
- " type="string" required>
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for postgresql it is always `postgressql`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Database name
-
-
-
- The destination table. It will be created if it doesn't exist. Schema is defined in the secret credentials.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For postgres sink, use the `jdbc` secret type.
-
-
-
- The maximum time (in milliseconds) the pipeline will batch events. Default `100`
-
-
-
- The maximum time the pipeline will batch events before flushing to sink. Default: '1s'
-
-
-
- Enables auto commit. Default: `true`
-
-
-
- Rewrite individual insert statements into multi-value insert statements. Default `true`
-
-
-
- Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
- The column must be numeric.
-
-
-
+Optional column that will be used to select the 'correct' row in case of conflict using the 'greater' wins strategy: - ie later date, higher number.
+The column must be numeric.
 
 ### Elastic Search
 
@@ -3752,160 +3222,90 @@ Lets you sink data to a [Elastic Search](/mirror/sinks/postgres) index.
 
 #### Example
 
+v3 example
 
-
- v3 example
-
-
-
- v2 example
-
-
+v2 example
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Elastic Search it is always `elasticsearch`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Elastic search index to write to.
 
- Defines the type of the sink, for Elastic Search it is always `elasticsearch`
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For Elastic Search sink, use the `elasticSearch` secret type.
 
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Elastic Search it is always `elasticsearch`
 
- User provided description.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Elastic search index to write to.
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Elastic search index to write to.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For Elastic Search sink, use the `elasticSearch` secret type.
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for Elastic Search it is always `elasticsearch`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Elastic search index to write to.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For Elastic Search sink, use the `elasticSearch` secret type.
-
-
-
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For Elastic Search sink, use the `elasticSearch` secret type.
 
 ### Open Search
 
 #### Example
 
+```yaml theme={null}
+sinks:
+my_elasticsearch_sink:
+description: Type.Optional(Type.String())
+type: elasticsearch
+from: Type.String()
+index: Type.String()
+secret_name: Type.String()
+```
 
-
- ```yaml theme={null}
- sinks:
- my_elasticsearch_sink:
- description: Type.Optional(Type.String())
- type: elasticsearch
- from: Type.String()
- index: Type.String()
- secret_name: Type.String()
- ```
-
-
-
- ```
- sinks:
- - type: elasticsearch
- sourceStreamName: negative_fpmm_scaled_liquidity_parameter
- referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
- index: test_negative_fpmm_scaled_liquidity_parameter
- secretName: API_POSTGRES_CREDENTIALS
- ```
-
-
+```
+sinks:
+- type: elasticsearch
+sourceStreamName: negative_fpmm_scaled_liquidity_parameter
+referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
+index: test_negative_fpmm_scaled_liquidity_parameter
+secretName: API_POSTGRES_CREDENTIALS
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Elastic Search it is always `elasticsearch`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Elastic search index to write to.
 
- Defines the type of the sink, for Elastic Search it is always `elasticsearch`
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For Elastic Search sink, use the `elasticSearch` secret type.
 
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Elastic Search it is always `elasticsearch`
 
- User provided description.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Elastic search index to write to.
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Elastic search index to write to.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For Elastic Search sink, use the `elasticSearch` secret type.
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for Elastic Search it is always `elasticsearch`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Elastic search index to write to.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For Elastic Search sink, use the `elasticSearch` secret type.
-
-
-
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For Elastic Search sink, use the `elasticSearch` secret type.
 
 ### Kafka
 
@@ -3913,457 +3313,265 @@ Lets you sink data to a [Kafka](/mirror/extensions/channels/kafka) topic.
 
 #### Example
 
+```yaml theme={null}
+sinks:
+kafka_topic_sink:
+type: kafka
+from: my_source
+topic: accounts
+secret_name: KAFKA_SINK_SECRET_CR343D
+topic_partitions: 2
+```
 
-
- ```yaml theme={null}
- sinks:
- kafka_topic_sink:
- type: kafka
- from: my_source
- topic: accounts
- secret_name: KAFKA_SINK_SECRET_CR343D
- topic_partitions: 2
- ```
-
-
-
- ```yaml theme={null}
- sinks:
- - type: kafka
- sourceStreamName: my_source
- topic: accounts
- secretName: KAFKA_SINK_SECRET_CR343D
- topicPartitions: 2
- ```
-
-
+```yaml theme={null}
+sinks:
+  - type: kafka
+sourceStreamName: my_source
+topic: accounts
+secretName: KAFKA_SINK_SECRET_CR343D
+topicPartitions: 2
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Kafka sink it is always `kafka`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Kafka topic name to write to. Will be created if it does not exist.
 
- Defines the type of the sink, for Kafka sink it is always `kafka`
+Number of paritions to be set in the topic. Only applicable if topic does not exists.
 
+When set to `true`, the sink will emit tombstone messages (null values) for DELETE operations instead of the actual payload. This is useful for maintaining the state in Kafka topics where the latest state of a key is required, and older states should be logically deleted. Default `false`
 
+Format of the record in the topic. Supported types: `json`, `avro`. Requires Schema Registry credentials in the secret for `avro` type.
 
- User provided description.
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For Kafka sink, use the `kafka` secret type.
 
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Kafka sink it is always `kafka`
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Kafka topic name to write to.
 
- Kafka topic name to write to. Will be created if it does not exist.
+To be used when creating the topic, in case it does not exist.
 
+When set to `true`, the sink will emit tombstone messages (null values) for DELETE operations instead of the actual payload. This is useful for maintaining the state in Kafka topics where the latest state of a key is required, and older states should be logically deleted. Default `false`
 
+Format of the record in the topic. Supported types: `json`, `avro`. Requires Schema Registry credentials in the secret for `avro` type.
 
- Number of paritions to be set in the topic. Only applicable if topic does not exists.
+Default: `avro`
 
-
-
- When set to `true`, the sink will emit tombstone messages (null values) for DELETE operations instead of the actual payload. This is useful for maintaining the state in Kafka topics where the latest state of a key is required, and older states should be logically deleted. Default `false`
-
-
-
- Format of the record in the topic. Supported types: `json`, `avro`. Requires Schema Registry credentials in the secret for `avro` type.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For Kafka sink, use the `kafka` secret type.
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for Kafka sink it is always `kafka`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Kafka topic name to write to.
-
-
-
- To be used when creating the topic, in case it does not exist.
-
-
-
- When set to `true`, the sink will emit tombstone messages (null values) for DELETE operations instead of the actual payload. This is useful for maintaining the state in Kafka topics where the latest state of a key is required, and older states should be logically deleted. Default `false`
-
-
-
- Format of the record in the topic. Supported types: `json`, `avro`. Requires Schema Registry credentials in the secret for `avro` type.
-
- Default: `avro`
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For Kafka sink, use the `kafka` secret type.
-
-
-
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For Kafka sink, use the `kafka` secret type.
 
 ### File
 
 #### Example
 
+```yaml theme={null}
+sinks:
+s3_write:
+type: file
+path: s3://goldsky/linea/traces/
+format: parquet
+from: linea.traces
+secret_name: GOLDSKY_S3_CREDS
+```
 
-
- ```yaml theme={null}
- sinks:
- s3_write:
- type: file
- path: s3://goldsky/linea/traces/
- format: parquet
- from: linea.traces
- secret_name: GOLDSKY_S3_CREDS
- ```
-
-
-
- ```
- sinks:
- - type: file
- sourceStreamName: linea.traces
- referenceName: s3_write
- path: s3://goldsky/linea/traces/
- secretName: GOLDSKY_S3_CREDS
- ```
-
-
+```
+sinks:
+- type: file
+sourceStreamName: linea.traces
+referenceName: s3_write
+path: s3://goldsky/linea/traces/
+secretName: GOLDSKY_S3_CREDS
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for File sink it is always `file`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Path to write to. Use prefix `s3://`. Currently, only `S3` is supported.
 
- Defines the type of the sink, for File sink it is always `file`
+Format of the output file. Supported types: `parquet`, `csv`.
 
+Enables auto-compaction which helps optimize the output file size. Default `false`
 
+Columns to be used for partitioning. Multiple columns are comma separated. For eg: `"col1,col2"`
 
- User provided description.
+The maximum sink file size before creating a new one. Default: `128MB`
 
+The maximum time the pipeline will batch records before flushing to sink. Default: `30min`
 
+Unique name of the sink. This is a user provided value.
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
+Defines the type of the sink, for File sink it is always `file`
 
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
- Path to write to. Use prefix `s3://`. Currently, only `S3` is supported.
+Path to write to. Use prefix `s3://`. Currently, only `S3` is supported.
 
+Format of the output file. Supported types: `parquet`, `csv`.
 
+Enables auto-compaction which helps optimize the output file size. Default `false`
 
- Format of the output file. Supported types: `parquet`, `csv`.
+Columns to be used for partitioning. Multiple columns are comma separated. For eg: `"col1,col2"`
 
+The maximum sink file size before creating a new one. Default: `128MB`
 
-
- Enables auto-compaction which helps optimize the output file size. Default `false`
-
-
-
- Columns to be used for partitioning. Multiple columns are comma separated. For eg: `"col1,col2"`
-
-
-
- The maximum sink file size before creating a new one. Default: `128MB`
-
-
-
- The maximum time the pipeline will batch records before flushing to sink. Default: `30min`
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for File sink it is always `file`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Path to write to. Use prefix `s3://`. Currently, only `S3` is supported.
-
-
-
- Format of the output file. Supported types: `parquet`, `csv`.
-
-
-
- Enables auto-compaction which helps optimize the output file size. Default `false`
-
-
-
- Columns to be used for partitioning. Multiple columns are comma separated. For eg: `"col1,col2"`
-
-
-
- The maximum sink file size before creating a new one. Default: `128MB`
-
-
-
- The maximum time the pipeline will batch records before flushing to sink. Default: `30min`
-
-
-
+The maximum time the pipeline will batch records before flushing to sink. Default: `30min`
 
 ### DynamoDB
 
 #### Example
 
+```yaml theme={null}
+sinks:
+postgres_test_negative_fpmm_scaled_liquidity_parameter:
+type: postgres
+from: negative_fpmm_scaled_liquidity_parameter
+table: test_negative_fpmm_scaled_liquidity_parameter
+schema: public
+secret_name: API_POSTGRES_CREDENTIALS
+```
 
-
- ```yaml theme={null}
- sinks:
- postgres_test_negative_fpmm_scaled_liquidity_parameter:
- type: postgres
- from: negative_fpmm_scaled_liquidity_parameter
- table: test_negative_fpmm_scaled_liquidity_parameter
- schema: public
- secret_name: API_POSTGRES_CREDENTIALS
- ```
-
-
-
- ```
- sinks:
- - type: postgres
- sourceStreamName: negative_fpmm_scaled_liquidity_parameter
- referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
- table: test_negative_fpmm_scaled_liquidity_parameter
- schema: public
- secretName: API_POSTGRES_CREDENTIALS
- ```
-
-
+```
+sinks:
+- type: postgres
+sourceStreamName: negative_fpmm_scaled_liquidity_parameter
+referenceName: postgres_test_negative_fpmm_scaled_liquidity_parameter
+table: test_negative_fpmm_scaled_liquidity_parameter
+schema: public
+secretName: API_POSTGRES_CREDENTIALS
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Clickhouse it is always `clickhouse`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For DynamoDB sink, use the `dynamodb` secret type.
 
- Defines the type of the sink, for Clickhouse it is always `clickhouse`
+The destination table. It will be created if it doesn't exist.
 
+Endpoint override, useful when writing to a DynamoDB VPC
 
+Maximum number of requests in flight. Default `50`
 
- User provided description.
+Batch max size. Default: `25`
 
+Maximum number of records to buffer. Default: `10000`
 
+Fail the sink on write error. Default `false`
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Clickhouse it is always `clickhouse`
 
+User provided description.
 
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For DynamoDB sink, use the `dynamodb` secret type.
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+For DynamoDB sink, use the `dynamodb` secret type.
 
+The destination table. It will be created if it doesn't exist.
 
- The destination table. It will be created if it doesn't exist.
+Endpoint override, useful when writing to a DynamoDB VPC
 
+Maximum number of requests in flight. Default `50`
 
+Batch max size. Default: `25`
 
- Endpoint override, useful when writing to a DynamoDB VPC
+Maximum number of records to buffer. Default: `10000`
 
-
-
- Maximum number of requests in flight. Default `50`
-
-
-
- Batch max size. Default: `25`
-
-
-
- Maximum number of records to buffer. Default: `10000`
-
-
-
- Fail the sink on write error. Default `false`
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for Clickhouse it is always `clickhouse`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- For DynamoDB sink, use the `dynamodb` secret type.
-
-
-
- The destination table. It will be created if it doesn't exist.
-
-
-
- Endpoint override, useful when writing to a DynamoDB VPC
-
-
-
- Maximum number of requests in flight. Default `50`
-
-
-
- Batch max size. Default: `25`
-
-
-
- Maximum number of records to buffer. Default: `10000`
-
-
-
- Fail the sink on write error. Default `false`
-
-
-
+Fail the sink on write error. Default `false`
 
 ### Webhook
 
 #### Example
 
+```yaml theme={null}
+sinks:
+webhook_publish:
+type: webhook
+from: base.logs
+url: https://webhook.site/d06324e8-d273-45b4-a18b-c4ad69c6e7e6
+secret_name: WEBHOOK_SECRET_CM3UPDBJC0
+```
 
-
- ```yaml theme={null}
- sinks:
- webhook_publish:
- type: webhook
- from: base.logs
- url: https://webhook.site/d06324e8-d273-45b4-a18b-c4ad69c6e7e6
- secret_name: WEBHOOK_SECRET_CM3UPDBJC0
- ```
-
-
-
- ```
- sinks:
- - type: webhook
- sourceStreamName: base.logs
- referenceName: webhook_publish
- url: https://webhook.site/d06324e8-d273-45b4-a18b-c4ad69c6e7e6
- secretName: WEBHOOK_SECRET_CM3UPDBJC0
- ```
-
-
+```
+sinks:
+- type: webhook
+sourceStreamName: base.logs
+referenceName: webhook_publish
+url: https://webhook.site/d06324e8-d273-45b4-a18b-c4ad69c6e7e6
+secretName: WEBHOOK_SECRET_CM3UPDBJC0
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Webhook sinks it is always `webhook`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+Defines the URL to send the record(s) to.
 
+Send only one record per call to the provided url
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
 
- Defines the type of the sink, for Webhook sinks it is always `webhook`
+For webhook sink, use the `httpauth` secret type.
 
+Headers to be sent in the request from the pipeline to the url
 
+User provided description.
 
- Defines the URL to send the record(s) to.
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for Webhook sinks it is always `webhook`
 
+Defines the URL to send the record(s) to.
 
- Send only one record per call to the provided url
+Send only one record per call to the provided url
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
 
+Use `httpauth` secret type.
 
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
+Headers to be sent in the request from the pipeline to the url
 
- For webhook sink, use the `httpauth` secret type.
-
-
-
- Headers to be sent in the request from the pipeline to the url
-
-
-
- User provided description.
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for Webhook sinks it is always `webhook`
-
-
-
- Defines the URL to send the record(s) to.
-
-
-
- Send only one record per call to the provided url
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
-
- Use `httpauth` secret type.
-
-
-
- Headers to be sent in the request from the pipeline to the url
-
-
-
- User provided description.
-
-
-
+User provided description.
 
 ### SQS
 
@@ -4371,99 +3579,60 @@ Lets you sink data to a [AWS SQS](/mirror/extensions/channels/aws-sqs) topic.
 
 #### Example
 
+```yaml theme={null}
+sinks:
+my_sqs_sink:
+type: sqs
+url: https://sqs.us-east-1.amazonaws.com/335342423/dev-logs
+secret_name: SQS_SECRET_IAM
+from: my_transform
+```
 
-
- ```yaml theme={null}
- sinks:
- my_sqs_sink:
- type: sqs
- url: https://sqs.us-east-1.amazonaws.com/335342423/dev-logs
- secret_name: SQS_SECRET_IAM
- from: my_transform
- ```
-
-
-
- ```yaml theme={null}
- sinks:
- - type: sqs
- referenceName: my_sqs_sink
- url: https://sqs.us-east-1.amazonaws.com/335342423/dev-logs
- secretName: SQS_SECRET_IAM
- sourceStreamName: my_transform
- ```
-
-
+```yaml theme={null}
+sinks:
+  - type: sqs
+referenceName: my_sqs_sink
+url: https://sqs.us-east-1.amazonaws.com/335342423/dev-logs
+secretName: SQS_SECRET_IAM
+sourceStreamName: my_transform
+```
 
 #### Schema
 
+" type="string" required>
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for postgresql it is always `postgressql`
 
- " type="string" required>
- Unique name of the sink. This is a user provided value.
+User provided description.
 
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
 
- Defines the type of the sink, for postgresql it is always `postgressql`
+For sqs sink, use the `sqs` secret type.
 
+SQS topic URL
 
+Fail the sink on write error. Default `false`
 
- User provided description.
+Unique name of the sink. This is a user provided value.
 
+Defines the type of the sink, for postgresql it is always `postgressql`
 
+User provided description.
 
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
+Data source for the sink. Reference to either a source or a transform defined in this pipeline.
 
+Goldksy secret name that contains credentials for calls between the pipeline and the sink.
+Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
 
+For sqs sink, use the `sqs` secret type.
 
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
+SQS topic URL
 
- For sqs sink, use the `sqs` secret type.
-
-
-
- SQS topic URL
-
-
-
- Fail the sink on write error. Default `false`
-
-
-
-
-
- Unique name of the sink. This is a user provided value.
-
-
-
- Defines the type of the sink, for postgresql it is always `postgressql`
-
-
-
- User provided description.
-
-
-
- Data source for the sink. Reference to either a source or a transform defined in this pipeline.
-
-
-
- Goldksy secret name that contains credentials for calls between the pipeline and the sink.
- Use this if you do not want to expose authenciation details in plain text in the `headers` attribute.
-
- For sqs sink, use the `sqs` secret type.
-
-
-
- SQS topic URL
-
-
-
- Fail the sink on write error. Default `false`
-
-
-
+Fail the sink on write error. Default `false`
 
 ## Pipeline runtime attributes
 
@@ -4473,19 +3642,14 @@ If you need a refresher on the of pipelines make sure to check out [About Pipeli
 
 Following are request-level attributes that only controls the behavior of a particular request on the pipeline. These attributes should be passed via arguments to the `goldsky pipeline apply ` command.
 
+Defines the desired status for the pipeline which can be one of the three: "ACTIVE", "INACTIVE", "PAUSED". If not provided it will default to the current status of the pipeline.
 
- Defines the desired status for the pipeline which can be one of the three: "ACTIVE", "INACTIVE", "PAUSED". If not provided it will default to the current status of the pipeline.
+Defines whether the pipeline should attempt to create a fresh snapshot before this configuration is applied. The pipeline needs to be in a healthy state for snapshot to be created successfully. It defaults to `true`.
 
+Defines whether the pipeline should be started from the latest available snapshot. This attribute is useful in restarting scenarios.
+To restart a pipeline from scratch, use `--use_latest_snapshot false`. It defaults to `true`.
 
- Defines whether the pipeline should attempt to create a fresh snapshot before this configuration is applied. The pipeline needs to be in a healthy state for snapshot to be created successfully. It defaults to `true`.
-
-
- Defines whether the pipeline should be started from the latest available snapshot. This attribute is useful in restarting scenarios.
- To restart a pipeline from scratch, use `--use_latest_snapshot false`. It defaults to `true`.
-
-
- Instructs the pipeline to restart. Useful in scenarios where the pipeline needs to be restarted but no configuration change is needed. It defaults to `undefined`.
-
+Instructs the pipeline to restart. Useful in scenarios where the pipeline needs to be restarted but no configuration change is needed. It defaults to `undefined`.
 
 ## Pipeline Runtime Commands
 
@@ -4495,8 +3659,8 @@ Commands that change the pipeline runtime. Many commands aim to abstract away th
 
 There are multiple ways to do this:
 
-* `goldsky pipeline start `
-* `goldsky pipeline apply --status ACTIVE`
+- `goldsky pipeline start `
+- `goldsky pipeline apply --status ACTIVE`
 
 This command will have no effect on pipeline that already has a desired status of `ACTIVE`.
 
@@ -4506,8 +3670,8 @@ Pause will attempt to take a snapshot and stop the pipeline so that it can be re
 
 There are multiple ways to do this:
 
-* `goldsky pipeline pause `
-* `goldsky pipeline apply --status PAUSED`
+- `goldsky pipeline pause `
+- `goldsky pipeline apply --status PAUSED`
 
 #### Stop
 
@@ -4515,15 +3679,17 @@ Stopping a pipeline does not attempt to take a snapshot.
 
 There are multiple ways to do this:
 
-* `goldsky pipeline stop
+- `goldsky pipeline stop
 
 `
-* `goldsky pipeline apply
 
- --status INACTIVE --from-snapshot none`
-* `goldsky pipeline apply
+- `goldsky pipeline apply
 
- --status INACTIVE --save-progress false` (prior to CLI version `11.0.0`)
+  --status INACTIVE --from-snapshot none`
+
+- `goldsky pipeline apply
+
+  --status INACTIVE --save-progress false`(prior to CLI version`11.0.0`)
 
 #### Update
 
@@ -4533,8 +3699,8 @@ By default any update on a `RUNNING` pipeline will attempt to take a snapshot be
 
 If you'd like to avoid taking snapshot as part of the update, run:
 
-* `goldsky pipeline apply --from-snapshot last`
-* `goldsky pipeline apply --save-progress false` (prior to CLI version `11.0.0`)
+- `goldsky pipeline apply --from-snapshot last`
+- `goldsky pipeline apply --save-progress false` (prior to CLI version `11.0.0`)
 
 This is useful in a situations where the pipeline is running into issues, hence the snapshot will not succeed, blocking the update that is to fix the issue.
 
@@ -4544,8 +3710,8 @@ Useful in scenarios where the pipeline is running into resource constraints.
 
 There are multiple ways to do this:
 
-* `goldsky pipeline resize `
-* `goldsky pipeline apply ` with the config file having the attribute:
+- `goldsky pipeline resize `
+- `goldsky pipeline apply ` with the config file having the attribute:
 
 ```
 resource_size: xl
@@ -4559,7 +3725,7 @@ There are multiple ways to restart a RUNNING pipeline without any configuration 
 
 1. `goldsky pipeline restart
 
- --from-snapshot last|none`
+--from-snapshot last|none`
 
 The above command will attempt to restart the pipeline.
 
@@ -4568,7 +3734,7 @@ To restart with last available snapshot, provide the `--from-snapshot last` opti
 
 2. `goldsky pipeline apply
 
- --restart` (CLI version below 10.0.0)
+--restart` (CLI version below 10.0.0)
 
 By default, the above command will will attempt a new snapshot and start the pipeline from that particular snapshot.
 
@@ -6296,14 +5462,12 @@ Options:
 
 # About Mirror pipelines
 
-
- We recently released v3 of pipeline configurations which uses a more intuitive
- and user friendly format to define and configure pipelines using a yaml file.
- For backward compatibility purposes, we will still support the previous v2
- format. This is why you will find references to each format in each yaml file
- presented across the documentation. Feel free to use whichever is more
- comfortable for you but we encourage you to start migrating to v3 format.
-
+We recently released v3 of pipeline configurations which uses a more intuitive
+and user friendly format to define and configure pipelines using a yaml file.
+For backward compatibility purposes, we will still support the previous v2
+format. This is why you will find references to each format in each yaml file
+presented across the documentation. Feel free to use whichever is more
+comfortable for you but we encourage you to start migrating to v3 format.
 
 ## Overview
 
@@ -6311,9 +5475,9 @@ A Mirror Pipeline defines flow of data from `sources -> transforms -> sinks`. It
 
 The core logic of the pipeline is defined in `sources`, `transforms` and `sinks` attributes.
 
-* `sources` represent origin of the data into the pipeline.
-* `transforms` represent data transformation/filter logic to be applied to either a source and/or transform in the pipeline.
-* `sinks` represent destination for the source and/or transform data out of the pipeline.
+- `sources` represent origin of the data into the pipeline.
+- `transforms` represent data transformation/filter logic to be applied to either a source and/or transform in the pipeline.
+- `sinks` represent destination for the source and/or transform data out of the pipeline.
 
 Each `source` and `transform` has a unique name which is referenceable in other `transform` and/or `sink`, determining dataflow within the pipeline.
 
@@ -6321,64 +5485,56 @@ While the pipeline is configured in yaml, [goldsky pipeline CLI commands](/refer
 
 Below is an example pipeline configuration which sources from `base.logs` Goldsky dataset, filters the data using `sql` and sinks to a `postgresql` table:
 
+```yaml base-logs.yaml theme={null}
+apiVersion: 3
+name: base-logs-pipeline
+resource_size: s
+sources:
+base.logs:
+dataset_name: base.logs
+version: 1.0.0
+type: dataset
+description: Enriched logs for events emitted from contracts. Contains the contract address, data, topics, decoded event and metadata for blocks and transactions.
+display_name: Logs
+transforms:
+filter_logs_by_block_number:
+sql: SELECT * FROM base.logs WHERE block_number > 5000
+primary_key: id
+sinks:
+postgres_base_logs:
+type: postgres
+table: base_logs
+schema: public
+secret_name: GOLDSKY_SECRET
+description: "Postgres sink for: base.logs"
+from: filter_logs_by_block_number
+```
 
+Keys in v3 format for sources, transforms and sinks are user provided
+values. In the above example, the source reference name `base.logs`
+matches the actual dataset name. This is the convention that you'll
+typically see across examples and autogenerated configurations. However,
+you can use a custom name as the key.
 
- ```yaml base-logs.yaml theme={null}
- apiVersion: 3
- name: base-logs-pipeline
- resource_size: s
- sources:
- base.logs:
- dataset_name: base.logs
- version: 1.0.0
- type: dataset
- description: Enriched logs for events emitted from contracts. Contains the contract address, data, topics, decoded event and metadata for blocks and transactions.
- display_name: Logs
- transforms:
- filter_logs_by_block_number:
- sql: SELECT * FROM base.logs WHERE block_number > 5000
- primary_key: id
- sinks:
- postgres_base_logs:
- type: postgres
- table: base_logs
- schema: public
- secret_name: GOLDSKY_SECRET
- description: "Postgres sink for: base.logs"
- from: filter_logs_by_block_number
- ```
-
-
- Keys in v3 format for sources, transforms and sinks are user provided
- values. In the above example, the source reference name `base.logs`
- matches the actual dataset name. This is the convention that you'll
- typically see across examples and autogenerated configurations. However,
- you can use a custom name as the key.
-
-
-
-
- ```yaml base-logs.yaml theme={null}
- name: base-logs-pipeline
- resource_size: s
- apiVersion: 3
- definition:
- sources:
- - referenceName: base.logs
- type: dataset
- version: 1.0.0
- transforms: []
- sinks:
- - type: postgres
- table: base_logs
- schema: public
- secretName: GOLDSKY_SECRET
- description: 'Postgres sink for: base.logs'
- sourceStreamName: base.logs
- referenceName: postgres_base_logs
- ```
-
-
+```yaml base-logs.yaml theme={null}
+name: base-logs-pipeline
+resource_size: s
+apiVersion: 3
+definition:
+sources:
+  - referenceName: base.logs
+type: dataset
+version: 1.0.0
+transforms: []
+sinks:
+  - type: postgres
+table: base_logs
+schema: public
+secretName: GOLDSKY_SECRET
+description: "Postgres sink for: base.logs"
+sourceStreamName: base.logs
+referenceName: postgres_base_logs
+```
 
 You can find the complete Pipeline configuration schema in the [reference](/reference/config-file/pipeline) page.
 
@@ -6398,16 +5554,16 @@ Creating a Pipeline configuration from scratch is challenging. However, there ar
 
 The `status` attribute represents the desired status of the pipeline and is provided by the user. Applicable values are:
 
-* `ACTIVE` means the user wants to start the pipeline.
-* `INACTIVE` means the user wants to stop the pipeline.
-* `PAUSED` means the user wants to save-progress made by the pipeline so far and stop it.
+- `ACTIVE` means the user wants to start the pipeline.
+- `INACTIVE` means the user wants to stop the pipeline.
+- `PAUSED` means the user wants to save-progress made by the pipeline so far and stop it.
 
 A pipeline with status `ACTIVE` has a runtime status as well. Runtime represents the execution of the pipeline. Applicable runtime status values are:
 
-* `STARTING` means the pipeline is being setup.
-* `RUNNING` means the pipeline has been setup and is processing records.
-* `FAILING` means the pipeline has encountered errors that prevents it from running successfully.
-* `TERMINATED` means the pipeline has failed and the execution has been terminated.
+- `STARTING` means the pipeline is being setup.
+- `RUNNING` means the pipeline has been setup and is processing records.
+- `FAILING` means the pipeline has encountered errors that prevents it from running successfully.
+- `TERMINATED` means the pipeline has failed and the execution has been terminated.
 
 There are several [goldsky pipeline CLI commands](/reference/config-file/pipeline#pipeline-runtime-commands) that help with pipeline execution.
 
@@ -6418,66 +5574,58 @@ For now, let's see how these states play out on successful and unsuccessful scen
 In this scenario the pipeline is succesfully setup and processing data without encountering any issues.
 We consider the pipeline to be in a healthy state which translates into the following statuses:
 
-* Desired `status` in the pipeline configuration is `ACTIVE`
-* Runtime Status goes from `STARTING` to `RUNNING`
+- Desired `status` in the pipeline configuration is `ACTIVE`
+- Runtime Status goes from `STARTING` to `RUNNING`
 
-
- ```mermaid theme={null}
- stateDiagram-v2
- state ACTIVE {
- [*] --> STARTING
- STARTING --> RUNNING
- }
- ```
-
+```mermaid theme={null}
+stateDiagram-v2
+state ACTIVE {
+[*] --> STARTING
+STARTING --> RUNNING
+}
+```
 
 Let's look at a simple example below where we configure a pipeline that consumes Logs from Base chain and streams them into a Postgres database:
 
+```yaml base-logs.yaml theme={null}
+name: base-logs-pipeline
+resource_size: s
+apiVersion: 3
+sources:
+base.logs:
+dataset_name: base.logs
+version: 1.0.0
+type: dataset
+description: Enriched logs for events emitted from contracts. Contains the contract address, data, topics, decoded event and metadata for blocks and transactions.
+display_name: Logs
+transforms: {}
+sinks:
+postgres_base_logs:
+type: postgres
+table: base_logs
+schema: public
+secret_name: GOLDSKY_SECRET
+description: "Postgres sink for: base.logs"
+from: base.logs
+```
 
-
- ```yaml base-logs.yaml theme={null}
- name: base-logs-pipeline
- resource_size: s
- apiVersion: 3
- sources:
- base.logs:
- dataset_name: base.logs
- version: 1.0.0
- type: dataset
- description: Enriched logs for events emitted from contracts. Contains the contract address, data, topics, decoded event and metadata for blocks and transactions.
- display_name: Logs
- transforms: {}
- sinks:
- postgres_base_logs:
- type: postgres
- table: base_logs
- schema: public
- secret_name: GOLDSKY_SECRET
- description: "Postgres sink for: base.logs"
- from: base.logs
- ```
-
-
-
- ```yaml base-logs.yaml theme={null}
- name: base-logs-pipeline
- definition:
- sources:
- - referenceName: base.logs
- type: dataset
- version: 1.0.0
- transforms: []
- sinks:
- - type: postgres
- table: base_logs
- schema: public
- secretName: GOLDSKY_SECRET
- description: 'Postgres sink for: base.logs'
- sourceStreamName: base.logs
- referenceName: postgres_base_logs
- ```
-
-
+```yaml base-logs.yaml theme={null}
+name: base-logs-pipeline
+definition:
+sources:
+  - referenceName: base.logs
+type: dataset
+version: 1.0.0
+transforms: []
+sinks:
+  - type: postgres
+table: base_logs
+schema: public
+secretName: GOLDSKY_SECRET
+description: "Postgres sink for: base.logs"
+sourceStreamName: base.logs
+referenceName: postgres_base_logs
+```
 
 Let's attempt to run it using the command `goldsky pipeline apply base-logs.yaml --status ACTIVE` or `goldsky pipeline start base-logs.yaml`
 
@@ -6510,7 +5658,6 @@ At this point we have set the desired status to `ACTIVE`. We can confirm this us
 
 We can then check the runtime status of this pipeline using the `goldsky pipeline monitor base-logs-pipeline` command:
 
-
 We can see how the pipeline starts in `STARTING` status and becomes `RUNNING` as it starts processing data successfully into our Postgres sink.
 This pipeline will start processing the historical data of the source dataset, reach its edge and continue streaming data in real time until we either stop it or it encounters error(s) that interrupts it's execution.
 
@@ -6520,90 +5667,82 @@ Let's now consider the scenario where the pipeline encounters errors during its 
 
 There can be multitude of reasons for a pipeline to encounter errors such as:
 
-* secrets not being correctly configured
-* sink availability issues
-* policy rules on the sink preventing the pipeline from writing records
-* resource size incompatiblity
-* and many more
+- secrets not being correctly configured
+- sink availability issues
+- policy rules on the sink preventing the pipeline from writing records
+- resource size incompatiblity
+- and many more
 
 These failure scenarios prevents a pipeline from getting-into or staying-in a `RUNNING` runtime status.
 
+```mermaid theme={null}
+---
+title: Healthy pipeline becomes unhealthy
+---
+stateDiagram-v2
+state status:ACTIVE {
+[*] --> STARTING
+STARTING --> RUNNING
+RUNNING --> FAILING
+FAILING --> TERMINATED
+}
+```
 
- ```mermaid theme={null}
- ---
- title: Healthy pipeline becomes unhealthy
- ---
- stateDiagram-v2
- state status:ACTIVE {
- [*] --> STARTING
- STARTING --> RUNNING
- RUNNING --> FAILING
- FAILING --> TERMINATED
- }
- ```
-
- ```mermaid theme={null}
- ---
- title: Pipeline cannot start
- ---
- stateDiagram-v2
- state status:ACTIVE {
- [*] --> STARTING
- STARTING --> FAILING
- FAILING --> TERMINATED
- }
- ```
-
+```mermaid theme={null}
+---
+title: Pipeline cannot start
+---
+stateDiagram-v2
+state status:ACTIVE {
+[*] --> STARTING
+STARTING --> FAILING
+FAILING --> TERMINATED
+}
+```
 
 A Pipeline can be in an `ACTIVE` desired status but a `TERMINATED` runtime status in scenarios that lead to terminal failure.
 
 Let's see an example where we'll use the same configuration as above but set a `secret_name` that does not exist.
 
+```yaml bad-base-logs.yaml theme={null}
+name: bad-base-logs-pipeline
+resource_size: s
+apiVersion: 3
+sources:
+base.logs:
+dataset_name: base.logs
+version: 1.0.0
+type: dataset
+description: Enriched logs for events emitted from contracts. Contains the contract address, data, topics, decoded event and metadata for blocks and transactions.
+display_name: Logs
+transforms: {}
+sinks:
+postgres_base_logs:
+type: postgres
+table: base_logs
+schema: public
+secret_name: YOUR_DATABASE_SECRET
+description: "Postgres sink for: base.logs"
+from: base.logs
+```
 
-
- ```yaml bad-base-logs.yaml theme={null}
- name: bad-base-logs-pipeline
- resource_size: s
- apiVersion: 3
- sources:
- base.logs:
- dataset_name: base.logs
- version: 1.0.0
- type: dataset
- description: Enriched logs for events emitted from contracts. Contains the contract address, data, topics, decoded event and metadata for blocks and transactions.
- display_name: Logs
- transforms: {}
- sinks:
- postgres_base_logs:
- type: postgres
- table: base_logs
- schema: public
- secret_name: YOUR_DATABASE_SECRET
- description: "Postgres sink for: base.logs"
- from: base.logs
- ```
-
-
-
- ```yaml bad-base-logs.yaml theme={null}
- name: bad-base-logs-pipeline
- definition:
- sources:
- - referenceName: base.logs
- type: dataset
- version: 1.0.0
- transforms: []
- sinks:
- - type: postgres
- table: base_logs
- schema: public
- secretName: YOUR_DATABASE_SECRET
- description: 'Postgres sink for: base.logs'
- sourceStreamName: base.logs
- referenceName: postgres_base_logs
- ```
-
-
+```yaml bad-base-logs.yaml theme={null}
+name: bad-base-logs-pipeline
+definition:
+sources:
+  - referenceName: base.logs
+type: dataset
+version: 1.0.0
+transforms: []
+sinks:
+  - type: postgres
+table: base_logs
+schema: public
+secretName: YOUR_DATABASE_SECRET
+description: "Postgres sink for: base.logs"
+sourceStreamName: base.logs
+referenceName: postgres_base_logs
+```
 
 Let's start it using the command `goldsky pipeline apply bad-base-logs.yaml`.
 
@@ -6623,7 +5762,6 @@ Using the dashboard: https://app.goldsky.com/dashboard/pipelines/stream/bad-base
 The pipeline configuration is valid, however, the pipeline runtime will encounter error since the secret that contains credentials to communicate with the sink does not exist.
 
 Running `goldsky pipeline monitor bad-base-logs-pipeline` we see:
-
 
 As expected, the pipeline has encountered a terminal error. Please note that the desired status is still `ACTIVE` even though the pipeline runtime status is `TERMINATED`
 
@@ -6651,8 +5789,7 @@ Runtime status, error messages and metrics can be seen via two methods:
 
 1. Pipeline dashboard at `https://app.goldsky.com/dashboard/pipelines/stream/
 
-/`
-2. `goldsky pipeline monitor ` CLI command
+/`2.`goldsky pipeline monitor ` CLI command
 
 Logs can only be seen in the pipeline dashboard.
 
@@ -6661,7 +5798,6 @@ Mirror attempts to surface appropriate and actionable error message and status f
 ### Email notifications
 
 If a pipeline fails terminally the project members will get notified via an email.
-
 
 You can configure this nofication in the [Notifications section](https://app.goldsky.com/dashboard/settings#notifications) of your project
 
@@ -6673,9 +5809,9 @@ There are two broad categories of errors.
 
 This means the schema of the pipeline configuration is not valid. These errors are usually caught before pipeline execution. Some possible scenarios:
 
-* a required attribute is missing
-* transform SQL has syntax errors
-* pipeline name is invalid
+- a required attribute is missing
+- transform SQL has syntax errors
+- pipeline name is invalid
 
 **Pipeline runtime error**
 
@@ -6683,10 +5819,10 @@ This means the pipeline encountered error during execution at runtime.
 
 Some possible scenarios:
 
-* credentails stored in the secret are incorrect or do not have needed access privilages
-* sink availability issues
-* poison-pill record that breaks the business logic in the transforms
-* `resource_size` limitation
+- credentails stored in the secret are incorrect or do not have needed access privilages
+- sink availability issues
+- poison-pill record that breaks the business logic in the transforms
+- `resource_size` limitation
 
 Transient errors are automatically retried as per retry-policy (for upto 6 hours) whearas non-transient ones immediately terminate the pipeline.
 
@@ -6698,16 +5834,16 @@ While many errors can be resolved by user intervention, there is a possibility o
 
 Resource sizing depends on a few different factors such as:
 
-* number of sources, transforms, sinks
-* expected amount of data to be processed.
-* transform sql involves joining multiple sources and/or transforms
+- number of sources, transforms, sinks
+- expected amount of data to be processed.
+- transform sql involves joining multiple sources and/or transforms
 
 Here's some general information that you can use as reference:
 
-* A `small` resource size is usually enough in most use case: it can handle full backfill of small chain datasets and write to speeds of up to 300K records per second. For pipelines using
- subgraphs as source it can reliably handle up to 8 subgraphs.
-* Larger resource sizes are usually needed when backfilling large chains or when doing large JOINS (example: JOIN between accounts and transactions datasets in Solana)
-* It's recommended to always follow a defensive approach: start small and scale up if needed.
+- A `small` resource size is usually enough in most use case: it can handle full backfill of small chain datasets and write to speeds of up to 300K records per second. For pipelines using
+  subgraphs as source it can reliably handle up to 8 subgraphs.
+- Larger resource sizes are usually needed when backfilling large chains or when doing large JOINS (example: JOIN between accounts and transactions datasets in Solana)
+- It's recommended to always follow a defensive approach: start small and scale up if needed.
 
 ## Snapshots
 
@@ -6715,8 +5851,8 @@ A Pipeline snapshot captures a point-in-time state of a `RUNNING` pipeline allow
 
 It can be useful in various scenarios:
 
-* evolving your `RUNNING` pipeline (eg: adding a new source, sink) without losing progress made so far.
-* recover from new bug introductions where the user fix the bug and resume from an earlier snapshot to reprocess data.
+- evolving your `RUNNING` pipeline (eg: adding a new source, sink) without losing progress made so far.
+- recover from new bug introductions where the user fix the bug and resume from an earlier snapshot to reprocess data.
 
 Please note that snapshot only contains info about the progress made in reading the source(s) and the sql transform's state. It isn't representative of the state of the source/sink. For eg: if all data in the sink database table is deleted, resuming the pipeline from a snapshot does not recover it.
 
@@ -6743,9 +5879,9 @@ gitGraph
 3. Automatically on regular intervals. For `RUNNING` pipelines in healthy state, automatic snapshots are taken every 4 hours to ensure minimal data loss in case of errors.
 4. Users can request snapshot creation via the following CLI command:
 
-* `goldsky pipeline snapshot create `
-* `goldsky pipeline apply --from-snapshot new`
-* `goldsky pipeline apply --save-progress true` (CLI version \`
+- `goldsky pipeline snapshot create `
+- `goldsky pipeline apply --from-snapshot new`
+- `goldsky pipeline apply --save-progress true` (CLI version \`
 
 ### How long does it take to create a snapshot
 
@@ -6759,15 +5895,15 @@ There is a scenario where the the pipeline was healthy at the time of starting t
 
 Happy Scenario:
 
-* Suppose a pipeline is at 50% progress, and an automatic snapshot is taken.
-* The pipeline then progresses to 60% and is in a healthy state. If you pause the pipeline at this point, a new snapshot is taken.
-* You can later start the pipeline from the 60% snapshot, ensuring continuity from the last known healthy state.
+- Suppose a pipeline is at 50% progress, and an automatic snapshot is taken.
+- The pipeline then progresses to 60% and is in a healthy state. If you pause the pipeline at this point, a new snapshot is taken.
+- You can later start the pipeline from the 60% snapshot, ensuring continuity from the last known healthy state.
 
 Bad Scenario:
 
-* If the pipeline reaches 50%, and an automatic snapshot is taken.
-* It then progresses to 60% but enters a bad state. Attempting to pause the pipeline in this state will fail.
-* If you restart the pipeline, it will resume from the last successful snapshot at 50%, there was no snapshot created at 60%
+- If the pipeline reaches 50%, and an automatic snapshot is taken.
+- It then progresses to 60% but enters a bad state. Attempting to pause the pipeline in this state will fail.
+- If you restart the pipeline, it will resume from the last successful snapshot at 50%, there was no snapshot created at 60%
 
 Can't find what you're looking for? Reach out to us at [support@goldsky.com](mailto:support@goldsky.com) for help.
 
@@ -6781,110 +5917,110 @@ Can't find what you're looking for? Reach out to us at [support@goldsky.com](mai
 
 ### Blocks
 
-| Field | | Type |
-| ------------------- | - | ------ |
-| id | | STRING |
-| number | | LONG |
-| hash | | STRING |
-| parent\_hash | | STRING |
-| nonce | | STRING |
-| sha3\_uncles | | STRING |
-| logs\_bloom | | STRING |
-| transactions\_root | | STRING |
-| state\_root | | STRING |
-| receipts\_root | | STRING |
-| miner | | STRING |
-| difficulty | | DOUBLE |
-| total\_difficulty | | DOUBLE |
-| size | | LONG |
-| extra\_data | | STRING |
-| gas\_limit | | LONG |
-| gas\_used | | LONG |
-| timestamp | | LONG |
-| transaction\_count | | LONG |
-| base\_fee\_per\_gas | | LONG |
-| withdrawals\_root | | STRING |
+| Field             |     | Type   |
+| ----------------- | --- | ------ |
+| id                |     | STRING |
+| number            |     | LONG   |
+| hash              |     | STRING |
+| parent_hash       |     | STRING |
+| nonce             |     | STRING |
+| sha3_uncles       |     | STRING |
+| logs_bloom        |     | STRING |
+| transactions_root |     | STRING |
+| state_root        |     | STRING |
+| receipts_root     |     | STRING |
+| miner             |     | STRING |
+| difficulty        |     | DOUBLE |
+| total_difficulty  |     | DOUBLE |
+| size              |     | LONG   |
+| extra_data        |     | STRING |
+| gas_limit         |     | LONG   |
+| gas_used          |     | LONG   |
+| timestamp         |     | LONG   |
+| transaction_count |     | LONG   |
+| base_fee_per_gas  |     | LONG   |
+| withdrawals_root  |     | STRING |
 
 ### Enriched Transactions
 
-| Field | | Type |
-| ------------------------------------ | - | ------- |
-| id | | STRING |
-| hash | | STRING |
-| nonce | | LONG |
-| block\_hash | | STRING |
-| block\_number | | LONG |
-| transaction\_index | | LONG |
-| from\_address | | STRING |
-| to\_address | | STRING |
-| value | | DECIMAL |
-| gas | | DECIMAL |
-| gas\_price | | DECIMAL |
-| input | | STRING |
-| max\_fee\_per\_gas | | DECIMAL |
-| max\_priority\_fee\_per\_gas | | DECIMAL |
-| transaction\_type | | LONG |
-| block\_timestamp | | LONG |
-| receipt\_cumulative\_gas\_used | | DECIMAL |
-| receipt\_gas\_used | | DECIMAL |
-| receipt\_contract\_address | | STRING |
-| receipt\_status | | LONG |
-| receipt\_effective\_gas\_price | | DECIMAL |
-| receipt\_root\_hash | | STRING |
-| receipt\_l1\_fee | | DECIMAL |
-| receipt\_l1\_gas\_used | | DECIMAL |
-| receipt\_l1\_gas\_price | | DECIMAL |
-| receipt\_l1\_fee\_scalar | | DOUBLE |
-| receipt\_l1\_blob\_base\_fee | | DECIMAL |
-| receipt\_l1\_blob\_base\_fee\_scalar | | LONG |
-| blob\_versioned\_hashes | | ARRAY |
-| max\_fee\_per\_blob\_gas | | DECIMAL |
-| receipt\_l1\_block\_number | | LONG |
-| receipt\_l1\_base\_fee\_scalar | | LONG |
-| gateway\_fee | | LONG |
-| fee\_currency | | STRING |
-| gateway\_fee\_recipient | | STRING |
+| Field                           |     | Type    |
+| ------------------------------- | --- | ------- |
+| id                              |     | STRING  |
+| hash                            |     | STRING  |
+| nonce                           |     | LONG    |
+| block_hash                      |     | STRING  |
+| block_number                    |     | LONG    |
+| transaction_index               |     | LONG    |
+| from_address                    |     | STRING  |
+| to_address                      |     | STRING  |
+| value                           |     | DECIMAL |
+| gas                             |     | DECIMAL |
+| gas_price                       |     | DECIMAL |
+| input                           |     | STRING  |
+| max_fee_per_gas                 |     | DECIMAL |
+| max_priority_fee_per_gas        |     | DECIMAL |
+| transaction_type                |     | LONG    |
+| block_timestamp                 |     | LONG    |
+| receipt_cumulative_gas_used     |     | DECIMAL |
+| receipt_gas_used                |     | DECIMAL |
+| receipt_contract_address        |     | STRING  |
+| receipt_status                  |     | LONG    |
+| receipt_effective_gas_price     |     | DECIMAL |
+| receipt_root_hash               |     | STRING  |
+| receipt_l1_fee                  |     | DECIMAL |
+| receipt_l1_gas_used             |     | DECIMAL |
+| receipt_l1_gas_price            |     | DECIMAL |
+| receipt_l1_fee_scalar           |     | DOUBLE  |
+| receipt_l1_blob_base_fee        |     | DECIMAL |
+| receipt_l1_blob_base_fee_scalar |     | LONG    |
+| blob_versioned_hashes           |     | ARRAY   |
+| max_fee_per_blob_gas            |     | DECIMAL |
+| receipt_l1_block_number         |     | LONG    |
+| receipt_l1_base_fee_scalar      |     | LONG    |
+| gateway_fee                     |     | LONG    |
+| fee_currency                    |     | STRING  |
+| gateway_fee_recipient           |     | STRING  |
 
 ### Logs
 
-| Field | | Type |
-| ------------------ | - | ------ |
-| id | | STRING |
-| block\_number | | LONG |
-| block\_hash | | STRING |
-| transaction\_hash | | STRING |
-| transaction\_index | | LONG |
-| log\_index | | LONG |
-| address | | STRING |
-| data | | STRING |
-| topics | | STRING |
-| block\_timestamp | | LONG |
+| Field             |     | Type   |
+| ----------------- | --- | ------ |
+| id                |     | STRING |
+| block_number      |     | LONG   |
+| block_hash        |     | STRING |
+| transaction_hash  |     | STRING |
+| transaction_index |     | LONG   |
+| log_index         |     | LONG   |
+| address           |     | STRING |
+| data              |     | STRING |
+| topics            |     | STRING |
+| block_timestamp   |     | LONG   |
 
 ### Raw traces
 
-| Field | | Type |
-| ------------------ | - | ------- |
-| id | | STRING |
-| block\_number | | LONG |
-| block\_hash | | STRING |
-| transaction\_hash | | STRING |
-| transaction\_index | | LONG |
-| from\_address | | STRING |
-| to\_address | | STRING |
-| value | | DECIMAL |
-| input | | STRING |
-| output | | STRING |
-| trace\_type | | STRING |
-| call\_type | | STRING |
-| reward\_type | | STRING |
-| gas | | LONG |
-| gas\_used | | LONG |
-| subtraces | | LONG |
-| trace\_address | | STRING |
-| error | | STRING |
-| status | | LONG |
-| trace\_id | | STRING |
-| block\_timestamp | | LONG |
+| Field             |     | Type    |
+| ----------------- | --- | ------- |
+| id                |     | STRING  |
+| block_number      |     | LONG    |
+| block_hash        |     | STRING  |
+| transaction_hash  |     | STRING  |
+| transaction_index |     | LONG    |
+| from_address      |     | STRING  |
+| to_address        |     | STRING  |
+| value             |     | DECIMAL |
+| input             |     | STRING  |
+| output            |     | STRING  |
+| trace_type        |     | STRING  |
+| call_type         |     | STRING  |
+| reward_type       |     | STRING  |
+| gas               |     | LONG    |
+| gas_used          |     | LONG    |
+| subtraces         |     | LONG    |
+| trace_address     |     | STRING  |
+| error             |     | STRING  |
+| status            |     | LONG    |
+| trace_id          |     | STRING  |
+| block_timestamp   |     | LONG    |
 
 ---
 
@@ -6902,76 +6038,70 @@ Here is a snippet of YAML that specifies a Webhook sink:
 
 ## Pipeline configuration
 
+```yaml theme={null}
+sinks:
+my_webhook_sink:
+type: webhook
 
+# The webhook url
+url: Type.String()
 
- ```yaml theme={null}
- sinks:
- my_webhook_sink:
- type: webhook
+# The object key coming from either a source or transform.
+# Example: ethereum.raw_blocks.
+from: Type.String()
 
- # The webhook url
- url: Type.String()
+# The name of a goldsky httpauth secret you created which contains a header that can be used for authentication. More on how to create these in the section below.
+secret_name: Type.Optional(Type.String())
 
- # The object key coming from either a source or transform.
- # Example: ethereum.raw_blocks.
- from: Type.String()
+# Optional metadata that you want to send on every request.
+headers:
+SOME-HEADER-KEY: Type.Optional(Type.String())
 
- # The name of a goldsky httpauth secret you created which contains a header that can be used for authentication. More on how to create these in the section below.
- secret_name: Type.Optional(Type.String())
+# Whether to send only one row per http request (better for compatibility with third-party integrations - e.g bots) or to mini-batch it (better for throughput).
+one_row_per_request: Type.Optional(Type.Boolean())
 
- # Optional metadata that you want to send on every request.
- headers:
- SOME-HEADER-KEY: Type.Optional(Type.String())
+# The number of records the sink will send together in a batch. Default `100`
+batch_size: Type.Optional(Type.Integer())
 
- # Whether to send only one row per http request (better for compatibility with third-party integrations - e.g bots) or to mini-batch it (better for throughput).
- one_row_per_request: Type.Optional(Type.Boolean())
+# The maximum time the sink will batch records before flushing. Examples: 60s, 1m, 1h. Default: '1s'
+batch_flush_interval: Type.Optional(Type.String())
+```
 
- # The number of records the sink will send together in a batch. Default `100`
- batch_size: Type.Optional(Type.Integer())
+```yaml theme={null}
+sinks:
+myWebhookSink:
+type: webhook
 
- # The maximum time the sink will batch records before flushing. Examples: 60s, 1m, 1h. Default: '1s'
- batch_flush_interval: Type.Optional(Type.String())
- ```
+# The webhook url
+url: Type.String()
 
+# The object key coming from either a source or transform.
+# Example: ethereum.raw_blocks.
+from: Type.String()
 
+# The name of a goldsky httpauth secret you created which contains a header that can be used for authentication. More on how to create these in the section below.
+secretName: Type.Optional(Type.String())
 
- ```yaml theme={null}
- sinks:
- myWebhookSink:
- type: webhook
+# Optional metadata that you want to send on every request.
+headers:
+SOME-HEADER-KEY: Type.Optional(Type.String())
 
- # The webhook url
- url: Type.String()
+# Whether to send only one row per http request (better for compatibility with third-party integrations - e.g bots) or to mini-batch it (better for throughput).
+oneRowPerRequest: Type.Optional(Type.Boolean())
 
- # The object key coming from either a source or transform.
- # Example: ethereum.raw_blocks.
- from: Type.String()
+# The number of records the sink will send together in a batch. Default `100`
+batchSize: Type.Optional(Type.Integer())
 
- # The name of a goldsky httpauth secret you created which contains a header that can be used for authentication. More on how to create these in the section below.
- secretName: Type.Optional(Type.String())
-
- # Optional metadata that you want to send on every request.
- headers:
- SOME-HEADER-KEY: Type.Optional(Type.String())
-
- # Whether to send only one row per http request (better for compatibility with third-party integrations - e.g bots) or to mini-batch it (better for throughput).
- oneRowPerRequest: Type.Optional(Type.Boolean())
-
- # The number of records the sink will send together in a batch. Default `100`
- batchSize: Type.Optional(Type.Integer())
-
- # The maximum time the sink will batch records before flushing. Examples: 60s, 1m, 1h. Default: '1s'
- batchFlushInterval: Type.Optional(Type.String())
- ```
-
-
+# The maximum time the sink will batch records before flushing. Examples: 60s, 1m, 1h. Default: '1s'
+batchFlushInterval: Type.Optional(Type.String())
+```
 
 ## Key considerations
 
-* **Failure Handling:** In case of failures, the pipeline retries requests indefinitely with exponential backoff.
-* **Networking & Performance:** For optimal performance, deploy your webhook server in a region close to where the pipelines are deployed (we use aws `us-west-2`). Aim to keep p95 latency under 100 milliseconds for best results.
-* **Latency vs Throughput:** Use lower batch\_size/batch\_flush\_interval to achive low latency and higher values to achieve high throughput (useful when backfilling/bootstraping).
-* **Connection & Response times**: The maximum allowed response time is 5 minutes and the maximum allowed time to establish a connection is 1 minute.
+- **Failure Handling:** In case of failures, the pipeline retries requests indefinitely with exponential backoff.
+- **Networking & Performance:** For optimal performance, deploy your webhook server in a region close to where the pipelines are deployed (we use aws `us-west-2`). Aim to keep p95 latency under 100 milliseconds for best results.
+- **Latency vs Throughput:** Use lower batch_size/batch_flush_interval to achive low latency and higher values to achieve high throughput (useful when backfilling/bootstraping).
+- **Connection & Response times**: The maximum allowed response time is 5 minutes and the maximum allowed time to establish a connection is 1 minute.
 
 ## Secret creation
 
@@ -6987,11 +6117,11 @@ Select `httpauth` as the secret type and then follow the prompts to finish creat
 
 ```yaml theme={null}
 sinks:
- my_webhook_sink:
- type: webhook
- url: https://my-webhook-service.com/webhook-1
- from: ethereum.raw_blocks
- secret_name: ETH_BLOCKS_SECRET
+  my_webhook_sink:
+  type: webhook
+  url: https://my-webhook-service.com/webhook-1
+  from: ethereum.raw_blocks
+  secret_name: ETH_BLOCKS_SECRET
 ```
 
 ---
@@ -7002,13 +6132,11 @@ sinks:
 
 # Timescale
 
+**Closed Beta**
 
- **Closed Beta**
+This feature is in closed beta and only available for our enterprise customers.
 
- This feature is in closed beta and only available for our enterprise customers.
-
- Please contact us at [support@goldsky.com](mailto:support@goldsky.com) to request access to this feature.
-
+Please contact us at [support@goldsky.com](mailto:support@goldsky.com) to request access to this feature.
 
 We partner with [Timescale](https://www.timescale.com) to provide teams with real-time data access on on-chain data, using a database powerful enough for time series analytical queries and fast enough for transactional workloads like APIs.
 
@@ -7082,11 +6210,9 @@ goldsky secret create --name AN_AWS_SQS_SECRET --value '{
 }'
 ```
 
-
- Secret requires `sqs:SendMessage` permission. Refer to [AWS SQS permissions
- documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-permissions-reference.html)
- for more information.
-
+Secret requires `sqs:SendMessage` permission. Refer to [AWS SQS permissions
+documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-permissions-reference.html)
+for more information.
 
 ## Processing Data
 
@@ -7094,8 +6220,8 @@ Typically, you would use SQS sync to cue data up and process for one reason or a
 
 The data will have two high level fields:
 
-* `op`: The operation type like `c` for create, `u` for update, `d` for delete)
-* `body`: The actual row data
+- `op`: The operation type like `c` for create, `u` for update, `d` for delete)
+- `body`: The actual row data
 
 In a normal pipeline driven by blockchain events, or one sending transactions, logs, blocks or traces, when you see `op` = `d`, typically it means it's processing a fork or reorganization.
 
@@ -7117,11 +6243,9 @@ You can use Kafka to deeply integrate into your existing data ecosystem. Goldsky
 
 Kafka has a rich ecosystem of SDKs and connectors you can make use of to do advanced data processing.
 
+**Less Magic Here**
 
- **Less Magic Here**
-
- The Kafka integration is less end to end - while Goldsky will handle a ton of the topic partitioning balancing and other details, using Kafka is a bit more involved compared to getting data directly mirrored into a database.
-
+The Kafka integration is less end to end - while Goldsky will handle a ton of the topic partitioning balancing and other details, using Kafka is a bit more involved compared to getting data directly mirrored into a database.
 
 Full configuration details for Kafka sink is available in the [reference](/reference/config-file/pipeline#kafka) page.
 
@@ -7158,10 +6282,10 @@ With external handler transforms, you can send data from your Mirror pipeline to
 
 **Key Features of External Handler Transforms:**
 
-* Send data to external services via HTTP.
-* Supports a wide variety of programming languages and external libraries.
-* Handle complex processing outside the pipeline and return results in real time.
-* Guaranteed at least once delivery and back-pressure control to ensure data integrity.
+- Send data to external services via HTTP.
+- Supports a wide variety of programming languages and external libraries.
+- Handle complex processing outside the pipeline and return results in real time.
+- Guaranteed at least once delivery and back-pressure control to ensure data integrity.
 
 ### How External Handlers work
 
@@ -7187,70 +6311,66 @@ With external handler transforms, you can send data from your Mirror pipeline to
 ### Example HTTP Response
 
 ```json theme={null}
- [
- {"id": 1, "transformed_value": "xyz"},
- {"id": 2, "transformed_value": "uvw"}
- ]
+[
+  { "id": 1, "transformed_value": "xyz" },
+  { "id": 2, "transformed_value": "uvw" }
+]
 ```
 
 ### YAML config with an external transform
 
-
- ```YAML theme={null}
- transforms:
- my_external_handler_transform:
- type: handler # the transform type. [required]
- primary_key: hash # [required]
- url: http://example-url/example-transform-route # url that your external handler is bound to. [required]
- headers: # [optional]
- 	 Some-Header: some_value # use http headers to pass any tokens your server requires for authentication or any metadata that you think is useful.
- from: ethereum.raw_blocks # the input for the handler. Data sent to your handler will have the same schema as this source/transform. [required]
- # A schema override signals to the pipeline that the handler will respond with a schema that differs from the upstream source/transform (in this case ethereum.raw_blocks).
- # No override means that the handler will do some processing, but that its output will maintain the upstream schema.
- # The return type of the handler is equal to the upstream schema after the override is applied. Make sure that your handler returns a response with rows that follow this schema.
- schema_override: # [optional]
- new_column_name: datatype # if you want to add a new column, do so by including its name and datatype.
- existing_column_name: new_datatype # if you want to change the type of an existing column (e.g. cast an int to string), do so by including its name and the new datatype
- other_existing_column_name: null # if you want to drop an existing column, do so by including its name and setting its datatype to null
- # The number of records the pipeline will send together in a batch. Default `100`
- batch_size: Type.Optional(Type.Integer())
- # The maximum time the pipeline will batch records before flushing. Examples: 60s, 1m, 1h. Default: '1s'
- batch_flush_interval: Type.Optional(Type.String())
- ```
-
+```YAML theme={null}
+transforms:
+my_external_handler_transform:
+type: handler # the transform type. [required]
+primary_key: hash # [required]
+url: http://example-url/example-transform-route # url that your external handler is bound to. [required]
+headers: # [optional]
+	 Some-Header: some_value # use http headers to pass any tokens your server requires for authentication or any metadata that you think is useful.
+from: ethereum.raw_blocks # the input for the handler. Data sent to your handler will have the same schema as this source/transform. [required]
+# A schema override signals to the pipeline that the handler will respond with a schema that differs from the upstream source/transform (in this case ethereum.raw_blocks).
+# No override means that the handler will do some processing, but that its output will maintain the upstream schema.
+# The return type of the handler is equal to the upstream schema after the override is applied. Make sure that your handler returns a response with rows that follow this schema.
+schema_override: # [optional]
+new_column_name: datatype # if you want to add a new column, do so by including its name and datatype.
+existing_column_name: new_datatype # if you want to change the type of an existing column (e.g. cast an int to string), do so by including its name and the new datatype
+other_existing_column_name: null # if you want to drop an existing column, do so by including its name and setting its datatype to null
+# The number of records the pipeline will send together in a batch. Default `100`
+batch_size: Type.Optional(Type.Integer())
+# The maximum time the pipeline will batch records before flushing. Examples: 60s, 1m, 1h. Default: '1s'
+batch_flush_interval: Type.Optional(Type.String())
+```
 
 ### Schema override datatypes
 
-When overriding the schema of the data returned by the handler it’s important to get the datatypes for each column right. The schema\_override property is a map of column names to Flink SQL datatypes.
+When overriding the schema of the data returned by the handler it’s important to get the datatypes for each column right. The schema_override property is a map of column names to Flink SQL datatypes.
 
 Data types are nullable by default. If you need non-nullable types use \ NOT NULL. For example: STRING NOT NULL.
 
-
- | Data Type | Notes |
- | :------------- | :---------------------------------- |
- | STRING | |
- | BOOLEAN | |
- | BYTE | |
- | DECIMAL | Supports fixed precision and scale. |
- | SMALLINT | |
- | INTEGER | |
- | BIGINT | |
- | FLOAT | |
- | DOUBLE | |
- | TIME | Supports only a precision of 0. |
- | TIMESTAMP | |
- | TIMESTAMP\_LTZ | |
- | ARRAY | |
- | ROW | |
-
+| Data Type     | Notes                               |
+| :------------ | :---------------------------------- |
+| STRING        |                                     |
+| BOOLEAN       |                                     |
+| BYTE          |                                     |
+| DECIMAL       | Supports fixed precision and scale. |
+| SMALLINT      |                                     |
+| INTEGER       |                                     |
+| BIGINT        |                                     |
+| FLOAT         |                                     |
+| DOUBLE        |                                     |
+| TIME          | Supports only a precision of 0.     |
+| TIMESTAMP     |                                     |
+| TIMESTAMP_LTZ |                                     |
+| ARRAY         |                                     |
+| ROW           |                                     |
 
 ### Key considerations
 
-* **Schema Changes:** If the external handler’s output schema changes, you will need to redeploy the pipeline with the relevant schema\_override.
-* **Failure Handling:** In case of failures, the pipeline retries requests indefinitely with exponential backoff.
-* **Networking & Performance:** For optimal performance, deploy your handler in a region close to where the pipelines are deployed (we use aws `us-west-2`). Aim to keep p95 latency under 100 milliseconds for best results.
-* **Latency vs Throughput:** Use lower batch\_size/batch\_flush\_interval to achive low latency and higher values to achieve high throughput (useful when backfilling/bootstraping).
-* **Connection & Response times**: The maximum allowed response time is 5 minutes and the maximum allowed time to establish a connection is 1 minute.
+- **Schema Changes:** If the external handler’s output schema changes, you will need to redeploy the pipeline with the relevant schema_override.
+- **Failure Handling:** In case of failures, the pipeline retries requests indefinitely with exponential backoff.
+- **Networking & Performance:** For optimal performance, deploy your handler in a region close to where the pipelines are deployed (we use aws `us-west-2`). Aim to keep p95 latency under 100 milliseconds for best results.
+- **Latency vs Throughput:** Use lower batch_size/batch_flush_interval to achive low latency and higher values to achieve high throughput (useful when backfilling/bootstraping).
+- **Connection & Response times**: The maximum allowed response time is 5 minutes and the maximum allowed time to establish a connection is 1 minute.
 
 ### In-order mode for external handlers
 
@@ -7266,120 +6386,120 @@ Simple transforms (e.g filtering) in between the source and the handler/webhook 
 
 **Example YAML config, with in-order mode**
 
-
- ```YAML theme={null}
- name: in-order-pipeline
- sources:
- ethereum.raw_transactions:
- dataset_name: ethereum.raw_transactions
- version: 1.1.0
- type: dataset
- filter: block_number > 21875698 # [required]
- in_order: true # [required] enables in-order mode on the given source and its downstream transforms and sinks.
- sinks:
- my_in_order_sink:
- type: webhook
- url: https://my-handler.com/process-in-order
- headers:
- WEBHOOK-SECRET: secret_two
- secret_name: HTTPAUTH_SECRET_TWO
- from: another_transform
- my_sink:
- type: webhook
- url: https://python-handler.fly.dev/echo
- from: ethereum.raw_transactions
- ```
-
+```YAML theme={null}
+name: in-order-pipeline
+sources:
+ethereum.raw_transactions:
+dataset_name: ethereum.raw_transactions
+version: 1.1.0
+type: dataset
+filter: block_number > 21875698 # [required]
+in_order: true # [required] enables in-order mode on the given source and its downstream transforms and sinks.
+sinks:
+my_in_order_sink:
+type: webhook
+url: https://my-handler.com/process-in-order
+headers:
+WEBHOOK-SECRET: secret_two
+secret_name: HTTPAUTH_SECRET_TWO
+from: another_transform
+my_sink:
+type: webhook
+url: https://python-handler.fly.dev/echo
+from: ethereum.raw_transactions
+```
 
 **Example in-order webhook sink**
 
 ```javascript theme={null}
-const express = require('express');
-const { Pool } = require('pg');
+const express = require("express");
+const { Pool } = require("pg");
 
 const app = express();
 app.use(express.json());
 
 // Database connection settings
 const pool = new Pool({
- user: 'your_user',
- host: 'localhost',
- database: 'your_database',
- password: 'your_password',
- port: 5432,
+  user: "your_user",
+  host: "localhost",
+  database: "your_database",
+  password: "your_password",
+  port: 5432,
 });
 
 async function isDuplicate(client, key) {
- const res = await client.query("SELECT 1 FROM processed_messages WHERE key = $1", [key]);
- return res.rowCount > 0;
+  const res = await client.query("SELECT 1 FROM processed_messages WHERE key = $1", [key]);
+  return res.rowCount > 0;
 }
 
-app.post('/webhook', async (req, res) => {
- const client = await pool.connect();
- try {
- await client.query('BEGIN');
+app.post("/webhook", async (req, res) => {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
 
- const payload = req.body;
- const metadata = payload.metadata || {};
- const data = payload.data || {};
- const op = metadata.op;
- const key = metadata.key;
+    const payload = req.body;
+    const metadata = payload.metadata || {};
+    const data = payload.data || {};
+    const op = metadata.op;
+    const key = metadata.key;
 
- if (!key || !op || !data) {
- await client.query('ROLLBACK');
- return res.status(400).json({ error: "Invalid payload" });
- }
+    if (!key || !op || !data) {
+      await client.query("ROLLBACK");
+      return res.status(400).json({ error: "Invalid payload" });
+    }
 
- if (await isDuplicate(client, key)) {
- await client.query('ROLLBACK');
- return res.status(200).json({ message: "Duplicate request processed without write side effects" });
- }
+    if (await isDuplicate(client, key)) {
+      await client.query("ROLLBACK");
+      return res.status(200).json({ message: "Duplicate request processed without write side effects" });
+    }
 
- if (op === "INSERT") {
- const fields = Object.keys(data);
- const values = Object.values(data);
- const placeholders = fields.map((_, i) => `$${i + 1}`).join(', ');
- const query = `INSERT INTO my_table (${fields.join(', ')}) VALUES (${placeholders})`;
- await client.query(query, values);
- } else if (op === "DELETE") {
- const conditions = Object.keys(data).map((key, i) => `${key} = $${i + 1}`).join(' AND ');
- const values = Object.values(data);
- const query = `DELETE FROM my_table WHERE ${conditions}`;
- await client.query(query, values);
- } else {
- await client.query('ROLLBACK');
- return res.status(400).json({ error: "Invalid operation" });
- }
+    if (op === "INSERT") {
+      const fields = Object.keys(data);
+      const values = Object.values(data);
+      const placeholders = fields.map((_, i) => `$${i + 1}`).join(", ");
+      const query = `INSERT INTO my_table (${fields.join(", ")}) VALUES (${placeholders})`;
+      await client.query(query, values);
+    } else if (op === "DELETE") {
+      const conditions = Object.keys(data)
+        .map((key, i) => `${key} = $${i + 1}`)
+        .join(" AND ");
+      const values = Object.values(data);
+      const query = `DELETE FROM my_table WHERE ${conditions}`;
+      await client.query(query, values);
+    } else {
+      await client.query("ROLLBACK");
+      return res.status(400).json({ error: "Invalid operation" });
+    }
 
- await client.query("INSERT INTO processed_messages (key) VALUES ($1)", [key]);
- await client.query('COMMIT');
- return res.status(200).json({ message: "Success" });
- } catch (e) {
- await client.query('ROLLBACK');
- return res.status(500).json({ error: e.message });
- } finally {
- client.release();
- }
+    await client.query("INSERT INTO processed_messages (key) VALUES ($1)", [key]);
+    await client.query("COMMIT");
+    return res.status(200).json({ message: "Success" });
+  } catch (e) {
+    await client.query("ROLLBACK");
+    return res.status(500).json({ error: e.message });
+  } finally {
+    client.release();
+  }
 });
 
 app.listen(5000, () => {
- console.log('Server running on port 5000');
+  console.log("Server running on port 5000");
 });
 ```
 
 **In-order mode tips**
 
-* To observe records in order, either have a single instance of your handler responding to requests OR introduce some coordination mechanism to make sure that only one replica of the service can answer at a time.
-* When deploying your service, avoid having old and new instances running at the same time. Instead, discard the current instance and incur a little downtime to preserve ordering.
-* When receiving messages that have already been processed in the handler (pre-existing idempotency key or previous index (e.g already seen block number)) **don't** introduce any side effects on your side, but **do** respond to the message as usual (i.e., processed messages for handlers, success code for webhook sink) so that the pipeline knows to keep going.
+- To observe records in order, either have a single instance of your handler responding to requests OR introduce some coordination mechanism to make sure that only one replica of the service can answer at a time.
+- When deploying your service, avoid having old and new instances running at the same time. Instead, discard the current instance and incur a little downtime to preserve ordering.
+- When receiving messages that have already been processed in the handler (pre-existing idempotency key or previous index (e.g already seen block number)) **don't** introduce any side effects on your side, but **do** respond to the message as usual (i.e., processed messages for handlers, success code for webhook sink) so that the pipeline knows to keep going.
 
 ### Useful tips
 
-Schema Changes: A change in the output schema of the external handler requires redeployment with schema\_override.
+Schema Changes: A change in the output schema of the external handler requires redeployment with schema_override.
 
-* **Failure Handling:** The pipeline retries indefinitely with exponential backoff.
-* **Networking:** Deploy the handler close to where the pipeline runs for better performance.
-* **Latency:** Keep handler response times under 100ms to ensure smooth operation.
+- **Failure Handling:** The pipeline retries indefinitely with exponential backoff.
+- **Networking:** Deploy the handler close to where the pipeline runs for better performance.
+- **Latency:** Keep handler response times under 100ms to ensure smooth operation.
 
 ---
 
@@ -7391,81 +6511,75 @@ Schema Changes: A change in the output schema of the external handler requires r
 
 This pipeline is named `poap-extended-1`. It pulls data from two `subgraph_entity` sources, does not perform any transformations, and stores the result into two separate PostgreSQL sinks.
 
+```yaml cross-chain-pipeline.yaml theme={null}
+name: poap-extended-1
+apiVersion: 3
+sources:
+hashflow_cross_chain.pool_created:
+type: subgraph_entity
+name: pool_created
+subgraphs:
+- name: polymarket
+version: 1.0.0
+- name: hashflow
+version: 1.0.0
+hashflow_cross_chain.update_router_permissions:
+type: subgraph_entity
+name: update_router_permissions
+subgraphs:
+- name: polymarket
+version: 1.0.0
+- name: hashflow
+version: 1.0.0
+transforms: {}
+sinks:
+pool_created_sink:
+type: postgres
+from: hashflow_cross_chain.pool_created
+table: test_pool_created
+schema: public
+secret_name: API_POSTGRES_CREDENTIALS
+update_router_permissions_sink:
+type: postgres
+from: hashflow_cross_chain.update_router_permissions
+table: test_update_router_permissions
+schema: public
+secret_name: API_POSTGRES_CREDENTIALS
+```
 
-
- ```yaml cross-chain-pipeline.yaml theme={null}
- name: poap-extended-1
- apiVersion: 3
- sources:
- hashflow_cross_chain.pool_created:
- type: subgraph_entity
- name: pool_created
- subgraphs:
- - name: polymarket
- version: 1.0.0
- - name: hashflow
- version: 1.0.0
- hashflow_cross_chain.update_router_permissions:
- type: subgraph_entity
- name: update_router_permissions
- subgraphs:
- - name: polymarket
- version: 1.0.0
- - name: hashflow
- version: 1.0.0
- transforms: {}
- sinks:
- pool_created_sink:
- type: postgres
- from: hashflow_cross_chain.pool_created
- table: test_pool_created
- schema: public
- secret_name: API_POSTGRES_CREDENTIALS
- update_router_permissions_sink:
- type: postgres
- from: hashflow_cross_chain.update_router_permissions
- table: test_update_router_permissions
- schema: public
- secret_name: API_POSTGRES_CREDENTIALS
- ```
-
-
-
- ```yaml theme={null}
- sources:
- - type: subgraphEntity
- deployments:
- - id: QmbsFSmqsWFFcbxnGedXifyeTbKBSypczRcwPrBxdQdyXE
- - id: QmNSwC6QjZSFcSm2Tmoy6Van7g6zSEqD3yz4tDWRFdZiKh
- - id: QmZUh5Rp3edMhYj3wCH58zSNvZvrPSQyeM6AN5HTmyw2Ch
- referenceName: hashflow_cross_chain.pool_created
- entity:
- name: pool_created
- - type: subgraphEntity
- deployments:
- - id: QmbsFSmqsWFFcbxnGedXifyeTbKBSypczRcwPrBxdQdyXE
- - id: QmNSwC6QjZSFcSm2Tmoy6Van7g6zSEqD3yz4tDWRFdZiKh
- - id: QmZUh5Rp3edMhYj3wCH58zSNvZvrPSQyeM6AN5HTmyw2Ch
- referenceName: hashflow_cross_chain.update_router_permissions
- entity:
- name: update_router_permissions
- transforms: []
- sinks:
- - type: postgres
- sourceStreamName: hashflow_cross_chain.pool_created
- table: test_pool_created
- schema: public
- secretName: API_POSTGRES_CREDENTIALS
- referenceName: pool_created_sink
- - type: postgres
- sourceStreamName: hashflow_cross_chain.update_router_permissions
- table: test_update_router_permissions
- schema: public
- secretName: API_POSTGRES_CREDENTIALS
- referenceName: update_router_permissions_sink
- ```
-
-
+```yaml theme={null}
+sources:
+- type: subgraphEntity
+deployments:
+- id: QmbsFSmqsWFFcbxnGedXifyeTbKBSypczRcwPrBxdQdyXE
+- id: QmNSwC6QjZSFcSm2Tmoy6Van7g6zSEqD3yz4tDWRFdZiKh
+- id: QmZUh5Rp3edMhYj3wCH58zSNvZvrPSQyeM6AN5HTmyw2Ch
+referenceName: hashflow_cross_chain.pool_created
+entity:
+name: pool_created
+- type: subgraphEntity
+deployments:
+- id: QmbsFSmqsWFFcbxnGedXifyeTbKBSypczRcwPrBxdQdyXE
+- id: QmNSwC6QjZSFcSm2Tmoy6Van7g6zSEqD3yz4tDWRFdZiKh
+- id: QmZUh5Rp3edMhYj3wCH58zSNvZvrPSQyeM6AN5HTmyw2Ch
+referenceName: hashflow_cross_chain.update_router_permissions
+entity:
+name: update_router_permissions
+transforms: []
+sinks:
+- type: postgres
+sourceStreamName: hashflow_cross_chain.pool_created
+table: test_pool_created
+schema: public
+secretName: API_POSTGRES_CREDENTIALS
+referenceName: pool_created_sink
+- type: postgres
+sourceStreamName: hashflow_cross_chain.update_router_permissions
+table: test_update_router_permissions
+schema: public
+secretName: API_POSTGRES_CREDENTIALS
+referenceName: update_router_permissions_sink
+```
 
 You can run the above example by copying the file into a local yaml file and running the following Goldsky CLI command:
 
@@ -7493,10 +6607,8 @@ Full configuration details for Clickhouse sink is available in the [reference](/
 
 ## Secrets
 
-
- **Use HTTP**
- Mirror writes to ClickHouse via the `http` interface (often port `8443`), rather than the `tcp` interface (often port `9000`).
-
+**Use HTTP**
+Mirror writes to ClickHouse via the `http` interface (often port `8443`), rather than the `tcp` interface (often port `9000`).
 
 ```shell theme={null}
 
@@ -7513,8 +6625,8 @@ goldsky secret create --name A_CLICKHOUSE_SECRET --value '{
 
 The user will need the following permissions for the target database.
 
-* CREATE DATABASE permissions for that database
-* INSERT, SELECT, CREATE, DROP table permissions for tables within that database
+- CREATE DATABASE permissions for that database
+- INSERT, SELECT, CREATE, DROP table permissions for tables within that database
 
 ```sql theme={null}
 CREATE USER 'username' IDENTIFIED WITH password 'user_password';
@@ -7546,13 +6658,11 @@ This will run a clean-up process, though there may be performance considerations
 
 ## Append-Only Mode
 
+**Proceed with Caution**
 
- **Proceed with Caution**
+Without `append_only_mode=true` (v2: `appendOnlyMode=true`), the pipeline may hit ClickHouse mutation flush limits. Write speed will also be slower due to mutations.
 
- Without `append_only_mode=true` (v2: `appendOnlyMode=true`), the pipeline may hit ClickHouse mutation flush limits. Write speed will also be slower due to mutations.
-
-
-Append-only mode means the pipeline will only *write* and not *update* or *delete* tables. There will be no mutations, only inserts.
+Append-only mode means the pipeline will only _write_ and not _update_ or _delete_ tables. There will be no mutations, only inserts.
 
 This drastically increases insert speed and reduces Flush exceptions (which happen when too many mutations are queued up).
 
@@ -7560,18 +6670,18 @@ It's highly recommended as it can help you operate a large dataset with many wri
 
 When `append_only_mode` (v2: `appendOnlyMode`) is `true` (default and recommended for ReplacingMergeTrees), the sink behaves the following way:
 
-* All updates and deletes are converted to inserts.
-* `is_deleted` column is automatically added to a table. It contains `1` in case of deletes, `0` otherwise.
-* If `versionColumnName` is specified, it's used as a [version number column](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree#ver) for deduplication. If it's not specified, `insert_time` column is automatically added to a table. It contains insertion time and is used for deduplication.
-* Primary key is used in the `ORDER BY` clause.
+- All updates and deletes are converted to inserts.
+- `is_deleted` column is automatically added to a table. It contains `1` in case of deletes, `0` otherwise.
+- If `versionColumnName` is specified, it's used as a [version number column](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree#ver) for deduplication. If it's not specified, `insert_time` column is automatically added to a table. It contains insertion time and is used for deduplication.
+- Primary key is used in the `ORDER BY` clause.
 
 This allows us to handle blockchain reorganizations natively while providing high insert speeds.
 
 When `append_only_mode` (v2: `appendOnlyMode`) is `false`:
 
-* All updates and deletes are propagated as is.
-* No extra columns are added.
-* Primary key is used in the `PRIMARY KEY` clause.
+- All updates and deletes are propagated as is.
+- No extra columns are added.
+- Primary key is used in the `PRIMARY KEY` clause.
 
 ---
 
@@ -7630,74 +6740,68 @@ goldsky secret create --name A_MYSQL_SECRET --value '{
 
 This definition gets real-time edge stream of decoded logs straight into a MySQL table named `eth_logs` in the `goldsky` schema, with the secret `A_MYSQL_SECRET` created above.
 
+```yaml theme={null}
+name: ethereum-decoded-logs-to-mysql
+apiVersion: 3
+sources:
+my_ethereum_decoded_logs:
+dataset_name: ethereum.decoded_logs
+version: 1.0.0
+type: dataset
+start_at: latest
+transforms:
+logs:
+sql: |
+SELECT
+id,
+address,
+event_signature,
+event_params,
+raw_log.block_number as block_number,
+raw_log.block_hash as block_hash,
+raw_log.transaction_hash as transaction_hash
+FROM
+my_ethereum_decoded_logs
+primary_key: id
+sinks:
+my_mysql_sink:
+type: mysql
+table: eth_logs
+schema: goldsky
+secret_name: A_MYSQL_SECRET
+from: logs
+```
 
+```yaml theme={null}
+sources:
+- name: ethereum.decoded_logs
+version: 1.0.0
+type: dataset
+startAt: latest
 
- ```yaml theme={null}
- name: ethereum-decoded-logs-to-mysql
- apiVersion: 3
- sources:
- my_ethereum_decoded_logs:
- dataset_name: ethereum.decoded_logs
- version: 1.0.0
- type: dataset
- start_at: latest
- transforms:
- logs:
- sql: |
- SELECT
- id,
- address,
- event_signature,
- event_params,
- raw_log.block_number as block_number,
- raw_log.block_hash as block_hash,
- raw_log.transaction_hash as transaction_hash
- FROM
- my_ethereum_decoded_logs
- primary_key: id
- sinks:
- my_mysql_sink:
- type: mysql
- table: eth_logs
- schema: goldsky
- secret_name: A_MYSQL_SECRET
- from: logs
- ```
+transforms:
+- sql: |
+SELECT
+id,
+address,
+event_signature,
+event_params,
+raw_log.block_number as block_number,
+raw_log.block_hash as block_hash,
+raw_log.transaction_hash as transaction_hash
+FROM
+ethereum.decoded_logs
+name: logs
+type: sql
+primaryKey: id
 
-
-
- ```yaml theme={null}
- sources:
- - name: ethereum.decoded_logs
- version: 1.0.0
- type: dataset
- startAt: latest
-
- transforms:
- - sql: |
- SELECT
- id,
- address,
- event_signature,
- event_params,
- raw_log.block_number as block_number,
- raw_log.block_hash as block_hash,
- raw_log.transaction_hash as transaction_hash
- FROM
- ethereum.decoded_logs
- name: logs
- type: sql
- primaryKey: id
-
- sinks:
- - type: mysql
- table: eth_logs
- schema: goldsky
- secretName: A_MYSQL_SECRET
- sourceStreamName: logs
- ```
-
-
+sinks:
+- type: mysql
+table: eth_logs
+schema: goldsky
+secretName: A_MYSQL_SECRET
+sourceStreamName: logs
+```
 
 ## Tips for backfilling large datasets into MySQL
 
@@ -7707,11 +6811,11 @@ Often, pipelines are bottlenecked against sinks.
 
 Here are some things to try:
 
-### Avoid indexes on tables until *after* the backfill
+### Avoid indexes on tables until _after_ the backfill
 
 Indexes increase the amount of writes needed for each insert. When doing many writes, inserts can slow down the process significantly if we're hitting resources limitations.
 
-### Bigger batch\_sizes for the inserts
+### Bigger batch_sizes for the inserts
 
 The `sink_buffer_max_rows` setting controls how many rows are batched into a single insert statement. Depending on the size of the events, you can increase this to help with write performance. `1000` is a good number to start with. The pipeline will collect data until the batch is full, or until the `sink_buffer_interval` is met.
 
@@ -7749,7 +6853,7 @@ You can alsways reference the sink section of the web dashboard to view connecti
 
 ## Billing
 
-Please see the[ pricing page](https://docs.goldsky.com/pricing/summary#hosted-databases-\(beta\)) for hosted Postgres pricing.
+Please see the[ pricing page](<https://docs.goldsky.com/pricing/summary#hosted-databases-(beta)>) for hosted Postgres pricing.
 
 ---
 
@@ -7764,44 +6868,39 @@ Please see the[ pricing page](https://docs.goldsky.com/pricing/summary#hosted-da
 -
 -
 - (function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c
- document.addEventListener('DOMContentLoaded', () => {
- const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
- link.rel = 'stylesheet';
- });
-
+  document.addEventListener('DOMContentLoaded', () => {
+  const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
+  link.rel = 'stylesheet';
+  });
 
 ((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","isDarkMode","system",null,["dark","light","true","false","system"],{"true":"dark","false":"light","dark":"dark","light":"light"},true,true):root {
- --primary: 255 173 51;
- --primary-light: 255 191 96;
- --primary-dark: 255 173 51;
- --background-light: 255 255 255;
- --background-dark: 14 13 13;
- --gray-50: 250 248 244;
- --gray-100: 245 243 239;
- --gray-200: 230 227 224;
- --gray-300: 213 211 207;
- --gray-400: 166 163 160;
- --gray-500: 119 117 113;
- --gray-600: 87 85 81;
- --gray-700: 70 67 64;
- --gray-800: 45 42 38;
- --gray-900: 30 28 24;
- --gray-950: 17 15 11;
- }
-
+--primary: 255 173 51;
+--primary-light: 255 191 96;
+--primary-dark: 255 173 51;
+--background-light: 255 255 255;
+--background-dark: 14 13 13;
+--gray-50: 250 248 244;
+--gray-100: 245 243 239;
+--gray-200: 230 227 224;
+--gray-300: 213 211 207;
+--gray-400: 166 163 160;
+--gray-500: 119 117 113;
+--gray-600: 87 85 81;
+--gray-700: 70 67 64;
+--gray-800: 45 42 38;
+--gray-900: 30 28 24;
+--gray-950: 17 15 11;
+}
 
 Access Restricted
 
 To gain access to this doc, provide your access code below.
 
-
 Enter access code
-
 
 Access
 
-
-(self.__next_f=self.__next_f||[]).push([0])self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[47132,[],\"\"]\n3:I[55983,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8039\",\"static/chunks/app/error-b040d5f8cf841de1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n4:I[75082,[],\"\"]\n"])self.__next_f.push([1,"5:I[85506,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1725\",\"static/chunks/d30757c7-de787cbe1c08669b.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7545\",\"static/chunks/7545-60869a4114f7ae15.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"6527\",\"static/chunks/6527-0cfb2d96505d7cbd.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9242\",\"static/chunks/9242-3e34f8ac634357ac.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2864\",\"static/chunks/2864-04288363fc5c3c65.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3258\",\"static/chunks/3258-4939df85402d2773.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7498\",\"static/chunks/7498-99247f6c149997d0.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8083\",\"static/chunks/8083-d1cd2287cdfdb928.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5042\",\"static/chunks/5042-b0c5439e99785afa.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9319\",\"static/chunks/9319-5d740d5b4131bcc5.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1750\",\"static/chunks/1750-b8d62ab6b08d4eba.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8047\",\"static/chunks/8047-d0623440424c2cb7.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5456\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(multitenant)/layout-d6018563a37b4650.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"ThemeProvider\"]\n"])self.__next_f.push([1,"6:I[89481,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2967\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/not-found-def8880edfc41373.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"RecommendedPagesList\"]\nd:I[71256,[],\"\"]\n:HL[\"/mintlify-assets/_next/static/media/bb3ef058b751a6ad-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n:HL[\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n"])self.__next_f.push([1,"0:{\"P\":null,\"b\":\"CimFi6HHLm2JdddW11G9U\",\"p\":\"/mintlify-assets\",\"c\":[\"\",\"_sites\",\"docs.goldsky.com\",\"_hidden-login-pages\",\"login\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"%5Fsites\",{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],{\"children\":[\"(login)\",{\"children\":[\"%5Fhidden-login-pages\",{\"children\":[\"login\",{\"children\":[\"__PAGE__\",{}]}]}]}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"suppressHydrationWarning\":true,\"lang\":\"en\",\"className\":\"__variable_8c6b06 __variable_3bbdad dark\",\"data-banner-state\":\"visible\",\"data-page-mode\":\"none\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"dangerouslySetInnerHTML\":{\"__html\":\"(function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c\u003clocalStorage.length;c++){let e=localStorage.key(c);if(e?.endsWith(`-${b}`)\u0026\u0026(d=localStorage.getItem(e),null!=d)){localStorage.setItem(a,d),localStorage.setItem(e,d);break}}let e=document.getElementById(\\\"banner\\\")?.innerText,f=null==d||!!e\u0026\u0026d!==e;document.documentElement.setAttribute(c,f?\\\"visible\\\":\\\"hidden\\\")}catch(a){console.error(a),document.documentElement.setAttribute(c,\\\"hidden\\\")}})(\\n \\\"__mintlify-bannerDismissed\\\",\\n \\\"bannerDismissed\\\",\\n \\\"data-banner-state\\\",\\n)\"}}],[\"$\",\"link\",null,{\"rel\":\"preload\",\"href\":\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\",\"as\":\"style\"}],[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"children\":\"\\n document.addEventListener('DOMContentLoaded', () =\u003e {\\n const link = document.querySelector('link[href=\\\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\\\"]');\\n link.rel = 'stylesheet';\\n });\\n \"}]]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$3\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],null]}]]}]]}],{\"children\":[\"%5Fsites\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],\"$L7\",{\"children\":[\"(login)\",\"$L8\",{\"children\":[\"%5Fhidden-login-pages\",\"$L9\",{\"children\":[\"login\",\"$La\",{\"children\":[\"__PAGE__\",\"$Lb\",{},null,false]},null,false]},null,false]},null,false]},null,false]},null,false]},null,false],\"$Lc\",false]],\"m\":\"$undefined\",\"G\":[\"$d\",[]],\"s\":false,\"S\":true}\n"])self.__next_f.push([1,"e:I[81925,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9249\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/error-bee1299859815f18.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n10:I[50700,[],\"OutletBoundary\"]\n12:I[87748,[],\"AsyncMetadataOutlet\"]\n14:I[50700,[],\"ViewportBoundary\"]\n16:I[50700,[],\"MetadataBoundary\"]\n17:\"$Sreact.suspense\"\n"])self.__next_f.push([1,"7:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$e\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n"])self.__next_f.push([1,"8:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n9:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\na:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\nb:[\"$\",\"$1\",\"c\",{\"children\":[\"$Lf\",null,[\"$\",\"$L10\",null,{\"children\":[\"$L11\",[\"$\",\"$L12\",null,{\"promise\":\"$@13\"}]]}]]}]\nc:[\"$\",\"$1\",\"h\",{\"children\":[null,[[\"$\",\"$L14\",null,{\"children\":\"$L15\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]],[\"$\",\"$L16\",null,{\"children\":[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$17\",null,{\"fallback\":null,\"children\":\"$L18\"}]}]}]]}]\n"])self.__next_f.push([1,"15:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n11:null\n"])self.__next_f.push([1,"13:{\"metadata\":[],\"error\":null,\"digest\":\"$undefined\"}\n"])self.__next_f.push([1,"18:\"$13:metadata\"\n"])self.__next_f.push([1,"19:I[5947,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5715\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(login)/%255Fhidden-login-pages/login/page-c53c4924f574dfeb.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"LoginComponent\",1]\n"])self.__next_f.push([1,"f:[\"$\",\"$L19\",null,{\"docsConfig\":{\"name\":\"Goldsky\",\"logo\":{\"light\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/light.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=33b340d73ed215a5536d400e3d607cb3\",\"dark\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/dark.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=eddd3726aa53fad9b3361c401056302e\"},\"favicon\":\"/images/favicon.svg\",\"colors\":{\"primary\":\"#FFAD33\",\"light\":\"#FFBF60\",\"dark\":\"#FFAD33\"},\"navigation\":[]},\"favicons\":{\"icons\":[{\"rel\":\"apple-touch-icon\",\"sizes\":\"180x180\",\"type\":\"image/png\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/apple-touch-icon.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=09996433c8201e0a5eb43f8d8b4f4c9c\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=522a08e0ddb5a6acc9fcf33696751827\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=6040c9e88bce5763db673bc2291eaa3e\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=3b89f06df79a32c9f08298c5058fc14f\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=d37aca0145322b46c2444222e2723b4a\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=07bf28f7a5f633613713acfe9f912881\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=1ba2820bf5f50836f071b29e31c5c2df\"}],\"browserconfig\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/browserconfig.xml?n=2G5ZPIp8LG_P-NaW\u0026s=d8b37c4f486be14a74e54063080ca70f\"},\"subdomain\":\"goldsky-38\"}]\n"])
+(self.**next_f=self.**next_f||[]).push([0])self.**next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[47132,[],\"\"]\n3:I[55983,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8039\",\"static/chunks/app/error-b040d5f8cf841de1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n4:I[75082,[],\"\"]\n"])self.**next_f.push([1,"5:I[85506,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1725\",\"static/chunks/d30757c7-de787cbe1c08669b.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7545\",\"static/chunks/7545-60869a4114f7ae15.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"6527\",\"static/chunks/6527-0cfb2d96505d7cbd.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9242\",\"static/chunks/9242-3e34f8ac634357ac.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2864\",\"static/chunks/2864-04288363fc5c3c65.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3258\",\"static/chunks/3258-4939df85402d2773.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7498\",\"static/chunks/7498-99247f6c149997d0.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8083\",\"static/chunks/8083-d1cd2287cdfdb928.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5042\",\"static/chunks/5042-b0c5439e99785afa.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9319\",\"static/chunks/9319-5d740d5b4131bcc5.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"1750\",\"static/chunks/1750-b8d62ab6b08d4eba.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"8047\",\"static/chunks/8047-d0623440424c2cb7.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5456\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(multitenant)/layout-d6018563a37b4650.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"ThemeProvider\"]\n"])self.**next_f.push([1,"6:I[89481,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"2967\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/not-found-def8880edfc41373.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"RecommendedPagesList\"]\nd:I[71256,[],\"\"]\n:HL[\"/mintlify-assets/_next/static/media/bb3ef058b751a6ad-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n:HL[\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"style\"]\n"])self.**next_f.push([1,"0:{\"P\":null,\"b\":\"CimFi6HHLm2JdddW11G9U\",\"p\":\"/mintlify-assets\",\"c\":[\"\",\"_sites\",\"docs.goldsky.com\",\"_hidden-login-pages\",\"login\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"%5Fsites\",{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],{\"children\":[\"(login)\",{\"children\":[\"%5Fhidden-login-pages\",{\"children\":[\"login\",{\"children\":[\"__PAGE__\",{}]}]}]}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/641aaa5e2088f47f.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/mintlify-assets/_next/static/css/d910ce6c26d880b3.css?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"suppressHydrationWarning\":true,\"lang\":\"en\",\"className\":\"__variable_8c6b06 __variable_3bbdad dark\",\"data-banner-state\":\"visible\",\"data-page-mode\":\"none\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"dangerouslySetInnerHTML\":{\"__html\":\"(function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c\u003clocalStorage.length;c++){let e=localStorage.key(c);if(e?.endsWith(`-${b}`)\u0026\u0026(d=localStorage.getItem(e),null!=d)){localStorage.setItem(a,d),localStorage.setItem(e,d);break}}let e=document.getElementById(\\\"banner\\\")?.innerText,f=null==d||!!e\u0026\u0026d!==e;document.documentElement.setAttribute(c,f?\\\"visible\\\":\\\"hidden\\\")}catch(a){console.error(a),document.documentElement.setAttribute(c,\\\"hidden\\\")}})(\\n \\\"__mintlify-bannerDismissed\\\",\\n \\\"bannerDismissed\\\",\\n \\\"data-banner-state\\\",\\n)\"}}],[\"$\",\"link\",null,{\"rel\":\"preload\",\"href\":\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\",\"as\":\"style\"}],[\"$\",\"script\",null,{\"type\":\"text/javascript\",\"children\":\"\\n document.addEventListener('DOMContentLoaded', () =\u003e {\\n const link = document.querySelector('link[href=\\\"https://d4tuoctqmanu0.cloudfront.net/katex.min.css\\\"]');\\n link.rel = 'stylesheet';\\n });\\n \"}]]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$3\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],null]}]]}]]}],{\"children\":[\"%5Fsites\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"subdomain\",\"docs.goldsky.com\",\"d\"],\"$L7\",{\"children\":[\"(login)\",\"$L8\",{\"children\":[\"%5Fhidden-login-pages\",\"$L9\",{\"children\":[\"login\",\"$La\",{\"children\":[\"__PAGE__\",\"$Lb\",{},null,false]},null,false]},null,false]},null,false]},null,false]},null,false]},null,false],\"$Lc\",false]],\"m\":\"$undefined\",\"G\":[\"$d\",[]],\"s\":false,\"S\":true}\n"])self.__next_f.push([1,"e:I[81925,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7261\",\"static/chunks/7261-d416a358707b6550.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4518\",\"static/chunks/4518-6b7118c60cd905b1.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"9249\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/error-bee1299859815f18.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"default\",1]\n10:I[50700,[],\"OutletBoundary\"]\n12:I[87748,[],\"AsyncMetadataOutlet\"]\n14:I[50700,[],\"ViewportBoundary\"]\n16:I[50700,[],\"MetadataBoundary\"]\n17:\"$Sreact.suspense\"\n"])self.**next_f.push([1,"7:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$e\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$L5\",null,{\"children\":[[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 22 163 74;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 10 13 13;\\n --gray-50: 243 247 245;\\n --gray-100: 238 242 240;\\n --gray-200: 223 227 224;\\n --gray-300: 206 211 208;\\n --gray-400: 159 163 160;\\n --gray-500: 112 116 114;\\n --gray-600: 80 84 82;\\n --gray-700: 63 67 64;\\n --gray-800: 38 42 39;\\n --gray-900: 23 27 25;\\n --gray-950: 10 15 12;\\n }\"}],null,null,[\"$\",\"style\",null,{\"children\":\":root {\\n --primary: 17 120 102;\\n --primary-light: 74 222 128;\\n --primary-dark: 22 101 52;\\n --background-light: 255 255 255;\\n --background-dark: 15 17 23;\\n}\"}],[\"$\",\"main\",null,{\"className\":\"h-screen bg-background-light dark:bg-background-dark text-left\",\"children\":[\"$\",\"article\",null,{\"className\":\"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full max-w-xl px-10\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary\",\"children\":[\"Error \",404]}],[\"$\",\"h1\",null,{\"className\":\"font-semibold mb-3 text-3xl\",\"children\":\"Page not found!\"}],[\"$\",\"p\",null,{\"className\":\"text-lg text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"We couldn't find the page.\"}],[\"$\",\"$L6\",null,{}]]}]}]}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n"])self.**next_f.push([1,"8:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\n9:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\na:[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}]\nb:[\"$\",\"$1\",\"c\",{\"children\":[\"$Lf\",null,[\"$\",\"$L10\",null,{\"children\":[\"$L11\",[\"$\",\"$L12\",null,{\"promise\":\"$@13\"}]]}]]}]\nc:[\"$\",\"$1\",\"h\",{\"children\":[null,[[\"$\",\"$L14\",null,{\"children\":\"$L15\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]],[\"$\",\"$L16\",null,{\"children\":[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$17\",null,{\"fallback\":null,\"children\":\"$L18\"}]}]}]]}]\n"])self.**next_f.push([1,"15:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n11:null\n"])self.**next_f.push([1,"13:{\"metadata\":[],\"error\":null,\"digest\":\"$undefined\"}\n"])self.__next_f.push([1,"18:\"$13:metadata\"\n"])self.__next_f.push([1,"19:I[5947,[\"3473\",\"static/chunks/891cff7f-2c9e6e8550c9a551.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"3558\",\"static/chunks/3558-fddc172a72b9afd8.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7841\",\"static/chunks/7841-00fecd9e8f1bb70f.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"4436\",\"static/chunks/4436-d0ce83d5e11f11de.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"7892\",\"static/chunks/7892-e62a7cf6ffb2ccf4.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5907\",\"static/chunks/5907-97ae5c2afd50f738.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\",\"5715\",\"static/chunks/app/%255Fsites/%5Bsubdomain%5D/(login)/%255Fhidden-login-pages/login/page-c53c4924f574dfeb.js?dpl=dpl_3oJjUFqmqAZsijDcgx3P6E6ZvVp4\"],\"LoginComponent\",1]\n"])self.__next_f.push([1,"f:[\"$\",\"$L19\",null,{\"docsConfig\":{\"name\":\"Goldsky\",\"logo\":{\"light\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/light.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=33b340d73ed215a5536d400e3d607cb3\",\"dark\":\"https://mintcdn.com/goldsky-38/djvhUUMseW21frQF/images/logo/dark.svg?fit=max\u0026auto=format\u0026n=djvhUUMseW21frQF\u0026q=85\u0026s=eddd3726aa53fad9b3361c401056302e\"},\"favicon\":\"/images/favicon.svg\",\"colors\":{\"primary\":\"#FFAD33\",\"light\":\"#FFBF60\",\"dark\":\"#FFAD33\"},\"navigation\":[]},\"favicons\":{\"icons\":[{\"rel\":\"apple-touch-icon\",\"sizes\":\"180x180\",\"type\":\"image/png\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/apple-touch-icon.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=09996433c8201e0a5eb43f8d8b4f4c9c\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=522a08e0ddb5a6acc9fcf33696751827\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=6040c9e88bce5763db673bc2291eaa3e\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: light)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=3b89f06df79a32c9f08298c5058fc14f\"},{\"rel\":\"icon\",\"sizes\":\"16x16\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-16x16.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=d37aca0145322b46c2444222e2723b4a\"},{\"rel\":\"icon\",\"sizes\":\"32x32\",\"type\":\"image/png\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon-32x32.png?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=07bf28f7a5f633613713acfe9f912881\"},{\"rel\":\"shortcut icon\",\"type\":\"image/x-icon\",\"media\":\"(prefers-color-scheme: dark)\",\"href\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon-dark/favicon.ico?fit=max\u0026n=2G5ZPIp8LG_P-NaW\u0026s=1ba2820bf5f50836f071b29e31c5c2df\"}],\"browserconfig\":\"https://mintcdn.com/goldsky-38/2G5ZPIp8LG_P-NaW/_generated/favicon/browserconfig.xml?n=2G5ZPIp8LG_P-NaW\u0026s=d8b37c4f486be14a74e54063080ca70f\"},\"subdomain\":\"goldsky-38\"}]\n"])
 
 ---
 
@@ -7859,74 +6958,68 @@ goldsky secret create --name A_POSTGRESQL_SECRET --value '{
 
 This definition gets real-time edge stream of decoded logs straight into a postgres table named `eth_logs` in the `goldsky` schema, with the secret `A_POSTGRESQL_SECRET` created above.
 
+```yaml theme={null}
+name: ethereum-decoded-logs-to-postgres
+apiVersion: 3
+sources:
+my_ethereum_decoded_logs:
+dataset_name: ethereum.decoded_logs
+version: 1.0.0
+type: dataset
+start_at: latest
+transforms:
+logs:
+sql: |
+SELECT
+id,
+address,
+event_signature,
+event_params,
+raw_log.block_number as block_number,
+raw_log.block_hash as block_hash,
+raw_log.transaction_hash as transaction_hash
+FROM
+my_ethereum_decoded_logs
+primary_key: id
+sinks:
+my_postgres_sink:
+type: postgres
+table: eth_logs
+schema: goldsky
+secret_name: A_POSTGRESQL_SECRET
+from: logs
+```
 
+```yaml theme={null}
+sources:
+- name: ethereum.decoded_logs
+version: 1.0.0
+type: dataset
+startAt: latest
 
- ```yaml theme={null}
- name: ethereum-decoded-logs-to-postgres
- apiVersion: 3
- sources:
- my_ethereum_decoded_logs:
- dataset_name: ethereum.decoded_logs
- version: 1.0.0
- type: dataset
- start_at: latest
- transforms:
- logs:
- sql: |
- SELECT
- id,
- address,
- event_signature,
- event_params,
- raw_log.block_number as block_number,
- raw_log.block_hash as block_hash,
- raw_log.transaction_hash as transaction_hash
- FROM
- my_ethereum_decoded_logs
- primary_key: id
- sinks:
- my_postgres_sink:
- type: postgres
- table: eth_logs
- schema: goldsky
- secret_name: A_POSTGRESQL_SECRET
- from: logs
- ```
+transforms:
+- sql: |
+SELECT
+id,
+address,
+event_signature,
+event_params,
+raw_log.block_number as block_number,
+raw_log.block_hash as block_hash,
+raw_log.transaction_hash as transaction_hash
+FROM
+ethereum.decoded_logs
+name: logs
+type: sql
+primaryKey: id
 
-
-
- ```yaml theme={null}
- sources:
- - name: ethereum.decoded_logs
- version: 1.0.0
- type: dataset
- startAt: latest
-
- transforms:
- - sql: |
- SELECT
- id,
- address,
- event_signature,
- event_params,
- raw_log.block_number as block_number,
- raw_log.block_hash as block_hash,
- raw_log.transaction_hash as transaction_hash
- FROM
- ethereum.decoded_logs
- name: logs
- type: sql
- primaryKey: id
-
- sinks:
- - type: postgres
- table: eth_logs
- schema: goldsky
- secretName: A_POSTGRESQL_SECRET
- sourceStreamName: logs
- ```
-
-
+sinks:
+- type: postgres
+table: eth_logs
+schema: goldsky
+secretName: A_POSTGRESQL_SECRET
+sourceStreamName: logs
+```
 
 ## Tips for backfilling large datasets into PostgreSQL
 
@@ -7936,11 +7029,11 @@ Often, pipelines are bottlenecked against sinks.
 
 Here are some things to try:
 
-### Avoid indexes on tables until *after* the backfill
+### Avoid indexes on tables until _after_ the backfill
 
 Indexes increase the amount of writes needed for each insert. When doing many writes, inserts can slow down the process significantly if we're hitting resources limitations.
 
-### Bigger batch\_sizes for the inserts
+### Bigger batch_sizes for the inserts
 
 The `sink_buffer_max_rows` setting controls how many rows are batched into a single insert statement. Depending on the size of the events, you can increase this to help with write performance. `1000` is a good number to start with. The pipeline will collect data until the batch is full, or until the `sink_buffer_interval` is met.
 
@@ -7964,7 +7057,6 @@ Supabase's direct connection URLs only support IPv6 connections and will not wor
 
 1. Use `Session Pooling`. In the connection screen, scroll down to see the connection string for the session pooler. This will be included in all Supabase plans and will work for most people. However, sessions will expire, and may lead to some warning logs in your pipeline logs. These will be dealt with gracefully and no action is needed. No data will be lost due to a session disconnection.
 
-
 2. Alternatively, buy the IPv4 add-on, if session pooling doesn't fit your needs. It can lead to more persistent direct connections,
 
 ---
@@ -7979,11 +7071,11 @@ You can use subgraphs as a pipeline source, allowing you to combined the flexibi
 
 This enables a lot of powerful use-cases:
 
-* Reuse all your existing subgraph entities.
-* Increase querying speeds drastically compared to graphql-engines.
-* Flexible aggregations that weren't possible with just GraphQL.
-* Analytics on protocols through Clickhouse, and more.
-* Plug into BI tools, train AI, and export data for your users
+- Reuse all your existing subgraph entities.
+- Increase querying speeds drastically compared to graphql-engines.
+- Flexible aggregations that weren't possible with just GraphQL.
+- Analytics on protocols through Clickhouse, and more.
+- Plug into BI tools, train AI, and export data for your users
 
 Full configuration details for Subgraph Entity source is available in the [reference](/reference/config-file/pipeline#subgraph-entity) page.
 
@@ -7991,7 +7083,7 @@ Full configuration details for Subgraph Entity source is available in the [refer
 
 Subgraphs natively support time travel queries. This means every historical version of every entity is stored. To do this, each row has an `id`, `vid`, and `block_range`.
 
-When you update an entity in a subgraph mapping handler, a new row in the database is created with the same ID, but new VID and block\_range, and the old row's `block_range` is updated to have an end.
+When you update an entity in a subgraph mapping handler, a new row in the database is created with the same ID, but new VID and block_range, and the old row's `block_range` is updated to have an end.
 
 By default, pipelines **deduplicate** on `id`, to show only the latest row per `id`. In other words, historical entity state is not kept in the sink database. This saves a lot of database space and makes for easier querying, as additional deduplication logic is not needed for simple queries. In a postgres database for example, the pipeline will update existing rows with the values from the newest block.
 
@@ -7999,66 +7091,60 @@ This deduplication happens through setting the primary key in the data going thr
 
 If historical data is desired, you can set the primary key to `vid` through a transform.
 
+```yaml theme={null}
+name: qidao-optimism-subgraph-to-postgrse
+apiVersion: 3
+sources:
+subgraph_account:
+type: subgraph_entity
+name: account
+subgraphs:
+- name: qidao-optimism
+version: 1.1.0
+transforms:
+historical_accounts:
+sql: >-
+select * from subgraph_account
+primary_key: vid
+sinks:
+postgres_account:
+type: postgres
+table: historical_accounts
+schema: goldsky
+secret_name: A_POSTGRESQL_SECRET
+from: historical_accounts
+```
+
+```yaml theme={null}
+sources:
+- type: subgraphEntity
+# The deployment IDs you gathered above. If you put multiple,
+# they must have the same schema
+deployments:
+- id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
+# A name, referred to later in the `sourceStreamName` of a transformation or sink
+referenceName: account
+entity:
+# The name of the entities
+name: account
+
+transforms:
+- referenceName: historical_accounts
+type: sql
+# The `account` referenced here is the referenceName set in the source
+sql: >-
+select * from account
+primaryKey: vid
 
 
- ```yaml theme={null}
- name: qidao-optimism-subgraph-to-postgrse
- apiVersion: 3
- sources:
- subgraph_account:
- type: subgraph_entity
- name: account
- subgraphs:
- - name: qidao-optimism
- version: 1.1.0
- transforms:
- historical_accounts:
- sql: >-
- select * from subgraph_account
- primary_key: vid
- sinks:
- postgres_account:
- type: postgres
- table: historical_accounts
- schema: goldsky
- secret_name: A_POSTGRESQL_SECRET
- from: historical_accounts
- ```
-
-
-
- ```yaml theme={null}
- sources:
- - type: subgraphEntity
- # The deployment IDs you gathered above. If you put multiple,
- # they must have the same schema
- deployments:
- - id: QmPuXT3poo1T4rS6agZfT51ZZkiN3zQr6n5F2o1v9dRnnr
- # A name, referred to later in the `sourceStreamName` of a transformation or sink
- referenceName: account
- entity:
- # The name of the entities
- name: account
-
- transforms:
- - referenceName: historical_accounts
- type: sql
- # The `account` referenced here is the referenceName set in the source
- sql: >-
- select * from account
- primaryKey: vid
-
-
- sinks:
- - type: postgres
- table: historical_accounts
- schema: goldsky
- secretName: A_POSTGRESQL_SECRET
- # the `historical_accounts` is the referenceKey of the transformation made above
- sourceStreamName: historical_accounts
- ```
-
-
+sinks:
+- type: postgres
+table: historical_accounts
+schema: goldsky
+secretName: A_POSTGRESQL_SECRET
+# the `historical_accounts` is the referenceKey of the transformation made above
+sourceStreamName: historical_accounts
+```
 
 In this case, all historical versions of the entity will be retained in the pipeline sink. If there was no table, tables will be automatically created as well.
 
@@ -8068,7 +7154,7 @@ In this case, all historical versions of the entity will be retained in the pipe
 
 Use any of your own subgraphs as a pipeline source. Use `goldsky pipeline create
 
-` and select `Project Subgraph`, and push subgraph data into any of our supported sinks.
+`and select`Project Subgraph`, and push subgraph data into any of our supported sinks.
 
 ### Community subgraphs
 
@@ -8088,9 +7174,9 @@ With mirror pipelines, you can access to indexed on-chain data. Define them as a
 
 ## Use-cases
 
-* Mirror specific logs and traces from a set of contracts into a postgres database to build an API for your protocol
-* ETL data into a data warehouse to run analytics
-* Push the full blockchain into Kafka or S3 to build a datalake for ML
+- Mirror specific logs and traces from a set of contracts into a postgres database to build an API for your protocol
+- ETL data into a data warehouse to run analytics
+- Push the full blockchain into Kafka or S3 to build a datalake for ML
 
 ## Supported Chains
 
@@ -8098,12 +7184,12 @@ With mirror pipelines, you can access to indexed on-chain data. Define them as a
 
 For EVM chains we support the following 4 datasets:
 
-| Dataset | Description |
+| Dataset               | Description                                                                                                                        |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Blocks | Metadata for each block on the chain including hashes, transaction count, difficulty, and gas used. |
-| Logs | Raw logs for events emitted from contracts. Contains the contract address, data, topics, and metadata for blocks and transactions. |
-| Enriched Transactions | Transaction data including input, value, from and to address, and metadata for the block, gas, and receipts. |
-| Traces | Traces of all function calls made on the chain including metadata for block, trace, transaction, and gas. |
+| Blocks                | Metadata for each block on the chain including hashes, transaction count, difficulty, and gas used.                                |
+| Logs                  | Raw logs for events emitted from contracts. Contains the contract address, data, topics, and metadata for blocks and transactions. |
+| Enriched Transactions | Transaction data including input, value, from and to address, and metadata for the block, gas, and receipts.                       |
+| Traces                | Traces of all function calls made on the chain including metadata for block, trace, transaction, and gas.                          |
 
 ### Fast Scan
 
@@ -8111,149 +7197,149 @@ Some datasets have support for [Fast Scan](/mirror/sources/direct-indexing#backf
 
 Here's a breakdown of the EVM chains we support and their corresponding datasets:
 
-| | Blocks | Enriched Transactions | Logs | Traces | Fast Scan |
+|                      | Blocks | Enriched Transactions | Logs | Traces | Fast Scan |
 | -------------------- | ------ | --------------------- | ---- | ------ | --------- |
-| 0G | ✓ | ✓ | ✓ | ✗ | ✗ |
-| 0G Galileo Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Abstract | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Align Testnet | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Apechain | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Apechain Curtis | ✓ | ✓ | ✓ | ✓\* | ✓ |
-| Proof of Play Apex | ✓ | ✓ | ✓ | ✗ | ✓ |
-| Arbitrum Nova | ✓ | ✓ | ✓ | ✗ | ✓ |
-| Arbitrum One | ✓ | ✓ | ✓ | ✓\* | ✓ |
-| Arbitrum Sepolia | ✓ | ✓ | ✓ | ✗ | ✓ |
-| Arena-Z | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Arena-Z Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Arweave \* | ✓ | ✓ | N/A | N/A | ✗ |
-| Automata | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Automata Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Avalanche | ✓ | ✓ | ✓ | ✓ | ✓ |
-| B3 | ✓ | ✓ | ✓ | ✓ | ✗ |
-| B3 Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Base | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Base Sepolia | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Berachain Bepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Berachain Mainnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Bitcoin | ✓ | ✓ | ✗ | ✗ | ✗ |
-| Blast | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Build on Bitcoin | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Binance Smart Chain | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Camp Testnet | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Celo | ✓\* | ✓\* | ✓ | ✓ | ✓ |
-| Celo Dango Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Codex | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Corn Maizenet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Cronos zkEVM | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Cronos zkEVM Sepolia | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Cyber | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Cyber Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Degen | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Ethena Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Ethereum | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Ethereum Holesky | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Ethereum Sepolia | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Etherlink | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Etherlink Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Ethernity | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Ethernity Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Fantom | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Flare | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Flare Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Fluent Devnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Forma | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Frax | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Gnosis | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Gravity | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Ham | ✓ | ✓ | ✓ | ✓ | ✗ |
-| HashKey | ✓ | ✓ | ✓ | ✗ | ✗ |
-| HyperEVM | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Immutable Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Immutable zkEVM | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Ink | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Ink Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| IOTA EVM | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Kroma | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Linea | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Lisk | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Lisk Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Lith Testnet | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Lyra | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Lyra Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| MegaETH Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Metal | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Metal Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Mezo | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Mezo Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Midnight Devnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Mint | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Mint Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Mode | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Mode Testnet | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Monad Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Morph | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Neura Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Oasys Homeverse | ✓ | ✓ | ✓ | ✓\* | ✓ |
-| Optimism | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Optimism Sepolia | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Orderly | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Orderly Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Palm | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Palm Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Plasma | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Plasma Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Plume | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Pharos Devnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Pharos Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Polygon | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Polynomial | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Proof of Play Barret | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Proof of Play Boss | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Proof of Play Cloud | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Public Good Network | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Race | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Rari | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Redstone | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Reya | ✓ | ✓ | ✓ | ✗ | ✓ |
-| Rise Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Ruby Testnet | ✓ | ✓ | ✓ | ✗ | ✓ |
-| Scroll | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Scroll Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Sei | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Settlus | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Shape | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Shape Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Shrapnel | ✓ | ✓ | ✓ | ✗ | ✓ |
-| SNAXchain | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Soneium | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Soneium Minato | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Sonic | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Sophon | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Sophon Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Story | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Story Aeneid Testnet | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Superseed | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Superseed Sepolia | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Swan | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Swellchain | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Swellchain Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| TAC | ✓ | ✓ | ✓ | ✗ | ✗ |
-| TAC Turin Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Taiko Hoodi Testnet | ✓ | ✓ | ✓ | ✗ | ✗ |
-| TRON | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Unichain | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Unichain Sepolia | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Viction | ✓ | ✓ | ✓ | ✗ | ✗ |
-| World Chain | ✓ | ✓ | ✓ | ✗ | ✗ |
-| XPLA | ✓ | ✓ | ✓ | ✗ | ✗ |
-| XR Sepolia | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Xterio | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Zero | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Zero Sepolia | ✓ | ✓ | ✓ | ✗ | ✗ |
-| Zetachain | ✓ | ✓ | ✓ | ✓ | ✓ |
-| zkSync Era | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Zora | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Zora Sepolia | ✓ | ✓ | ✓ | ✓ | ✗ |
+| 0G                   | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| 0G Galileo Testnet   | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Abstract             | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Align Testnet        | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Apechain             | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Apechain Curtis      | ✓      | ✓                     | ✓    | ✓\*    | ✓         |
+| Proof of Play Apex   | ✓      | ✓                     | ✓    | ✗      | ✓         |
+| Arbitrum Nova        | ✓      | ✓                     | ✓    | ✗      | ✓         |
+| Arbitrum One         | ✓      | ✓                     | ✓    | ✓\*    | ✓         |
+| Arbitrum Sepolia     | ✓      | ✓                     | ✓    | ✗      | ✓         |
+| Arena-Z              | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Arena-Z Testnet      | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Arweave \*           | ✓      | ✓                     | N/A  | N/A    | ✗         |
+| Automata             | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Automata Testnet     | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Avalanche            | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| B3                   | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| B3 Sepolia           | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Base                 | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Base Sepolia         | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Berachain Bepolia    | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Berachain Mainnet    | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Bitcoin              | ✓      | ✓                     | ✗    | ✗      | ✗         |
+| Blast                | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Build on Bitcoin     | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Binance Smart Chain  | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Camp Testnet         | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Celo                 | ✓\*    | ✓\*                   | ✓    | ✓      | ✓         |
+| Celo Dango Testnet   | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Codex                | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Corn Maizenet        | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Cronos zkEVM         | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Cronos zkEVM Sepolia | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Cyber                | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Cyber Testnet        | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Degen                | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Ethena Testnet       | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Ethereum             | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Ethereum Holesky     | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Ethereum Sepolia     | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Etherlink            | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Etherlink Testnet    | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Ethernity            | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Ethernity Testnet    | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Fantom               | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Flare                | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Flare Testnet        | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Fluent Devnet        | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Forma                | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Frax                 | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Gnosis               | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Gravity              | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Ham                  | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| HashKey              | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| HyperEVM             | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Immutable Testnet    | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Immutable zkEVM      | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Ink                  | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Ink Sepolia          | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| IOTA EVM             | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Kroma                | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Linea                | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Lisk                 | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Lisk Sepolia         | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Lith Testnet         | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Lyra                 | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Lyra Testnet         | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| MegaETH Testnet      | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Metal                | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Metal Testnet        | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Mezo                 | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Mezo Testnet         | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Midnight Devnet      | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Mint                 | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Mint Sepolia         | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Mode                 | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Mode Testnet         | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Monad Testnet        | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Morph                | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Neura Testnet        | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Oasys Homeverse      | ✓      | ✓                     | ✓    | ✓\*    | ✓         |
+| Optimism             | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Optimism Sepolia     | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Orderly              | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Orderly Sepolia      | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Palm                 | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Palm Testnet         | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Plasma               | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Plasma Testnet       | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Plume                | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Pharos Devnet        | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Pharos Testnet       | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Polygon              | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Polynomial           | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Proof of Play Barret | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Proof of Play Boss   | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Proof of Play Cloud  | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Public Good Network  | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Race                 | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Rari                 | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Redstone             | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Reya                 | ✓      | ✓                     | ✓    | ✗      | ✓         |
+| Rise Sepolia         | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Ruby Testnet         | ✓      | ✓                     | ✓    | ✗      | ✓         |
+| Scroll               | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Scroll Sepolia       | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Sei                  | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Settlus              | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Shape                | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Shape Sepolia        | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Shrapnel             | ✓      | ✓                     | ✓    | ✗      | ✓         |
+| SNAXchain            | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Soneium              | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Soneium Minato       | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Sonic                | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Sophon               | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Sophon Testnet       | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Story                | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Story Aeneid Testnet | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Superseed            | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Superseed Sepolia    | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Swan                 | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Swellchain           | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Swellchain Testnet   | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| TAC                  | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| TAC Turin Testnet    | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Taiko Hoodi Testnet  | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| TRON                 | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Unichain             | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Unichain Sepolia     | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Viction              | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| World Chain          | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| XPLA                 | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| XR Sepolia           | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Xterio               | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Zero                 | ✓      | ✓                     | ✓    | ✓      | ✗         |
+| Zero Sepolia         | ✓      | ✓                     | ✓    | ✗      | ✗         |
+| Zetachain            | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| zkSync Era           | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Zora                 | ✓      | ✓                     | ✓    | ✓      | ✓         |
+| Zora Sepolia         | ✓      | ✓                     | ✓    | ✓      | ✗         |
 
 \* The Arweave dataset includes bundled/L2 data.
 
@@ -8261,96 +7347,94 @@ Here's a breakdown of the EVM chains we support and their corresponding datasets
 
 #### Beacon
 
-| Dataset | Description |
+| Dataset                                    | Description                                                                         |
 | ------------------------------------------ | ----------------------------------------------------------------------------------- |
-| Attestations | Attestations (votes) from validators for the block. |
-| Attester Slashing | Metadata for attester slashing. |
-| Blocks | Metadata for each block on the chain including hashes, deposit count, and gas used. |
-| BLS Signature to Execution Address Changes | BLS Signature to Execution Address Changes. |
-| Deposits | Metadata for deposits. |
-| Proposer Slashing | Metadata for proposer slashing. |
-| Voluntary Exits | Metadata for voluntary exits. |
-| Withdrawls | Metadata for withdrawls. |
+| Attestations                               | Attestations (votes) from validators for the block.                                 |
+| Attester Slashing                          | Metadata for attester slashing.                                                     |
+| Blocks                                     | Metadata for each block on the chain including hashes, deposit count, and gas used. |
+| BLS Signature to Execution Address Changes | BLS Signature to Execution Address Changes.                                         |
+| Deposits                                   | Metadata for deposits.                                                              |
+| Proposer Slashing                          | Metadata for proposer slashing.                                                     |
+| Voluntary Exits                            | Metadata for voluntary exits.                                                       |
+| Withdrawls                                 | Metadata for withdrawls.                                                            |
 
 #### Fogo
 
-| Dataset | Description |
+| Dataset                        | Description                                                                                              |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | Transactions with Instructions | Enriched transaction data including instructions, accounts, balance changes, and metadata for the block. |
-| Rewards | Records of rewards distributed to validators for securing and validating the network. |
-| Blocks | Metadata for each block on the chain including hashes, transaction count, slot and leader rewards. |
+| Rewards                        | Records of rewards distributed to validators for securing and validating the network.                    |
+| Blocks                         | Metadata for each block on the chain including hashes, transaction count, slot and leader rewards.       |
 
 #### IOTA
 
-| Dataset | Description |
+| Dataset      | Description                                                                                                                                                                                                  |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Checkpoints | A checkpoint is a periodic, finalized snapshot of the blockchain's state in the Movement VM, batching transactions to ensure consistency and scalability across the network. |
-| Epochs | An epoch is a defined time period in the Movement VM during which a fixed set of validators processes transactions and manages governance, with transitions enabling validator rotation and network updates. |
-| Events | Events in the Movement VM are structured data emissions from smart contracts, recorded on the blockchain to log significant actions or state changes for external monitoring and interaction. |
-| Move Calls | Move calls are a function invocation within a Move smart contract, executed by the Movement VM to perform specific operations or state transitions on the blockchain. |
-| Transactions | A transaction in the Movement VM is a signed instruction executed by the Move smart contract to modify the blockchain's state, such as transferring assets or invoking contract functions. |
+| Checkpoints  | A checkpoint is a periodic, finalized snapshot of the blockchain's state in the Movement VM, batching transactions to ensure consistency and scalability across the network.                                 |
+| Epochs       | An epoch is a defined time period in the Movement VM during which a fixed set of validators processes transactions and manages governance, with transitions enabling validator rotation and network updates. |
+| Events       | Events in the Movement VM are structured data emissions from smart contracts, recorded on the blockchain to log significant actions or state changes for external monitoring and interaction.                |
+| Move Calls   | Move calls are a function invocation within a Move smart contract, executed by the Movement VM to perform specific operations or state transitions on the blockchain.                                        |
+| Transactions | A transaction in the Movement VM is a signed instruction executed by the Move smart contract to modify the blockchain's state, such as transferring assets or invoking contract functions.                   |
 
 #### Movement
 
-| Dataset | Description |
+| Dataset                     | Description                                                                                                |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Account Transactions | All raw onchain transactions involving account-level actions (e.g., transaction version, account address). |
-| Block Metadata Transactions | Metadata about blocks and block-level transactions (e.g., block height, epoch, version). |
-| Fungible Asset Balances | Real-time balances of fungible tokens across accounts. |
-| Current Token Data | Latest metadata for tokens - includes name, description, supply, etc. |
-| Current Token Ownerships | Snapshot of token ownership across the chain. |
-| Events | All emitted contract event logs - useful for indexing arbitrary contract behavior. |
-| Fungible Asset Activities | Track activity for fungible tokens - owner address, amount, and type. |
-| Fungible Asset Balances | Historical balance tracking for fungible assets (not just the current state). |
-| Fungible Asset Metadata | Static metadata for fungible tokens - like decimals, symbol, and name. |
-| Signatures | Cryptographic signature data from transactions, useful for validating sender authenticity. |
-| Token Activities | Detailed logs of token movements and interactions across tokens and NFTs. |
+| Account Transactions        | All raw onchain transactions involving account-level actions (e.g., transaction version, account address). |
+| Block Metadata Transactions | Metadata about blocks and block-level transactions (e.g., block height, epoch, version).                   |
+| Fungible Asset Balances     | Real-time balances of fungible tokens across accounts.                                                     |
+| Current Token Data          | Latest metadata for tokens - includes name, description, supply, etc.                                      |
+| Current Token Ownerships    | Snapshot of token ownership across the chain.                                                              |
+| Events                      | All emitted contract event logs - useful for indexing arbitrary contract behavior.                         |
+| Fungible Asset Activities   | Track activity for fungible tokens - owner address, amount, and type.                                      |
+| Fungible Asset Balances     | Historical balance tracking for fungible assets (not just the current state).                              |
+| Fungible Asset Metadata     | Static metadata for fungible tokens - like decimals, symbol, and name.                                     |
+| Signatures                  | Cryptographic signature data from transactions, useful for validating sender authenticity.                 |
+| Token Activities            | Detailed logs of token movements and interactions across tokens and NFTs.                                  |
 
 #### Solana
 
-| Dataset | Description |
+| Dataset                             | Description                                                                                                                                                      |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Edge Accounts | Contains details of all active accounts on the Solana blockchain, including balance and owner information. Live data from slot 271611201. |
-| Edge Blocks | Metadata for each block on the chain including hashes, transaction count, difficulty, and gas used. Live data from slot 271611201. |
-| Edge Instructions | Specific operations within transactions that describe the actions to be performed on the Solana blockchain. Live data from slot 271611201. |
-| Edge Rewards | Records of rewards distributed to validators for securing and validating the Solana network. Live data from slot 271611201. |
-| Edge Token Transfers | Transactions involving the movement of tokens between accounts on the Solana blockchain. Live data from slot 271611201. |
-| Edge Tokens | Information about different token types issued on the Solana blockchain, including metadata and supply details. Live data from slot 271611201. |
-| Edge Transactions | Enriched transaction data including input, value, from and to address, and metadata for the block, gas and receipt. Live data from slot 271611201. |
+| Edge Accounts                       | Contains details of all active accounts on the Solana blockchain, including balance and owner information. Live data from slot 271611201.                        |
+| Edge Blocks                         | Metadata for each block on the chain including hashes, transaction count, difficulty, and gas used. Live data from slot 271611201.                               |
+| Edge Instructions                   | Specific operations within transactions that describe the actions to be performed on the Solana blockchain. Live data from slot 271611201.                       |
+| Edge Rewards                        | Records of rewards distributed to validators for securing and validating the Solana network. Live data from slot 271611201.                                      |
+| Edge Token Transfers                | Transactions involving the movement of tokens between accounts on the Solana blockchain. Live data from slot 271611201.                                          |
+| Edge Tokens                         | Information about different token types issued on the Solana blockchain, including metadata and supply details. Live data from slot 271611201.                   |
+| Edge Transactions                   | Enriched transaction data including input, value, from and to address, and metadata for the block, gas and receipt. Live data from slot 271611201.               |
 | Edge Transactions with Instructions | Enriched transaction data including instructions, input, value, from and to address, and metadata for the block, gas and receipt. Live data from slot 316536533. |
 
-
- You can interact with these Solana datasets at no cost at
- [https://crypto.clickhouse.com/](https://crypto.clickhouse.com/)
-
+You can interact with these Solana datasets at no cost at
+[https://crypto.clickhouse.com/](https://crypto.clickhouse.com/)
 
 #### Starknet
 
-| Dataset | Description |
+| Dataset      | Description                                                                                                  |
 | ------------ | ------------------------------------------------------------------------------------------------------------ |
-| Blocks | Metadata for each block on the chain including hashes, transaction count, difficulty, and gas used. |
-| Events | Consists of raw event data from the blockchain, documenting various on-chain activities and triggers. |
-| Messages | Messaging data from the Starknet blockchain, used for L2 & L1 communication. |
+| Blocks       | Metadata for each block on the chain including hashes, transaction count, difficulty, and gas used.          |
+| Events       | Consists of raw event data from the blockchain, documenting various on-chain activities and triggers.        |
+| Messages     | Messaging data from the Starknet blockchain, used for L2 & L1 communication.                                 |
 | Transactions | Transaction data including input, value, from and to address, and metadata for the block, gas, and receipts. |
 
 #### Stellar
 
-| Dataset | Description |
+| Dataset         | Description                                                                                                                                                         |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Assets | Contains information about all assets issued on the Stellar network, including details like asset codes, issuers, and related metadata. |
-| Contract Events | Records events related to smart contract execution on the Stellar network, detailing the interactions and state changes within contracts. |
-| Effects | Captures the effects of various operations on the Stellar ledger, such as changes in balances, creation of accounts, and other state modifications. |
-| Ledgers | Provides a comprehensive record of all ledger entries, summarizing the state of the blockchain at each ledger close, including transaction sets and ledger headers. |
+| Assets          | Contains information about all assets issued on the Stellar network, including details like asset codes, issuers, and related metadata.                             |
+| Contract Events | Records events related to smart contract execution on the Stellar network, detailing the interactions and state changes within contracts.                           |
+| Effects         | Captures the effects of various operations on the Stellar ledger, such as changes in balances, creation of accounts, and other state modifications.                 |
+| Ledgers         | Provides a comprehensive record of all ledger entries, summarizing the state of the blockchain at each ledger close, including transaction sets and ledger headers. |
 
 #### Sui
 
-| Dataset | Description |
+| Dataset      | Description                                                                                                                           |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Checkpoints | Contains raw data of blockchain checkpoints capturing the state of the ledger at specific intervals. |
-| Epochs | Includes raw data detailing the various epochs in the blockchain, which mark significant periods or phases in the network's operation |
-| Events | Consists of raw event data from the blockchain, documenting various on-chain activities and triggers |
-| Packages | Contains raw data about the deployed smart contract packages on the blockchain |
-| Transactions | Transaction data including effects, events, senders, recipients, balance and object changes, and other metadata. |
+| Checkpoints  | Contains raw data of blockchain checkpoints capturing the state of the ledger at specific intervals.                                  |
+| Epochs       | Includes raw data detailing the various epochs in the blockchain, which mark significant periods or phases in the network's operation |
+| Events       | Consists of raw event data from the blockchain, documenting various on-chain activities and triggers                                  |
+| Packages     | Contains raw data about the deployed smart contract packages on the blockchain                                                        |
+| Transactions | Transaction data including effects, events, senders, recipients, balance and object changes, and other metadata.                      |
 
 ### Curated Datasets
 
@@ -8360,22 +7444,22 @@ Beyond onchain datasets, the Goldsky team continuosly curates and publishes deri
 
 You can expect every EVM chain to have the following datasets available:
 
-| Dataset | Description |
-| --------- | ------------------------------------------------- |
-| ERC\_20 | Every transfer event for all fungible tokens. |
-| ERC\_721 | Every transfer event for all non-fungible tokens. |
-| ERC\_1155 | Every transfer event for all ERC-1155 tokens. |
+| Dataset  | Description                                       |
+| -------- | ------------------------------------------------- |
+| ERC_20   | Every transfer event for all fungible tokens.     |
+| ERC_721  | Every transfer event for all non-fungible tokens. |
+| ERC_1155 | Every transfer event for all ERC-1155 tokens.     |
 
 #### Polymarket datasets
 
-| Dataset | Description |
+| Dataset              | Description                                                                                                                                                                                                                                                                                                                                        |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Global Open Interest | Keeps track of global open interest. |
-| Market Open Interest | Keeps track of open interest for each market. |
-| Order Filled | This event is emitted when a single Polymarket order is partially or completely filled. For example: a 50c YES buy for 100 YES matched against a 50c YES sell for 100 YES will emit 2 Orderi Filled events, from the perspective of the YES buy and of the YES sell. This is useful for granular tracking of trading activity and history. |
-| Orders Matched | This event is emitted when a Polymarket taker order is matched against a set of Polymarket maker(limit) orders. For example: a 50c YES buy for 200 YES matched against 2 50c YES sells for 100 YES each will emit a single Orders Matched event. Orders Matched gives a more high level view of trading activity as it only tracks taker activity. |
-| User Balances | This event keeps track of all user outcome token positions. |
-| User Positions | Keeps track of outcome token positions along with pnl specific data including average price and realized pnl. |
+| Global Open Interest | Keeps track of global open interest.                                                                                                                                                                                                                                                                                                               |
+| Market Open Interest | Keeps track of open interest for each market.                                                                                                                                                                                                                                                                                                      |
+| Order Filled         | This event is emitted when a single Polymarket order is partially or completely filled. For example: a 50c YES buy for 100 YES matched against a 50c YES sell for 100 YES will emit 2 Orderi Filled events, from the perspective of the YES buy and of the YES sell. This is useful for granular tracking of trading activity and history.         |
+| Orders Matched       | This event is emitted when a Polymarket taker order is matched against a set of Polymarket maker(limit) orders. For example: a 50c YES buy for 200 YES matched against 2 50c YES sells for 100 YES each will emit a single Orders Matched event. Orders Matched gives a more high level view of trading activity as it only tracks taker activity. |
+| User Balances        | This event keeps track of all user outcome token positions.                                                                                                                                                                                                                                                                                        |
+| User Positions       | Keeps track of outcome token positions along with pnl specific data including average price and realized pnl.                                                                                                                                                                                                                                      |
 
 Additional chains, including roll-ups, can be indexed on demand. Contact us at [sales@goldsky.com](mailto:sales@goldsky.com) to learn more.
 
@@ -8407,22 +7491,14 @@ firehose. They aren't designed to be queryable on their own - instead, you
 should plan to connect them to your existing data stack or sink that's not
 currently supported by Goldsky.
 
+AWS S3 offers unparalleled scalability and durability for storing vast
+amounts of data.
 
+AWS SQS provides reliable message queuing for decoupling distributed systems
+with ease.
 
- AWS S3 offers unparalleled scalability and durability for storing vast
- amounts of data.
-
-
-
- AWS SQS provides reliable message queuing for decoupling distributed systems
- with ease.
-
-
-
- Kafka excels in handling high-throughput, real-time data streams with strong
- fault tolerance.
-
-
+Kafka excels in handling high-throughput, real-time data streams with strong
+fault tolerance.
 
 ## What should I use?
 
@@ -8461,51 +7537,33 @@ Our team can work with many different strategies and can give guidance on how to
 
 Sinks define the destination of your data. We support two broad categories of sinks based on their functionality and applicability:
 
-* Standard Sinks: These sinks are destinations readily available for querying and analysis, such as traditional databases.
-* Channel Sinks: These sinks serve as intermediate storage layers, facilitating further integration into your data stack. Examples: Kafka, AWS S3, or AWS SQS.
+- Standard Sinks: These sinks are destinations readily available for querying and analysis, such as traditional databases.
+- Channel Sinks: These sinks serve as intermediate storage layers, facilitating further integration into your data stack. Examples: Kafka, AWS S3, or AWS SQS.
 
 ## Standard Sinks
 
 Standard Sinks are the default and most popular type of sinks for Mirror. They are optimized for immediate querying and analysis, providing a seamless experience for real-time data access and operations. These sinks are:
 
+Postgres stands out with its advanced features, extensibility, and strong
+ACID compliance.
 
+Hosted Postgres managed by Goldsky via NeonDB. Store data securely, scale infinitely and export your data if you need it.
 
- Postgres stands out with its advanced features, extensibility, and strong
- ACID compliance.
+MySQL stands out with its advanced features, extensibility, and strong
+ACID compliance.
 
+ClickHouse delivers exceptional performance for OLAP queries with its
+columnar storage format.
 
+Elasticsearch is a powerful tool for real-time search and analytics on large
+datasets.
 
- Hosted Postgres managed by Goldsky via NeonDB. Store data securely, scale infinitely and export your data if you need it.
+Timescale offers powerful time-series data management and analytics with
+PostgreSQL compatibility.
 
+Goldsky Channels are storage layers designed to absorb the Goldsky firehose and let you stream data into alternative sinks. These channels are AWS S3, AWS SQS and Kafka.
 
-
- MySQL stands out with its advanced features, extensibility, and strong
- ACID compliance.
-
-
-
- ClickHouse delivers exceptional performance for OLAP queries with its
- columnar storage format.
-
-
-
- Elasticsearch is a powerful tool for real-time search and analytics on large
- datasets.
-
-
-
- Timescale offers powerful time-series data management and analytics with
- PostgreSQL compatibility.
-
-
-
- Goldsky Channels are storage layers designed to absorb the Goldsky firehose and let you stream data into alternative sinks. These channels are AWS S3, AWS SQS and Kafka.
-
-
-
- A Webhook sink enables sending data to an external service via HTTP. This allows you to output pipeline results to your application server, to a third-party API, or a bot.
-
-
+A Webhook sink enables sending data to an external service via HTTP. This allows you to output pipeline results to your application server, to a third-party API, or a bot.
 
 ### What should I use?
 
@@ -8517,30 +7575,29 @@ The drawbacks are that they take more space. This means large, non-indexed scans
 
 1. [Postgres](/mirror/sinks/postgres) is the gold standard for application databases. It can scale almost infinitely with some management (You can use a Goldsky hosted version so you don't have to worrry about scaling), and can support very fast point-lookups with proper indexing.
 
- If you require super fast lookups by `transaction_hash` or a specific column, Postgres is a very safe choice to start with. It’s great as a backend for live data APIs.
+If you require super fast lookups by `transaction_hash` or a specific column, Postgres is a very safe choice to start with. It’s great as a backend for live data APIs.
 
- However, it can be slow for analytics queries with a lot of aggregations. For that, you may want to look for an analytical database.
+However, it can be slow for analytics queries with a lot of aggregations. For that, you may want to look for an analytical database.
 
- Great hosted solutions for Postgres include [NeonDB](https://neon.tech/), [AWS Aurora](https://aws.amazon.com/rds/aurora/), and [GCP CloudSQL](https://cloud.google.com/sql).
-2. [Elasticsearch](/mirror/sinks/elasticsearch) is a no-sql database that allows for blazing fast lookups and searches. Elasticsearch is built around super-fast non-indexed scanning, meaning it can look at every single record to find the one you want. As a result, you can do queries like fuzzy matches and wildcard lookups with millisecond latency.
+Great hosted solutions for Postgres include [NeonDB](https://neon.tech/), [AWS Aurora](https://aws.amazon.com/rds/aurora/), and [GCP CloudSQL](https://cloud.google.com/sql). 2. [Elasticsearch](/mirror/sinks/elasticsearch) is a no-sql database that allows for blazing fast lookups and searches. Elasticsearch is built around super-fast non-indexed scanning, meaning it can look at every single record to find the one you want. As a result, you can do queries like fuzzy matches and wildcard lookups with millisecond latency.
 
- Common applications include search on multiple columns, ‘instant’ auto-complete, and more.
+Common applications include search on multiple columns, ‘instant’ auto-complete, and more.
 
 #### For Analytics
 
 1. [ClickHouse](/mirror/sinks/clickhouse) is a very efficient choice for storage. You can store the entire Ethereum blockchain and pay around \$50 in storage.
 
- We recommend considering ClickHouse as an alternative to Snowflake or BigQuery - it supports many of the same use cases, and has additional features such as materialized views. We’ve seen our customers save tens of thousands of dollars using Goldsky and ClickHouse as a solution.
+We recommend considering ClickHouse as an alternative to Snowflake or BigQuery - it supports many of the same use cases, and has additional features such as materialized views. We’ve seen our customers save tens of thousands of dollars using Goldsky and ClickHouse as a solution.
 
- The pricing for managing ClickHouse is based on storage cost, then compute cost. The compute cost is constant and isn’t based on the amount of data scanned, so you can run concurrent queries without increasing cost.
+The pricing for managing ClickHouse is based on storage cost, then compute cost. The compute cost is constant and isn’t based on the amount of data scanned, so you can run concurrent queries without increasing cost.
 
 ## Channel Sinks
 
 Channel Sinks act as an extension of the default sinks, providing intermediate storage for more complex data integration scenarios. They are designed to handle high-throughput data streams and enable further processing within your data stack. Examples include:
 
-* AWS S3: A scalable object storage service.
-* AWS SQS: A fully managed message queue for microservices, distributed systems, and serverless applications.
-* Kafka: A distributed event streaming platform.
+- AWS S3: A scalable object storage service.
+- AWS SQS: A fully managed message queue for microservices, distributed systems, and serverless applications.
+- Kafka: A distributed event streaming platform.
 
 For more information on Channel Sinks and how to integrate them, visit our [Channels documentation](/mirror/extensions/channels/overview).
 
@@ -8566,10 +7623,9 @@ Depending on how you choose to [source](/mirror/sources/supported-sources) your 
 
 1. **You only care about a few contracts**
 
- Rather than fill up your database with a ton of extra data, you'd rather ***filter*** down your data to a smaller set.
-2. **The data is still a bit raw**
+Rather than fill up your database with a ton of extra data, you'd rather **_filter_** down your data to a smaller set. 2. **The data is still a bit raw**
 
- Maybe you'd rather track gwei rounded to the nearest whole number instead of wei. You're looking to ***map*** data to a different format so you don't have to run this calculation over and over again.
+Maybe you'd rather track gwei rounded to the nearest whole number instead of wei. You're looking to **_map_** data to a different format so you don't have to run this calculation over and over again.
 
 ## [External Handler Transforms](/mirror/transforms/external-handlers)
 
@@ -8577,10 +7633,10 @@ With external handler transforms, you can send data from your Mirror pipeline to
 
 Key Features of External Handler Transforms:
 
-* Send data to external services via HTTP.
-* Supports a wide variety of programming languages and external libraries.
-* Handle complex processing outside the pipeline and return results in real time.
-* Guaranteed at least once delivery and back-pressure control to ensure data integrity.
+- Send data to external services via HTTP.
+- Supports a wide variety of programming languages and external libraries.
+- Handle complex processing outside the pipeline and return results in real time.
+- Guaranteed at least once delivery and back-pressure control to ensure data integrity.
 
 ### How External Handlers work
 
@@ -8595,13 +7651,9 @@ Key Features of External Handler Transforms:
 
 # Mirror - Supported sources
 
+Mirror data from community subgraphs or from your own custom subgraphs into any sink.
 
-
- Mirror data from community subgraphs or from your own custom subgraphs into any sink.
-
-
-
- Mirror entire chains into your database for analysis, or filter/transform them to what you need.
+Mirror entire chains into your database for analysis, or filter/transform them to what you need.
 
 ---
 
@@ -8613,25 +7665,17 @@ Key Features of External Handler Transforms:
 
 Mirror streams **onchain data directly to your database**, with \
 
+You can [source](/mirror/sources/supported-sources) the data you want via
+a subgraph or direct indexing, then use
+[transforms](/mirror/transforms/transforms-overview) to further filter or
+map that data.
 
- You can [source](/mirror/sources/supported-sources) the data you want via
- a subgraph or direct indexing, then use
- [transforms](/mirror/transforms/transforms-overview) to further filter or
- map that data.
-
-
-
-
-
- Mirror can minimize your latency if you're [running an
- app](/mirror/sinks/supported-sinks#for-apis-for-apps), or maximize your
- efficiency if you're [calculating
- analytics](/mirror/sinks/supported-sinks#for-analytics). You can even send
- data to a [channel](/mirror/extensions/channels/overview) to level up your
- data team.
-
-
-
+Mirror can minimize your latency if you're [running an
+app](/mirror/sinks/supported-sinks#for-apis-for-apps), or maximize your
+efficiency if you're [calculating
+analytics](/mirror/sinks/supported-sinks#for-analytics). You can even send
+data to a [channel](/mirror/extensions/channels/overview) to level up your
+data team.
 
 Behind the scenes, Mirror automatically creates and runs data pipelines for you off a `.yaml` config file. Pipelines:
 
@@ -8652,12 +7696,10 @@ Can't find what you're looking for? Reach out to us at [support@goldsky.com](mai
 
 # Object Storage (S3/GCS/R2)
 
-
- The sub-second realtime and reorg-aware advantages of mirror are greatly
- diminished when using our S3 connector due to the constraints of file-based
- storage. If possible, it's highly recommended to use one of the other channels
- or sinks instead!
-
+The sub-second realtime and reorg-aware advantages of mirror are greatly
+diminished when using our S3 connector due to the constraints of file-based
+storage. If possible, it's highly recommended to use one of the other channels
+or sinks instead!
 
 The files are created in [Parquet](https://parquet.apache.org/) format.
 
@@ -8732,42 +7774,41 @@ Depending on how you choose to [source](/mirror/sources/supported-sources) your 
 
 1. **You only care about a few contracts**
 
- Rather than fill up your database with a ton of extra data, you'd rather ***filter*** down your data to a smaller set.
-2. **The data is still a bit raw**
+Rather than fill up your database with a ton of extra data, you'd rather **_filter_** down your data to a smaller set. 2. **The data is still a bit raw**
 
- Maybe you'd rather track gwei rounded to the nearest whole number instead of wei. You're looking to ***map*** data to a different format so you don't have to run this calculation over and over again.
+Maybe you'd rather track gwei rounded to the nearest whole number instead of wei. You're looking to **_map_** data to a different format so you don't have to run this calculation over and over again.
 
 ### The SQL Solution
 
 You can use SQL-based transforms to solve both of these challenges that normally would have you writing your own indexer or data pipeline. Instead, Goldsky can automatically run these for you using just 3 pieces of info:
 
-* `name`: **A shortname for this transform**
+- `name`: **A shortname for this transform**
 
- You can refer to this from sinks via `from` or treat it as a table in SQL from other transforms.
-* `sql`: **The actual SQL**
+You can refer to this from sinks via `from` or treat it as a table in SQL from other transforms.
 
- To filter your data, use a `WHERE` clause, e.g. `WHERE liquidity > 1000`.
+- `sql`: **The actual SQL**
 
- To map your data, use an `AS` clause combined with `SELECT`, e.g. `SELECT wei / 1000000000 AS gwei`.
-* `primary_key`: **A unique ID**
+To filter your data, use a `WHERE` clause, e.g. `WHERE liquidity > 1000`.
 
- This should be unique, but you can also use this to intentionally de-duplicate data - the latest row with the same ID will replace all the others.
+To map your data, use an `AS` clause combined with `SELECT`, e.g. `SELECT wei / 1000000000 AS gwei`.
+
+- `primary_key`: **A unique ID**
+
+This should be unique, but you can also use this to intentionally de-duplicate data - the latest row with the same ID will replace all the others.
 
 Combine them together into your [config](/reference/config-file/pipeline):
 
+````yaml theme={null}
+transforms:
+negative_fpmm_scaled_liquidity_parameter:
+sql: SELECT id FROM polymarket.fixed_product_market_maker WHERE scaled_liquidity_parameter
 
 
- ```yaml theme={null}
- transforms:
- negative_fpmm_scaled_liquidity_parameter:
- sql: SELECT id FROM polymarket.fixed_product_market_maker WHERE scaled_liquidity_parameter
-
-
- ```yaml theme={null}
- transforms:
- - referenceName: negative_fpmm_scaled_liquidity_parameter
- type: sql
- sql: SELECT id FROM polygon.fixed_product_market_maker WHERE scaled_liquidity_parameter
+```yaml theme={null}
+transforms:
+- referenceName: negative_fpmm_scaled_liquidity_parameter
+type: sql
+sql: SELECT id FROM polygon.fixed_product_market_maker WHERE scaled_liquidity_parameter
 
 
 That's it. You can now filter and map data to exactly what you need.
@@ -8785,30 +7826,30 @@ That's it. You can now filter and map data to exactly what you need.
 -
 -
 - (function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c
- document.addEventListener('DOMContentLoaded', () => {
- const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
- link.rel = 'stylesheet';
- });
+document.addEventListener('DOMContentLoaded', () => {
+const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
+link.rel = 'stylesheet';
+});
 
 
 ((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","isDarkMode","system",null,["dark","light","true","false","system"],{"true":"dark","false":"light","dark":"dark","light":"light"},true,true):root {
- --primary: 255 173 51;
- --primary-light: 255 191 96;
- --primary-dark: 255 173 51;
- --background-light: 255 255 255;
- --background-dark: 14 13 13;
- --gray-50: 250 248 244;
- --gray-100: 245 243 239;
- --gray-200: 230 227 224;
- --gray-300: 213 211 207;
- --gray-400: 166 163 160;
- --gray-500: 119 117 113;
- --gray-600: 87 85 81;
- --gray-700: 70 67 64;
- --gray-800: 45 42 38;
- --gray-900: 30 28 24;
- --gray-950: 17 15 11;
- }
+--primary: 255 173 51;
+--primary-light: 255 191 96;
+--primary-dark: 255 173 51;
+--background-light: 255 255 255;
+--background-dark: 14 13 13;
+--gray-50: 250 248 244;
+--gray-100: 245 243 239;
+--gray-200: 230 227 224;
+--gray-300: 213 211 207;
+--gray-400: 166 163 160;
+--gray-500: 119 117 113;
+--gray-600: 87 85 81;
+--gray-700: 70 67 64;
+--gray-800: 45 42 38;
+--gray-900: 30 28 24;
+--gray-950: 17 15 11;
+}
 
 
 Access Restricted
@@ -8837,30 +7878,30 @@ Access
 -
 -
 - (function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c
- document.addEventListener('DOMContentLoaded', () => {
- const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
- link.rel = 'stylesheet';
- });
+document.addEventListener('DOMContentLoaded', () => {
+const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
+link.rel = 'stylesheet';
+});
 
 
 ((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","isDarkMode","system",null,["dark","light","true","false","system"],{"true":"dark","false":"light","dark":"dark","light":"light"},true,true):root {
- --primary: 255 173 51;
- --primary-light: 255 191 96;
- --primary-dark: 255 173 51;
- --background-light: 255 255 255;
- --background-dark: 14 13 13;
- --gray-50: 250 248 244;
- --gray-100: 245 243 239;
- --gray-200: 230 227 224;
- --gray-300: 213 211 207;
- --gray-400: 166 163 160;
- --gray-500: 119 117 113;
- --gray-600: 87 85 81;
- --gray-700: 70 67 64;
- --gray-800: 45 42 38;
- --gray-900: 30 28 24;
- --gray-950: 17 15 11;
- }
+--primary: 255 173 51;
+--primary-light: 255 191 96;
+--primary-dark: 255 173 51;
+--background-light: 255 255 255;
+--background-dark: 14 13 13;
+--gray-50: 250 248 244;
+--gray-100: 245 243 239;
+--gray-200: 230 227 224;
+--gray-300: 213 211 207;
+--gray-400: 166 163 160;
+--gray-500: 119 117 113;
+--gray-600: 87 85 81;
+--gray-700: 70 67 64;
+--gray-800: 45 42 38;
+--gray-900: 30 28 24;
+--gray-950: 17 15 11;
+}
 
 
 Access Restricted
@@ -8889,30 +7930,30 @@ Access
 -
 -
 - (function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c
- document.addEventListener('DOMContentLoaded', () => {
- const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
- link.rel = 'stylesheet';
- });
+document.addEventListener('DOMContentLoaded', () => {
+const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
+link.rel = 'stylesheet';
+});
 
 
 ((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","isDarkMode","system",null,["dark","light","true","false","system"],{"true":"dark","false":"light","dark":"dark","light":"light"},true,true):root {
- --primary: 255 173 51;
- --primary-light: 255 191 96;
- --primary-dark: 255 173 51;
- --background-light: 255 255 255;
- --background-dark: 14 13 13;
- --gray-50: 250 248 244;
- --gray-100: 245 243 239;
- --gray-200: 230 227 224;
- --gray-300: 213 211 207;
- --gray-400: 166 163 160;
- --gray-500: 119 117 113;
- --gray-600: 87 85 81;
- --gray-700: 70 67 64;
- --gray-800: 45 42 38;
- --gray-900: 30 28 24;
- --gray-950: 17 15 11;
- }
+--primary: 255 173 51;
+--primary-light: 255 191 96;
+--primary-dark: 255 173 51;
+--background-light: 255 255 255;
+--background-dark: 14 13 13;
+--gray-50: 250 248 244;
+--gray-100: 245 243 239;
+--gray-200: 230 227 224;
+--gray-300: 213 211 207;
+--gray-400: 166 163 160;
+--gray-500: 119 117 113;
+--gray-600: 87 85 81;
+--gray-700: 70 67 64;
+--gray-800: 45 42 38;
+--gray-900: 30 28 24;
+--gray-950: 17 15 11;
+}
 
 
 Access Restricted
@@ -8941,30 +7982,30 @@ Access
 -
 -
 - (function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c
- document.addEventListener('DOMContentLoaded', () => {
- const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
- link.rel = 'stylesheet';
- });
+document.addEventListener('DOMContentLoaded', () => {
+const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
+link.rel = 'stylesheet';
+});
 
 
 ((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","isDarkMode","system",null,["dark","light","true","false","system"],{"true":"dark","false":"light","dark":"dark","light":"light"},true,true):root {
- --primary: 255 173 51;
- --primary-light: 255 191 96;
- --primary-dark: 255 173 51;
- --background-light: 255 255 255;
- --background-dark: 14 13 13;
- --gray-50: 250 248 244;
- --gray-100: 245 243 239;
- --gray-200: 230 227 224;
- --gray-300: 213 211 207;
- --gray-400: 166 163 160;
- --gray-500: 119 117 113;
- --gray-600: 87 85 81;
- --gray-700: 70 67 64;
- --gray-800: 45 42 38;
- --gray-900: 30 28 24;
- --gray-950: 17 15 11;
- }
+--primary: 255 173 51;
+--primary-light: 255 191 96;
+--primary-dark: 255 173 51;
+--background-light: 255 255 255;
+--background-dark: 14 13 13;
+--gray-50: 250 248 244;
+--gray-100: 245 243 239;
+--gray-200: 230 227 224;
+--gray-300: 213 211 207;
+--gray-400: 166 163 160;
+--gray-500: 119 117 113;
+--gray-600: 87 85 81;
+--gray-700: 70 67 64;
+--gray-800: 45 42 38;
+--gray-900: 30 28 24;
+--gray-950: 17 15 11;
+}
 
 
 Access Restricted
@@ -8993,30 +8034,30 @@ Access
 -
 -
 - (function(a,b,c){try{let d=localStorage.getItem(a);if(null==d)for(let c=0;c
- document.addEventListener('DOMContentLoaded', () => {
- const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
- link.rel = 'stylesheet';
- });
+document.addEventListener('DOMContentLoaded', () => {
+const link = document.querySelector('link[href="https://d4tuoctqmanu0.cloudfront.net/katex.min.css"]');
+link.rel = 'stylesheet';
+});
 
 
 ((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","isDarkMode","system",null,["dark","light","true","false","system"],{"true":"dark","false":"light","dark":"dark","light":"light"},true,true):root {
- --primary: 255 173 51;
- --primary-light: 255 191 96;
- --primary-dark: 255 173 51;
- --background-light: 255 255 255;
- --background-dark: 14 13 13;
- --gray-50: 250 248 244;
- --gray-100: 245 243 239;
- --gray-200: 230 227 224;
- --gray-300: 213 211 207;
- --gray-400: 166 163 160;
- --gray-500: 119 117 113;
- --gray-600: 87 85 81;
- --gray-700: 70 67 64;
- --gray-800: 45 42 38;
- --gray-900: 30 28 24;
- --gray-950: 17 15 11;
- }
+--primary: 255 173 51;
+--primary-light: 255 191 96;
+--primary-dark: 255 173 51;
+--background-light: 255 255 255;
+--background-dark: 14 13 13;
+--gray-50: 250 248 244;
+--gray-100: 245 243 239;
+--gray-200: 230 227 224;
+--gray-300: 213 211 207;
+--gray-400: 166 163 160;
+--gray-500: 119 117 113;
+--gray-600: 87 85 81;
+--gray-700: 70 67 64;
+--gray-800: 45 42 38;
+--gray-900: 30 28 24;
+--gray-950: 17 15 11;
+}
 
 
 Access Restricted
@@ -9034,3 +8075,4 @@ Access
 
 ---
 
+````

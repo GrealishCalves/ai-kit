@@ -39,24 +39,24 @@ Every issue MUST have AT LEAST ONE component label. Multiple components allowed.
 
 ### Core Components (Aligned with Projects)
 
-| Label      | Description                      | Examples                                    |
-| ---------- | -------------------------------- | ------------------------------------------- |
-| `frontend` | User-facing interface            | Web app, UI components, client-side logic   |
-| `backend`  | Server-side logic                | API, services, workers, server-side logic   |
-| `contract` | Smart contracts & blockchain     | Solidity contracts, blockchain interactions |
+| Label      | Description                  | Examples                                    |
+| ---------- | ---------------------------- | ------------------------------------------- |
+| `frontend` | User-facing interface        | Web app, UI components, client-side logic   |
+| `backend`  | Server-side logic            | API, services, workers, server-side logic   |
+| `contract` | Smart contracts & blockchain | Solidity contracts, blockchain interactions |
 
 ### Additional Components (Optional)
 
-| Label            | Description             | Examples                           |
-| ---------------- | ----------------------- | ---------------------------------- |
-| `database`       | Data storage layer      | Schema, queries, migrations        |
-| `infrastructure` | Deployment & operations | CI/CD, monitoring, hosting         |
-| `api`            | API layer               | REST, GraphQL, webhooks            |
-| `documentation`  | Documentation           | README, API docs, guides           |
-| `testing`        | Testing infrastructure  | Test frameworks, CI tests          |
-| `security`       | Security-related        | Auth, permissions, encryption      |
-| `performance`    | Performance-related     | Optimization, caching              |
-| `other`          | Other components        | Specify in description             |
+| Label            | Description             | Examples                      |
+| ---------------- | ----------------------- | ----------------------------- |
+| `database`       | Data storage layer      | Schema, queries, migrations   |
+| `infrastructure` | Deployment & operations | CI/CD, monitoring, hosting    |
+| `api`            | API layer               | REST, GraphQL, webhooks       |
+| `documentation`  | Documentation           | README, API docs, guides      |
+| `testing`        | Testing infrastructure  | Test frameworks, CI tests     |
+| `security`       | Security-related        | Auth, permissions, encryption |
+| `performance`    | Performance-related     | Optimization, caching         |
+| `other`          | Other components        | Specify in description        |
 
 **Examples:**
 

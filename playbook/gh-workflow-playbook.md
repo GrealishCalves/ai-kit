@@ -7,6 +7,7 @@ A step-by-step guide for the complete software development cycle using GitHub CL
 ## Overview
 
 This playbook covers the entire development workflow:
+
 1. **Planning** - Issue creation and branch setup
 2. **Development** - Code changes and commits
 3. **Review** - PR creation and code review
@@ -87,6 +88,7 @@ git checkout -b feature/42-user-authentication
 ```
 
 **Branch Naming Conventions:**
+
 - `feature/description` - New features
 - `fix/description` - Bug fixes
 - `chore/description` - Maintenance tasks
@@ -122,6 +124,7 @@ git commit -m "docs: update API documentation"
 ```
 
 **Commit Message Format:**
+
 ```
 <type>: <subject>
 
@@ -582,6 +585,7 @@ gh release view v1.2.0 --web
 ## Best Practices
 
 ### 1. Commit Messages
+
 ```bash
 # Good
 git commit -m "feat: add user authentication
@@ -599,24 +603,28 @@ git commit -m "fix stuff"
 ```
 
 ### 2. PR Descriptions
+
 - Always include: Summary, Changes, Testing, Review Focus
 - Reference related issues with `Fixes #123` or `Refs #123`
 - Use checklists for tracking progress
 - Add screenshots for UI changes
 
 ### 3. Branch Management
+
 - Keep branches short-lived (< 1 week)
 - Delete branches after merge
 - Sync with main regularly
 - Use descriptive branch names
 
 ### 4. Code Review
+
 - Review within 24 hours
 - Test changes locally
 - Provide constructive feedback
 - Approve only when confident
 
 ### 5. CI/CD
+
 - Always wait for CI to pass
 - Fix failing tests immediately
 - Don't merge with warnings
@@ -627,6 +635,7 @@ git commit -m "fix stuff"
 ## Troubleshooting
 
 ### PR Creation Fails
+
 ```bash
 # Check authentication
 gh auth status
@@ -639,6 +648,7 @@ git remote -v
 ```
 
 ### CI Checks Failing
+
 ```bash
 # View checks
 gh pr checks
@@ -651,6 +661,7 @@ gh run rerun <run-id> --failed
 ```
 
 ### Merge Conflicts
+
 ```bash
 # Update branch with main
 gh pr update-branch <pr-number>
@@ -666,6 +677,7 @@ git push
 ```
 
 ### Can't Approve Own PR
+
 This is expected GitHub behavior. You need another team member to review and approve.
 
 ---
@@ -704,6 +716,7 @@ gh release list                      # List releases
 ## Summary
 
 This playbook provides a complete workflow for:
+
 - ✅ Feature development with issues and PRs
 - ✅ Bug fixes and hotfixes
 - ✅ Code review process
@@ -714,4 +727,3 @@ This playbook provides a complete workflow for:
 - ✅ Release management
 
 Follow these workflows to maintain a clean, efficient development process using GitHub CLI.
-

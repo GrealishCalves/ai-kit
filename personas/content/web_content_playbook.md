@@ -1156,17 +1156,14 @@ The timeout is 30 seconds. This was determined through extensive load testing ac
 **Questions to ask:**
 
 1. **Would they interrupt with "wait, what does that mean?"**
-
    - If YES → You've used undefined jargon or skipped steps
    - If NO → Good accessibility
 
 2. **Would they say "okay, but why?"**
-
    - If YES → You've stated facts without explaining reasoning
    - If NO → Good depth
 
 3. **Would their eyes glaze over halfway through?**
-
    - If YES → Too much detail, losing focus
    - If NO → Good balance
 

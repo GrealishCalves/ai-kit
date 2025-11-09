@@ -10,6 +10,7 @@
 ### ❌ Error: "parent label is not a group"
 
 **Error Message:**
+
 ```json
 {
   "message": "parent label is not a group",
@@ -29,18 +30,25 @@
 # ❌ WRONG - Create regular label then try to use as parent
 mutation {
   issueLabelCreate(input: { name: "Type", color: "#95a2b3" }) {
-    issueLabel { id }
+    issueLabel {
+      id
+    }
   }
 }
 
 # ✅ CORRECT - Create label as a group
 mutation {
-  issueLabelCreate(input: { 
-    name: "Type"
-    color: "#95a2b3"
-    isGroup: true  # Must set this!
-  }) {
-    issueLabel { id isGroup }
+  issueLabelCreate(
+    input: {
+      name: "Type"
+      color: "#95a2b3"
+      isGroup: true # Must set this!
+    }
+  ) {
+    issueLabel {
+      id
+      isGroup
+    }
   }
 }
 ```
@@ -50,6 +58,7 @@ mutation {
 ### ❌ Error: "parent label team mismatch"
 
 **Error Message:**
+
 ```json
 {
   "message": "parent label team mismatch",
@@ -68,38 +77,56 @@ mutation {
 ```graphql
 # ❌ WRONG - Parent is team-specific, child is workspace-level
 mutation CreateGroup {
-  issueLabelCreate(input: { 
-    name: "Type"
-    isGroup: true
-    teamId: "team-uuid"  # Team-specific
-  }) { issueLabel { id } }
+  issueLabelCreate(
+    input: {
+      name: "Type"
+      isGroup: true
+      teamId: "team-uuid" # Team-specific
+    }
+  ) {
+    issueLabel {
+      id
+    }
+  }
 }
 
 mutation AddChild {
   issueLabelUpdate(
-    id: "workspace-label-uuid"  # Workspace-level (team: null)
+    id: "workspace-label-uuid" # Workspace-level (team: null)
     input: { parentId: "group-uuid" }
-  ) { issueLabel { id } }
+  ) {
+    issueLabel {
+      id
+    }
+  }
 }
 
 # ✅ CORRECT - Both workspace-level
 mutation CreateGroup {
-  issueLabelCreate(input: { 
-    name: "Type"
-    isGroup: true
-    # No teamId = workspace-level
-  }) { issueLabel { id } }
+  issueLabelCreate(
+    input: {
+      name: "Type"
+      isGroup: true
+      # No teamId = workspace-level
+    }
+  ) {
+    issueLabel {
+      id
+    }
+  }
 }
 
 mutation AddChild {
-  issueLabelUpdate(
-    id: "workspace-label-uuid"
-    input: { parentId: "group-uuid" }
-  ) { issueLabel { id } }
+  issueLabelUpdate(id: "workspace-label-uuid", input: { parentId: "group-uuid" }) {
+    issueLabel {
+      id
+    }
+  }
 }
 ```
 
 **Rule:** Check label's `team` field before grouping
+
 - `team: null` = Workspace-level
 - `team: { id: "..." }` = Team-specific
 
@@ -108,6 +135,7 @@ mutation AddChild {
 ### ❌ Error: "reserved label name"
 
 **Error Message:**
+
 ```json
 {
   "message": "reserved label name",
@@ -122,6 +150,7 @@ mutation AddChild {
 **Cause:** Attempting to create a label with a reserved name
 
 **Reserved Names:**
+
 - `priority`
 - `status`
 - `state`
@@ -134,14 +163,18 @@ mutation AddChild {
 # ❌ WRONG
 mutation {
   issueLabelCreate(input: { name: "Priority", isGroup: true }) {
-    issueLabel { id }
+    issueLabel {
+      id
+    }
   }
 }
 
 # ✅ CORRECT
 mutation {
   issueLabelCreate(input: { name: "Priority Level", isGroup: true }) {
-    issueLabel { id }
+    issueLabel {
+      id
+    }
   }
 }
 ```
@@ -153,16 +186,19 @@ mutation {
 ### ❌ Error: "relatedIssueId must be a UUID"
 
 **Error Message:**
+
 ```json
 {
   "message": "Argument Validation Error",
   "extensions": {
-    "validationErrors": [{
-      "property": "relatedIssueId",
-      "constraints": {
-        "isUuid": "relatedIssueId must be a UUID"
+    "validationErrors": [
+      {
+        "property": "relatedIssueId",
+        "constraints": {
+          "isUuid": "relatedIssueId must be a UUID"
+        }
       }
-    }]
+    ]
   }
 }
 ```
@@ -174,30 +210,43 @@ mutation {
 ```graphql
 # ❌ WRONG - Using identifier
 mutation {
-  issueRelationCreate(input: {
-    type: "blocks"
-    issueId: "uuid-here"
-    relatedIssueId: "CHA-73"  # ❌ Identifier won't work
-  }) { issueRelation { id } }
+  issueRelationCreate(
+    input: {
+      type: "blocks"
+      issueId: "uuid-here"
+      relatedIssueId: "CHA-73" # ❌ Identifier won't work
+    }
+  ) {
+    issueRelation {
+      id
+    }
+  }
 }
 
 # ✅ CORRECT - Get UUID first, then use it
 query GetIssueUUID {
   issue(id: "CHA-73") {
-    id  # Returns UUID: "76aff500-be96-4ad9-a467-c5391a0e2cc4"
+    id # Returns UUID: "76aff500-be96-4ad9-a467-c5391a0e2cc4"
   }
 }
 
 mutation CreateRelation {
-  issueRelationCreate(input: {
-    type: "blocks"
-    issueId: "b42d0772-f61b-4494-bcb8-77f52b7eb6b7"
-    relatedIssueId: "76aff500-be96-4ad9-a467-c5391a0e2cc4"  # ✅ UUID
-  }) { issueRelation { id } }
+  issueRelationCreate(
+    input: {
+      type: "blocks"
+      issueId: "b42d0772-f61b-4494-bcb8-77f52b7eb6b7"
+      relatedIssueId: "76aff500-be96-4ad9-a467-c5391a0e2cc4" # ✅ UUID
+    }
+  ) {
+    issueRelation {
+      id
+    }
+  }
 }
 ```
 
 **Via Linear MCP Natural Language:**
+
 ```
 # ❌ WRONG
 Create a blocking relationship where CHA-73 blocks CHA-74
@@ -215,16 +264,19 @@ Create an issue relation where issue [uuid-73] blocks issue [uuid-74] using issu
 ### ❌ Error: Missing teamIds
 
 **Error Message:**
+
 ```json
 {
   "message": "Argument Validation Error",
   "extensions": {
-    "validationErrors": [{
-      "property": "teamIds",
-      "constraints": {
-        "arrayMinSize": "teamIds must contain at least 1 elements"
+    "validationErrors": [
+      {
+        "property": "teamIds",
+        "constraints": {
+          "arrayMinSize": "teamIds must contain at least 1 elements"
+        }
       }
-    }]
+    ]
   }
 }
 ```
@@ -236,19 +288,26 @@ Create an issue relation where issue [uuid-73] blocks issue [uuid-74] using issu
 ```graphql
 # ❌ WRONG
 mutation {
-  projectCreate(input: {
-    name: "My Project"
-    description: "Project description"
-  }) { project { id } }
+  projectCreate(input: { name: "My Project", description: "Project description" }) {
+    project {
+      id
+    }
+  }
 }
 
 # ✅ CORRECT
 mutation {
-  projectCreate(input: {
-    name: "My Project"
-    description: "Project description"
-    teamIds: ["18615646-967d-4c0f-9e37-5a63857e8964"]  # Required!
-  }) { project { id } }
+  projectCreate(
+    input: {
+      name: "My Project"
+      description: "Project description"
+      teamIds: ["18615646-967d-4c0f-9e37-5a63857e8964"] # Required!
+    }
+  ) {
+    project {
+      id
+    }
+  }
 }
 ```
 
@@ -259,16 +318,19 @@ mutation {
 ### ❌ Error: Missing projectId
 
 **Error Message:**
+
 ```json
 {
   "message": "Argument Validation Error",
   "extensions": {
-    "validationErrors": [{
-      "property": "projectId",
-      "constraints": {
-        "isNotEmpty": "projectId should not be empty"
+    "validationErrors": [
+      {
+        "property": "projectId",
+        "constraints": {
+          "isNotEmpty": "projectId should not be empty"
+        }
       }
-    }]
+    ]
   }
 }
 ```
@@ -280,19 +342,26 @@ mutation {
 ```graphql
 # ❌ WRONG
 mutation {
-  documentCreate(input: {
-    title: "My Document"
-    content: "Document content"
-  }) { document { id } }
+  documentCreate(input: { title: "My Document", content: "Document content" }) {
+    document {
+      id
+    }
+  }
 }
 
 # ✅ CORRECT
 mutation {
-  documentCreate(input: {
-    title: "My Document"
-    content: "Document content"
-    projectId: "feb5441a-8504-4fc0-a1b0-ac6146fb8b22"  # Required!
-  }) { document { id } }
+  documentCreate(
+    input: {
+      title: "My Document"
+      content: "Document content"
+      projectId: "feb5441a-8504-4fc0-a1b0-ac6146fb8b22" # Required!
+    }
+  ) {
+    document {
+      id
+    }
+  }
 }
 ```
 
@@ -307,17 +376,33 @@ When working with relationships or updates, always query the entity first to get
 ```graphql
 # Step 1: Get UUIDs
 query {
-  issue(id: "CHA-73") { id }
-  teams { nodes { id name } }
-  issueLabels { nodes { id name team { id } } }
+  issue(id: "CHA-73") {
+    id
+  }
+  teams {
+    nodes {
+      id
+      name
+    }
+  }
+  issueLabels {
+    nodes {
+      id
+      name
+      team {
+        id
+      }
+    }
+  }
 }
 
 # Step 2: Use UUIDs in mutations
 mutation {
-  issueRelationCreate(input: {
-    issueId: "uuid-from-step-1"
-    relatedIssueId: "uuid-from-step-1"
-  }) { issueRelation { id } }
+  issueRelationCreate(input: { issueId: "uuid-from-step-1", relatedIssueId: "uuid-from-step-1" }) {
+    issueRelation {
+      id
+    }
+  }
 }
 ```
 
@@ -345,21 +430,22 @@ query CheckLabelScope {
 ```graphql
 # Step 1: Create group
 mutation {
-  issueLabelCreate(input: { 
-    name: "Type"
-    isGroup: true
-  }) {
-    issueLabel { id }
+  issueLabelCreate(input: { name: "Type", isGroup: true }) {
+    issueLabel {
+      id
+    }
   }
 }
 
 # Step 2: Add children
 mutation {
-  issueLabelUpdate(
-    id: "child-label-uuid"
-    input: { parentId: "group-uuid-from-step-1" }
-  ) {
-    issueLabel { id parent { name } }
+  issueLabelUpdate(id: "child-label-uuid", input: { parentId: "group-uuid-from-step-1" }) {
+    issueLabel {
+      id
+      parent {
+        name
+      }
+    }
   }
 }
 ```
@@ -396,4 +482,3 @@ Before making a mutation, verify:
 ---
 
 **End of Common Errors Guide**
-

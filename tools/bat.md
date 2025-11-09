@@ -118,14 +118,13 @@ bat apps/goldsky/schema.graphql apps/goldsky/subgraph.yaml
 
 ### **Advantages Over cat**
 
-| Feature              | cat | bat |
-| -------------------- | --- | --- |
-| Syntax highlighting  | ❌  | ✅  |
-| Line numbers         | ❌  | ✅  |
-| Git integration      | ❌  | ✅  |
-| Automatic paging     | ❌  | ✅  |
-| Theme support        | ❌  | ✅  |
-| Non-printable chars  | ❌  | ✅  |
-| Language detection   | ❌  | ✅  |
-| File concatenation   | ✅  | ✅  |
-
+| Feature             | cat | bat |
+| ------------------- | --- | --- |
+| Syntax highlighting | ❌  | ✅  |
+| Line numbers        | ❌  | ✅  |
+| Git integration     | ❌  | ✅  |
+| Automatic paging    | ❌  | ✅  |
+| Theme support       | ❌  | ✅  |
+| Non-printable chars | ❌  | ✅  |
+| Language detection  | ❌  | ✅  |
+| File concatenation  | ✅  | ✅  |

@@ -190,13 +190,11 @@ Verify against playbook checklists:
 ### How Playbooks Are Created
 
 1. **Real-World Implementation**
-
    - Playbooks are extracted from actual project work
    - Patterns validated through successful outcomes
    - Anti-patterns identified through failures
 
 2. **Evidence-Based Documentation**
-
    - All patterns backed by concrete examples
    - Success metrics measured and documented
    - Impact quantified (code reduction, confidence level, etc.)
@@ -308,13 +306,11 @@ Is this configuration accessed multiple times?
 ### Adding New Playbooks
 
 1. **Validate Pattern**
-
    - Use pattern successfully 3+ times
    - Measure impact (code reduction, time savings, etc.)
    - Verify generalizability (not project-specific)
 
 2. **Document Pattern**
-
    - Follow existing playbook structure
    - Include real-world examples
    - Provide success metrics
@@ -329,14 +325,12 @@ Is this configuration accessed multiple times?
 ### Updating Existing Playbooks
 
 1. **Identify Improvement**
-
    - New anti-pattern discovered
    - Better example found
    - Success metrics refined
    - Industry best practices changed
 
 2. **Document Change**
-
    - Add to relevant section
    - Update examples
    - Refine success metrics

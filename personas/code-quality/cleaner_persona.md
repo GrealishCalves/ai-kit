@@ -327,19 +327,16 @@ Dead code detection tools (like Knip) CANNOT detect:
 **Root Causes of False Positives:**
 
 1. **Framework-Specific Patterns Not Recognized:**
-
    - File-based routing (framework-dependent patterns)
    - Framework-specific conventions (pages, routes, layouts, etc.)
    - Generated files (build artifacts, auto-generated code)
 
 2. **Re-Export Patterns Not Traced:**
-
    - `helpers.ts` → `index.ts` → `consumer.ts`
    - Tool sees no direct imports to intermediate file
    - Flags intermediate file as unused
 
 3. **Type-Only Imports Missed:**
-
    - `import type { TypeName } from './types'`
    - File used only for types
    - Flagged as unused by static analysis

@@ -52,13 +52,7 @@ GraphQL queries follow this pattern:
 
 ```graphql
 query QueryName($variable: Type!) {
-  entityName(
-    where: { field: value }
-    orderBy: fieldName
-    orderDirection: asc
-    first: 10
-    skip: 0
-  ) {
+  entityName(where: { field: value }, orderBy: fieldName, orderDirection: asc, first: 10, skip: 0) {
     field1
     field2
     nestedEntity {
@@ -69,6 +63,7 @@ query QueryName($variable: Type!) {
 ```
 
 **Key Components:**
+
 - `where`: Filter conditions
 - `orderBy`: Sort field
 - `orderDirection`: `asc` or `desc`
@@ -366,4 +361,3 @@ curl -s -X POST "${SUBGRAPH_URL}" \
 # Use with watch for monitoring
 watch -n 10 'curl -s -X POST "${SUBGRAPH_URL}" -H "Content-Type: application/json" -d "{\"query\": \"query { entities(where: {status: ACTIVE}) { id } }\"}" | jaq ".data.entities | length"'
 ```
-

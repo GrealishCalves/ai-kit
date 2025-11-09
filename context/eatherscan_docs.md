@@ -1,17 +1,14 @@
 # Etherscan API Documentation
 
-*Scraped from docs.etherscan.io*
+_Scraped from docs.etherscan.io_
 
-*Total pages: 97*
-
+_Total pages: 97_
 
 ---
-
 
 # Get Address ERC20 Token Holding
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/addresstokenbalance
-
 
 ---
 
@@ -19,7 +16,8 @@ This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -148,14 +146,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Address ERC721 Token Holding
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/addresstokennftbalance
-
 
 ---
 
@@ -163,7 +158,8 @@ This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -275,14 +271,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Address ERC721 Token Inventory by Contract
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/addresstokennftinventory
-
 
 ---
 
@@ -290,7 +283,8 @@ This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -423,18 +417,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Native Balance for an Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/balance
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -527,14 +519,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Historical Native Balance for an Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/balancehistory
-
 
 ---
 
@@ -542,7 +531,8 @@ This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -635,18 +625,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Chainlist
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/chainlist
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -710,18 +698,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Ethereum Nodes Size
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/chainsize
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -872,18 +858,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Check Proxy Contract Verification Status
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/checkproxyverification
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -962,18 +946,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Check Source Code Verification Status
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/checkverifystatus
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -1052,20 +1034,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Average Block Size
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyavgblocksize
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -1188,20 +1168,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Average Block Time
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyavgblocktime
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -1324,20 +1302,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Average Gas Limit
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyavggaslimit
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -1460,20 +1436,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Average Gas Price
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyavggasprice
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -1600,20 +1574,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Average Network Hash Rate
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyavghashrate
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -1736,20 +1708,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Average Network Difficulty
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyavgnetdifficulty
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -1872,20 +1842,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Block Count and Rewards
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyblkcount
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2010,20 +1978,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Block Rewards
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyblockrewards
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2146,20 +2112,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Ethereum Daily Total Gas Used
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailygasused
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2282,20 +2246,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Network Utilization
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailynetutilization
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2418,20 +2380,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily New Address Count
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailynewaddress
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2554,20 +2514,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Transaction Count
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailytx
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2690,20 +2648,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Network Transaction Fee
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailytxnfee
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2826,20 +2782,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Daily Uncle Block Count and Rewards
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/dailyuncleblkcount
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -2964,18 +2918,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_blockNumber
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethblocknumber
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3051,18 +3003,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_call
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethcall
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3172,20 +3122,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Ether Historical Price
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethdailyprice
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3308,18 +3256,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_estimateGas
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethestimategas
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3455,18 +3401,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_gasPrice
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgasprice
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3542,18 +3486,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getBlockByNumber
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgetblockbynumber
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3691,18 +3633,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getBlockTransactionCountByNumber
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgetblocktransactioncountbynumber
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3790,18 +3730,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getCode
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgetcode
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -3901,18 +3839,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getStorageAt
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgetstorageat
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4024,18 +3960,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getTransactionByBlockNumberAndIndex
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgettransactionbyblocknumberandindex
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4156,18 +4090,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getTransactionByHash
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgettransactionbyhash
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4274,18 +4206,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getTransactionCount
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgettransactioncount
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4385,18 +4315,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getTransactionReceipt
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgettransactionreceipt
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4513,18 +4441,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_getUncleByBlockNumberAndIndex
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethgetunclebyblocknumberandindex
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4644,18 +4570,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Ether Last Price
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethprice
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4736,18 +4660,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # eth_sendRawTransaction
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethsendrawtransaction
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4838,18 +4760,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Total Supply of Ether
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethsupply
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -4925,18 +4845,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Total Supply of Ether 2
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/ethsupply2
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5017,14 +4935,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Export Address Tags
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/exportaddresstags
-
 
 ---
 
@@ -5032,7 +4947,8 @@ This is a PRO endpoint, available to the [Enterprise tier](https://etherscan.io/
 
 This endpoint is throttled to 2 calls/s and 100 calls/day
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5115,18 +5031,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Estimation of Confirmation Time
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/gasestimate
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5214,18 +5128,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Gas Oracle
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/gasoracle
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5308,18 +5220,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Contract ABI
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getabi
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5400,14 +5310,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Nametag for an Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getaddresstag
-
 
 ---
 
@@ -5415,7 +5322,8 @@ This is a PRO endpoint, available to the [Pro Plus tier](https://etherscan.io/ap
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5510,7 +5418,7 @@ Ask AI
          ],
          "reputation":0,
          "other_attributes":[
-            
+
          ],
          "lastupdatedtimestamp":1721899658
       }
@@ -5519,18 +5427,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Estimated Block Countdown by Block Number
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getblockcountdown
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5618,18 +5524,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Block Number by Timestamp
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getblocknobytime
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5729,18 +5633,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Block and Uncle Rewards by Block Number
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getblockreward
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5846,18 +5748,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Contract Creator and Creation Tx Hash
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getcontractcreation
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -5946,20 +5846,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Deposit Transactions by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getdeposittxs
 
-
 ---
 
 This endpoint is only available for the Arbitrum and Optimism stack chains.
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -6134,20 +6032,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Label Master List
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getlabelmasterlist
 
-
 ---
 
 This is a PRO endpoint, available to the [Enterprise tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -6231,18 +6127,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Event Logs by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getlogs
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -6413,18 +6307,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Event Logs by Address and Topics
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getlogs-address-topics
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -6629,18 +6521,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Event Logs by Topics
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getlogs-topics
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -6895,18 +6785,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Blocks Validated by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getminedblocks
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7029,18 +6917,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Contract Source Code
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getsourcecode
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7140,18 +7026,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Check Contract Execution Status
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getstatus
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7240,18 +7124,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Check Transaction Receipt Status
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/gettxreceiptstatus
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7339,18 +7221,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Withdrawal Transactions by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/getwithdrawaltxs
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7476,18 +7356,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Total Nodes Count
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/nodecount
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7566,18 +7444,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get ERC1155 Token Transfers by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/token1155tx
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7754,18 +7630,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get ERC20-Token Account Balance for TokenContractAddress
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokenbalance
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -7877,14 +7751,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Historical ERC20-Token Account Balance by BlockNo
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokenbalancehistory
-
 
 ---
 
@@ -7892,7 +7763,8 @@ This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8004,20 +7876,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Token Holder Count by Contract Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokenholdercount
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8105,20 +7975,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Token Holder List by Contract Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokenholderlist
 
-
 ---
 
 This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8239,14 +8107,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Token Info by ContractAddress
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokeninfo
-
 
 ---
 
@@ -8254,7 +8119,8 @@ This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8369,18 +8235,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get ERC721 Token Transfers by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokennfttx
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8557,18 +8421,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get ERC20-Token TotalSupply by ContractAddress
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokensupply
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8656,14 +8518,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Historical ERC20-Token TotalSupply by ContractAddress & BlockNo
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokensupplyhistory
-
 
 ---
 
@@ -8671,7 +8530,8 @@ This is a PRO endpoint, available to any [paid tier](https://etherscan.io/apis)
 
 This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8771,18 +8631,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get ERC20 Token Transfers by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/tokentx
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -8959,14 +8817,11 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Top Token Holders
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/toptokenholders
-
 
 ---
 
@@ -8976,7 +8831,8 @@ This [historical endpoint](/resources/rate-limits) is throttled to 2 calls/s
 
 HyperEVM (999) is not supported yet
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -9089,18 +8945,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Normal Transactions By Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/txlist
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -9264,18 +9118,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Internal Transactions by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/txlistinternal
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -9433,18 +9285,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Internal Transactions by Block Range
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/txlistinternal-blockrange
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -9590,18 +9440,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Internal Transactions by Transaction Hash
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/txlistinternal-txhash
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -9695,20 +9543,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Plasma Deposits by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/txnbridge
 
-
 ---
 
 This endpoint is only available for Polygon (137), Xdai (100) and BTTC(199)
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -9833,18 +9679,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Get Beacon Chain Withdrawals by Address
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/txsbeaconwithdrawal
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -9994,18 +9838,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Verify Proxy Contract
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/verifyproxycontract
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -10098,18 +9940,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Verify Solidity Source Code
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/verifysourcecode
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -10294,20 +10134,18 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Verify Stylus Source Code
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/verifystylus
 
-
 ---
 
 This endpoint is only available for the Arbitrum stack chains.
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -10446,18 +10284,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Verify Vyper Source Code
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/verifyvyper
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -10606,18 +10442,16 @@ Ask AI
 
 ```
 
-
 ---
-
 
 # Verify Source Code on zkSync
 
 **Source:** https://docs.etherscan.io/api-reference/endpoint/verifyzksyncsourcecode
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#query-parameters)
@@ -10763,18 +10597,16 @@ default:"zksync"
 
 zkSync compiler mode to process the build artifacts.
 
-
 ---
-
 
 # Common Verification Errors
 
 **Source:** https://docs.etherscan.io/contract-verification/common-verification-errors
 
-
 ---
 
-### 
+###
+
 [​
 
 ](#contract-doesn%E2%80%99t-match)
@@ -10786,7 +10618,8 @@ The submitted source code does not match the contract code deployed on chain.
 Common causes include using a different compiler version or enabling optimisation runs.
 For an exact match to be found, both **source code** and **compiler settings** specified have to exactly match the deployment conditions, for the same bytecode to be reproduced.
 
-### 
+###
+
 [​
 
 ](#solidity-compilation-error)
@@ -10797,7 +10630,8 @@ Solidity Compilation Error
 A compilation issue occured due to syntax errors in your Solidity source code.
 Consider debugging your contract with any compiler such as [**Remix**](https://remix.ethereum.org/) or [**Hardhat**](https://hardhat.org/) and reference the error from Solidity’s [**official documentation**](https://docs.soliditylang.org).
 
-### 
+###
+
 [​
 
 ](#contract-not-deployed)
@@ -10808,7 +10642,8 @@ Contract Not Deployed
 The contract has not been deployed at the specific address at the specific chain.
 Check the contract address you’ve deployed, if your contract deployment transaction has succeeded or if the [**chainId**](/supported-chains) specified is correct.
 
-### 
+###
+
 [​
 
 ](#missing-or-invalid-library-names)
@@ -10819,7 +10654,8 @@ Missing or Invalid Library Names
 A [**library**](https://solidity-by-example.org/library/) was used in your contract deployment, but was not specified, misspelt or using the wrong library address.
 Double check on your library names ( **case sensitive** such as “PRBMath” ) or ensure that a matching library name and library address is provided.
 
-### 
+###
+
 [​
 
 ](#missing-contract-name)
@@ -10830,7 +10666,8 @@ Missing Contract Name
 A match was not found with the name of the contract specified when multiple files are provided.
 Ensure that you have provided the correct contract name to be matched against, and making sure you submit the **main contract** name not its dependencies.
 
-### 
+###
+
 [​
 
 ](#no-deployment-bytecode-match-found)
@@ -10841,7 +10678,8 @@ No Deployment Bytecode Match Found
 The compilation of your submitted source code does not match the deployment bytecode, ie the constructor arguments plus general initialisation code and runtime bytecode.
 Similar solution as above, do take into account constructor arguments as well below.
 
-### 
+###
+
 [​
 
 ](#missing%2Finvalid-constructor-arguments)
@@ -10852,7 +10690,8 @@ Missing/Invalid Constructor Arguments
 if your contract utilized the `constructor` keyword, you should provide it in hex format. Otherwise, leave this field empty as it is.
 You may reference your original deployment’s constructor arguments or determine it from the [**end of your compiled bytecode**](https://info.etherscan.com/contract-verification-constructor-arguments/).
 
-### 
+###
+
 [​
 
 ](#mismatched-bytecode-metadata-hash)
@@ -10864,7 +10703,8 @@ The [**metadata hash**](https://docs.soliditylang.org/en/v0.8.17/metadata.html#e
 Submit your contract verification using the solc json input format, and [**specify the settings**](https://github.com/PaulRBerg/hardhat-template/blob/f6406c4e7c9e23d5169b39fb11d528a975b678e6/hardhat.config.ts#L104) accordingly there.
 Other submission formats such as single file or multifile **do not support** changing this setting, and will use the compiler defaults.
 
-### 
+###
+
 [​
 
 ](#similar-match-found)
@@ -10875,7 +10715,8 @@ Similar Match Found
 This error indicates that the contract has already been verified via [**Similar Match**](https://info.etherscan.com/types-of-contract-verification/) to another contract.
 Kindly [**reach out**](https://info.etherscan.com/update-on-similar-match-contract-verification/) to us at this point of time to have this updated to Full Match if required.
 
-### 
+###
+
 [​
 
 ](#similar-match-api-responses)
@@ -10885,7 +10726,8 @@ Both [`getsourcecode`](/api-reference/endpoint/getsourcecode) and [`getabi`](/ap
 
 If a verified contract does not return data from these endpoints, report the issue to us.
 
-### 
+###
+
 [​
 
 ](#unsupported-solc-version)
@@ -10896,7 +10738,8 @@ Unsupported Solc Version
 This error is thrown when you specify to use an invalid or unsupported version of the Solidity Compiler ie. below `v0.4.11-nightly.2017.3.15+`.
 Do [**let us know**](/resources/contact-us) if you need to verify a contract below this supported version such as to prove you deployed the first NFT.
 
-### 
+###
+
 [​
 
 ](#source-code-already-verified)
@@ -10907,7 +10750,8 @@ Source Code Already Verified
 An [**Exact Match**](https://info.etherscan.com/types-of-contract-verification/) has been obtained, get back to having your [**coffee**](https://media.giphy.com/media/11ISwbgCxEzMyY/giphy.gif).
 If you think this might be a mistake, do check if you’ve submitted verification to the right **explorer/chain**, a contract that is verified on Etherscan is **not automatically verified** on other explorers.
 
-### 
+###
+
 [​
 
 ](#unsupported-file-import-callback)
@@ -10918,7 +10762,8 @@ Unsupported File Import Callback
 This error is thrown when contracts reference imports from external sources, such as [**OpenZeppelin**](https://docs.openzeppelin.com/) libraries or Github links.
 Consider [**flattening**](https://hardhat.org/hardhat-runner/docs/advanced/flattening#flattening-your-contracts) your source code into a single file, or use the Solidity Standard Json Input format that comes with tools such as [**Hardhat**](https://hardhat.org/hardhat-runner/docs/guides/verifying#verifying-your-contracts) to resolve these external imports.
 
-### 
+###
+
 [​
 
 ](#invalid-chainid)
@@ -10927,7 +10772,8 @@ Invalid chainId
 The chain you’ve specified does not have an Etherscan-like explorer.
 Check the chainId used against our [**supported list**](/supported-chains).
 
-### 
+###
+
 [​
 
 ](#temporary-error)
@@ -10938,22 +10784,20 @@ Temporary Error
 Something went wrong on our end, which could include downtime or [**maintenance**](https://etherscan.freshstatus.io/) windows.
 Please retry this in a while or [**ping us**](/resources/contact-us) if this continues to persist.
 
-
 ---
-
 
 # Verify with Foundry
 
 **Source:** https://docs.etherscan.io/contract-verification/verify-with-foundry
 
-
 ---
 
-You must update to  the nightly build of Foundry to use this at the moment, via `foundryup --install nightly`
+You must update to the nightly build of Foundry to use this at the moment, via `foundryup --install nightly`
 
 [**Foundry**](https://book.getfoundry.sh/) is a tool that helps take the heat off smart contract development steps, including compiling, deploying and finally submitting your contract for verification.
 
-## 
+##
+
 [​
 
 ](#deploy-and-verify)
@@ -10968,7 +10812,8 @@ forge create --broadcast --rpc-url https://rpc.sepolia.ethpandaops.io --private-
 
 ```
 
-## 
+##
+
 [​
 
 ](#verify-an-existing-contract)
@@ -10983,7 +10828,8 @@ forge verify-contract --watch --chain sepolia 0x324eca20b358b18e48f2611f7452560c
 
 ```
 
-## 
+##
+
 [​
 
 ](#migrating-from-v1)
@@ -10991,7 +10837,7 @@ Migrating from V1
 
 API keys from any other explorer (such as BscScan/Basescan/Arbiscan) have been deprecated
 
-The easiest way to migrate is to simply pass in your [**Etherscan API key**](https://etherscan.io/apidashboard) via `--etherscan-api-key` 
+The easiest way to migrate is to simply pass in your [**Etherscan API key**](https://etherscan.io/apidashboard) via `--etherscan-api-key`
 For deployment scripts, in `foundry.toml` you can shorten your settings to this, without needing a different key for each chain.
 
 Copy
@@ -11002,20 +10848,17 @@ Ask AI
 etherscan_api_key = "VZFDUWB3YGQ1YCDKTCU1D6DDSS6EWI62KV"
 
 [etherscan]
-mainnet   = { key = "${ETHERSCAN_API_KEY}" } 
+mainnet   = { key = "${ETHERSCAN_API_KEY}" }
 
 ```
 
-*This open source integration was shipped by* [*@iainnash*](https://github.com/iainnash) *and the Foundry team*
-
+_This open source integration was shipped by_ [_@iainnash_](https://github.com/iainnash) _and the Foundry team_
 
 ---
-
 
 # Verify with Hardhat
 
 **Source:** https://docs.etherscan.io/contract-verification/verify-with-hardhat
-
 
 ---
 
@@ -11024,7 +10867,8 @@ Make sure you’ve updated to [**@nomicfoundation/hardhat-verify@^2.0.14**](http
 [**Hardhat**](https://hardhat.org/) is a smart contracts development tool, perfect if you’re familiar with Javascript/Typescript.
 If you’ve yet to setup Hardhat, here’s the [**official guide**](https://hardhat.org/tutorial/creating-a-new-hardhat-project)**,** the following steps are to setup the verification plugin.
 
-## 
+##
+
 [​
 
 ](#install)
@@ -11041,7 +10885,8 @@ npm i @nomicfoundation/hardhat-verify
 
 ```
 
-## 
+##
+
 [​
 
 ](#config)
@@ -11080,7 +10925,8 @@ config: HardhatUserConfig = {
 
 ```
 
-## 
+##
+
 [​
 
 ](#deploy-and-verify)
@@ -11095,7 +10941,8 @@ npx hardhat ignition deploy ./ignition/modules/Lock.ts --network sepolia --verif
 
 ```
 
-## 
+##
+
 [​
 
 ](#verify-an-existing-contract)
@@ -11110,7 +10957,8 @@ npx hardhat verify --network sepolia 0xdCBdBAA8404554502B433106e62728B659aCfE3b
 
 ```
 
-## 
+##
+
 [​
 
 ](#custom-chains)
@@ -11147,7 +10995,8 @@ etherscan: {
 
 ```
 
-## 
+##
+
 [​
 
 ](#migrating-from-v1)
@@ -11158,22 +11007,20 @@ API keys from any other explorer (such as BscScan/Basescan/Arbiscan) have been d
 This change largely affects the `hardhat.config.ts` file — good riddance to the long `customChains` entries for each explorer.
 Update your config to a single Etherscan `apiKey` entry as per above.
 
-*This open source integration was shipped by* [***@antico5***](https://github.com/antico5) *and the Hardhat team*.
-
+_This open source integration was shipped by_ [**_@antico5_**](https://github.com/antico5) _and the Hardhat team_.
 
 ---
-
 
 # Verify with Remix
 
 **Source:** https://docs.etherscan.io/contract-verification/verify-with-remix
 
-
 ---
 
 [**Remix**](https://remix.ethereum.org/) is a no-frills, just works in your browser Solidity development tool.
 
-## 
+##
+
 [​
 
 ](#activate)
@@ -11181,7 +11028,8 @@ Activate
 
 Once you’ve written and deployed your contract, click on the **Plugin Manager** and select **Contract Verification**.
 
-## 
+##
+
 [​
 
 ](#add-an-api-key)
@@ -11190,7 +11038,8 @@ Add an API Key
 The Etherscan verification plugin requires an API key because grumpy bots yell at us on a daily basis.
 Click the “Enable” link and add your key, leave the rest as default.
 
-## 
+##
+
 [​
 
 ](#verify)
@@ -11201,16 +11050,13 @@ Now that the Etherscan checkbox is enabled, click Verify. Without this, the cont
 
 Once verified, you will see a happy green ✅.
 
-*This open source integration was shipped by* [**@manuelwedler**](https://github.com/manuelwedler) *and the Remix team*.
-
+_This open source integration was shipped by_ [**@manuelwedler**](https://github.com/manuelwedler) _and the Remix team_.
 
 ---
-
 
 # Getting an API Key
 
 **Source:** https://docs.etherscan.io/getting-an-api-key
-
 
 ---
 
@@ -11232,21 +11078,19 @@ Make your First Request
 
 Use your key to start testing requests in the [API Playground](/api-reference) within this docs 🚀.
 
-
 ---
-
 
 # Introduction
 
 **Source:** https://docs.etherscan.io/introduction
-
 
 ---
 
 Etherscan is the leading blockchain explorer, search, API, and analytics platform for Ethereum and other EVM-compatible chains.
 With Etherscan API V2, we’ve unified all 60+ [supported chains](/supported-chains) under a single account and API key system. Your app becomes multichain 🌈 simply by updating the `chainid` parameter to support BNB Smart Chain (BSC), Base, Arbitrum, HyperEVM, and more.
 
-## 
+##
+
 [​
 
 ](#start-building)
@@ -11286,21 +11130,19 @@ Name Tag Endpoint
 
 ](/api-reference/endpoint/getaddresstag)
 
-
 ---
-
 
 # Introduction
 
 **Source:** https://docs.etherscan.io/mcp-docs/introduction
-
 
 ---
 
 Etherscan’s MCP [(Model Context Protocol)](https://modelcontextprotocol.io) allows you to connect Etherscan data to your AI models such as ChatGPT, Claude.
 On top of providing reliable access, by avoiding hallucination or getting blocked via web search, it opens up the possiblity of building AI agents to do stuff for you.
 
-## 
+##
+
 [​
 
 ](#etherscan-mcp-server)
@@ -11319,14 +11161,11 @@ https://mcp.etherscan.io/mcp
 
 Reach out for [early access](mailto:apisupport@etherscan.io) to a bearer token.
 
-
 ---
-
 
 # Introduction
 
 **Source:** https://docs.etherscan.io/metadata/introduction
-
 
 ---
 
@@ -11334,14 +11173,11 @@ The Metadata CSV export is an Enterprise feature that allows dataset exports of 
 This export currently supports Ethereum only, with other chains to follow.
 [Contact us](mailto:apisupport@etherscan.io) to for more info and to book a demo.
 
-
 ---
-
 
 # Common Error Messages
 
 **Source:** https://docs.etherscan.io/resources/common-error-messages
-
 
 ---
 
@@ -11360,7 +11196,8 @@ Ask AI
 
 ```
 
-### 
+###
+
 [​
 
 ](#missing-or-unsupported-chain)
@@ -11370,7 +11207,8 @@ Missing or Unsupported Chain
 
 The chain you’ve specified is not supported by us yet. It could also be that you’ve sent multiple chains at the same time like `420,10`, you can only send **one** at a time.
 
-### 
+###
+
 [​
 
 ](#invalid-api-key)
@@ -11382,7 +11220,8 @@ This error occurs when you specify an invalid API Key.
 Ensure you are using your **Etherscan API Key**, keys from other chains like Polygonscan/Arbiscan are not valid for V2.
 Keys do take a few minutes to activate, anything longer than should be alarming.
 
-### 
+###
+
 [​
 
 ](#max-rate-limit)
@@ -11394,7 +11233,8 @@ This error occurs when you **exceed the rate limit** assigned to your specific A
 To resolve, adhere to the [rate limits](/resources/rate-limits) of your available plan.
 If you are using a script or application, **apply throttling** like a token bucket to limit the frequency of calls.
 
-### 
+###
+
 [​
 
 ](#missing-or-invalid-action)
@@ -11406,7 +11246,8 @@ This error occurs when you **do not specify**, or specify an **invalid** `module
 To resolve, **double check** your API query to use a valid module and action name.
 If you require some help getting started, try copying the sample queries provided in the API Playground and pasting them into your browser.
 
-### 
+###
+
 [​
 
 ](#endpoint-specific-errors)
@@ -11417,7 +11258,8 @@ Endpoint-specific errors
 These error messages returned are specific to certain endpoints and their **related parameters.**
 To resolve, kindly refer to the specific endpoint’s documentation, and check for the **correct format** or **values** to be specified as **parameters.**
 
-### 
+###
+
 [​
 
 ](#query-timeout)
@@ -11428,7 +11270,8 @@ Query Timeout
 This error occurs when you have sent a particularly large query that did not manage to be completed in time.
 To resolve, consider selecting a smaller date/block range, though you may [**ping us**](/resources/contact-us) if you think the issue may be performance related.
 
-### 
+###
+
 [​
 
 ](#migrate-from-v1)
@@ -11439,7 +11282,8 @@ Migrate from V1
 Please migrate to using Etherscan V2, with your Etherscan API key, here’s our [**migration guide**](/v2-migration).
 Legacy V1 endpoints from other explorers are accessible by passing in the chain ID, eg 8453 for Base.
 
-### 
+###
+
 [​
 
 ](#free-tier-throttled)
@@ -11449,20 +11293,18 @@ Free Tier Throttled
 
 During periods of very high load, Free tier requests may be throttled. For uninterrupted access, using any [**Paid tier**](https://etherscan.io/apis) will have your requests prioritized.
 
-
 ---
-
 
 # Contact Us
 
 **Source:** https://docs.etherscan.io/resources/contact-us
 
-
 ---
 
 Beware of **phishing attempts** and emails **impersonating the team** at Etherscan, we only communicate from the channels below.
 
-### 
+###
+
 [​
 
 ](#support-tickets)
@@ -11474,7 +11316,8 @@ If your issues are related to transactions, you may find helpful articles over a
 
 Reach out to us via a [**support ticket.**](https://etherscan.io/contactus)
 
-### 
+###
+
 [​
 
 ](#twitter)
@@ -11484,7 +11327,8 @@ For general updates, new feature releases and community support, keep in touch w
 
 Follow us on [**Twitter.**](https://twitter.com/etherscan)
 
-### 
+###
+
 [​
 
 ](#freshstatus)
@@ -11494,20 +11338,18 @@ Announcements for ongoing and scheduled maintenance works that may affect certai
 
 Check Etherscan’s [**network status.**](https://etherscan.freshstatus.io/)
 
-
 ---
-
 
 # PRO Endpoints
 
 **Source:** https://docs.etherscan.io/resources/pro-endpoints
 
-
 ---
 
 A complete list of PRO endpoints available with a [paid subscription.](https://etherscan.io/apis)
 
-## 
+##
+
 [​
 
 ](#account)
@@ -11515,7 +11357,8 @@ Account
 
 - [Get Historical Native Balance for an Address](/api-reference/endpoint/balancehistory)
 
-## 
+##
+
 [​
 
 ](#tokens)
@@ -11537,7 +11380,8 @@ Tokens
 
 - [Get Address ERC721 Token Inventory by Contract](/api-reference/endpoint/addresstokennftinventory)
 
-## 
+##
+
 [​
 
 ](#blocks)
@@ -11553,7 +11397,8 @@ Blocks
 
 - [Get Daily Uncle Block Count and Rewards](/api-reference/endpoint/dailyuncleblkcount)
 
-## 
+##
+
 [​
 
 ](#stats)
@@ -11573,7 +11418,8 @@ Stats
 
 - [Get Ether Historical Price](/api-reference/endpoint/ethdailyprice)
 
-## 
+##
+
 [​
 
 ](#gas-tracker)
@@ -11585,7 +11431,8 @@ Gas Tracker
 
 - [Get Daily Average Gas Price](/api-reference/endpoint/dailyavggasprice)
 
-## 
+##
+
 [​
 
 ](#nametags)
@@ -11593,14 +11440,11 @@ Nametags
 
 - [Get Nametag for an Address](/api-reference/endpoint/getaddresstag) (Pro Plus tier)
 
-
 ---
-
 
 # Rate Limits
 
 **Source:** https://docs.etherscan.io/resources/rate-limits
-
 
 ---
 
@@ -11608,14 +11452,11 @@ Historical endpoints have a rate limit of **2 calls/s** regardless of API PRO ti
 
 API TierRate LimitFree5 calls/second, up to 100,000 calls/day, may experience [usage caps](/resources/common-error-messages#free-tier-throttled) when network is busyStandard10 calls/second, up to 200,000 calls/dayAdvanced20 calls/second, up to 500,000 calls/dayProfessional30 calls/second, up to 1,000,000 calls/dayPro Plus30 calls/second, up to 1,500,000 calls/dayDedicated/Custom[**Contact Us**](mailto:apisupport@etherscan.io)
 
-
 ---
-
 
 # Supported Chains
 
 **Source:** https://docs.etherscan.io/supported-chains
-
 
 ---
 
@@ -11625,14 +11466,11 @@ Sophon Mainnet (50104) and Sophon Sepolia Testnet (531050104) will be deprecatin
 
 Chain NameChain IDEthereum Mainnet1Sepolia Testnet11155111Holesky Testnet17000Hoodi Testnet560048Abstract Mainnet2741Abstract Sepolia Testnet11124ApeChain Curtis Testnet33111ApeChain Mainnet33139Arbitrum Nova Mainnet42170Arbitrum One Mainnet42161Arbitrum Sepolia Testnet421614Avalanche C-Chain43114Avalanche Fuji Testnet43113Base Mainnet8453Base Sepolia Testnet84532Berachain Bepolia Testnet80069Berachain Mainnet80094BitTorrent Chain Mainnet199BitTorrent Chain Testnet1029Blast Mainnet81457Blast Sepolia Testnet168587773BNB Smart Chain Mainnet56BNB Smart Chain Testnet97Celo Mainnet42220Celo Sepolia Testnet11142220Fraxtal Mainnet252Fraxtal Testnet2522Gnosis100HyperEVM Mainnet999Katana Bokuto737373Katana Mainnet747474Linea Mainnet59144Linea Sepolia Testnet59141Mantle Mainnet5000Mantle Sepolia Testnet5003Memecore Testnet43521Monad Testnet10143Moonbase Alpha Testnet1287Moonbeam Mainnet1284Moonriver Mainnet1285OP Mainnet10OP Sepolia Testnet11155420opBNB Mainnet204opBNB Testnet5611Polygon Amoy Testnet80002Polygon Mainnet137Scroll Mainnet534352Scroll Sepolia Testnet534351Sei Mainnet1329Sei Testnet1328Sonic Mainnet146Sonic Testnet14601Sophon Mainnet50104Sophon Sepolia Testnet531050104Swellchain Mainnet1923Swellchain Testnet1924Taiko Hoodi167012Taiko Mainnet167000Unichain Mainnet130Unichain Sepolia Testnet1301World Mainnet480World Sepolia Testnet4801XDC Apothem Testnet51XDC Mainnet50zkSync Mainnet324zkSync Sepolia Testnet300
 
-
 ---
-
 
 # V2 Migration
 
 **Source:** https://docs.etherscan.io/v2-migration
-
 
 ---
 
@@ -11656,7 +11494,8 @@ Ask AI
 
 All existing endpoints remain compatible once you update them to the **V2 format**.
 
-### 
+###
+
 [​
 
 ](#how-to-migrate)
@@ -11725,6 +11564,5 @@ Ask AI
 https://api.etherscan.io/v2/api?chainid=137&action=balance&apikey=YourEtherscanApiKey
 
 ```
-
 
 ---

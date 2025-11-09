@@ -35,11 +35,13 @@
 ### When to Use Sub-Issues
 
 ✅ **Use sub-issues for:**
+
 - Planned work breakdown known at planning time
 - Tasks that are part of the same feature/epic
 - Work that must complete before parent can be marked "Done"
 
 ❌ **Don't use sub-issues for:**
+
 - Bugs discovered during implementation (use `related` instead)
 - Independent work that can be done separately
 - Work discovered after parent issue is created
@@ -198,13 +200,17 @@ Any manual checks needed for this sub-task.
 
 ```graphql
 mutation {
-  issueCreate(input: {
-    title: "Add OAuth provider configuration"
-    parentId: "PARENT-ISSUE-UUID"  # REQUIRED for sub-issues
-    teamId: "TEAM-ID"
-    labelIds: ["FEATURE-ID", "BACKEND-ID"]
-  }) {
-    issue { id }
+  issueCreate(
+    input: {
+      title: "Add OAuth provider configuration"
+      parentId: "PARENT-ISSUE-UUID" # REQUIRED for sub-issues
+      teamId: "TEAM-ID"
+      labelIds: ["FEATURE-ID", "BACKEND-ID"]
+    }
+  ) {
+    issue {
+      id
+    }
   }
 }
 ```
@@ -239,4 +245,3 @@ mutation {
 - [Label Schema](../labels.md) - Label selection guidance
 - [Workflow Guide](../guide.md) - Complete workflow documentation
 - [Parent Template](./feature-template.md) - Feature template for parent issues
-

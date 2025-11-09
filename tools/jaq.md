@@ -132,4 +132,3 @@ cat apps/hardhat/ignition/deployments/**/*.json | jaq -r 'select(.abi? != null) 
 - Remember to quote filters in shells to avoid globbing or variable expansion (`jaq '.items[] | .name'`)
 - Use `--raw-output` when piping into tools that expect plain text (e.g., `xargs`, `sort`)
 - For complex filters, author them in separate `.jq` files and load with `jaq -f script.jq`
-

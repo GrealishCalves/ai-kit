@@ -516,4 +516,3 @@ gh run watch                         # Watch run
 gh alias set name 'command'          # Create alias
 gh api endpoint                      # API call
 ```
-

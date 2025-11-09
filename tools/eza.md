@@ -126,4 +126,3 @@ eza -l node_modules/.pnpm | head
 - Git status missing? Make sure you run inside repo root or add `--git-repos`
 - Colors missing over SSH? Force with `--color=always` or ensure `$TERM` supports color
 - Prefer `ls` paths? Use alias `alias ls='eza'` in shell config, with fallback `\ls`
-

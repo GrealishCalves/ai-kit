@@ -610,13 +610,11 @@ const seq = 1n; // May be wrong if multiple requests
 ### Entity Definitions
 
 1. **Provider** (Lottery Creator)
-
    - Funds prize pool
    - Receives 95% of ticket revenue (net revenue)
    - Wallet: `walletClients[1]`
 
 2. **Player** (Ticket Buyer)
-
    - Pays ticket cost
    - Receives prize if wins
    - Receives refund if lottery ends without winner
@@ -992,7 +990,7 @@ it("should reject withdrawUnawardedPrize when prize already withdrawn via finali
   await viem.assertions.revertWithCustomError(
     contracts.lottery.write.withdrawUnawardedPrize([lotteryId]),
     contracts.lottery,
-    "NothingToClaim" // ← ALWAYS reverts!
+    "NothingToClaim", // ← ALWAYS reverts!
   );
 });
 
@@ -1172,7 +1170,7 @@ export async function createLotteryNative(
     ticketPrice: bigint;
     pickRange: number;
     duration: number;
-  }
+  },
 ): Promise<{ lotteryId: bigint; hash: Hash }> {
   // Direct operations only
   const tx = await contracts.lottery.write.createLottery([...args]);
@@ -1193,17 +1191,14 @@ export class LotteryHelper {
 ### Helper Function Categories
 
 1. **Setup Helpers** (`test-setup.ts`)
-
    - `setupLocalEnvironment()` - Environment initialization
    - `setupTokensForWallet()` - Token distribution
 
 2. **Lottery Helpers** (`lottery-helpers.ts`)
-
    - `createLotteryNative()` - Lottery creation
    - `buyTicketsNative()` - Ticket purchase
 
 3. **VRF Helpers** (`vrf-helpers.ts`)
-
    - `fulfillMockVRFWithWin()` - Controlled win
    - `fulfillMockVRFWithLoss()` - Controlled loss
    - `getLatestMockSequenceNumber()` - Sequence tracking

@@ -90,6 +90,7 @@ For each finding:
 ## Anti-Patterns
 
 ❌ **Don't:**
+
 - Assume code is correct without verification
 - Look for confirmations instead of flaws
 - Suggest changes without proper justification
@@ -97,6 +98,7 @@ For each finding:
 - Skip verification for "simple" changes
 
 ✅ **Do:**
+
 - Challenge own work after implementation
 - Use terminal tools for evidence-based verification
 - Only suggest changes with significant impact
@@ -180,11 +182,13 @@ Confidence: 95%
 ## Critical Self-Review
 
 ### Code Paths
+
 - [ ] All functions are used (no dead code)
 - [ ] All code paths are tested
 - [ ] All edge cases are handled
 
 ### Security
+
 - [ ] No command injection vulnerabilities
 - [ ] All logging is sanitized
 - [ ] All API keys are protected
@@ -192,30 +196,35 @@ Confidence: 95%
 - [ ] All timeouts are implemented
 
 ### Configuration
+
 - [ ] All configuration is centralized
 - [ ] No hardcoded values
 - [ ] All config functions are used
 - [ ] Dynamic configuration (environment-driven)
 
 ### Error Handling
+
 - [ ] All async operations have try/catch
 - [ ] All errors are logged properly
 - [ ] All user-facing errors are clear
 - [ ] All edge cases are handled
 
 ### Testing
+
 - [ ] All critical paths are tested
 - [ ] All fixes have automated tests
 - [ ] All tests pass
 - [ ] End-to-end workflows verified
 
 ### Documentation
+
 - [ ] All changes are documented
 - [ ] All Linear issues updated
 - [ ] All DoD sections completed
 - [ ] All evidence provided
 
 ### Confidence Level
+
 - [ ] 90%+ confidence in implementation
 - [ ] All findings addressed
 - [ ] Production-ready
@@ -234,7 +243,7 @@ Confidence: 95%
 
 ## Output Format
 
-```markdown
+````markdown
 ## File: path/to/file.ts
 
 ### Assessment: Pass / Needs Improvement / Fail
@@ -242,14 +251,17 @@ Confidence: 95%
 ### Findings
 
 #### Consistency
+
 - ✅ Naming conventions consistent
 - ❌ Error handling inconsistent (lines 45-67)
 
 #### Security
+
 - ✅ No secrets in code
 - ❌ Logging not sanitized (line 89)
 
 #### Maintainability
+
 - ✅ Self-documenting code
 - ❌ Function too long (>50 lines, line 120-180)
 
@@ -263,21 +275,24 @@ Confidence: 95%
    try {
      // operation
    } catch (error) {
-     logger.error('Operation failed', { error });
+     logger.error("Operation failed", { error });
      throw error;
    }
    ```
+````
 
 2. **Sanitize logging** (HIGH)
    - Line 89 logs API key in URL
    - Impact: Security vulnerability
    - Solution: Redact sensitive data
    ```typescript
-   logger.info('Request sent', { url: redactUrl(url) });
+   logger.info("Request sent", { url: redactUrl(url) });
    ```
 
 ### Risk Level: 6/10
 
 ### Priority: High
+
 ```
 
+```

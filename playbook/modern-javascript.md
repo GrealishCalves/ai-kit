@@ -18,18 +18,21 @@ Use modern ES6+ patterns for cleaner, more maintainable code. Avoid legacy patte
 ### 1. Variable Declarations
 
 ❌ **Don't:**
+
 ```javascript
 var x = 1;
-var name = 'test';
+var name = "test";
 ```
 
 ✅ **Do:**
+
 ```javascript
-const x = 1;           // Use const for values that don't change
-let name = 'test';     // Use let for values that change
+const x = 1; // Use const for values that don't change
+let name = "test"; // Use let for values that change
 ```
 
 **Why:**
+
 - `const` prevents accidental reassignment
 - `let` has block scope (safer than function scope)
 - `var` has confusing hoisting behavior
@@ -39,6 +42,7 @@ let name = 'test';     // Use let for values that change
 ### 2. Functions
 
 ❌ **Don't:**
+
 ```javascript
 function add(a, b) {
   return a + b;
@@ -50,18 +54,20 @@ function getName() {
 ```
 
 ✅ **Do:**
+
 ```javascript
 const add = (a, b) => a + b;
 
-const getName = () => name;  // Arrow functions for simple returns
+const getName = () => name; // Arrow functions for simple returns
 
 // Use function declarations only when you need 'this' binding
 function Component() {
-  this.name = 'Component';
+  this.name = "Component";
 }
 ```
 
 **Why:**
+
 - Arrow functions are more concise
 - Implicit return for single expressions
 - Lexical `this` binding (no surprises)
@@ -71,6 +77,7 @@ function Component() {
 ### 3. Array Iteration
 
 ❌ **Don't:**
+
 ```javascript
 // Manual for loop
 for (let i = 0; i < items.length; i++) {
@@ -93,26 +100,26 @@ for (const item of items) {
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Use forEach for side effects
-items.forEach(item => console.log(item));
+items.forEach((item) => console.log(item));
 
 // Use reduce for accumulation
 const sum = items.reduce((acc, item) => acc + item.value, 0);
 
 // Use filter for filtering
-const filtered = items.filter(item => item.active);
+const filtered = items.filter((item) => item.active);
 
 // Use map for transformation
-const names = items.map(item => item.name);
+const names = items.map((item) => item.name);
 
 // Chain methods
-const activeNames = items
-  .filter(item => item.active)
-  .map(item => item.name);
+const activeNames = items.filter((item) => item.active).map((item) => item.name);
 ```
 
 **Why:**
+
 - More declarative (what, not how)
 - Less error-prone (no index management)
 - Easier to read and understand intent
@@ -122,6 +129,7 @@ const activeNames = items
 ### 4. Optional Chaining
 
 ❌ **Don't:**
+
 ```javascript
 const name = obj && obj.user && obj.user.name;
 
@@ -131,6 +139,7 @@ if (config && config.settings && config.settings.enabled) {
 ```
 
 ✅ **Do:**
+
 ```javascript
 const name = obj?.user?.name;
 
@@ -140,6 +149,7 @@ if (config?.settings?.enabled) {
 ```
 
 **Why:**
+
 - Shorter, cleaner syntax
 - Prevents "Cannot read property of undefined" errors
 - More readable
@@ -149,20 +159,23 @@ if (config?.settings?.enabled) {
 ### 5. Nullish Coalescing
 
 ❌ **Don't:**
-```javascript
-const value = input || 'default';  // Fails for 0, false, ''
 
-const port = process.env.PORT || 3000;  // '0' would use 3000
+```javascript
+const value = input || "default"; // Fails for 0, false, ''
+
+const port = process.env.PORT || 3000; // '0' would use 3000
 ```
 
 ✅ **Do:**
-```javascript
-const value = input ?? 'default';  // Only null/undefined use default
 
-const port = process.env.PORT ?? 3000;  // '0' is valid
+```javascript
+const value = input ?? "default"; // Only null/undefined use default
+
+const port = process.env.PORT ?? 3000; // '0' is valid
 ```
 
 **Why:**
+
 - `||` treats 0, false, '' as falsy (often wrong)
 - `??` only treats null/undefined as nullish (correct)
 
@@ -171,12 +184,13 @@ const port = process.env.PORT ?? 3000;  // '0' is valid
 ### 6. Object Destructuring
 
 ❌ **Don't:**
+
 ```javascript
 function processUser(user) {
   const name = user.name;
   const email = user.email;
   const age = user.age;
-  
+
   console.log(name, email, age);
 }
 
@@ -186,6 +200,7 @@ const port = config.port;
 ```
 
 ✅ **Do:**
+
 ```javascript
 function processUser({ name, email, age }) {
   console.log(name, email, age);
@@ -201,6 +216,7 @@ const { name: userName } = user;
 ```
 
 **Why:**
+
 - Less repetitive code
 - Clear parameter expectations
 - Easy to add defaults
@@ -210,8 +226,9 @@ const { name: userName } = user;
 ### 7. Array Destructuring
 
 ❌ **Don't:**
+
 ```javascript
-const parts = path.split('/');
+const parts = path.split("/");
 const first = parts[0];
 const second = parts[1];
 
@@ -221,8 +238,9 @@ b = temp;
 ```
 
 ✅ **Do:**
+
 ```javascript
-const [first, second] = path.split('/');
+const [first, second] = path.split("/");
 
 // Swap values
 [a, b] = [b, a];
@@ -232,6 +250,7 @@ const [first, , third] = array;
 ```
 
 **Why:**
+
 - Cleaner syntax
 - No temporary variables needed
 - More expressive
@@ -241,13 +260,15 @@ const [first, , third] = array;
 ### 8. Template Literals
 
 ❌ **Don't:**
-```javascript
-const message = 'Hello, ' + name + '! You have ' + count + ' messages.';
 
-const url = baseUrl + '/api/' + version + '/users/' + userId;
+```javascript
+const message = "Hello, " + name + "! You have " + count + " messages.";
+
+const url = baseUrl + "/api/" + version + "/users/" + userId;
 ```
 
 ✅ **Do:**
+
 ```javascript
 const message = `Hello, ${name}! You have ${count} messages.`;
 
@@ -263,6 +284,7 @@ const html = `
 ```
 
 **Why:**
+
 - More readable
 - Supports multi-line strings
 - Easier to maintain
@@ -272,6 +294,7 @@ const html = `
 ### 9. Spread Operator
 
 ❌ **Don't:**
+
 ```javascript
 // Array concatenation
 const combined = arr1.concat(arr2);
@@ -287,6 +310,7 @@ fn.apply(null, args);
 ```
 
 ✅ **Do:**
+
 ```javascript
 // Array concatenation
 const combined = [...arr1, ...arr2];
@@ -304,10 +328,11 @@ fn(...args);
 const newArray = [...oldArray, newItem];
 
 // Override properties
-const updated = { ...user, name: 'New Name' };
+const updated = { ...user, name: "New Name" };
 ```
 
 **Why:**
+
 - More intuitive syntax
 - Immutable operations (safer)
 - Flexible and composable
@@ -317,27 +342,30 @@ const updated = { ...user, name: 'New Name' };
 ### 10. Default Parameters
 
 ❌ **Don't:**
+
 ```javascript
 function request(url, method, timeout) {
-  method = method || 'GET';
+  method = method || "GET";
   timeout = timeout || 30000;
   // ...
 }
 ```
 
 ✅ **Do:**
+
 ```javascript
-function request(url, method = 'GET', timeout = 30000) {
+function request(url, method = "GET", timeout = 30000) {
   // ...
 }
 
 // With destructuring
-function createServer({ host = 'localhost', port = 3000 } = {}) {
+function createServer({ host = "localhost", port = 3000 } = {}) {
   // ...
 }
 ```
 
 **Why:**
+
 - Clearer function signature
 - Handles undefined correctly
 - Self-documenting
@@ -347,22 +375,24 @@ function createServer({ host = 'localhost', port = 3000 } = {}) {
 ### 11. Object Property Shorthand
 
 ❌ **Don't:**
+
 ```javascript
-const name = 'John';
+const name = "John";
 const age = 30;
 
 const user = {
   name: name,
   age: age,
-  getName: function() {
+  getName: function () {
     return this.name;
-  }
+  },
 };
 ```
 
 ✅ **Do:**
+
 ```javascript
-const name = 'John';
+const name = "John";
 const age = 30;
 
 const user = {
@@ -370,11 +400,12 @@ const user = {
   age,
   getName() {
     return this.name;
-  }
+  },
 };
 ```
 
 **Why:**
+
 - Less repetitive
 - Cleaner syntax
 - Easier to refactor
@@ -384,24 +415,25 @@ const user = {
 ### 12. Async/Await
 
 ❌ **Don't:**
+
 ```javascript
 function fetchData() {
   return fetch(url)
-    .then(res => res.json())
-    .then(data => processData(data))
-    .catch(err => handleError(err));
+    .then((res) => res.json())
+    .then((data) => processData(data))
+    .catch((err) => handleError(err));
 }
 
 // Nested promises
-fetch(url1)
-  .then(res1 => {
-    return fetch(url2).then(res2 => {
-      return [res1, res2];
-    });
+fetch(url1).then((res1) => {
+  return fetch(url2).then((res2) => {
+    return [res1, res2];
   });
+});
 ```
 
 ✅ **Do:**
+
 ```javascript
 async function fetchData() {
   try {
@@ -414,13 +446,11 @@ async function fetchData() {
 }
 
 // Parallel requests
-const [res1, res2] = await Promise.all([
-  fetch(url1),
-  fetch(url2)
-]);
+const [res1, res2] = await Promise.all([fetch(url1), fetch(url2)]);
 ```
 
 **Why:**
+
 - Reads like synchronous code
 - Better error handling
 - Easier to debug
@@ -432,19 +462,21 @@ const [res1, res2] = await Promise.all([
 ### 1. Mutating Arrays/Objects
 
 ❌ **Don't:**
+
 ```javascript
 const addItem = (array, item) => {
-  array.push(item);  // Mutates original
+  array.push(item); // Mutates original
   return array;
 };
 
 const updateUser = (user, name) => {
-  user.name = name;  // Mutates original
+  user.name = name; // Mutates original
   return user;
 };
 ```
 
 ✅ **Do:**
+
 ```javascript
 const addItem = (array, item) => [...array, item];
 
@@ -456,6 +488,7 @@ const updateUser = (user, name) => ({ ...user, name });
 ### 2. Unnecessary Conditionals
 
 ❌ **Don't:**
+
 ```javascript
 const isActive = user.active === true ? true : false;
 
@@ -467,6 +500,7 @@ if (condition) {
 ```
 
 ✅ **Do:**
+
 ```javascript
 const isActive = user.active;
 
@@ -478,38 +512,40 @@ return condition;
 ### 3. Verbose Array Methods
 
 ❌ **Don't:**
+
 ```javascript
-const names = users.map(user => {
+const names = users.map((user) => {
   return user.name;
 });
 
-const active = users.filter(user => {
+const active = users.filter((user) => {
   return user.active === true;
 });
 ```
 
 ✅ **Do:**
-```javascript
-const names = users.map(user => user.name);
 
-const active = users.filter(user => user.active);
+```javascript
+const names = users.map((user) => user.name);
+
+const active = users.filter((user) => user.active);
 ```
 
 ---
 
 ## Quick Reference
 
-| Pattern | Old Way | Modern Way |
-|---------|---------|------------|
-| Variables | `var x = 1` | `const x = 1` or `let x = 1` |
-| Functions | `function f() {}` | `const f = () => {}` |
-| Iteration | `for (let i = 0...)` | `.map()`, `.filter()`, `.reduce()` |
-| Safe Access | `obj && obj.prop` | `obj?.prop` |
-| Defaults | `x \|\| 'default'` | `x ?? 'default'` |
-| Strings | `'Hello ' + name` | `` `Hello ${name}` `` |
-| Copy Array | `arr.slice()` | `[...arr]` |
-| Merge Objects | `Object.assign({}, a, b)` | `{ ...a, ...b }` |
-| Async | `.then().catch()` | `async/await` |
+| Pattern       | Old Way                   | Modern Way                         |
+| ------------- | ------------------------- | ---------------------------------- |
+| Variables     | `var x = 1`               | `const x = 1` or `let x = 1`       |
+| Functions     | `function f() {}`         | `const f = () => {}`               |
+| Iteration     | `for (let i = 0...)`      | `.map()`, `.filter()`, `.reduce()` |
+| Safe Access   | `obj && obj.prop`         | `obj?.prop`                        |
+| Defaults      | `x \|\| 'default'`        | `x ?? 'default'`                   |
+| Strings       | `'Hello ' + name`         | `` `Hello ${name}` ``              |
+| Copy Array    | `arr.slice()`             | `[...arr]`                         |
+| Merge Objects | `Object.assign({}, a, b)` | `{ ...a, ...b }`                   |
+| Async         | `.then().catch()`         | `async/await`                      |
 
 ---
 
@@ -533,34 +569,34 @@ Before committing code:
 ## Example: Before & After
 
 ### Before (Legacy)
+
 ```javascript
 function processUsers(users, filter) {
-  filter = filter || 'active';
+  filter = filter || "active";
   var result = [];
-  
+
   for (var i = 0; i < users.length; i++) {
     var user = users[i];
     if (user && user.status && user.status === filter) {
       result.push({
         name: user.name,
-        email: user.email
+        email: user.email,
       });
     }
   }
-  
+
   return result;
 }
 ```
 
 ### After (Modern)
+
 ```javascript
-const processUsers = (users, filter = 'active') =>
-  users
-    .filter(user => user?.status === filter)
-    .map(({ name, email }) => ({ name, email }));
+const processUsers = (users, filter = "active") => users.filter((user) => user?.status === filter).map(({ name, email }) => ({ name, email }));
 ```
 
 **Improvements:**
+
 - 12 lines → 4 lines (67% reduction)
 - No manual iteration
 - No temporary variables
@@ -582,4 +618,3 @@ const processUsers = (users, filter = 'active') =>
 8. **Destructuring** - Less repetitive code
 9. **async/await** - Cleaner async code
 10. **Immutability** - Avoid mutations, use spread/map/filter
-

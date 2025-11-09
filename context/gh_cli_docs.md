@@ -1,17 +1,14 @@
 # GitHub CLI Documentation
 
-*Scraped from cli.github.com/manual*
+_Scraped from cli.github.com/manual_
 
-*Total pages: 218*
-
+_Total pages: 218_
 
 ---
-
 
 # GitHub CLI manual
 
 **Source:** https://cli.github.com/manual/
-
 
 ---
 
@@ -19,16 +16,16 @@
 
 GitHub CLI, or `gh`, is a command-line interface to GitHub for use in your terminal or your scripts.
 
-  - 
-    
+-
+
 [Available commands](./gh)
 
-  - 
-    
+-
+
 [Usage examples](./examples)
 
-  - 
-    
+-
+
 [Community extensions](https://github.com/topics/gh-extension)
 
 ## Installation
@@ -37,16 +34,16 @@ You can find installation instructions on our [README](https://github.com/cli/cl
 
 ## Configuration
 
-  - 
-    
+-
+
 Run [`gh auth login`](./gh_auth_login) to authenticate with your GitHub account. Alternatively, `gh` will respect the `GITHUB_TOKEN` [environment variable](./gh_help_environment).
 
-  - 
-    
+-
+
 To set your preferred editor, use `gh config set editor <editor>`. Read more about [`gh config`](./gh_config) and [environment variables](./gh_help_environment).
 
-  - 
-    
+-
+
 Declare your aliases for often-used commands with [`gh alias set`](./gh_alias_set).
 
 ## GitHub Enterprise
@@ -74,22 +71,19 @@ export GH_ENTERPRISE_TOKEN=<access-token>
 
 ## Support
 
-  - 
-    
+-
+
 Ask usage questions and send us feedback in [Discussions](https://github.com/cli/cli/discussions)
 
-  - 
-    
+-
+
 Report bugs or search for existing feature requests in our [issue tracker](https://github.com/cli/cli/issues)
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh
-
 
 ---
 
@@ -99,72 +93,72 @@ Work seamlessly with GitHub from the command line.
 
 ### Core commands
 
-  - [gh auth](./gh_auth)
+- [gh auth](./gh_auth)
 
-  - [gh browse](./gh_browse)
+- [gh browse](./gh_browse)
 
-  - [gh codespace](./gh_codespace)
+- [gh codespace](./gh_codespace)
 
-  - [gh gist](./gh_gist)
+- [gh gist](./gh_gist)
 
-  - [gh issue](./gh_issue)
+- [gh issue](./gh_issue)
 
-  - [gh org](./gh_org)
+- [gh org](./gh_org)
 
-  - [gh pr](./gh_pr)
+- [gh pr](./gh_pr)
 
-  - [gh project](./gh_project)
+- [gh project](./gh_project)
 
-  - [gh release](./gh_release)
+- [gh release](./gh_release)
 
-  - [gh repo](./gh_repo)
+- [gh repo](./gh_repo)
 
 ### GitHub Actions commands
 
-  - [gh cache](./gh_cache)
+- [gh cache](./gh_cache)
 
-  - [gh run](./gh_run)
+- [gh run](./gh_run)
 
-  - [gh workflow](./gh_workflow)
+- [gh workflow](./gh_workflow)
 
 ### Additional commands
 
-  - [gh agent-task](./gh_agent-task)
+- [gh agent-task](./gh_agent-task)
 
-  - [gh alias](./gh_alias)
+- [gh alias](./gh_alias)
 
-  - [gh api](./gh_api)
+- [gh api](./gh_api)
 
-  - [gh attestation](./gh_attestation)
+- [gh attestation](./gh_attestation)
 
-  - [gh completion](./gh_completion)
+- [gh completion](./gh_completion)
 
-  - [gh config](./gh_config)
+- [gh config](./gh_config)
 
-  - [gh extension](./gh_extension)
+- [gh extension](./gh_extension)
 
-  - [gh gpg-key](./gh_gpg-key)
+- [gh gpg-key](./gh_gpg-key)
 
-  - [gh label](./gh_label)
+- [gh label](./gh_label)
 
-  - [gh preview](./gh_preview)
+- [gh preview](./gh_preview)
 
-  - [gh ruleset](./gh_ruleset)
+- [gh ruleset](./gh_ruleset)
 
-  - [gh search](./gh_search)
+- [gh search](./gh_search)
 
-  - [gh secret](./gh_secret)
+- [gh secret](./gh_secret)
 
-  - [gh ssh-key](./gh_ssh-key)
+- [gh ssh-key](./gh_ssh-key)
 
-  - [gh status](./gh_status)
+- [gh status](./gh_status)
 
-  - [gh variable](./gh_variable)
+- [gh variable](./gh_variable)
 
 ### Options
 
-		`--version`
-	Show gh version
+    	`--version`
+    Show gh version
 
 ### Examples
 
@@ -174,14 +168,11 @@ $ gh repo clone cli/cli
 $ gh pr checkout 321
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_agent-task
-
 
 ---
 
@@ -197,15 +188,15 @@ subject to change without notice.
 
 ### Available commands
 
-  - [gh agent-task create](./gh_agent-task_create)
+- [gh agent-task create](./gh_agent-task_create)
 
-  - [gh agent-task list](./gh_agent-task_list)
+- [gh agent-task list](./gh_agent-task_list)
 
-  - [gh agent-task view](./gh_agent-task_view)
+- [gh agent-task view](./gh_agent-task_view)
 
 ### ALIASES
 
-gh agent,  gh agents, gh agent-tasks
+gh agent, gh agents, gh agent-tasks
 
 ### Examples
 
@@ -225,16 +216,13 @@ $ gh agent-task view 12345abc-12345-12345-12345-12345abc
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_agent-task_create
-
 
 ---
 
@@ -249,20 +237,20 @@ gh agent-task create [<task description>] [flags]
 
 ### Options
 
-	`-b`, 
-		`--base <string>`
-	Base branch for the pull request (use default branch if not provided)
+    `-b`,
+    	`--base <string>`
+    Base branch for the pull request (use default branch if not provided)
 
-		`--follow`
-	Follow agent session logs
+    	`--follow`
+    Follow agent session logs
 
-	`-F`, 
-		`--from-file <file>`
-	Read task description from file (use "-" to read from standard input)
+    `-F`,
+    	`--from-file <file>`
+    Read task description from file (use "-" to read from standard input)
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -291,16 +279,13 @@ $ gh agent-task create "fix errors" --base branch
 
 ### See also
 
-  - [gh agent-task](./gh_agent-task)
-
+- [gh agent-task](./gh_agent-task)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_agent-task_list
-
 
 ---
 
@@ -315,26 +300,23 @@ gh agent-task list [flags]
 
 ### Options
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of agent tasks to fetch (default 30)
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of agent tasks to fetch (default 30)
 
-	`-w`, 
-		`--web`
-	Open agent tasks in the browser
+    `-w`,
+    	`--web`
+    Open agent tasks in the browser
 
 ### See also
 
-  - [gh agent-task](./gh_agent-task)
-
+- [gh agent-task](./gh_agent-task)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_agent-task_view
-
 
 ---
 
@@ -349,19 +331,19 @@ View an agent task session.
 
 ### Options
 
-		`--follow`
-	Follow agent session logs
+    	`--follow`
+    Follow agent session logs
 
-		`--log`
-	Show agent session logs
+    	`--log`
+    Show agent session logs
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
-	`-w`, 
-		`--web`
-	Open agent task in the browser
+    `-w`,
+    	`--web`
+    Open agent task in the browser
 
 ### Examples
 
@@ -384,16 +366,13 @@ $ gh agent-task view 12345 --web
 
 ### See also
 
-  - [gh agent-task](./gh_agent-task)
-
+- [gh agent-task](./gh_agent-task)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_alias
-
 
 ---
 
@@ -405,26 +384,23 @@ Run `gh help alias set` to learn more.
 
 ### Available commands
 
-  - [gh alias delete](./gh_alias_delete)
+- [gh alias delete](./gh_alias_delete)
 
-  - [gh alias import](./gh_alias_import)
+- [gh alias import](./gh_alias_import)
 
-  - [gh alias list](./gh_alias_list)
+- [gh alias list](./gh_alias_list)
 
-  - [gh alias set](./gh_alias_set)
+- [gh alias set](./gh_alias_set)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_alias_delete
-
 
 ---
 
@@ -439,21 +415,18 @@ gh alias delete {<alias> | --all} [flags]
 
 ### Options
 
-		`--all`
-	Delete all aliases
+    	`--all`
+    Delete all aliases
 
 ### See also
 
-  - [gh alias](./gh_alias)
-
+- [gh alias](./gh_alias)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_alias_import
-
 
 ---
 
@@ -487,8 +460,8 @@ another. Run `gh help alias list` to learn more.
 
 ### Options
 
-		`--clobber`
-	Overwrite existing aliases of the same name
+    	`--clobber`
+    Overwrite existing aliases of the same name
 
 ### Examples
 
@@ -502,16 +475,13 @@ $ gh alias import -
 
 ### See also
 
-  - [gh alias](./gh_alias)
-
+- [gh alias](./gh_alias)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_alias_list
-
 
 ---
 
@@ -530,16 +500,13 @@ gh alias ls
 
 ### See also
 
-  - [gh alias](./gh_alias)
-
+- [gh alias](./gh_alias)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_alias_set
-
 
 ---
 
@@ -566,12 +533,12 @@ invoked. This allows for chaining multiple commands via piping and redirection.
 
 ### Options
 
-		`--clobber`
-	Overwrite existing aliases of the same name
+    	`--clobber`
+    Overwrite existing aliases of the same name
 
-	`-s`, 
-		`--shell`
-	Declare an alias to be passed through a shell interpreter
+    `-s`,
+    	`--shell`
+    Declare an alias to be passed through a shell interpreter
 
 ### Examples
 
@@ -598,16 +565,13 @@ $ gh igrep epic foo  #=> gh issue list --label="epic" | grep "foo"
 
 ### See also
 
-  - [gh alias](./gh_alias)
-
+- [gh alias](./gh_alias)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_api
-
 
 ---
 
@@ -648,14 +612,14 @@ request method to `POST`. To send the parameters as a `GET` query string instead
 
 The `-F/--field` flag has magic type conversion based on the format of the value:
 
-  - literal values `true`, `false`, `null`, and integer numbers get converted to
-appropriate JSON types;
+- literal values `true`, `false`, `null`, and integer numbers get converted to
+  appropriate JSON types;
 
-  - placeholder values `{owner}`, `{repo}`, and `{branch}` get populated with values
-from the repository of the current directory;
+- placeholder values `{owner}`, `{repo}`, and `{branch}` get populated with values
+  from the repository of the current directory;
 
-  - if the value starts with `@`, the rest of the value is interpreted as a
-filename to read the value from. Pass `-` to read from standard input.
+- if the value starts with `@`, the rest of the value is interpreted as a
+  filename to read the value from. Pass `-` to read from standard input.
 
 For GraphQL requests, all fields other than `query` and `operationName` are
 interpreted as GraphQL variables.
@@ -679,58 +643,58 @@ into an outer JSON array.
 
 ### Options
 
-		`--cache <duration>`
-	Cache the response, e.g. "3600s", "60m", "1h"
+    	`--cache <duration>`
+    Cache the response, e.g. "3600s", "60m", "1h"
 
-	`-F`, 
-		`--field <key=value>`
-	Add a typed parameter in key=value format
+    `-F`,
+    	`--field <key=value>`
+    Add a typed parameter in key=value format
 
-	`-H`, 
-		`--header <key:value>`
-	Add a HTTP request header in key:value format
+    `-H`,
+    	`--header <key:value>`
+    Add a HTTP request header in key:value format
 
-		`--hostname <string>`
-	The GitHub hostname for the request (default "github.com")
+    	`--hostname <string>`
+    The GitHub hostname for the request (default "github.com")
 
-	`-i`, 
-		`--include`
-	Include HTTP response status line and headers in the output
+    `-i`,
+    	`--include`
+    Include HTTP response status line and headers in the output
 
-		`--input <file>`
-	The file to use as body for the HTTP request (use "-" to read from standard input)
+    	`--input <file>`
+    The file to use as body for the HTTP request (use "-" to read from standard input)
 
-	`-q`, 
-		`--jq <string>`
-	Query to select values from the response using jq syntax
+    `-q`,
+    	`--jq <string>`
+    Query to select values from the response using jq syntax
 
-	`-X`, 
-		`--method <string> (default "GET")`
-	The HTTP method for the request
+    `-X`,
+    	`--method <string> (default "GET")`
+    The HTTP method for the request
 
-		`--paginate`
-	Make additional HTTP requests to fetch all pages of results
+    	`--paginate`
+    Make additional HTTP requests to fetch all pages of results
 
-	`-p`, 
-		`--preview <strings>`
-	Opt into GitHub API previews (names should omit '-preview')
+    `-p`,
+    	`--preview <strings>`
+    Opt into GitHub API previews (names should omit '-preview')
 
-	`-f`, 
-		`--raw-field <key=value>`
-	Add a string parameter in key=value format
+    `-f`,
+    	`--raw-field <key=value>`
+    Add a string parameter in key=value format
 
-		`--silent`
-	Do not print the response body
+    	`--silent`
+    Do not print the response body
 
-		`--slurp`
-	Use with "--paginate" to return an array of all pages of either JSON arrays or objects
+    	`--slurp`
+    Use with "--paginate" to return an array of all pages of either JSON arrays or objects
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--verbose`
-	Include full HTTP request and response in the output
+    	`--verbose`
+    Include full HTTP request and response in the output
 
 ### Examples
 
@@ -812,16 +776,13 @@ $ gh api graphql --paginate --slurp -f query='
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_attestation
-
 
 ---
 
@@ -831,11 +792,11 @@ Download and verify artifact attestations.
 
 ### Available commands
 
-  - [gh attestation download](./gh_attestation_download)
+- [gh attestation download](./gh_attestation_download)
 
-  - [gh attestation trusted-root](./gh_attestation_trusted-root)
+- [gh attestation trusted-root](./gh_attestation_trusted-root)
 
-  - [gh attestation verify](./gh_attestation_verify)
+- [gh attestation verify](./gh_attestation_verify)
 
 ### ALIASES
 
@@ -843,16 +804,13 @@ gh at
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_attestation_download
-
 
 ---
 
@@ -869,18 +827,19 @@ Download attestations associated with an artifact for offline use.
 
 The command requires either:
 
-  - a file path to an artifact, or
+- a file path to an artifact, or
 
-  - a container image URI (e.g. `oci://<image-uri>`)
+- a container image URI (e.g. `oci://<image-uri>`)
 
-      (note that if you provide an OCI URL, you must already be authenticated with
-its container registry)
+        (note that if you provide an OCI URL, you must already be authenticated with
+
+  its container registry)
 
 In addition, the command requires either:
 
-  - the `--repo` flag (e.g. --repo github/example).
+- the `--repo` flag (e.g. --repo github/example).
 
-  - the `--owner` flag (e.g. --owner github), or
+- the `--owner` flag (e.g. --owner github), or
 
 The `--repo` flag value must match the name of the GitHub repository
 that the artifact is linked with.
@@ -899,27 +858,27 @@ is "sha256:1234", the file will be named "sha256-1234.jsonl".
 
 ### Options
 
-	`-d`, 
-		`--digest-alg <string> (default "sha256")`
-	The algorithm used to compute a digest of the artifact: {sha256|sha512}
+    `-d`,
+    	`--digest-alg <string> (default "sha256")`
+    The algorithm used to compute a digest of the artifact: {sha256|sha512}
 
-		`--hostname <string>`
-	Configure host to use
+    	`--hostname <string>`
+    Configure host to use
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of attestations to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of attestations to fetch
 
-	`-o`, 
-		`--owner <string>`
-	GitHub organization to scope attestation lookup by
+    `-o`,
+    	`--owner <string>`
+    GitHub organization to scope attestation lookup by
 
-		`--predicate-type <string>`
-	Filter attestations by provided predicate type
+    	`--predicate-type <string>`
+    Filter attestations by provided predicate type
 
-	`-R`, 
-		`--repo <string>`
-	Repository name in the format <owner>/<repo>
+    `-R`,
+    	`--repo <string>`
+    Repository name in the format <owner>/<repo>
 
 ### Examples
 
@@ -936,16 +895,13 @@ $ gh attestation download oci://example.com/foo/bar:latest -o github
 
 ### See also
 
-  - [gh attestation](./gh_attestation)
-
+- [gh attestation](./gh_attestation)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_attestation_trusted-root
-
 
 ---
 
@@ -975,17 +931,17 @@ want the contents of a trusted_root.jsonl file, use `--verify-only`.
 
 ### Options
 
-		`--hostname <string>`
-	Configure host to use
+    	`--hostname <string>`
+    Configure host to use
 
-		`--tuf-root <string>`
-	Path to the TUF root.json file on disk
+    	`--tuf-root <string>`
+    Path to the TUF root.json file on disk
 
-		`--tuf-url <string>`
-	URL to the TUF repository mirror
+    	`--tuf-url <string>`
+    URL to the TUF repository mirror
 
-		`--verify-only`
-	Don't output trusted_root.jsonl contents
+    	`--verify-only`
+    Don't output trusted_root.jsonl contents
 
 ### Examples
 
@@ -996,16 +952,13 @@ $ gh attestation trusted-root
 
 ### See also
 
-  - [gh attestation](./gh_attestation)
-
+- [gh attestation](./gh_attestation)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_attestation_verify
-
 
 ---
 
@@ -1026,9 +979,9 @@ An attestation is a claim (i.e. a provenance statement) made by an actor
 
 In order to verify an attestation, you must provide an artifact and validate:
 
-  - the identity of the actor that produced the attestation
+- the identity of the actor that produced the attestation
 
-  - the expected attestation predicate type (the nature of the claim)
+- the expected attestation predicate type (the nature of the claim)
 
 By default, this command enforces the `https://slsa.dev/provenance/v1`
 predicate type. To verify other attestation predicate types use the
@@ -1036,10 +989,10 @@ predicate type. To verify other attestation predicate types use the
 
 The "actor identity" consists of:
 
-  - the repository or the repository owner the artifact is linked with
+- the repository or the repository owner the artifact is linked with
 
-  - the Actions workflow that produced the attestation (a.k.a the
-signer workflow)
+- the Actions workflow that produced the attestation (a.k.a the
+  signer workflow)
 
 This identity is then validated against the attestation's certificate's
 SourceRepository, SourceRepositoryOwner, and SubjectAlternativeName
@@ -1049,9 +1002,9 @@ It is up to you to decide how precisely you want to enforce this identity.
 
 At a minimum, this command requires either:
 
-  - the `--owner` flag (e.g. --owner github), or
+- the `--owner` flag (e.g. --owner github), or
 
-  - the `--repo` flag (e.g. --repo github/example)
+- the `--repo` flag (e.g. --repo github/example)
 
 The more precisely you specify the identity, the more control you will
 have over the security guarantees offered by the verification process.
@@ -1070,15 +1023,16 @@ For more options, see the other available flags.
 
 To specify the artifact, this command requires:
 
-  - a file path to an artifact, or
+- a file path to an artifact, or
 
-  - a container image URI (e.g. `oci://<image-uri>`)
+- a container image URI (e.g. `oci://<image-uri>`)
 
-      (note that if you provide an OCI URL, you must already be authenticated with
-its container registry)
+        (note that if you provide an OCI URL, you must already be authenticated with
+
+  its container registry)
 
 By default, this command will attempt to fetch relevant attestations via the
-GitHub API using the values provided to `--owner` or  `--repo`.
+GitHub API using the values provided to `--owner` or `--repo`.
 
 To instead fetch attestations from your artifact's OCI registry, use the
 `--bundle-from-oci` flag.
@@ -1096,22 +1050,22 @@ piped into a policy engine.
 
 Each object in the array contains two properties:
 
-  - an `attestation` object, which contains the bundle that was verified
+- an `attestation` object, which contains the bundle that was verified
 
-  - a `verificationResult` object, which is a parsed representation of the
-contents of the bundle that was verified.
+- a `verificationResult` object, which is a parsed representation of the
+  contents of the bundle that was verified.
 
 Within the `verificationResult` object you will find:
 
-  - `signature.certificate`, which is a parsed representation of the X.509
-certificate embedded in the attestation,
+- `signature.certificate`, which is a parsed representation of the X.509
+  certificate embedded in the attestation,
 
-  - `verifiedTimestamps`, an array of objects denoting when the attestation
-was witnessed by a transparency log or a timestamp authority
+- `verifiedTimestamps`, an array of objects denoting when the attestation
+  was witnessed by a transparency log or a timestamp authority
 
-  - `statement`, which contains the `subject` array referencing artifacts,
-the `predicateType` field, and the `predicate` object which contains
-additional, often user-controllable, metadata
+- `statement`, which contains the `subject` array referencing artifacts,
+  the `predicateType` field, and the `predicate` object which contains
+  additional, often user-controllable, metadata
 
 IMPORTANT: please note that only the `signature.certificate` and the
 `verifiedTimestamps` properties contain values that cannot be
@@ -1136,79 +1090,79 @@ See above re: `--signer-workflow`.
 
 ### Options
 
-	`-b`, 
-		`--bundle <string>`
-	Path to bundle on disk, either a single bundle in a JSON file or a JSON lines file with multiple bundles
+    `-b`,
+    	`--bundle <string>`
+    Path to bundle on disk, either a single bundle in a JSON file or a JSON lines file with multiple bundles
 
-		`--bundle-from-oci`
-	When verifying an OCI image, fetch the attestation bundle from the OCI registry instead of from GitHub
+    	`--bundle-from-oci`
+    When verifying an OCI image, fetch the attestation bundle from the OCI registry instead of from GitHub
 
-		`--cert-identity <string>`
-	Enforce that the certificate's SubjectAlternativeName matches the provided value exactly
+    	`--cert-identity <string>`
+    Enforce that the certificate's SubjectAlternativeName matches the provided value exactly
 
-	`-i`, 
-		`--cert-identity-regex <string>`
-	Enforce that the certificate's SubjectAlternativeName matches the provided regex
+    `-i`,
+    	`--cert-identity-regex <string>`
+    Enforce that the certificate's SubjectAlternativeName matches the provided regex
 
-		`--cert-oidc-issuer <string> (default "https://token.actions.githubusercontent.com")`
-	Enforce that the issuer of the OIDC token matches the provided value
+    	`--cert-oidc-issuer <string> (default "https://token.actions.githubusercontent.com")`
+    Enforce that the issuer of the OIDC token matches the provided value
 
-		`--custom-trusted-root <string>`
-	Path to a trusted_root.jsonl file; likely for offline verification
+    	`--custom-trusted-root <string>`
+    Path to a trusted_root.jsonl file; likely for offline verification
 
-		`--deny-self-hosted-runners`
-	Fail verification for attestations generated on self-hosted runners
+    	`--deny-self-hosted-runners`
+    Fail verification for attestations generated on self-hosted runners
 
-	`-d`, 
-		`--digest-alg <string> (default "sha256")`
-	The algorithm used to compute a digest of the artifact: {sha256|sha512}
+    `-d`,
+    	`--digest-alg <string> (default "sha256")`
+    The algorithm used to compute a digest of the artifact: {sha256|sha512}
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-		`--hostname <string>`
-	Configure host to use
+    	`--hostname <string>`
+    Configure host to use
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of attestations to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of attestations to fetch
 
-		`--no-public-good`
-	Do not verify attestations signed with Sigstore public good instance
+    	`--no-public-good`
+    Do not verify attestations signed with Sigstore public good instance
 
-	`-o`, 
-		`--owner <string>`
-	GitHub organization to scope attestation lookup by
+    `-o`,
+    	`--owner <string>`
+    GitHub organization to scope attestation lookup by
 
-		`--predicate-type <string> (default "https://slsa.dev/provenance/v1")`
-	Enforce that verified attestations' predicate type matches the provided value
+    	`--predicate-type <string> (default "https://slsa.dev/provenance/v1")`
+    Enforce that verified attestations' predicate type matches the provided value
 
-	`-R`, 
-		`--repo <string>`
-	Repository name in the format <owner>/<repo>
+    `-R`,
+    	`--repo <string>`
+    Repository name in the format <owner>/<repo>
 
-		`--signer-digest <string>`
-	Enforce that the digest associated with the signer workflow matches the provided value
+    	`--signer-digest <string>`
+    Enforce that the digest associated with the signer workflow matches the provided value
 
-		`--signer-repo <string>`
-	Enforce that the workflow that signed the attestation's repository matches the provided value (<owner>/<repo>)
+    	`--signer-repo <string>`
+    Enforce that the workflow that signed the attestation's repository matches the provided value (<owner>/<repo>)
 
-		`--signer-workflow <string>`
-	Enforce that the workflow that signed the attestation matches the provided value ([host/]<owner>/<repo>/<path>/<to>/<workflow>)
+    	`--signer-workflow <string>`
+    Enforce that the workflow that signed the attestation matches the provided value ([host/]<owner>/<repo>/<path>/<to>/<workflow>)
 
-		`--source-digest <string>`
-	Enforce that the digest associated with the source repository matches the provided value
+    	`--source-digest <string>`
+    Enforce that the digest associated with the source repository matches the provided value
 
-		`--source-ref <string>`
-	Enforce that the git ref associated with the source repository matches the provided value
+    	`--source-ref <string>`
+    Enforce that the git ref associated with the source repository matches the provided value
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Examples
 
@@ -1231,16 +1185,13 @@ $ gh attestation verify example.bin --owner github --signer-repo actions/example
 
 ### See also
 
-  - [gh attestation](./gh_attestation)
-
+- [gh attestation](./gh_attestation)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth
-
 
 ---
 
@@ -1250,32 +1201,29 @@ Authenticate gh and git with GitHub
 
 ### Available commands
 
-  - [gh auth login](./gh_auth_login)
+- [gh auth login](./gh_auth_login)
 
-  - [gh auth logout](./gh_auth_logout)
+- [gh auth logout](./gh_auth_logout)
 
-  - [gh auth refresh](./gh_auth_refresh)
+- [gh auth refresh](./gh_auth_refresh)
 
-  - [gh auth setup-git](./gh_auth_setup-git)
+- [gh auth setup-git](./gh_auth_setup-git)
 
-  - [gh auth status](./gh_auth_status)
+- [gh auth status](./gh_auth_status)
 
-  - [gh auth switch](./gh_auth_switch)
+- [gh auth switch](./gh_auth_switch)
 
-  - [gh auth token](./gh_auth_token)
+- [gh auth token](./gh_auth_token)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth_login
-
 
 ---
 
@@ -1322,34 +1270,34 @@ For more information on OAuth scopes, see
 
 ### Options
 
-	`-c`, 
-		`--clipboard`
-	Copy one-time OAuth device code to clipboard
+    `-c`,
+    	`--clipboard`
+    Copy one-time OAuth device code to clipboard
 
-	`-p`, 
-		`--git-protocol <string>`
-	The protocol to use for git operations on this host: {ssh|https}
+    `-p`,
+    	`--git-protocol <string>`
+    The protocol to use for git operations on this host: {ssh|https}
 
-	`-h`, 
-		`--hostname <string>`
-	The hostname of the GitHub instance to authenticate with
+    `-h`,
+    	`--hostname <string>`
+    The hostname of the GitHub instance to authenticate with
 
-		`--insecure-storage`
-	Save authentication credentials in plain text instead of credential store
+    	`--insecure-storage`
+    Save authentication credentials in plain text instead of credential store
 
-	`-s`, 
-		`--scopes <strings>`
-	Additional authentication scopes to request
+    `-s`,
+    	`--scopes <strings>`
+    Additional authentication scopes to request
 
-		`--skip-ssh-key`
-	Skip generate/upload SSH key prompt
+    	`--skip-ssh-key`
+    Skip generate/upload SSH key prompt
 
-	`-w`, 
-		`--web`
-	Open a browser to authenticate
+    `-w`,
+    	`--web`
+    Open a browser to authenticate
 
-		`--with-token`
-	Read token from standard input
+    	`--with-token`
+    Read token from standard input
 
 ### Examples
 
@@ -1369,16 +1317,13 @@ $ gh auth login --hostname enterprise.internal
 
 ### See also
 
-  - [gh auth](./gh_auth)
-
+- [gh auth](./gh_auth)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth_logout
-
 
 ---
 
@@ -1399,13 +1344,13 @@ This command does not revoke authentication tokens.
 
 To revoke all authentication tokens generated by the GitHub CLI:
 
-  - Visit [https://github.com/settings/applications](https://github.com/settings/applications)
+- Visit [https://github.com/settings/applications](https://github.com/settings/applications)
 
-  - Select the "GitHub CLI" application
+- Select the "GitHub CLI" application
 
-  - Select "Revoke Access"
+- Select "Revoke Access"
 
-  - Select "I understand, revoke access"
+- Select "I understand, revoke access"
 
 Note: this procedure will revoke all authentication tokens ever
 generated by the GitHub CLI across all your devices.
@@ -1415,13 +1360,13 @@ For more information about revoking OAuth application tokens, see:
 
 ### Options
 
-	`-h`, 
-		`--hostname <string>`
-	The hostname of the GitHub instance to log out of
+    `-h`,
+    	`--hostname <string>`
+    The hostname of the GitHub instance to log out of
 
-	`-u`, 
-		`--user <string>`
-	The account to log out of
+    `-u`,
+    	`--user <string>`
+    The account to log out of
 
 ### Examples
 
@@ -1435,16 +1380,13 @@ $ gh auth logout --hostname enterprise.internal --user monalisa
 
 ### See also
 
-  - [gh auth](./gh_auth)
-
+- [gh auth](./gh_auth)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth_refresh
-
 
 ---
 
@@ -1477,27 +1419,27 @@ For more information on OAuth scopes, see
 
 ### Options
 
-	`-c`, 
-		`--clipboard`
-	Copy one-time OAuth device code to clipboard
+    `-c`,
+    	`--clipboard`
+    Copy one-time OAuth device code to clipboard
 
-	`-h`, 
-		`--hostname <string>`
-	The GitHub host to use for authentication
+    `-h`,
+    	`--hostname <string>`
+    The GitHub host to use for authentication
 
-		`--insecure-storage`
-	Save authentication credentials in plain text instead of credential store
+    	`--insecure-storage`
+    Save authentication credentials in plain text instead of credential store
 
-	`-r`, 
-		`--remove-scopes <strings>`
-	Authentication scopes to remove from gh
+    `-r`,
+    	`--remove-scopes <strings>`
+    Authentication scopes to remove from gh
 
-		`--reset-scopes`
-	Reset authentication scopes to the default minimum set of scopes
+    	`--reset-scopes`
+    Reset authentication scopes to the default minimum set of scopes
 
-	`-s`, 
-		`--scopes <strings>`
-	Additional authentication scopes for gh to have
+    `-s`,
+    	`--scopes <strings>`
+    Additional authentication scopes for gh to have
 
 ### Examples
 
@@ -1520,16 +1462,13 @@ $ gh auth refresh --clipboard
 
 ### See also
 
-  - [gh auth](./gh_auth)
-
+- [gh auth](./gh_auth)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth_setup-git
-
 
 ---
 
@@ -1552,13 +1491,13 @@ If the host is not authenticated with, the command fails with an error.
 
 ### Options
 
-	`-f`, 
-		`--force <--hostname>`
-	Force setup even if the host is not known. Must be used in conjunction with --hostname
+    `-f`,
+    	`--force <--hostname>`
+    Force setup even if the host is not known. Must be used in conjunction with --hostname
 
-	`-h`, 
-		`--hostname <string>`
-	The hostname to configure git for
+    `-h`,
+    	`--hostname <string>`
+    The hostname to configure git for
 
 ### Examples
 
@@ -1572,16 +1511,13 @@ $ gh auth setup-git --hostname enterprise.internal
 
 ### See also
 
-  - [gh auth](./gh_auth)
-
+- [gh auth](./gh_auth)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth_status
-
 
 ---
 
@@ -1605,26 +1541,26 @@ To change the active account for a host, see `gh auth switch`.
 
 ### Options
 
-	`-a`, 
-		`--active`
-	Display the active account only
+    `-a`,
+    	`--active`
+    Display the active account only
 
-	`-h`, 
-		`--hostname <string>`
-	Check only a specific hostname's auth status
+    `-h`,
+    	`--hostname <string>`
+    Check only a specific hostname's auth status
 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--show-token`
-	Display the auth token
+    `-t`,
+    	`--show-token`
+    Display the auth token
 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### JSON Fields
 
@@ -1654,16 +1590,13 @@ $ gh auth status --json hosts --jq '.hosts | add'
 
 ### See also
 
-  - [gh auth](./gh_auth)
-
+- [gh auth](./gh_auth)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth_switch
-
 
 ---
 
@@ -1687,13 +1620,13 @@ For a list of authenticated accounts you can run `gh auth status`.
 
 ### Options
 
-	`-h`, 
-		`--hostname <string>`
-	The hostname of the GitHub instance to switch account for
+    `-h`,
+    	`--hostname <string>`
+    The hostname of the GitHub instance to switch account for
 
-	`-u`, 
-		`--user <string>`
-	The account to switch to
+    `-u`,
+    	`--user <string>`
+    The account to switch to
 
 ### Examples
 
@@ -1707,16 +1640,13 @@ $ gh auth switch --hostname enterprise.internal --user monalisa
 
 ### See also
 
-  - [gh auth](./gh_auth)
-
+- [gh auth](./gh_auth)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_auth_token
-
 
 ---
 
@@ -1735,26 +1665,23 @@ Without the `--user` flag, the active account for the host is chosen.
 
 ### Options
 
-	`-h`, 
-		`--hostname <string>`
-	The hostname of the GitHub instance authenticated with
+    `-h`,
+    	`--hostname <string>`
+    The hostname of the GitHub instance authenticated with
 
-	`-u`, 
-		`--user <string>`
-	The account to output the token for
+    `-u`,
+    	`--user <string>`
+    The account to output the token for
 
 ### See also
 
-  - [gh auth](./gh_auth)
-
+- [gh auth](./gh_auth)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_browse
-
 
 ---
 
@@ -1767,49 +1694,49 @@ gh browse [<number> | <path> | <commit-sha>] [flags]
 
 Transition from the terminal to the web browser to view and interact with:
 
-  - Issues
+- Issues
 
-  - Pull requests
+- Pull requests
 
-  - Repository content
+- Repository content
 
-  - Repository home page
+- Repository home page
 
-  - Repository settings
+- Repository settings
 
 ### Options
 
-	`-b`, 
-		`--branch <string>`
-	Select another branch by passing in the branch name
+    `-b`,
+    	`--branch <string>`
+    Select another branch by passing in the branch name
 
-	`-c`, 
-		`--commit <string>`
-	Select another commit by passing in the commit SHA, default is the last commit
+    `-c`,
+    	`--commit <string>`
+    Select another commit by passing in the commit SHA, default is the last commit
 
-	`-n`, 
-		`--no-browser`
-	Print destination URL instead of opening the browser
+    `-n`,
+    	`--no-browser`
+    Print destination URL instead of opening the browser
 
-	`-p`, 
-		`--projects`
-	Open repository projects
+    `-p`,
+    	`--projects`
+    Open repository projects
 
-	`-r`, 
-		`--releases`
-	Open repository releases
+    `-r`,
+    	`--releases`
+    Open repository releases
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
-	`-s`, 
-		`--settings`
-	Open repository settings
+    `-s`,
+    	`--settings`
+    Open repository settings
 
-	`-w`, 
-		`--wiki`
-	Open repository wiki
+    `-w`,
+    	`--wiki`
+    Open repository wiki
 
 ### Examples
 
@@ -1841,16 +1768,13 @@ $ gh browse main.go --commit=77507cd94ccafcf568f8560cfecde965fcfa63
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_cache
-
 
 ---
 
@@ -1860,15 +1784,15 @@ Work with GitHub Actions caches.
 
 ### Available commands
 
-  - [gh cache delete](./gh_cache_delete)
+- [gh cache delete](./gh_cache_delete)
 
-  - [gh cache list](./gh_cache_list)
+- [gh cache list](./gh_cache_list)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -1879,16 +1803,13 @@ $ gh cache delete --all
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_cache_delete
-
 
 ---
 
@@ -1905,22 +1826,22 @@ Deletion requires authorization with the `repo` scope.
 
 ### Options
 
-	`-a`, 
-		`--all`
-	Delete all caches
+    `-a`,
+    	`--all`
+    Delete all caches
 
-	`-r`, 
-		`--ref <string>`
-	Delete by cache key and ref, formatted as refs/heads/<branch name> or refs/pull/<number>/merge
+    `-r`,
+    	`--ref <string>`
+    Delete by cache key and ref, formatted as refs/heads/<branch name> or refs/pull/<number>/merge
 
-		`--succeed-on-no-caches <--all>`
-	Return exit code 0 if no caches found. Must be used in conjunction with --all
+    	`--succeed-on-no-caches <--all>`
+    Return exit code 0 if no caches found. Must be used in conjunction with --all
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -1949,16 +1870,13 @@ $ gh cache delete --all --succeed-on-no-caches
 
 ### See also
 
-  - [gh cache](./gh_cache)
-
+- [gh cache](./gh_cache)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_cache_list
-
 
 ---
 
@@ -1973,42 +1891,42 @@ gh cache list [flags]
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-k`, 
-		`--key <string>`
-	Filter by cache key prefix
+    `-k`,
+    	`--key <string>`
+    Filter by cache key prefix
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of caches to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of caches to fetch
 
-	`-O`, 
-		`--order <string> (default "desc")`
-	Order of caches returned: {asc|desc}
+    `-O`,
+    	`--order <string> (default "desc")`
+    Order of caches returned: {asc|desc}
 
-	`-r`, 
-		`--ref <string>`
-	Filter by ref, formatted as refs/heads/<branch name> or refs/pull/<number>/merge
+    `-r`,
+    	`--ref <string>`
+    Filter by ref, formatted as refs/heads/<branch name> or refs/pull/<number>/merge
 
-	`-S`, 
-		`--sort <string> (default "last_accessed_at")`
-	Sort fetched caches: {created_at|last_accessed_at|size_in_bytes}
+    `-S`,
+    	`--sort <string> (default "last_accessed_at")`
+    Sort fetched caches: {created_at|last_accessed_at|size_in_bytes}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -2042,16 +1960,13 @@ $ gh cache list --ref refs/pull/<pr-number>/merge
 
 ### See also
 
-  - [gh cache](./gh_cache)
-
+- [gh cache](./gh_cache)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace
-
 
 ---
 
@@ -2061,31 +1976,31 @@ Connect to and manage codespaces
 
 ### Available commands
 
-  - [gh codespace code](./gh_codespace_code)
+- [gh codespace code](./gh_codespace_code)
 
-  - [gh codespace cp](./gh_codespace_cp)
+- [gh codespace cp](./gh_codespace_cp)
 
-  - [gh codespace create](./gh_codespace_create)
+- [gh codespace create](./gh_codespace_create)
 
-  - [gh codespace delete](./gh_codespace_delete)
+- [gh codespace delete](./gh_codespace_delete)
 
-  - [gh codespace edit](./gh_codespace_edit)
+- [gh codespace edit](./gh_codespace_edit)
 
-  - [gh codespace jupyter](./gh_codespace_jupyter)
+- [gh codespace jupyter](./gh_codespace_jupyter)
 
-  - [gh codespace list](./gh_codespace_list)
+- [gh codespace list](./gh_codespace_list)
 
-  - [gh codespace logs](./gh_codespace_logs)
+- [gh codespace logs](./gh_codespace_logs)
 
-  - [gh codespace ports](./gh_codespace_ports)
+- [gh codespace ports](./gh_codespace_ports)
 
-  - [gh codespace rebuild](./gh_codespace_rebuild)
+- [gh codespace rebuild](./gh_codespace_rebuild)
 
-  - [gh codespace ssh](./gh_codespace_ssh)
+- [gh codespace ssh](./gh_codespace_ssh)
 
-  - [gh codespace stop](./gh_codespace_stop)
+- [gh codespace stop](./gh_codespace_stop)
 
-  - [gh codespace view](./gh_codespace_view)
+- [gh codespace view](./gh_codespace_view)
 
 ### ALIASES
 
@@ -2093,16 +2008,13 @@ gh cs
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_code
-
 
 ---
 
@@ -2117,36 +2029,33 @@ gh codespace code [flags]
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-		`--insiders`
-	Use the insiders version of Visual Studio Code
+    	`--insiders`
+    Use the insiders version of Visual Studio Code
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
-	`-w`, 
-		`--web`
-	Use the web version of Visual Studio Code
+    `-w`,
+    	`--web`
+    Use the web version of Visual Studio Code
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_cp
-
 
 ---
 
@@ -2180,28 +2089,28 @@ the codespace inside the `~/.ssh directory`.
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-e`, 
-		`--expand`
-	Expand remote file names on remote shell
+    `-e`,
+    	`--expand`
+    Expand remote file names on remote shell
 
-	`-p`, 
-		`--profile <string>`
-	Name of the SSH profile to use
+    `-p`,
+    	`--profile <string>`
+    Name of the SSH profile to use
 
-	`-r`, 
-		`--recursive`
-	Recursively copy directories
+    `-r`,
+    	`--recursive`
+    Recursively copy directories
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
 ### Examples
 
@@ -2214,16 +2123,13 @@ $ gh codespace cp -e -- -F ~/.ssh/codespaces_config 'remote:~/*.go' ./gofiles/
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_create
-
 
 ---
 
@@ -2238,58 +2144,55 @@ gh codespace create [flags]
 
 ### Options
 
-	`-b`, 
-		`--branch <string>`
-	Repository branch
+    `-b`,
+    	`--branch <string>`
+    Repository branch
 
-		`--default-permissions`
-	Do not prompt to accept additional permissions requested by the codespace
+    	`--default-permissions`
+    Do not prompt to accept additional permissions requested by the codespace
 
-		`--devcontainer-path <string>`
-	Path to the devcontainer.json file to use when creating codespace
+    	`--devcontainer-path <string>`
+    Path to the devcontainer.json file to use when creating codespace
 
-	`-d`, 
-		`--display-name <string>`
-	Display name for the codespace (48 characters or less)
+    `-d`,
+    	`--display-name <string>`
+    Display name for the codespace (48 characters or less)
 
-		`--idle-timeout <duration>`
-	Allowed inactivity before codespace is stopped, e.g. "10m", "1h"
+    	`--idle-timeout <duration>`
+    Allowed inactivity before codespace is stopped, e.g. "10m", "1h"
 
-	`-l`, 
-		`--location <string>`
-	Location: {EastUs|SouthEastAsia|WestEurope|WestUs2} (determined automatically if not provided)
+    `-l`,
+    	`--location <string>`
+    Location: {EastUs|SouthEastAsia|WestEurope|WestUs2} (determined automatically if not provided)
 
-	`-m`, 
-		`--machine <string>`
-	Hardware specifications for the VM
+    `-m`,
+    	`--machine <string>`
+    Hardware specifications for the VM
 
-	`-R`, 
-		`--repo <string>`
-	Repository name with owner: user/repo
+    `-R`,
+    	`--repo <string>`
+    Repository name with owner: user/repo
 
-		`--retention-period <duration>`
-	Allowed time after shutting down before the codespace is automatically deleted (maximum 30 days), e.g. "1h", "72h"
+    	`--retention-period <duration>`
+    Allowed time after shutting down before the codespace is automatically deleted (maximum 30 days), e.g. "1h", "72h"
 
-	`-s`, 
-		`--status`
-	Show status of post-create command and dotfiles
+    `-s`,
+    	`--status`
+    Show status of post-create command and dotfiles
 
-	`-w`, 
-		`--web`
-	Create codespace from browser, cannot be used with --display-name, --idle-timeout, or --retention-period
+    `-w`,
+    	`--web`
+    Create codespace from browser, cannot be used with --display-name, --idle-timeout, or --retention-period
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_delete
-
 
 ---
 
@@ -2309,47 +2212,44 @@ Organization administrators may delete any codespace billed to the organization.
 
 ### Options
 
-		`--all`
-	Delete all codespaces
+    	`--all`
+    Delete all codespaces
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-		`--days <N> (default 0)`
-	Delete codespaces older than N days
+    	`--days <N> (default 0)`
+    Delete codespaces older than N days
 
-	`-f`, 
-		`--force`
-	Skip confirmation for codespaces that contain unsaved changes
+    `-f`,
+    	`--force`
+    Skip confirmation for codespaces that contain unsaved changes
 
-	`-o`, 
-		`--org <login>`
-	The login handle of the organization (admin-only)
+    `-o`,
+    	`--org <login>`
+    The login handle of the organization (admin-only)
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
-	`-u`, 
-		`--user <username>`
-	The username to delete codespaces for (used with --org)
+    `-u`,
+    	`--user <username>`
+    The username to delete codespaces for (used with --org)
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_edit
-
 
 ---
 
@@ -2364,37 +2264,34 @@ gh codespace edit [flags]
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-d`, 
-		`--display-name <string>`
-	Set the display name
+    `-d`,
+    	`--display-name <string>`
+    Set the display name
 
-	`-m`, 
-		`--machine <string>`
-	Set hardware specifications for the VM
+    `-m`,
+    	`--machine <string>`
+    Set hardware specifications for the VM
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_jupyter
-
 
 ---
 
@@ -2409,29 +2306,26 @@ gh codespace jupyter [flags]
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_list
-
 
 ---
 
@@ -2448,36 +2342,36 @@ Alternatively, organization administrators may list all codespaces billed to the
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of codespaces to list
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of codespaces to list
 
-	`-o`, 
-		`--org <login>`
-	The login handle of the organization to list codespaces for (admin-only)
+    `-o`,
+    	`--org <login>`
+    The login handle of the organization to list codespaces for (admin-only)
 
-	`-R`, 
-		`--repo <string>`
-	Repository name with owner: user/repo
+    `-R`,
+    	`--repo <string>`
+    Repository name with owner: user/repo
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-u`, 
-		`--user <username>`
-	The username to list codespaces for (used with --org)
+    `-u`,
+    	`--user <username>`
+    The username to list codespaces for (used with --org)
 
-	`-w`, 
-		`--web`
-	List codespaces in the web browser, cannot be used with --user or --org
+    `-w`,
+    	`--web`
+    List codespaces in the web browser, cannot be used with --user or --org
 
 ### ALIASES
 
@@ -2489,16 +2383,13 @@ gh cs ls, gh codespace ls
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_logs
-
 
 ---
 
@@ -2513,33 +2404,30 @@ gh codespace logs [flags]
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-f`, 
-		`--follow`
-	Tail and follow the logs
+    `-f`,
+    	`--follow`
+    Tail and follow the logs
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_ports
-
 
 ---
 
@@ -2554,33 +2442,33 @@ gh codespace ports [flags]
 
 ### Available commands
 
-  - [gh codespace ports forward](./gh_codespace_ports_forward)
+- [gh codespace ports forward](./gh_codespace_ports_forward)
 
-  - [gh codespace ports visibility](./gh_codespace_ports_visibility)
+- [gh codespace ports visibility](./gh_codespace_ports_visibility)
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### JSON Fields
 
@@ -2588,16 +2476,13 @@ gh codespace ports [flags]
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_ports_forward
-
 
 ---
 
@@ -2612,29 +2497,26 @@ gh codespace ports forward <remote-port>:<local-port>...
 
 ### Options inherited from parent commands
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
 ### See also
 
-  - [gh codespace ports](./gh_codespace_ports)
-
+- [gh codespace ports](./gh_codespace_ports)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_ports_visibility
-
 
 ---
 
@@ -2649,16 +2531,16 @@ gh codespace ports visibility <port>:{public|private|org}...
 
 ### Options inherited from parent commands
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
 ### Examples
 
@@ -2668,16 +2550,13 @@ $ gh codespace ports visibility 80:org 3000:private 8000:public
 
 ### See also
 
-  - [gh codespace ports](./gh_codespace_ports)
-
+- [gh codespace ports](./gh_codespace_ports)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_rebuild
-
 
 ---
 
@@ -2695,32 +2574,29 @@ your working directory's dev container. A full rebuild also removes cached Docke
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-		`--full`
-	Perform a full rebuild
+    	`--full`
+    Perform a full rebuild
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_ssh
-
 
 ---
 
@@ -2738,13 +2614,13 @@ The `ssh` command will automatically create a public/private ssh key pair in the
 `~/.ssh` directory if you do not have an existing valid key pair. When selecting the
 key pair to use, the preferred order is:
 
-  - Key specified by `-i` in `<ssh-flags>`
+- Key specified by `-i` in `<ssh-flags>`
 
-  - Automatic key, if it already exists
+- Automatic key, if it already exists
 
-  - First valid key pair in ssh config (according to `ssh -G`)
+- First valid key pair in ssh config (according to `ssh -G`)
 
-  - Automatic key, newly created
+- Automatic key, newly created
 
 The `ssh` command also supports deeper integration with OpenSSH using a `--config`
 option that generates per-codespace ssh configuration in OpenSSH format.
@@ -2771,32 +2647,32 @@ you can add the following to your `devcontainer.json`:
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-		`--config`
-	Write OpenSSH configuration to stdout
+    	`--config`
+    Write OpenSSH configuration to stdout
 
-	`-d`, 
-		`--debug`
-	Log debug data to a file
+    `-d`,
+    	`--debug`
+    Log debug data to a file
 
-		`--debug-file <string>`
-	Path of the file log to
+    	`--debug-file <string>`
+    Path of the file log to
 
-		`--profile <string>`
-	Name of the SSH profile to use
+    	`--profile <string>`
+    Name of the SSH profile to use
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
-		`--server-port <int> (default 0)`
-	SSH server port number (0 => pick unused)
+    	`--server-port <int> (default 0)`
+    SSH server port number (0 => pick unused)
 
 ### Examples
 
@@ -2809,16 +2685,13 @@ $ printf 'Match all\nInclude ~/.ssh/codespaces\n' >> ~/.ssh/config
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_stop
-
 
 ---
 
@@ -2833,37 +2706,34 @@ gh codespace stop [flags]
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-o`, 
-		`--org <login>`
-	The login handle of the organization (admin-only)
+    `-o`,
+    	`--org <login>`
+    The login handle of the organization (admin-only)
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
-	`-u`, 
-		`--user <username>`
-	The username to stop codespace for (used with --org)
+    `-u`,
+    	`--user <username>`
+    The username to stop codespace for (used with --org)
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_codespace_view
-
 
 ---
 
@@ -2878,27 +2748,27 @@ gh codespace view [flags]
 
 ### Options
 
-	`-c`, 
-		`--codespace <string>`
-	Name of the codespace
+    `-c`,
+    	`--codespace <string>`
+    Name of the codespace
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-R`, 
-		`--repo <string>`
-	Filter codespace selection by repository name (user/repo)
+    `-R`,
+    	`--repo <string>`
+    Filter codespace selection by repository name (user/repo)
 
-		`--repo-owner <string>`
-	Filter codespace selection by repository owner (username or org)
+    	`--repo-owner <string>`
+    Filter codespace selection by repository owner (username or org)
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### JSON Fields
 
@@ -2922,16 +2792,13 @@ $ gh cs view --json displayName,machineDisplayName,state
 
 ### See also
 
-  - [gh codespace](./gh_codespace)
-
+- [gh codespace](./gh_codespace)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_completion
-
 
 ---
 
@@ -3010,22 +2877,19 @@ Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 
 ### Options
 
-	`-s`, 
-		`--shell <string>`
-	Shell type: {bash|zsh|fish|powershell}
+    `-s`,
+    	`--shell <string>`
+    Shell type: {bash|zsh|fish|powershell}
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_config
-
 
 ---
 
@@ -3035,50 +2899,47 @@ Display or change configuration settings for gh.
 
 Current respected settings:
 
-  - `git_protocol`: the protocol to use for git clone and push operations `{https | ssh}` (default `https`)
+- `git_protocol`: the protocol to use for git clone and push operations `{https | ssh}` (default `https`)
 
-  - `editor`: the text editor program to use for authoring text
+- `editor`: the text editor program to use for authoring text
 
-  - `prompt`: toggle interactive prompting in the terminal `{enabled | disabled}` (default `enabled`)
+- `prompt`: toggle interactive prompting in the terminal `{enabled | disabled}` (default `enabled`)
 
-  - `prefer_editor_prompt`: toggle preference for editor-based interactive prompting in the terminal `{enabled | disabled}` (default `disabled`)
+- `prefer_editor_prompt`: toggle preference for editor-based interactive prompting in the terminal `{enabled | disabled}` (default `disabled`)
 
-  - `pager`: the terminal pager program to send standard output to
+- `pager`: the terminal pager program to send standard output to
 
-  - `http_unix_socket`: the path to a Unix socket through which to make an HTTP connection
+- `http_unix_socket`: the path to a Unix socket through which to make an HTTP connection
 
-  - `browser`: the web browser to use for opening URLs
+- `browser`: the web browser to use for opening URLs
 
-  - `color_labels`: whether to display labels using their RGB hex color codes in terminals that support truecolor `{enabled | disabled}` (default `disabled`)
+- `color_labels`: whether to display labels using their RGB hex color codes in terminals that support truecolor `{enabled | disabled}` (default `disabled`)
 
-  - `accessible_colors`: whether customizable, 4-bit accessible colors should be used `{enabled | disabled}` (default `disabled`)
+- `accessible_colors`: whether customizable, 4-bit accessible colors should be used `{enabled | disabled}` (default `disabled`)
 
-  - `accessible_prompter`: whether an accessible prompter should be used `{enabled | disabled}` (default `disabled`)
+- `accessible_prompter`: whether an accessible prompter should be used `{enabled | disabled}` (default `disabled`)
 
-  - `spinner`: whether to use a animated spinner as a progress indicator `{enabled | disabled}` (default `enabled`)
+- `spinner`: whether to use a animated spinner as a progress indicator `{enabled | disabled}` (default `enabled`)
 
 ### Available commands
 
-  - [gh config clear-cache](./gh_config_clear-cache)
+- [gh config clear-cache](./gh_config_clear-cache)
 
-  - [gh config get](./gh_config_get)
+- [gh config get](./gh_config_get)
 
-  - [gh config list](./gh_config_list)
+- [gh config list](./gh_config_list)
 
-  - [gh config set](./gh_config_set)
+- [gh config set](./gh_config_set)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_config_clear-cache
-
 
 ---
 
@@ -3100,16 +2961,13 @@ $ gh config clear-cache
 
 ### See also
 
-  - [gh config](./gh_config)
-
+- [gh config](./gh_config)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_config_get
-
 
 ---
 
@@ -3124,9 +2982,9 @@ gh config get <key> [flags]
 
 ### Options
 
-	`-h`, 
-		`--host <string>`
-	Get per-host setting
+    `-h`,
+    	`--host <string>`
+    Get per-host setting
 
 ### Examples
 
@@ -3136,16 +2994,13 @@ $ gh config get git_protocol
 
 ### See also
 
-  - [gh config](./gh_config)
-
+- [gh config](./gh_config)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_config_list
-
 
 ---
 
@@ -3160,9 +3015,9 @@ gh config list [flags]
 
 ### Options
 
-	`-h`, 
-		`--host <string>`
-	Get per-host configuration
+    `-h`,
+    	`--host <string>`
+    Get per-host configuration
 
 ### ALIASES
 
@@ -3170,16 +3025,13 @@ gh config ls
 
 ### See also
 
-  - [gh config](./gh_config)
-
+- [gh config](./gh_config)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_config_set
-
 
 ---
 
@@ -3194,9 +3046,9 @@ gh config set <key> <value> [flags]
 
 ### Options
 
-	`-h`, 
-		`--host <string>`
-	Set per-host setting
+    `-h`,
+    	`--host <string>`
+    Set per-host setting
 
 ### Examples
 
@@ -3209,16 +3061,13 @@ $ gh config set prompt disabled
 
 ### See also
 
-  - [gh config](./gh_config)
-
+- [gh config](./gh_config)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension
-
 
 ---
 
@@ -3240,21 +3089,21 @@ For the list of available extensions, see [https://github.com/topics/gh-extensio
 
 ### Available commands
 
-  - [gh extension browse](./gh_extension_browse)
+- [gh extension browse](./gh_extension_browse)
 
-  - [gh extension create](./gh_extension_create)
+- [gh extension create](./gh_extension_create)
 
-  - [gh extension exec](./gh_extension_exec)
+- [gh extension exec](./gh_extension_exec)
 
-  - [gh extension install](./gh_extension_install)
+- [gh extension install](./gh_extension_install)
 
-  - [gh extension list](./gh_extension_list)
+- [gh extension list](./gh_extension_list)
 
-  - [gh extension remove](./gh_extension_remove)
+- [gh extension remove](./gh_extension_remove)
 
-  - [gh extension search](./gh_extension_search)
+- [gh extension search](./gh_extension_search)
 
-  - [gh extension upgrade](./gh_extension_upgrade)
+- [gh extension upgrade](./gh_extension_upgrade)
 
 ### ALIASES
 
@@ -3262,16 +3111,13 @@ gh ext, gh extensions
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_browse
-
 
 ---
 
@@ -3306,25 +3152,22 @@ along with `gh ext install`, `gh ext remove`, and `gh repo view`.
 
 ### Options
 
-		`--debug`
-	Log to /tmp/extBrowse-*
+    	`--debug`
+    Log to /tmp/extBrowse-*
 
-	`-s`, 
-		`--single-column`
-	Render TUI with only one column of text
+    `-s`,
+    	`--single-column`
+    Render TUI with only one column of text
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_create
-
 
 ---
 
@@ -3339,8 +3182,8 @@ gh extension create [<name>] [flags]
 
 ### Options
 
-		`--precompiled <string>`
-	Create a precompiled extension. Possible values: go, other
+    	`--precompiled <string>`
+    Create a precompiled extension. Possible values: go, other
 
 ### Examples
 
@@ -3360,16 +3203,13 @@ $ gh extension create --precompiled=other foobar
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_exec
-
 
 ---
 
@@ -3396,16 +3236,13 @@ $ gh extension exec label
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_install
-
 
 ---
 
@@ -3433,28 +3270,28 @@ extensions respectively, the latest version is used otherwise.
 For local repositories, often used while developing extensions, use `.` as the
 value of the repository argument. Note the following:
 
-  - After installing an extension from a locally cloned repository, the GitHub CLI will
-manage this extension as a symbolic link (or equivalent mechanism on Windows) pointing
-to an executable file with the same name as the repository in the repository's root.
-For example, if the repository is named `gh-foobar`, the symbolic link will point
-to `gh-foobar` in the extension repository's root.
+- After installing an extension from a locally cloned repository, the GitHub CLI will
+  manage this extension as a symbolic link (or equivalent mechanism on Windows) pointing
+  to an executable file with the same name as the repository in the repository's root.
+  For example, if the repository is named `gh-foobar`, the symbolic link will point
+  to `gh-foobar` in the extension repository's root.
 
-  - When executing the extension, the GitHub CLI will run the executable file found
-by following the symbolic link. If no executable file is found, the extension
-will fail to execute.
+- When executing the extension, the GitHub CLI will run the executable file found
+  by following the symbolic link. If no executable file is found, the extension
+  will fail to execute.
 
-  - If the extension is precompiled, the executable file must be built manually and placed
-in the repository's root.
+- If the extension is precompiled, the executable file must be built manually and placed
+  in the repository's root.
 
 For the list of available extensions, see [https://github.com/topics/gh-extension](https://github.com/topics/gh-extension).
 
 ### Options
 
-		`--force`
-	Force upgrade extension, or ignore if latest already installed
+    	`--force`
+    Force upgrade extension, or ignore if latest already installed
 
-		`--pin <string>`
-	Pin extension to a release tag or commit ref
+    	`--pin <string>`
+    Pin extension to a release tag or commit ref
 
 ### Examples
 
@@ -3471,16 +3308,13 @@ $ gh extension install .
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_list
-
 
 ---
 
@@ -3495,20 +3329,17 @@ gh extension list
 
 ### ALIASES
 
-gh extension ls,  gh extensions ls, gh ext ls
+gh extension ls, gh extensions ls, gh ext ls
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_remove
-
 
 ---
 
@@ -3523,16 +3354,13 @@ gh extension remove <name>
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_search
-
 
 ---
 
@@ -3580,36 +3408,36 @@ gh ext list
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-		`--license <strings>`
-	Filter based on license type
+    	`--license <strings>`
+    Filter based on license type
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of extensions to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of extensions to fetch
 
-		`--order <string> (default "desc")`
-	Order of repositories returned, ignored unless '--sort' flag is specified: {asc|desc}
+    	`--order <string> (default "desc")`
+    Order of repositories returned, ignored unless '--sort' flag is specified: {asc|desc}
 
-		`--owner <strings>`
-	Filter on owner
+    	`--owner <strings>`
+    Filter on owner
 
-		`--sort <string> (default "best-match")`
-	Sort fetched repositories: {forks|help-wanted-issues|stars|updated}
+    	`--sort <string> (default "best-match")`
+    Sort fetched repositories: {forks|help-wanted-issues|stars|updated}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open the search query in the web browser
+    `-w`,
+    	`--web`
+    Open the search query in the web browser
 
 ### JSON Fields
 
@@ -3642,16 +3470,13 @@ $ gh ext search -w
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_extension_upgrade
-
 
 ---
 
@@ -3666,27 +3491,24 @@ gh extension upgrade {<name> | --all} [flags]
 
 ### Options
 
-		`--all`
-	Upgrade all extensions
+    	`--all`
+    Upgrade all extensions
 
-		`--dry-run`
-	Only display upgrades
+    	`--dry-run`
+    Only display upgrades
 
-		`--force`
-	Force upgrade extension
+    	`--force`
+    Force upgrade extension
 
 ### See also
 
-  - [gh extension](./gh_extension)
-
+- [gh extension](./gh_extension)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist
-
 
 ---
 
@@ -3696,32 +3518,29 @@ Work with GitHub gists.
 
 ### Available commands
 
-  - [gh gist clone](./gh_gist_clone)
+- [gh gist clone](./gh_gist_clone)
 
-  - [gh gist create](./gh_gist_create)
+- [gh gist create](./gh_gist_create)
 
-  - [gh gist delete](./gh_gist_delete)
+- [gh gist delete](./gh_gist_delete)
 
-  - [gh gist edit](./gh_gist_edit)
+- [gh gist edit](./gh_gist_edit)
 
-  - [gh gist list](./gh_gist_list)
+- [gh gist list](./gh_gist_list)
 
-  - [gh gist rename](./gh_gist_rename)
+- [gh gist rename](./gh_gist_rename)
 
-  - [gh gist view](./gh_gist_view)
+- [gh gist view](./gh_gist_view)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist_clone
-
 
 ---
 
@@ -3736,24 +3555,21 @@ Clone a GitHub gist locally.
 
 A gist can be supplied as argument in either of the following formats:
 
-  - by ID, e.g. `5b0e0062eb8e9654adad7bb1d81cc75f`
+- by ID, e.g. `5b0e0062eb8e9654adad7bb1d81cc75f`
 
-  - by URL, e.g. `https://gist.github.com/OWNER/5b0e0062eb8e9654adad7bb1d81cc75f`
+- by URL, e.g. `https://gist.github.com/OWNER/5b0e0062eb8e9654adad7bb1d81cc75f`
 
 Pass additional `git clone` flags by listing them after `--`.
 
 ### See also
 
-  - [gh gist](./gh_gist)
-
+- [gh gist](./gh_gist)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist_create
-
 
 ---
 
@@ -3773,21 +3589,21 @@ By default, gists are secret; use `--public` to make publicly listed ones.
 
 ### Options
 
-	`-d`, 
-		`--desc <string>`
-	A description for this gist
+    `-d`,
+    	`--desc <string>`
+    A description for this gist
 
-	`-f`, 
-		`--filename <string>`
-	Provide a filename to be used when reading from standard input
+    `-f`,
+    	`--filename <string>`
+    Provide a filename to be used when reading from standard input
 
-	`-p`, 
-		`--public`
-	List the gist publicly (default "secret")
+    `-p`,
+    	`--public`
+    List the gist publicly (default "secret")
 
-	`-w`, 
-		`--web`
-	Open the web browser with created gist
+    `-w`,
+    	`--web`
+    Open the web browser with created gist
 
 ### ALIASES
 
@@ -3817,16 +3633,13 @@ $ cat cool.txt | gh gist create
 
 ### See also
 
-  - [gh gist](./gh_gist)
-
+- [gh gist](./gh_gist)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist_delete
-
 
 ---
 
@@ -3845,8 +3658,8 @@ To delete a gist non-interactively, supply the gist id or url.
 
 ### Options
 
-		`--yes`
-	Confirm deletion without prompting
+    	`--yes`
+    Confirm deletion without prompting
 
 ### Examples
 
@@ -3860,16 +3673,13 @@ $ gh gist delete 1234
 
 ### See also
 
-  - [gh gist](./gh_gist)
-
+- [gh gist](./gh_gist)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist_edit
-
 
 ---
 
@@ -3884,34 +3694,31 @@ gh gist edit {<id> | <url>} [<filename>] [flags]
 
 ### Options
 
-	`-a`, 
-		`--add <string>`
-	Add a new file to the gist
+    `-a`,
+    	`--add <string>`
+    Add a new file to the gist
 
-	`-d`, 
-		`--desc <string>`
-	New description for the gist
+    `-d`,
+    	`--desc <string>`
+    New description for the gist
 
-	`-f`, 
-		`--filename <string>`
-	Select a file to edit
+    `-f`,
+    	`--filename <string>`
+    Select a file to edit
 
-	`-r`, 
-		`--remove <string>`
-	Remove a file from the gist
+    `-r`,
+    	`--remove <string>`
+    Remove a file from the gist
 
 ### See also
 
-  - [gh gist](./gh_gist)
-
+- [gh gist](./gh_gist)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist_list
-
 
 ---
 
@@ -3944,21 +3751,21 @@ No highlights or other color is printed when output is redirected.
 
 ### Options
 
-		`--filter <expression>`
-	Filter gists using a regular expression
+    	`--filter <expression>`
+    Filter gists using a regular expression
 
-		`--include-content`
-	Include gists' file content when filtering
+    	`--include-content`
+    Include gists' file content when filtering
 
-	`-L`, 
-		`--limit <int> (default 10)`
-	Maximum number of gists to fetch
+    `-L`,
+    	`--limit <int> (default 10)`
+    Maximum number of gists to fetch
 
-		`--public`
-	Show only public gists
+    	`--public`
+    Show only public gists
 
-		`--secret`
-	Show only secret gists
+    	`--secret`
+    Show only secret gists
 
 ### ALIASES
 
@@ -3976,16 +3783,13 @@ $ gh gist list --filter octo --include-content
 
 ### See also
 
-  - [gh gist](./gh_gist)
-
+- [gh gist](./gh_gist)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist_rename
-
 
 ---
 
@@ -4000,16 +3804,13 @@ Rename a file in the given gist ID / URL.
 
 ### See also
 
-  - [gh gist](./gh_gist)
-
+- [gh gist](./gh_gist)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gist_view
-
 
 ---
 
@@ -4024,33 +3825,30 @@ View the given gist or select from recent gists.
 
 ### Options
 
-	`-f`, 
-		`--filename <string>`
-	Display a single file from the gist
+    `-f`,
+    	`--filename <string>`
+    Display a single file from the gist
 
-		`--files`
-	List file names from the gist
+    	`--files`
+    List file names from the gist
 
-	`-r`, 
-		`--raw`
-	Print raw instead of rendered gist contents
+    `-r`,
+    	`--raw`
+    Print raw instead of rendered gist contents
 
-	`-w`, 
-		`--web`
-	Open gist in the browser
+    `-w`,
+    	`--web`
+    Open gist in the browser
 
 ### See also
 
-  - [gh gist](./gh_gist)
-
+- [gh gist](./gh_gist)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gpg-key
-
 
 ---
 
@@ -4060,24 +3858,21 @@ Manage GPG keys registered with your GitHub account.
 
 ### Available commands
 
-  - [gh gpg-key add](./gh_gpg-key_add)
+- [gh gpg-key add](./gh_gpg-key_add)
 
-  - [gh gpg-key delete](./gh_gpg-key_delete)
+- [gh gpg-key delete](./gh_gpg-key_delete)
 
-  - [gh gpg-key list](./gh_gpg-key_list)
+- [gh gpg-key list](./gh_gpg-key_list)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gpg-key_add
-
 
 ---
 
@@ -4092,22 +3887,19 @@ gh gpg-key add [<key-file>] [flags]
 
 ### Options
 
-	`-t`, 
-		`--title <string>`
-	Title for the new key
+    `-t`,
+    	`--title <string>`
+    Title for the new key
 
 ### See also
 
-  - [gh gpg-key](./gh_gpg-key)
-
+- [gh gpg-key](./gh_gpg-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gpg-key_delete
-
 
 ---
 
@@ -4122,22 +3914,19 @@ gh gpg-key delete <key-id> [flags]
 
 ### Options
 
-	`-y`, 
-		`--yes`
-	Skip the confirmation prompt
+    `-y`,
+    	`--yes`
+    Skip the confirmation prompt
 
 ### See also
 
-  - [gh gpg-key](./gh_gpg-key)
-
+- [gh gpg-key](./gh_gpg-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_gpg-key_list
-
 
 ---
 
@@ -4156,16 +3945,13 @@ gh gpg-key ls
 
 ### See also
 
-  - [gh gpg-key](./gh_gpg-key)
-
+- [gh gpg-key](./gh_gpg-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_help
-
 
 ---
 
@@ -4181,16 +3967,13 @@ Simply type gh help [path to command] for full details.
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_help_environment
-
 
 ---
 
@@ -4256,20 +4039,20 @@ If a newer version was found, an upgrade notice is displayed on standard error.
 `GH_CONFIG_DIR`: the directory where gh will store configuration files. If not specified,
 the default value will be one of the following paths (in order of precedence):
 
-  - `$XDG_CONFIG_HOME/gh` (if `$XDG_CONFIG_HOME` is set),
+- `$XDG_CONFIG_HOME/gh` (if `$XDG_CONFIG_HOME` is set),
 
-  - `$AppData/GitHub CLI` (on Windows if `$AppData` is set), or
+- `$AppData/GitHub CLI` (on Windows if `$AppData` is set), or
 
-  - `$HOME/.config/gh`.
+- `$HOME/.config/gh`.
 
 `GH_PROMPT_DISABLED`: set to any value to disable interactive prompting in the terminal.
 
 `GH_PATH`: set the path to the gh executable, useful for when gh can not properly determine
 its own path such as in the cygwin terminal.
 
-`GH_MDWIDTH`: default maximum width for markdown render wrapping.  The max width of lines
+`GH_MDWIDTH`: default maximum width for markdown render wrapping. The max width of lines
 wrapped on the terminal will be taken as the lesser of the terminal width, this value, or 120 if
-not specified.  This value is used, for example, with `pr view` subcommand.
+not specified. This value is used, for example, with `pr view` subcommand.
 
 `GH_ACCESSIBLE_PROMPTER` (preview): set to a truthy value to enable prompts that are
 more compatible with speech synthesis and braille screen readers.
@@ -4279,16 +4062,13 @@ a textual progress indicator.
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_help_exit-codes
-
 
 ---
 
@@ -4296,20 +4076,20 @@ a textual progress indicator.
 
 gh follows normal conventions regarding exit codes.
 
-  - 
-    
+-
+
 If a command completes successfully, the exit code will be 0
 
-  - 
-    
+-
+
 If a command fails for any reason, the exit code will be 1
 
-  - 
-    
+-
+
 If a command is running but gets cancelled, the exit code will be 2
 
-  - 
-    
+-
+
 If a command requires authentication, the exit code will be 4
 
 NOTE: It is possible that a particular command may have more exit codes, so it is a good
@@ -4318,16 +4098,13 @@ control some behavior.
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_help_formatting
-
 
 ---
 
@@ -4357,35 +4134,35 @@ those JSON values which match the query.
 In addition to the Go template functions in the standard library, the following functions can be used
 with this formatting directive:
 
-  - `autocolor`: like `color`, but only emits color to terminals
+- `autocolor`: like `color`, but only emits color to terminals
 
-  - `color <style> <input>`: colorize input using [https://github.com/mgutz/ansi](https://github.com/mgutz/ansi)
+- `color <style> <input>`: colorize input using [https://github.com/mgutz/ansi](https://github.com/mgutz/ansi)
 
-  - `join <sep> <list>`: joins values in the list using a separator
+- `join <sep> <list>`: joins values in the list using a separator
 
-  - `pluck <field> <list>`: collects values of a field from all items in the input
+- `pluck <field> <list>`: collects values of a field from all items in the input
 
-  - `tablerow <fields>...`: aligns fields in output vertically as a table
+- `tablerow <fields>...`: aligns fields in output vertically as a table
 
-  - `tablerender`: renders fields added by tablerow in place
+- `tablerender`: renders fields added by tablerow in place
 
-  - `timeago <time>`: renders a timestamp as relative to now
+- `timeago <time>`: renders a timestamp as relative to now
 
-  - `timefmt <format> <time>`: formats a timestamp using Go's `Time.Format` function
+- `timefmt <format> <time>`: formats a timestamp using Go's `Time.Format` function
 
-  - `truncate <length> <input>`: ensures input fits within length
+- `truncate <length> <input>`: ensures input fits within length
 
-  - `hyperlink <url> <text>`: renders a terminal hyperlink
+- `hyperlink <url> <text>`: renders a terminal hyperlink
 
 The following Sprig template library functions can also be used with this formatting directive:
 
-  - `contains <arg> <string>`: checks if `string` contains `arg`
+- `contains <arg> <string>`: checks if `string` contains `arg`
 
-  - `hasPrefix <prefix> <string>`: checks if `string` starts with `prefix`
+- `hasPrefix <prefix> <string>`: checks if `string` starts with `prefix`
 
-  - `hasSuffix <suffix> <string>`: checks if `string` ends with `suffix`
+- `hasSuffix <suffix> <string>`: checks if `string` ends with `suffix`
 
-  - `regexMatch <regex> <string>`: checks if `string` has any matches for `regex`
+- `regexMatch <regex> <string>`: checks if `string` has any matches for `regex`
 
 For more information about the Sprig library, see [https://masterminds.github.io/sprig/](https://masterminds.github.io/sprig/).
 
@@ -4500,16 +4277,13 @@ mislav    COMMENTED          This is going along great! Thanks for working on th
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_help_mintty
-
 
 ---
 
@@ -4521,33 +4295,30 @@ user for input.
 
 There are a few workarounds to make gh work with MinTTY:
 
-  - 
-    
+-
+
 Reinstall Git for Windows, checking "Enable experimental support for pseudo consoles".
 
-  - 
-    
+-
+
 Use a different terminal emulator with Git for Windows like Windows Terminal.
 You can run `C:\Program Files\Git\bin\bash.exe` from any terminal emulator to continue
 using all of the tooling in Git For Windows without MinTTY.
 
-  - 
-    
+-
+
 Prefix invocations of gh with `winpty`, eg: `winpty gh auth login`.
 NOTE: this can lead to some UI bugs.
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # gh reference
 
 **Source:** https://cli.github.com/manual/gh_help_reference
-
 
 ---
 
@@ -7064,16 +6835,13 @@ View the summary of a workflow
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue
-
 
 ---
 
@@ -7083,43 +6851,43 @@ Work with GitHub issues.
 
 ### General commands
 
-  - [gh issue create](./gh_issue_create)
+- [gh issue create](./gh_issue_create)
 
-  - [gh issue list](./gh_issue_list)
+- [gh issue list](./gh_issue_list)
 
-  - [gh issue status](./gh_issue_status)
+- [gh issue status](./gh_issue_status)
 
 ### Targeted commands
 
-  - [gh issue close](./gh_issue_close)
+- [gh issue close](./gh_issue_close)
 
-  - [gh issue comment](./gh_issue_comment)
+- [gh issue comment](./gh_issue_comment)
 
-  - [gh issue delete](./gh_issue_delete)
+- [gh issue delete](./gh_issue_delete)
 
-  - [gh issue develop](./gh_issue_develop)
+- [gh issue develop](./gh_issue_develop)
 
-  - [gh issue edit](./gh_issue_edit)
+- [gh issue edit](./gh_issue_edit)
 
-  - [gh issue lock](./gh_issue_lock)
+- [gh issue lock](./gh_issue_lock)
 
-  - [gh issue pin](./gh_issue_pin)
+- [gh issue pin](./gh_issue_pin)
 
-  - [gh issue reopen](./gh_issue_reopen)
+- [gh issue reopen](./gh_issue_reopen)
 
-  - [gh issue transfer](./gh_issue_transfer)
+- [gh issue transfer](./gh_issue_transfer)
 
-  - [gh issue unlock](./gh_issue_unlock)
+- [gh issue unlock](./gh_issue_unlock)
 
-  - [gh issue unpin](./gh_issue_unpin)
+- [gh issue unpin](./gh_issue_unpin)
 
-  - [gh issue view](./gh_issue_view)
+- [gh issue view](./gh_issue_view)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -7131,16 +6899,13 @@ $ gh issue view 123 --web
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_close
-
 
 ---
 
@@ -7155,32 +6920,29 @@ gh issue close {<number> | <url>} [flags]
 
 ### Options
 
-	`-c`, 
-		`--comment <string>`
-	Leave a closing comment
+    `-c`,
+    	`--comment <string>`
+    Leave a closing comment
 
-	`-r`, 
-		`--reason <string>`
-	Reason for closing: {completed|not planned}
+    `-r`,
+    	`--reason <string>`
+    Reason for closing: {completed|not planned}
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_comment
-
 
 ---
 
@@ -7198,39 +6960,39 @@ prompt for the comment text.
 
 ### Options
 
-	`-b`, 
-		`--body <text>`
-	The comment body text
+    `-b`,
+    	`--body <text>`
+    The comment body text
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-		`--create-if-none`
-	Create a new comment if no comments are found. Can be used only with --edit-last
+    	`--create-if-none`
+    Create a new comment if no comments are found. Can be used only with --edit-last
 
-		`--delete-last`
-	Delete the last comment of the current user
+    	`--delete-last`
+    Delete the last comment of the current user
 
-		`--edit-last`
-	Edit the last comment of the current user
+    	`--edit-last`
+    Edit the last comment of the current user
 
-	`-e`, 
-		`--editor`
-	Skip prompts and open the text editor to write the body in
+    `-e`,
+    	`--editor`
+    Skip prompts and open the text editor to write the body in
 
-	`-w`, 
-		`--web`
-	Open the web browser to write the comment
+    `-w`,
+    	`--web`
+    Open the web browser to write the comment
 
-		`--yes`
-	Skip the delete confirmation prompt when --delete-last is provided
+    	`--yes`
+    Skip the delete confirmation prompt when --delete-last is provided
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -7240,16 +7002,13 @@ $ gh issue comment 12 --body "Hi from GitHub CLI"
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_create
-
 
 ---
 
@@ -7267,60 +7026,60 @@ To authorize, run `gh auth refresh -s project`.
 
 The `--assignee` flag supports the following special values:
 
-  - `@me`: assign yourself
+- `@me`: assign yourself
 
-  - `@copilot`: assign Copilot (not supported on GitHub Enterprise Server)
+- `@copilot`: assign Copilot (not supported on GitHub Enterprise Server)
 
 ### Options
 
-	`-a`, 
-		`--assignee <login>`
-	Assign people by their login. Use "@me" to self-assign.
+    `-a`,
+    	`--assignee <login>`
+    Assign people by their login. Use "@me" to self-assign.
 
-	`-b`, 
-		`--body <string>`
-	Supply a body. Will prompt for one otherwise.
+    `-b`,
+    	`--body <string>`
+    Supply a body. Will prompt for one otherwise.
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-	`-e`, 
-		`--editor`
-	Skip prompts and open the text editor to write the title and body in. The first line is the title and the remaining text is the body.
+    `-e`,
+    	`--editor`
+    Skip prompts and open the text editor to write the title and body in. The first line is the title and the remaining text is the body.
 
-	`-l`, 
-		`--label <name>`
-	Add labels by name
+    `-l`,
+    	`--label <name>`
+    Add labels by name
 
-	`-m`, 
-		`--milestone <name>`
-	Add the issue to a milestone by name
+    `-m`,
+    	`--milestone <name>`
+    Add the issue to a milestone by name
 
-	`-p`, 
-		`--project <title>`
-	Add the issue to projects by title
+    `-p`,
+    	`--project <title>`
+    Add the issue to projects by title
 
-		`--recover <string>`
-	Recover input from a failed run of create
+    	`--recover <string>`
+    Recover input from a failed run of create
 
-	`-T`, 
-		`--template <name>`
-	Template name to use as starting body text
+    `-T`,
+    	`--template <name>`
+    Template name to use as starting body text
 
-	`-t`, 
-		`--title <string>`
-	Supply a title. Will prompt for one otherwise.
+    `-t`,
+    	`--title <string>`
+    Supply a title. Will prompt for one otherwise.
 
-	`-w`, 
-		`--web`
-	Open the browser to create an issue
+    `-w`,
+    	`--web`
+    Open the browser to create an issue
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -7341,7 +7100,7 @@ $ gh issue create --template "Bug Report"
 
 ### See also
 
-  - [gh issue](./gh_issue)
+- [gh issue](./gh_issue)
 
 ### In use
 
@@ -7375,14 +7134,11 @@ Opening https://github.com/owner/repo/issues/new in your browser.
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_delete
-
 
 ---
 
@@ -7397,27 +7153,24 @@ gh issue delete {<number> | <url>} [flags]
 
 ### Options
 
-		`--yes`
-	Confirm deletion without prompting
+    	`--yes`
+    Confirm deletion without prompting
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_develop
-
 
 ---
 
@@ -7436,30 +7189,30 @@ remote branch. The new branch will be configured as the base branch for pull req
 
 ### Options
 
-	`-b`, 
-		`--base <string>`
-	Name of the remote branch you want to make your new branch from
+    `-b`,
+    	`--base <string>`
+    Name of the remote branch you want to make your new branch from
 
-		`--branch-repo <string>`
-	Name or URL of the repository where you want to create your new branch
+    	`--branch-repo <string>`
+    Name or URL of the repository where you want to create your new branch
 
-	`-c`, 
-		`--checkout`
-	Checkout the branch after creating it
+    `-c`,
+    	`--checkout`
+    Checkout the branch after creating it
 
-	`-l`, 
-		`--list`
-	List linked branches for the issue
+    `-l`,
+    	`--list`
+    List linked branches for the issue
 
-	`-n`, 
-		`--name <string>`
-	Name of the branch to create
+    `-n`,
+    	`--name <string>`
+    Name of the branch to create
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -7482,16 +7235,13 @@ $ gh issue develop 123 --repo cli/cli --branch-repo monalisa/cli
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_edit
-
 
 ---
 
@@ -7510,54 +7260,54 @@ To authorize, run `gh auth refresh -s project`.
 The `--add-assignee` and `--remove-assignee` flags both support
 the following special values:
 
-  - `@me`: assign or unassign yourself
+- `@me`: assign or unassign yourself
 
-  - `@copilot`: assign or unassign Copilot (not supported on GitHub Enterprise Server)
+- `@copilot`: assign or unassign Copilot (not supported on GitHub Enterprise Server)
 
 ### Options
 
-		`--add-assignee <login>`
-	Add assigned users by their login. Use "@me" to assign yourself, or "@copilot" to assign Copilot.
+    	`--add-assignee <login>`
+    Add assigned users by their login. Use "@me" to assign yourself, or "@copilot" to assign Copilot.
 
-		`--add-label <name>`
-	Add labels by name
+    	`--add-label <name>`
+    Add labels by name
 
-		`--add-project <title>`
-	Add the issue to projects by title
+    	`--add-project <title>`
+    Add the issue to projects by title
 
-	`-b`, 
-		`--body <string>`
-	Set the new body.
+    `-b`,
+    	`--body <string>`
+    Set the new body.
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-	`-m`, 
-		`--milestone <name>`
-	Edit the milestone the issue belongs to by name
+    `-m`,
+    	`--milestone <name>`
+    Edit the milestone the issue belongs to by name
 
-		`--remove-assignee <login>`
-	Remove assigned users by their login. Use "@me" to unassign yourself, or "@copilot" to unassign Copilot.
+    	`--remove-assignee <login>`
+    Remove assigned users by their login. Use "@me" to unassign yourself, or "@copilot" to unassign Copilot.
 
-		`--remove-label <name>`
-	Remove labels by name
+    	`--remove-label <name>`
+    Remove labels by name
 
-		`--remove-milestone`
-	Remove the milestone association from the issue
+    	`--remove-milestone`
+    Remove the milestone association from the issue
 
-		`--remove-project <title>`
-	Remove the issue from projects by title
+    	`--remove-project <title>`
+    Remove the issue from projects by title
 
-	`-t`, 
-		`--title <string>`
-	Set the new title.
+    `-t`,
+    	`--title <string>`
+    Set the new title.
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -7575,16 +7325,13 @@ $ gh issue edit 23 34 --add-label "help wanted"
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_list
-
 
 ---
 
@@ -7606,60 +7353,60 @@ On supported GitHub hosts, advanced issue search syntax can be used in the
 
 ### Options
 
-		`--app <string>`
-	Filter by GitHub App author
+    	`--app <string>`
+    Filter by GitHub App author
 
-	`-a`, 
-		`--assignee <string>`
-	Filter by assignee
+    `-a`,
+    	`--assignee <string>`
+    Filter by assignee
 
-	`-A`, 
-		`--author <string>`
-	Filter by author
+    `-A`,
+    	`--author <string>`
+    Filter by author
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-l`, 
-		`--label <strings>`
-	Filter by label
+    `-l`,
+    	`--label <strings>`
+    Filter by label
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of issues to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of issues to fetch
 
-		`--mention <string>`
-	Filter by mention
+    	`--mention <string>`
+    Filter by mention
 
-	`-m`, 
-		`--milestone <string>`
-	Filter by milestone number or title
+    `-m`,
+    	`--milestone <string>`
+    Filter by milestone number or title
 
-	`-S`, 
-		`--search <query>`
-	Search issues with query
+    `-S`,
+    	`--search <query>`
+    Search issues with query
 
-	`-s`, 
-		`--state <string> (default "open")`
-	Filter by state: {open|closed|all}
+    `-s`,
+    	`--state <string> (default "open")`
+    Filter by state: {open|closed|all}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	List issues in the web browser
+    `-w`,
+    	`--web`
+    List issues in the web browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -7682,7 +7429,7 @@ $ gh issue list --state all
 
 ### See also
 
-  - [gh issue](./gh_issue)
+- [gh issue](./gh_issue)
 
 ### In use
 
@@ -7720,14 +7467,11 @@ Issues for owner/repo
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_lock
-
 
 ---
 
@@ -7742,28 +7486,25 @@ gh issue lock {<number> | <url>} [flags]
 
 ### Options
 
-	`-r`, 
-		`--reason <string>`
-	Optional reason for locking conversation (off_topic, resolved, spam, too_heated).
+    `-r`,
+    	`--reason <string>`
+    Optional reason for locking conversation (off_topic, resolved, spam, too_heated).
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_pin
-
 
 ---
 
@@ -7780,9 +7521,9 @@ The issue can be specified by issue number or URL.
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -7799,16 +7540,13 @@ $ gh issue pin 23 --repo owner/repo
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_reopen
-
 
 ---
 
@@ -7823,28 +7561,25 @@ gh issue reopen {<number> | <url>} [flags]
 
 ### Options
 
-	`-c`, 
-		`--comment <string>`
-	Add a reopening comment
+    `-c`,
+    	`--comment <string>`
+    Add a reopening comment
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_status
-
 
 ---
 
@@ -7859,22 +7594,22 @@ gh issue status [flags]
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -7882,7 +7617,7 @@ gh issue status [flags]
 
 ### See also
 
-  - [gh issue](./gh_issue)
+- [gh issue](./gh_issue)
 
 ### In use
 
@@ -7903,14 +7638,11 @@ gh issue status [flags]
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_transfer
-
 
 ---
 
@@ -7925,22 +7657,19 @@ gh issue transfer {<number> | <url>} <destination-repo>
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_unlock
-
 
 ---
 
@@ -7955,22 +7684,19 @@ gh issue unlock {<number> | <url>}
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_unpin
-
 
 ---
 
@@ -7987,9 +7713,9 @@ The issue can be specified by issue number or URL.
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -8006,16 +7732,13 @@ $ gh issue unpin 23 --repo owner/repo
 
 ### See also
 
-  - [gh issue](./gh_issue)
-
+- [gh issue](./gh_issue)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_issue_view
-
 
 ---
 
@@ -8032,30 +7755,30 @@ With `--web` flag, open the issue in a web browser instead.
 
 ### Options
 
-	`-c`, 
-		`--comments`
-	View issue comments
+    `-c`,
+    	`--comments`
+    View issue comments
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open an issue in the browser
+    `-w`,
+    	`--web`
+    Open an issue in the browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -8063,7 +7786,7 @@ With `--web` flag, open the issue in a web browser instead.
 
 ### See also
 
-  - [gh issue](./gh_issue)
+- [gh issue](./gh_issue)
 
 ### In use
 
@@ -8094,14 +7817,11 @@ Opening https://github.com/owner/repo/issues/21 in your browser.
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_label
-
 
 ---
 
@@ -8111,34 +7831,31 @@ Work with GitHub labels.
 
 ### Available commands
 
-  - [gh label clone](./gh_label_clone)
+- [gh label clone](./gh_label_clone)
 
-  - [gh label create](./gh_label_create)
+- [gh label create](./gh_label_create)
 
-  - [gh label delete](./gh_label_delete)
+- [gh label delete](./gh_label_delete)
 
-  - [gh label edit](./gh_label_edit)
+- [gh label edit](./gh_label_edit)
 
-  - [gh label list](./gh_label_list)
+- [gh label list](./gh_label_list)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_label_clone
-
 
 ---
 
@@ -8162,15 +7879,15 @@ destination repository using the `--force` flag.
 
 ### Options
 
-	`-f`, 
-		`--force`
-	Overwrite labels in the destination repository
+    `-f`,
+    	`--force`
+    Overwrite labels in the destination repository
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -8184,16 +7901,13 @@ $ gh label clone cli/cli --repo octocat/cli
 
 ### See also
 
-  - [gh label](./gh_label)
-
+- [gh label](./gh_label)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_label_create
-
 
 ---
 
@@ -8213,23 +7927,23 @@ The label color needs to be 6 character hex value.
 
 ### Options
 
-	`-c`, 
-		`--color <string>`
-	Color of the label
+    `-c`,
+    	`--color <string>`
+    Color of the label
 
-	`-d`, 
-		`--description <string>`
-	Description of the label
+    `-d`,
+    	`--description <string>`
+    Description of the label
 
-	`-f`, 
-		`--force`
-	Update the label color and description if label already exists
+    `-f`,
+    	`--force`
+    Update the label color and description if label already exists
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -8240,16 +7954,13 @@ $ gh label create bug --description "Something isn't working" --color E99695
 
 ### See also
 
-  - [gh label](./gh_label)
-
+- [gh label](./gh_label)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_label_delete
-
 
 ---
 
@@ -8264,27 +7975,24 @@ gh label delete <name> [flags]
 
 ### Options
 
-		`--yes`
-	Confirm deletion without prompting
+    	`--yes`
+    Confirm deletion without prompting
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh label](./gh_label)
-
+- [gh label](./gh_label)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_label_edit
-
 
 ---
 
@@ -8303,23 +8011,23 @@ The label color needs to be 6 character hex value.
 
 ### Options
 
-	`-c`, 
-		`--color <string>`
-	Color of the label
+    `-c`,
+    	`--color <string>`
+    Color of the label
 
-	`-d`, 
-		`--description <string>`
-	Description of the label
+    `-d`,
+    	`--description <string>`
+    Description of the label
 
-	`-n`, 
-		`--name <string>`
-	New name of the label
+    `-n`,
+    	`--name <string>`
+    New name of the label
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -8333,16 +8041,13 @@ $ gh label edit bug --name big-bug --description "Bigger than normal bug"
 
 ### See also
 
-  - [gh label](./gh_label)
-
+- [gh label](./gh_label)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_label_list
-
 
 ---
 
@@ -8360,40 +8065,40 @@ This behavior cannot be configured with the `--order` or `--sort` flags.
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of labels to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of labels to fetch
 
-		`--order <string> (default "asc")`
-	Order of labels returned: {asc|desc}
+    	`--order <string> (default "asc")`
+    Order of labels returned: {asc|desc}
 
-	`-S`, 
-		`--search <string>`
-	Search label names and descriptions
+    `-S`,
+    	`--search <string>`
+    Search label names and descriptions
 
-		`--sort <string> (default "created")`
-	Sort fetched labels: {created|name}
+    	`--sort <string> (default "created")`
+    Sort fetched labels: {created|name}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	List labels in the web browser
+    `-w`,
+    	`--web`
+    List labels in the web browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -8415,16 +8120,13 @@ $ gh label list --search bug
 
 ### See also
 
-  - [gh label](./gh_label)
-
+- [gh label](./gh_label)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_org
-
 
 ---
 
@@ -8434,7 +8136,7 @@ Work with GitHub organizations.
 
 ### General commands
 
-  - [gh org list](./gh_org_list)
+- [gh org list](./gh_org_list)
 
 ### Examples
 
@@ -8444,16 +8146,13 @@ $ gh org list
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_org_list
-
 
 ---
 
@@ -8468,9 +8167,9 @@ gh org list [flags]
 
 ### Options
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of organizations to list
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of organizations to list
 
 ### ALIASES
 
@@ -8488,16 +8187,13 @@ $ gh org list --limit 100
 
 ### See also
 
-  - [gh org](./gh_org)
-
+- [gh org](./gh_org)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr
-
 
 ---
 
@@ -8507,47 +8203,47 @@ Work with GitHub pull requests.
 
 ### General commands
 
-  - [gh pr create](./gh_pr_create)
+- [gh pr create](./gh_pr_create)
 
-  - [gh pr list](./gh_pr_list)
+- [gh pr list](./gh_pr_list)
 
-  - [gh pr status](./gh_pr_status)
+- [gh pr status](./gh_pr_status)
 
 ### Targeted commands
 
-  - [gh pr checkout](./gh_pr_checkout)
+- [gh pr checkout](./gh_pr_checkout)
 
-  - [gh pr checks](./gh_pr_checks)
+- [gh pr checks](./gh_pr_checks)
 
-  - [gh pr close](./gh_pr_close)
+- [gh pr close](./gh_pr_close)
 
-  - [gh pr comment](./gh_pr_comment)
+- [gh pr comment](./gh_pr_comment)
 
-  - [gh pr diff](./gh_pr_diff)
+- [gh pr diff](./gh_pr_diff)
 
-  - [gh pr edit](./gh_pr_edit)
+- [gh pr edit](./gh_pr_edit)
 
-  - [gh pr lock](./gh_pr_lock)
+- [gh pr lock](./gh_pr_lock)
 
-  - [gh pr merge](./gh_pr_merge)
+- [gh pr merge](./gh_pr_merge)
 
-  - [gh pr ready](./gh_pr_ready)
+- [gh pr ready](./gh_pr_ready)
 
-  - [gh pr reopen](./gh_pr_reopen)
+- [gh pr reopen](./gh_pr_reopen)
 
-  - [gh pr review](./gh_pr_review)
+- [gh pr review](./gh_pr_review)
 
-  - [gh pr unlock](./gh_pr_unlock)
+- [gh pr unlock](./gh_pr_unlock)
 
-  - [gh pr update-branch](./gh_pr_update-branch)
+- [gh pr update-branch](./gh_pr_update-branch)
 
-  - [gh pr view](./gh_pr_view)
+- [gh pr view](./gh_pr_view)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -8559,16 +8255,13 @@ $ gh pr view --web
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_checkout
-
 
 ---
 
@@ -8583,25 +8276,25 @@ gh pr checkout [<number> | <url> | <branch>] [flags]
 
 ### Options
 
-	`-b`, 
-		`--branch <string>`
-	Local branch name to use (default [the name of the head branch])
+    `-b`,
+    	`--branch <string>`
+    Local branch name to use (default [the name of the head branch])
 
-		`--detach`
-	Checkout PR with a detached HEAD
+    	`--detach`
+    Checkout PR with a detached HEAD
 
-	`-f`, 
-		`--force`
-	Reset the existing local branch to the latest state of the pull request
+    `-f`,
+    	`--force`
+    Reset the existing local branch to the latest state of the pull request
 
-		`--recurse-submodules`
-	Update all submodules after checkout
+    	`--recurse-submodules`
+    Update all submodules after checkout
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -8621,7 +8314,7 @@ $ gh pr checkout feature
 
 ### See also
 
-  - [gh pr](./gh_pr)
+- [gh pr](./gh_pr)
 
 ### In use
 
@@ -8658,14 +8351,11 @@ Already up to date.
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_checks
-
 
 ---
 
@@ -8685,43 +8375,43 @@ When the `--json` flag is used, it includes a `bucket` field, which categorizes
 the `state` field into `pass`, `fail`, `pending`, `skipping`, or `cancel`.
 
 Additional exit codes:
-	8: Checks pending
+8: Checks pending
 
 ### Options
 
-		`--fail-fast`
-	Exit watch mode on first check failure
+    	`--fail-fast`
+    Exit watch mode on first check failure
 
-	`-i`, 
-		`--interval <--watch> (default 10)`
-	Refresh interval in seconds when using --watch flag
+    `-i`,
+    	`--interval <--watch> (default 10)`
+    Refresh interval in seconds when using --watch flag
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-		`--required`
-	Only show checks that are required
+    	`--required`
+    Only show checks that are required
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--watch`
-	Watch checks until they finish
+    	`--watch`
+    Watch checks until they finish
 
-	`-w`, 
-		`--web`
-	Open the web browser to show details about checks
+    `-w`,
+    	`--web`
+    Open the web browser to show details about checks
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -8729,16 +8419,13 @@ Additional exit codes:
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_close
-
 
 ---
 
@@ -8753,32 +8440,29 @@ gh pr close {<number> | <url> | <branch>} [flags]
 
 ### Options
 
-	`-c`, 
-		`--comment <string>`
-	Leave a closing comment
+    `-c`,
+    	`--comment <string>`
+    Leave a closing comment
 
-	`-d`, 
-		`--delete-branch`
-	Delete the local and remote branch after close
+    `-d`,
+    	`--delete-branch`
+    Delete the local and remote branch after close
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_comment
-
 
 ---
 
@@ -8796,39 +8480,39 @@ prompt for the comment text.
 
 ### Options
 
-	`-b`, 
-		`--body <text>`
-	The comment body text
+    `-b`,
+    	`--body <text>`
+    The comment body text
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-		`--create-if-none`
-	Create a new comment if no comments are found. Can be used only with --edit-last
+    	`--create-if-none`
+    Create a new comment if no comments are found. Can be used only with --edit-last
 
-		`--delete-last`
-	Delete the last comment of the current user
+    	`--delete-last`
+    Delete the last comment of the current user
 
-		`--edit-last`
-	Edit the last comment of the current user
+    	`--edit-last`
+    Edit the last comment of the current user
 
-	`-e`, 
-		`--editor`
-	Skip prompts and open the text editor to write the body in
+    `-e`,
+    	`--editor`
+    Skip prompts and open the text editor to write the body in
 
-	`-w`, 
-		`--web`
-	Open the web browser to write the comment
+    `-w`,
+    	`--web`
+    Open the web browser to write the comment
 
-		`--yes`
-	Skip the delete confirmation prompt when --delete-last is provided
+    	`--yes`
+    Skip the delete confirmation prompt when --delete-last is provided
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -8838,16 +8522,13 @@ $ gh pr comment 13 --body "Hi from GitHub CLI"
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_create
-
 
 ---
 
@@ -8893,86 +8574,86 @@ To authorize, run `gh auth refresh -s project`.
 
 ### Options
 
-	`-a`, 
-		`--assignee <login>`
-	Assign people by their login. Use "@me" to self-assign.
+    `-a`,
+    	`--assignee <login>`
+    Assign people by their login. Use "@me" to self-assign.
 
-	`-B`, 
-		`--base <branch>`
-	The branch into which you want your code merged
+    `-B`,
+    	`--base <branch>`
+    The branch into which you want your code merged
 
-	`-b`, 
-		`--body <string>`
-	Body for the pull request
+    `-b`,
+    	`--body <string>`
+    Body for the pull request
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-	`-d`, 
-		`--draft`
-	Mark pull request as a draft
+    `-d`,
+    	`--draft`
+    Mark pull request as a draft
 
-		`--dry-run`
-	Print details instead of creating the PR. May still push git changes.
+    	`--dry-run`
+    Print details instead of creating the PR. May still push git changes.
 
-	`-e`, 
-		`--editor`
-	Skip prompts and open the text editor to write the title and body in. The first line is the title and the remaining text is the body.
+    `-e`,
+    	`--editor`
+    Skip prompts and open the text editor to write the title and body in. The first line is the title and the remaining text is the body.
 
-	`-f`, 
-		`--fill`
-	Use commit info for title and body
+    `-f`,
+    	`--fill`
+    Use commit info for title and body
 
-		`--fill-first`
-	Use first commit info for title and body
+    	`--fill-first`
+    Use first commit info for title and body
 
-		`--fill-verbose`
-	Use commits msg+body for description
+    	`--fill-verbose`
+    Use commits msg+body for description
 
-	`-H`, 
-		`--head <branch>`
-	The branch that contains commits for your pull request (default [current branch])
+    `-H`,
+    	`--head <branch>`
+    The branch that contains commits for your pull request (default [current branch])
 
-	`-l`, 
-		`--label <name>`
-	Add labels by name
+    `-l`,
+    	`--label <name>`
+    Add labels by name
 
-	`-m`, 
-		`--milestone <name>`
-	Add the pull request to a milestone by name
+    `-m`,
+    	`--milestone <name>`
+    Add the pull request to a milestone by name
 
-		`--no-maintainer-edit`
-	Disable maintainer's ability to modify pull request
+    	`--no-maintainer-edit`
+    Disable maintainer's ability to modify pull request
 
-	`-p`, 
-		`--project <title>`
-	Add the pull request to projects by title
+    `-p`,
+    	`--project <title>`
+    Add the pull request to projects by title
 
-		`--recover <string>`
-	Recover input from a failed run of create
+    	`--recover <string>`
+    Recover input from a failed run of create
 
-	`-r`, 
-		`--reviewer <handle>`
-	Request reviews from people or teams by their handle
+    `-r`,
+    	`--reviewer <handle>`
+    Request reviews from people or teams by their handle
 
-	`-T`, 
-		`--template <file>`
-	Template file to use as starting body text
+    `-T`,
+    	`--template <file>`
+    Template file to use as starting body text
 
-	`-t`, 
-		`--title <string>`
-	Title for the pull request
+    `-t`,
+    	`--title <string>`
+    Title for the pull request
 
-	`-w`, 
-		`--web`
-	Open the web browser to create a pull request
+    `-w`,
+    	`--web`
+    Open the web browser to create a pull request
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -8990,7 +8671,7 @@ $ gh pr create --template "pull_request_template.md"
 
 ### See also
 
-  - [gh pr](./gh_pr)
+- [gh pr](./gh_pr)
 
 ### In use
 
@@ -9029,14 +8710,11 @@ Opening https://github.com/owner/repo/pull/branch in your browser.
       This command will automatically create a fork for you if you're in a repository that you don't have permission to
       push to.
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_diff
-
 
 ---
 
@@ -9056,37 +8734,34 @@ With `--web` flag, open the pull request diff in a web browser instead.
 
 ### Options
 
-		`--color <string> (default "auto")`
-	Use color in diff output: {always|never|auto}
+    	`--color <string> (default "auto")`
+    Use color in diff output: {always|never|auto}
 
-		`--name-only`
-	Display only names of changed files
+    	`--name-only`
+    Display only names of changed files
 
-		`--patch`
-	Display diff in patch format
+    	`--patch`
+    Display diff in patch format
 
-	`-w`, 
-		`--web`
-	Open the pull request diff in the browser
+    `-w`,
+    	`--web`
+    Open the pull request diff in the browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_edit
-
 
 ---
 
@@ -9108,67 +8783,67 @@ To authorize, run `gh auth refresh -s project`.
 The `--add-assignee` and `--remove-assignee` flags both support
 the following special values:
 
-  - `@me`: assign or unassign yourself
+- `@me`: assign or unassign yourself
 
-  - `@copilot`: assign or unassign Copilot (not supported on GitHub Enterprise Server)
+- `@copilot`: assign or unassign Copilot (not supported on GitHub Enterprise Server)
 
 The `--add-reviewer` and `--remove-reviewer` flags do not support
 these special values.
 
 ### Options
 
-		`--add-assignee <login>`
-	Add assigned users by their login. Use "@me" to assign yourself, or "@copilot" to assign Copilot.
+    	`--add-assignee <login>`
+    Add assigned users by their login. Use "@me" to assign yourself, or "@copilot" to assign Copilot.
 
-		`--add-label <name>`
-	Add labels by name
+    	`--add-label <name>`
+    Add labels by name
 
-		`--add-project <title>`
-	Add the pull request to projects by title
+    	`--add-project <title>`
+    Add the pull request to projects by title
 
-		`--add-reviewer <login>`
-	Add reviewers by their login.
+    	`--add-reviewer <login>`
+    Add reviewers by their login.
 
-	`-B`, 
-		`--base <branch>`
-	Change the base branch for this pull request
+    `-B`,
+    	`--base <branch>`
+    Change the base branch for this pull request
 
-	`-b`, 
-		`--body <string>`
-	Set the new body.
+    `-b`,
+    	`--body <string>`
+    Set the new body.
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-	`-m`, 
-		`--milestone <name>`
-	Edit the milestone the pull request belongs to by name
+    `-m`,
+    	`--milestone <name>`
+    Edit the milestone the pull request belongs to by name
 
-		`--remove-assignee <login>`
-	Remove assigned users by their login. Use "@me" to unassign yourself, or "@copilot" to unassign Copilot.
+    	`--remove-assignee <login>`
+    Remove assigned users by their login. Use "@me" to unassign yourself, or "@copilot" to unassign Copilot.
 
-		`--remove-label <name>`
-	Remove labels by name
+    	`--remove-label <name>`
+    Remove labels by name
 
-		`--remove-milestone`
-	Remove the milestone association from the pull request
+    	`--remove-milestone`
+    Remove the milestone association from the pull request
 
-		`--remove-project <title>`
-	Remove the pull request from projects by title
+    	`--remove-project <title>`
+    Remove the pull request from projects by title
 
-		`--remove-reviewer <login>`
-	Remove reviewers by their login.
+    	`--remove-reviewer <login>`
+    Remove reviewers by their login.
 
-	`-t`, 
-		`--title <string>`
-	Set the new title.
+    `-t`,
+    	`--title <string>`
+    Set the new title.
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -9185,16 +8860,13 @@ $ gh pr edit 23 --remove-milestone
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_list
-
 
 ---
 
@@ -9216,65 +8888,65 @@ On supported GitHub hosts, advanced issue search syntax can be used in the
 
 ### Options
 
-		`--app <string>`
-	Filter by GitHub App author
+    	`--app <string>`
+    Filter by GitHub App author
 
-	`-a`, 
-		`--assignee <string>`
-	Filter by assignee
+    `-a`,
+    	`--assignee <string>`
+    Filter by assignee
 
-	`-A`, 
-		`--author <string>`
-	Filter by author
+    `-A`,
+    	`--author <string>`
+    Filter by author
 
-	`-B`, 
-		`--base <string>`
-	Filter by base branch
+    `-B`,
+    	`--base <string>`
+    Filter by base branch
 
-	`-d`, 
-		`--draft`
-	Filter by draft state
+    `-d`,
+    	`--draft`
+    Filter by draft state
 
-	`-H`, 
-		`--head <string>`
-	Filter by head branch ("<owner>:<branch>" syntax not supported)
+    `-H`,
+    	`--head <string>`
+    Filter by head branch ("<owner>:<branch>" syntax not supported)
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-l`, 
-		`--label <strings>`
-	Filter by label
+    `-l`,
+    	`--label <strings>`
+    Filter by label
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of items to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of items to fetch
 
-	`-S`, 
-		`--search <query>`
-	Search pull requests with query
+    `-S`,
+    	`--search <query>`
+    Search pull requests with query
 
-	`-s`, 
-		`--state <string> (default "open")`
-	Filter by state: {open|closed|merged|all}
+    `-s`,
+    	`--state <string> (default "open")`
+    Filter by state: {open|closed|merged|all}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	List pull requests in the web browser
+    `-w`,
+    	`--web`
+    List pull requests in the web browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -9305,7 +8977,7 @@ $ gh pr list --search "<SHA>" --state merged
 
 ### See also
 
-  - [gh pr](./gh_pr)
+- [gh pr](./gh_pr)
 
 ### In use
 
@@ -9343,14 +9015,11 @@ Pull requests for owner/repo
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_lock
-
 
 ---
 
@@ -9365,28 +9034,25 @@ gh pr lock {<number> | <url>} [flags]
 
 ### Options
 
-	`-r`, 
-		`--reason <string>`
-	Optional reason for locking conversation (off_topic, resolved, spam, too_heated).
+    `-r`,
+    	`--reason <string>`
+    Optional reason for locking conversation (off_topic, resolved, spam, too_heated).
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_merge
-
 
 ---
 
@@ -9409,68 +9075,65 @@ To bypass a merge queue and merge directly, pass the `--admin` flag.
 
 ### Options
 
-		`--admin`
-	Use administrator privileges to merge a pull request that does not meet requirements
+    	`--admin`
+    Use administrator privileges to merge a pull request that does not meet requirements
 
-	`-A`, 
-		`--author-email <text>`
-	Email text for merge commit author
+    `-A`,
+    	`--author-email <text>`
+    Email text for merge commit author
 
-		`--auto`
-	Automatically merge only after necessary requirements are met
+    	`--auto`
+    Automatically merge only after necessary requirements are met
 
-	`-b`, 
-		`--body <text>`
-	Body text for the merge commit
+    `-b`,
+    	`--body <text>`
+    Body text for the merge commit
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-	`-d`, 
-		`--delete-branch`
-	Delete the local and remote branch after merge
+    `-d`,
+    	`--delete-branch`
+    Delete the local and remote branch after merge
 
-		`--disable-auto`
-	Disable auto-merge for this pull request
+    	`--disable-auto`
+    Disable auto-merge for this pull request
 
-		`--match-head-commit <SHA>`
-	Commit SHA that the pull request head must match to allow merge
+    	`--match-head-commit <SHA>`
+    Commit SHA that the pull request head must match to allow merge
 
-	`-m`, 
-		`--merge`
-	Merge the commits with the base branch
+    `-m`,
+    	`--merge`
+    Merge the commits with the base branch
 
-	`-r`, 
-		`--rebase`
-	Rebase the commits onto the base branch
+    `-r`,
+    	`--rebase`
+    Rebase the commits onto the base branch
 
-	`-s`, 
-		`--squash`
-	Squash the commits into one commit and merge it into the base branch
+    `-s`,
+    	`--squash`
+    Squash the commits into one commit and merge it into the base branch
 
-	`-t`, 
-		`--subject <text>`
-	Subject text for the merge commit
+    `-t`,
+    	`--subject <text>`
+    Subject text for the merge commit
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_ready
-
 
 ---
 
@@ -9490,27 +9153,24 @@ If supported by your plan, convert to draft with `--undo`
 
 ### Options
 
-		`--undo`
-	Convert a pull request to "draft"
+    	`--undo`
+    Convert a pull request to "draft"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_reopen
-
 
 ---
 
@@ -9525,28 +9185,25 @@ gh pr reopen {<number> | <url> | <branch>} [flags]
 
 ### Options
 
-	`-c`, 
-		`--comment <string>`
-	Add a reopening comment
+    `-c`,
+    	`--comment <string>`
+    Add a reopening comment
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_review
-
 
 ---
 
@@ -9563,31 +9220,31 @@ Without an argument, the pull request that belongs to the current branch is revi
 
 ### Options
 
-	`-a`, 
-		`--approve`
-	Approve pull request
+    `-a`,
+    	`--approve`
+    Approve pull request
 
-	`-b`, 
-		`--body <string>`
-	Specify the body of a review
+    `-b`,
+    	`--body <string>`
+    Specify the body of a review
 
-	`-F`, 
-		`--body-file <file>`
-	Read body text from file (use "-" to read from standard input)
+    `-F`,
+    	`--body-file <file>`
+    Read body text from file (use "-" to read from standard input)
 
-	`-c`, 
-		`--comment`
-	Comment on a pull request
+    `-c`,
+    	`--comment`
+    Comment on a pull request
 
-	`-r`, 
-		`--request-changes`
-	Request changes on a pull request
+    `-r`,
+    	`--request-changes`
+    Request changes on a pull request
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -9607,16 +9264,13 @@ $ gh pr review 123 -r -b "needs more ASCII art"
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_status
-
 
 ---
 
@@ -9636,26 +9290,26 @@ To see more details of CI checks, run `gh pr checks`.
 
 ### Options
 
-	`-c`, 
-		`--conflict-status`
-	Display the merge conflict status of each pull request
+    `-c`,
+    	`--conflict-status`
+    Display the merge conflict status of each pull request
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -9663,7 +9317,7 @@ To see more details of CI checks, run `gh pr checks`.
 
 ### See also
 
-  - [gh pr](./gh_pr)
+- [gh pr](./gh_pr)
 
 ### In use
 
@@ -9686,14 +9340,11 @@ To see more details of CI checks, run `gh pr checks`.
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_unlock
-
 
 ---
 
@@ -9708,22 +9359,19 @@ gh pr unlock {<number> | <url>}
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_update-branch
-
 
 ---
 
@@ -9744,14 +9392,14 @@ branch, the `--rebase` option should be provided.
 
 ### Options
 
-		`--rebase`
-	Update PR branch by rebasing on top of latest base branch
+    	`--rebase`
+    Update PR branch by rebasing on top of latest base branch
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -9763,16 +9411,13 @@ $ gh pr update-branch 23 --repo owner/repo
 
 ### See also
 
-  - [gh pr](./gh_pr)
-
+- [gh pr](./gh_pr)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_pr_view
-
 
 ---
 
@@ -9792,30 +9437,30 @@ With `--web` flag, open the pull request in a web browser instead.
 
 ### Options
 
-	`-c`, 
-		`--comments`
-	View pull request comments
+    `-c`,
+    	`--comments`
+    View pull request comments
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open a pull request in the browser
+    `-w`,
+    	`--web`
+    Open a pull request in the browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -9823,7 +9468,7 @@ With `--web` flag, open the pull request in a web browser instead.
 
 ### See also
 
-  - [gh pr](./gh_pr)
+- [gh pr](./gh_pr)
 
 ### In use
 
@@ -9870,14 +9515,11 @@ View this pull request on GitHub: https://github.com/owner/repo/pull/21
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_preview
-
 
 ---
 
@@ -9888,20 +9530,17 @@ They should be considered unstable and can change at any time.
 
 ### Available commands
 
-  - [gh preview prompter](./gh_preview_prompter)
+- [gh preview prompter](./gh_preview_prompter)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_preview_prompter
-
 
 ---
 
@@ -9917,36 +9556,33 @@ Without an argument, all prompts will be run.
 
 Available prompt types:
 
-  - select
+- select
 
-  - multi-select
+- multi-select
 
-  - input
+- input
 
-  - password
+- password
 
-  - confirm
+- confirm
 
-  - auth-token
+- auth-token
 
-  - confirm-deletion
+- confirm-deletion
 
-  - input-hostname
+- input-hostname
 
-  - markdown-editor
+- markdown-editor
 
 ### See also
 
-  - [gh preview](./gh_preview)
-
+- [gh preview](./gh_preview)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project
-
 
 ---
 
@@ -9960,43 +9596,43 @@ add the `project` scope by running `gh auth refresh -s project`.
 
 ### Available commands
 
-  - [gh project close](./gh_project_close)
+- [gh project close](./gh_project_close)
 
-  - [gh project copy](./gh_project_copy)
+- [gh project copy](./gh_project_copy)
 
-  - [gh project create](./gh_project_create)
+- [gh project create](./gh_project_create)
 
-  - [gh project delete](./gh_project_delete)
+- [gh project delete](./gh_project_delete)
 
-  - [gh project edit](./gh_project_edit)
+- [gh project edit](./gh_project_edit)
 
-  - [gh project field-create](./gh_project_field-create)
+- [gh project field-create](./gh_project_field-create)
 
-  - [gh project field-delete](./gh_project_field-delete)
+- [gh project field-delete](./gh_project_field-delete)
 
-  - [gh project field-list](./gh_project_field-list)
+- [gh project field-list](./gh_project_field-list)
 
-  - [gh project item-add](./gh_project_item-add)
+- [gh project item-add](./gh_project_item-add)
 
-  - [gh project item-archive](./gh_project_item-archive)
+- [gh project item-archive](./gh_project_item-archive)
 
-  - [gh project item-create](./gh_project_item-create)
+- [gh project item-create](./gh_project_item-create)
 
-  - [gh project item-delete](./gh_project_item-delete)
+- [gh project item-delete](./gh_project_item-delete)
 
-  - [gh project item-edit](./gh_project_item-edit)
+- [gh project item-edit](./gh_project_item-edit)
 
-  - [gh project item-list](./gh_project_item-list)
+- [gh project item-list](./gh_project_item-list)
 
-  - [gh project link](./gh_project_link)
+- [gh project link](./gh_project_link)
 
-  - [gh project list](./gh_project_list)
+- [gh project list](./gh_project_list)
 
-  - [gh project mark-template](./gh_project_mark-template)
+- [gh project mark-template](./gh_project_mark-template)
 
-  - [gh project unlink](./gh_project_unlink)
+- [gh project unlink](./gh_project_unlink)
 
-  - [gh project view](./gh_project_view)
+- [gh project view](./gh_project_view)
 
 ### Examples
 
@@ -10009,16 +9645,13 @@ $ gh project item-list 1 --owner cli
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_close
-
 
 ---
 
@@ -10033,22 +9666,22 @@ gh project close [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--undo`
-	Reopen a closed project
+    	`--undo`
+    Reopen a closed project
 
 ### Examples
 
@@ -10062,16 +9695,13 @@ $ gh project close 1 --owner github --undo
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_copy
-
 
 ---
 
@@ -10086,28 +9716,28 @@ gh project copy [<number>] [flags]
 
 ### Options
 
-		`--drafts`
-	Include draft issues when copying
+    	`--drafts`
+    Include draft issues when copying
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--source-owner <string>`
-	Login of the source owner. Use "@me" for the current user.
+    	`--source-owner <string>`
+    Login of the source owner. Use "@me" for the current user.
 
-		`--target-owner <string>`
-	Login of the target owner. Use "@me" for the current user.
+    	`--target-owner <string>`
+    Login of the target owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--title <string>`
-	Title for the new project
+    	`--title <string>`
+    Title for the new project
 
 ### Examples
 
@@ -10118,16 +9748,13 @@ $ gh project copy 1 --source-owner monalisa --target-owner github --title "a new
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_create
-
 
 ---
 
@@ -10142,22 +9769,22 @@ gh project create [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--title <string>`
-	Title for the project
+    	`--title <string>`
+    Title for the project
 
 ### Examples
 
@@ -10168,16 +9795,13 @@ $ gh project create --owner monalisa --title "a new project"
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_delete
-
 
 ---
 
@@ -10192,19 +9816,19 @@ gh project delete [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Examples
 
@@ -10215,16 +9839,13 @@ $ gh project delete 1 --owner "@me"
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_edit
-
 
 ---
 
@@ -10239,32 +9860,32 @@ gh project edit [<number>] [flags]
 
 ### Options
 
-	`-d`, 
-		`--description <string>`
-	New description of the project
+    `-d`,
+    	`--description <string>`
+    New description of the project
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-		`--readme <string>`
-	New readme for the project
+    	`--readme <string>`
+    New readme for the project
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--title <string>`
-	New title for the project
+    	`--title <string>`
+    New title for the project
 
-		`--visibility <string>`
-	Change project visibility: {PUBLIC|PRIVATE}
+    	`--visibility <string>`
+    Change project visibility: {PUBLIC|PRIVATE}
 
 ### Examples
 
@@ -10275,16 +9896,13 @@ $ gh project edit 1 --owner monalisa --title "New title"
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_field-create
-
 
 ---
 
@@ -10299,28 +9917,28 @@ gh project field-create [<number>] [flags]
 
 ### Options
 
-		`--data-type <string>`
-	DataType of the new field.: {TEXT|SINGLE_SELECT|DATE|NUMBER}
+    	`--data-type <string>`
+    DataType of the new field.: {TEXT|SINGLE_SELECT|DATE|NUMBER}
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--name <string>`
-	Name of the new field
+    	`--name <string>`
+    Name of the new field
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-		`--single-select-options <strings>`
-	Options for SINGLE_SELECT data type
+    	`--single-select-options <strings>`
+    Options for SINGLE_SELECT data type
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Examples
 
@@ -10334,16 +9952,13 @@ $ gh project field-create 1 --owner monalisa --name "new field" --data-type "SIN
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_field-delete
-
 
 ---
 
@@ -10358,32 +9973,29 @@ gh project field-delete [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-		`--id <string>`
-	ID of the field to delete
+    	`--id <string>`
+    ID of the field to delete
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_field-list
-
 
 ---
 
@@ -10398,23 +10010,23 @@ gh project field-list [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of fields to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of fields to fetch
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Examples
 
@@ -10425,16 +10037,13 @@ $ gh project field-list 1 --owner "@me"
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_item-add
-
 
 ---
 
@@ -10449,22 +10058,22 @@ gh project item-add [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--url <string>`
-	URL of the issue or pull request to add to the project
+    	`--url <string>`
+    URL of the issue or pull request to add to the project
 
 ### Examples
 
@@ -10475,16 +10084,13 @@ $ gh project item-add 1 --owner monalisa --url https://github.com/monalisa/mypro
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_item-archive
-
 
 ---
 
@@ -10499,25 +10105,25 @@ gh project item-archive [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-		`--id <string>`
-	ID of the item to archive
+    	`--id <string>`
+    ID of the item to archive
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--undo`
-	Unarchive an item
+    	`--undo`
+    Unarchive an item
 
 ### Examples
 
@@ -10528,16 +10134,13 @@ $ gh project item-archive 1 --owner "@me" --id <item-ID>
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_item-create
-
 
 ---
 
@@ -10552,25 +10155,25 @@ gh project item-create [<number>] [flags]
 
 ### Options
 
-		`--body <string>`
-	Body for the draft issue
+    	`--body <string>`
+    Body for the draft issue
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--title <string>`
-	Title for the draft issue
+    	`--title <string>`
+    Title for the draft issue
 
 ### Examples
 
@@ -10581,16 +10184,13 @@ $ gh project item-create 1 --owner "@me" --title "new item" --body "new item bod
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_item-delete
-
 
 ---
 
@@ -10605,22 +10205,22 @@ gh project item-delete [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-		`--id <string>`
-	ID of the item to delete
+    	`--id <string>`
+    ID of the item to delete
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Examples
 
@@ -10631,16 +10231,13 @@ $ gh project item-delete 1 --owner "@me" --id <item-id>
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_item-edit
-
 
 ---
 
@@ -10659,49 +10256,49 @@ Remove project item field value using `--clear` flag.
 
 ### Options
 
-		`--body <string>`
-	Body of the draft issue item
+    	`--body <string>`
+    Body of the draft issue item
 
-		`--clear`
-	Remove field value
+    	`--clear`
+    Remove field value
 
-		`--date <string>`
-	Date value for the field (YYYY-MM-DD)
+    	`--date <string>`
+    Date value for the field (YYYY-MM-DD)
 
-		`--field-id <string>`
-	ID of the field to update
+    	`--field-id <string>`
+    ID of the field to update
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-		`--id <string>`
-	ID of the item to edit
+    	`--id <string>`
+    ID of the item to edit
 
-		`--iteration-id <string>`
-	ID of the iteration value to set on the field
+    	`--iteration-id <string>`
+    ID of the iteration value to set on the field
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--number <float> (default 0)`
-	Number value for the field
+    	`--number <float> (default 0)`
+    Number value for the field
 
-		`--project-id <string>`
-	ID of the project to which the field belongs to
+    	`--project-id <string>`
+    ID of the project to which the field belongs to
 
-		`--single-select-option-id <string>`
-	ID of the single select option value to set on the field
+    	`--single-select-option-id <string>`
+    ID of the single select option value to set on the field
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--text <string>`
-	Text value for the field
+    	`--text <string>`
+    Text value for the field
 
-		`--title <string>`
-	Title of the draft issue item
+    	`--title <string>`
+    Title of the draft issue item
 
 ### Examples
 
@@ -10715,16 +10312,13 @@ $ gh project item-edit --id <item-id> --field-id <field-id> --project-id <projec
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_item-list
-
 
 ---
 
@@ -10739,23 +10333,23 @@ gh project item-list [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of items to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of items to fetch
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Examples
 
@@ -10766,16 +10360,13 @@ $ gh project item-list 1 --owner "@me"
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_link
-
 
 ---
 
@@ -10790,16 +10381,16 @@ gh project link [<number>] [flags]
 
 ### Options
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-R`, 
-		`--repo <string>`
-	The repository to be linked to this project
+    `-R`,
+    	`--repo <string>`
+    The repository to be linked to this project
 
-	`-T`, 
-		`--team <string>`
-	The team to be linked to this project
+    `-T`,
+    	`--team <string>`
+    The team to be linked to this project
 
 ### Examples
 
@@ -10816,16 +10407,13 @@ $ gh project link 1
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_list
-
 
 ---
 
@@ -10840,30 +10428,30 @@ gh project list [flags]
 
 ### Options
 
-		`--closed`
-	Include closed projects
+    	`--closed`
+    Include closed projects
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of projects to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of projects to fetch
 
-		`--owner <string>`
-	Login of the owner
+    	`--owner <string>`
+    Login of the owner
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open projects list in the browser
+    `-w`,
+    	`--web`
+    Open projects list in the browser
 
 ### ALIASES
 
@@ -10881,16 +10469,13 @@ $ gh project list --owner github --closed
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_mark-template
-
 
 ---
 
@@ -10905,22 +10490,22 @@ gh project mark-template [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the org owner.
+    	`--owner <string>`
+    Login of the org owner.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--undo`
-	Unmark the project as a template.
+    	`--undo`
+    Unmark the project as a template.
 
 ### Examples
 
@@ -10934,16 +10519,13 @@ $ gh project mark-template 1 --owner "github" --undo
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_unlink
-
 
 ---
 
@@ -10958,16 +10540,16 @@ gh project unlink [<number>] [flags]
 
 ### Options
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-R`, 
-		`--repo <string>`
-	The repository to be unlinked from this project
+    `-R`,
+    	`--repo <string>`
+    The repository to be unlinked from this project
 
-	`-T`, 
-		`--team <string>`
-	The team to be unlinked from this project
+    `-T`,
+    	`--team <string>`
+    The team to be unlinked from this project
 
 ### Examples
 
@@ -10984,16 +10566,13 @@ $ gh project unlink 1
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_project_view
-
 
 ---
 
@@ -11008,23 +10587,23 @@ gh project view [<number>] [flags]
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--owner <string>`
-	Login of the owner. Use "@me" for the current user.
+    	`--owner <string>`
+    Login of the owner. Use "@me" for the current user.
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open a project in the browser
+    `-w`,
+    	`--web`
+    Open a project in the browser
 
 ### Examples
 
@@ -11038,16 +10617,13 @@ $ gh project view 1 --owner monalisa --web
 
 ### See also
 
-  - [gh project](./gh_project)
-
+- [gh project](./gh_project)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release
-
 
 ---
 
@@ -11057,46 +10633,43 @@ Manage releases
 
 ### General commands
 
-  - [gh release create](./gh_release_create)
+- [gh release create](./gh_release_create)
 
-  - [gh release list](./gh_release_list)
+- [gh release list](./gh_release_list)
 
 ### Targeted commands
 
-  - [gh release delete](./gh_release_delete)
+- [gh release delete](./gh_release_delete)
 
-  - [gh release delete-asset](./gh_release_delete-asset)
+- [gh release delete-asset](./gh_release_delete-asset)
 
-  - [gh release download](./gh_release_download)
+- [gh release download](./gh_release_download)
 
-  - [gh release edit](./gh_release_edit)
+- [gh release edit](./gh_release_edit)
 
-  - [gh release upload](./gh_release_upload)
+- [gh release upload](./gh_release_upload)
 
-  - [gh release verify](./gh_release_verify)
+- [gh release verify](./gh_release_verify)
 
-  - [gh release verify-asset](./gh_release_verify-asset)
+- [gh release verify-asset](./gh_release_verify-asset)
 
-  - [gh release view](./gh_release_view)
+- [gh release view](./gh_release_view)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_create
-
 
 ---
 
@@ -11135,55 +10708,55 @@ effect if there are no existing releases or this is the very first release.
 
 ### Options
 
-		`--discussion-category <string>`
-	Start a discussion in the specified category
+    	`--discussion-category <string>`
+    Start a discussion in the specified category
 
-	`-d`, 
-		`--draft`
-	Save the release as a draft instead of publishing it
+    `-d`,
+    	`--draft`
+    Save the release as a draft instead of publishing it
 
-		`--fail-on-no-commits`
-	Fail if there are no commits since the last release (no impact on the first release)
+    	`--fail-on-no-commits`
+    Fail if there are no commits since the last release (no impact on the first release)
 
-		`--generate-notes`
-	Automatically generate title and notes for the release via GitHub Release Notes API
+    	`--generate-notes`
+    Automatically generate title and notes for the release via GitHub Release Notes API
 
-		`--latest`
-	Mark this release as "Latest" (default [automatic based on date and version]). --latest=false to explicitly NOT set as latest
+    	`--latest`
+    Mark this release as "Latest" (default [automatic based on date and version]). --latest=false to explicitly NOT set as latest
 
-	`-n`, 
-		`--notes <string>`
-	Release notes
+    `-n`,
+    	`--notes <string>`
+    Release notes
 
-	`-F`, 
-		`--notes-file <file>`
-	Read release notes from file (use "-" to read from standard input)
+    `-F`,
+    	`--notes-file <file>`
+    Read release notes from file (use "-" to read from standard input)
 
-		`--notes-from-tag`
-	Fetch notes from the tag annotation or message of commit associated with tag
+    	`--notes-from-tag`
+    Fetch notes from the tag annotation or message of commit associated with tag
 
-		`--notes-start-tag <string>`
-	Tag to use as the starting point for generating release notes
+    	`--notes-start-tag <string>`
+    Tag to use as the starting point for generating release notes
 
-	`-p`, 
-		`--prerelease`
-	Mark the release as a prerelease
+    `-p`,
+    	`--prerelease`
+    Mark the release as a prerelease
 
-		`--target <branch>`
-	Target branch or full commit SHA (default [main branch])
+    	`--target <branch>`
+    Target branch or full commit SHA (default [main branch])
 
-	`-t`, 
-		`--title <string>`
-	Release title
+    `-t`,
+    	`--title <string>`
+    Release title
 
-		`--verify-tag`
-	Abort in case the git tag doesn't already exist in the remote repository
+    	`--verify-tag`
+    Abort in case the git tag doesn't already exist in the remote repository
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -11228,16 +10801,13 @@ $ gh release create v1.2.3 --fail-on-no-commits
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_delete
-
 
 ---
 
@@ -11252,31 +10822,28 @@ gh release delete <tag> [flags]
 
 ### Options
 
-		`--cleanup-tag`
-	Delete the specified tag in addition to its release
+    	`--cleanup-tag`
+    Delete the specified tag in addition to its release
 
-	`-y`, 
-		`--yes`
-	Skip the confirmation prompt
+    `-y`,
+    	`--yes`
+    Skip the confirmation prompt
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_delete-asset
-
 
 ---
 
@@ -11291,28 +10858,25 @@ gh release delete-asset <tag> <asset-name> [flags]
 
 ### Options
 
-	`-y`, 
-		`--yes`
-	Skip the confirmation prompt
+    `-y`,
+    	`--yes`
+    Skip the confirmation prompt
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_download
-
 
 ---
 
@@ -11331,33 +10895,33 @@ is required.
 
 ### Options
 
-	`-A`, 
-		`--archive <format>`
-	Download the source code archive in the specified format (zip or tar.gz)
+    `-A`,
+    	`--archive <format>`
+    Download the source code archive in the specified format (zip or tar.gz)
 
-		`--clobber`
-	Overwrite existing files of the same name
+    	`--clobber`
+    Overwrite existing files of the same name
 
-	`-D`, 
-		`--dir <directory> (default ".")`
-	The directory to download files into
+    `-D`,
+    	`--dir <directory> (default ".")`
+    The directory to download files into
 
-	`-O`, 
-		`--output <file>`
-	The file to write a single asset to (use "-" to write to standard output)
+    `-O`,
+    	`--output <file>`
+    The file to write a single asset to (use "-" to write to standard output)
 
-	`-p`, 
-		`--pattern <stringArray>`
-	Download only assets that match a glob pattern
+    `-p`,
+    	`--pattern <stringArray>`
+    Download only assets that match a glob pattern
 
-		`--skip-existing`
-	Skip downloading when files of the same name exist
+    	`--skip-existing`
+    Skip downloading when files of the same name exist
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -11377,16 +10941,13 @@ $ gh release download v1.2.3 --archive=zip
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_edit
-
 
 ---
 
@@ -11401,44 +10962,44 @@ gh release edit <tag>
 
 ### Options
 
-		`--discussion-category <string>`
-	Start a discussion in the specified category when publishing a draft
+    	`--discussion-category <string>`
+    Start a discussion in the specified category when publishing a draft
 
-		`--draft`
-	Save the release as a draft instead of publishing it
+    	`--draft`
+    Save the release as a draft instead of publishing it
 
-		`--latest`
-	Explicitly mark the release as "Latest"
+    	`--latest`
+    Explicitly mark the release as "Latest"
 
-	`-n`, 
-		`--notes <string>`
-	Release notes
+    `-n`,
+    	`--notes <string>`
+    Release notes
 
-	`-F`, 
-		`--notes-file <file>`
-	Read release notes from file (use "-" to read from standard input)
+    `-F`,
+    	`--notes-file <file>`
+    Read release notes from file (use "-" to read from standard input)
 
-		`--prerelease`
-	Mark the release as a prerelease
+    	`--prerelease`
+    Mark the release as a prerelease
 
-		`--tag <string>`
-	The name of the tag
+    	`--tag <string>`
+    The name of the tag
 
-		`--target <branch>`
-	Target branch or full commit SHA (default [main branch])
+    	`--target <branch>`
+    Target branch or full commit SHA (default [main branch])
 
-	`-t`, 
-		`--title <string>`
-	Release title
+    `-t`,
+    	`--title <string>`
+    Release title
 
-		`--verify-tag`
-	Abort in case the git tag doesn't already exist in the remote repository
+    	`--verify-tag`
+    Abort in case the git tag doesn't already exist in the remote repository
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -11452,16 +11013,13 @@ $ gh release edit v1.0 --notes-file /path/to/release_notes.md
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_list
-
 
 ---
 
@@ -11476,36 +11034,36 @@ gh release list [flags]
 
 ### Options
 
-		`--exclude-drafts`
-	Exclude draft releases
+    	`--exclude-drafts`
+    Exclude draft releases
 
-		`--exclude-pre-releases`
-	Exclude pre-releases
+    	`--exclude-pre-releases`
+    Exclude pre-releases
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of items to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of items to fetch
 
-	`-O`, 
-		`--order <string> (default "desc")`
-	Order of releases returned: {asc|desc}
+    `-O`,
+    	`--order <string> (default "desc")`
+    Order of releases returned: {asc|desc}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -11517,16 +11075,13 @@ gh release ls
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_upload
-
 
 ---
 
@@ -11544,27 +11099,24 @@ file name.
 
 ### Options
 
-		`--clobber`
-	Overwrite existing assets of the same name
+    	`--clobber`
+    Overwrite existing assets of the same name
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_verify
-
 
 ---
 
@@ -11579,27 +11131,27 @@ Verify that a GitHub Release is accompanied by a valid cryptographically signed 
 
 An attestation is a claim made by GitHub regarding a release and its assets.
 
-This command checks that the specified release (or the latest release, if no tag is given) has a valid attestation. 
+This command checks that the specified release (or the latest release, if no tag is given) has a valid attestation.
 It fetches the attestation for the release and prints metadata about all assets referenced in the attestation, including their digests.
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -11616,16 +11168,13 @@ gh release verify v1.2.3 --format json
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_verify-asset
-
 
 ---
 
@@ -11647,22 +11196,22 @@ An attestation is a claim made by GitHub regarding a release and its assets.
 
 ### Options
 
-		`--format <string>`
-	Output format: {json}
+    	`--format <string>`
+    Output format: {json}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -11679,16 +11228,13 @@ $ gh release verify-asset v1.2.3 ./dist/my-asset.zip --format json
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_release_view
-
 
 ---
 
@@ -11706,26 +11252,26 @@ is shown.
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open the release in the browser
+    `-w`,
+    	`--web`
+    Open the release in the browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -11733,16 +11279,13 @@ is shown.
 
 ### See also
 
-  - [gh release](./gh_release)
-
+- [gh release](./gh_release)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo
-
 
 ---
 
@@ -11752,39 +11295,39 @@ Work with GitHub repositories.
 
 ### General commands
 
-  - [gh repo create](./gh_repo_create)
+- [gh repo create](./gh_repo_create)
 
-  - [gh repo list](./gh_repo_list)
+- [gh repo list](./gh_repo_list)
 
 ### Targeted commands
 
-  - [gh repo archive](./gh_repo_archive)
+- [gh repo archive](./gh_repo_archive)
 
-  - [gh repo autolink](./gh_repo_autolink)
+- [gh repo autolink](./gh_repo_autolink)
 
-  - [gh repo clone](./gh_repo_clone)
+- [gh repo clone](./gh_repo_clone)
 
-  - [gh repo delete](./gh_repo_delete)
+- [gh repo delete](./gh_repo_delete)
 
-  - [gh repo deploy-key](./gh_repo_deploy-key)
+- [gh repo deploy-key](./gh_repo_deploy-key)
 
-  - [gh repo edit](./gh_repo_edit)
+- [gh repo edit](./gh_repo_edit)
 
-  - [gh repo fork](./gh_repo_fork)
+- [gh repo fork](./gh_repo_fork)
 
-  - [gh repo gitignore](./gh_repo_gitignore)
+- [gh repo gitignore](./gh_repo_gitignore)
 
-  - [gh repo license](./gh_repo_license)
+- [gh repo license](./gh_repo_license)
 
-  - [gh repo rename](./gh_repo_rename)
+- [gh repo rename](./gh_repo_rename)
 
-  - [gh repo set-default](./gh_repo_set-default)
+- [gh repo set-default](./gh_repo_set-default)
 
-  - [gh repo sync](./gh_repo_sync)
+- [gh repo sync](./gh_repo_sync)
 
-  - [gh repo unarchive](./gh_repo_unarchive)
+- [gh repo unarchive](./gh_repo_unarchive)
 
-  - [gh repo view](./gh_repo_view)
+- [gh repo view](./gh_repo_view)
 
 ### Examples
 
@@ -11796,16 +11339,13 @@ $ gh repo view --web
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_archive
-
 
 ---
 
@@ -11822,22 +11362,19 @@ With no argument, archives the current repository.
 
 ### Options
 
-	`-y`, 
-		`--yes`
-	Skip the confirmation prompt
+    `-y`,
+    	`--yes`
+    Skip the confirmation prompt
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_autolink
-
 
 ---
 
@@ -11851,32 +11388,29 @@ For more information, see [https://docs.github.com/en/repositories/managing-your
 
 ### Available commands
 
-  - [gh repo autolink create](./gh_repo_autolink_create)
+- [gh repo autolink create](./gh_repo_autolink_create)
 
-  - [gh repo autolink delete](./gh_repo_autolink_delete)
+- [gh repo autolink delete](./gh_repo_autolink_delete)
 
-  - [gh repo autolink list](./gh_repo_autolink_list)
+- [gh repo autolink list](./gh_repo_autolink_list)
 
-  - [gh repo autolink view](./gh_repo_autolink_view)
+- [gh repo autolink view](./gh_repo_autolink_view)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_autolink_create
-
 
 ---
 
@@ -11898,23 +11432,23 @@ By default, autolinks are alphanumeric with `--numeric` flag used to create a nu
 
 The `<num>` variable behavior differs depending on whether the autolink is alphanumeric or numeric:
 
-  - alphanumeric: matches `A-Z` (case insensitive), `0-9`, and `-`
+- alphanumeric: matches `A-Z` (case insensitive), `0-9`, and `-`
 
-  - numeric: matches `0-9`
+- numeric: matches `0-9`
 
 If the template contains multiple instances of `<num>`, only the first will be replaced.
 
 ### Options
 
-	`-n`, 
-		`--numeric`
-	Mark autolink as numeric
+    `-n`,
+    	`--numeric`
+    Mark autolink as numeric
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -11934,16 +11468,13 @@ $ gh repo autolink create STORY- "https://example.com/STORY?id=<num>" --numeric
 
 ### See also
 
-  - [gh repo autolink](./gh_repo_autolink)
-
+- [gh repo autolink](./gh_repo_autolink)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_autolink_delete
-
 
 ---
 
@@ -11958,27 +11489,24 @@ Delete an autolink reference for a repository.
 
 ### Options
 
-		`--yes`
-	Confirm deletion without prompting
+    	`--yes`
+    Confirm deletion without prompting
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh repo autolink](./gh_repo_autolink)
-
+- [gh repo autolink](./gh_repo_autolink)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_autolink_list
-
 
 ---
 
@@ -11995,26 +11523,26 @@ Information about autolinks is only available to repository administrators.
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	List autolink references in the web browser
+    `-w`,
+    	`--web`
+    List autolink references in the web browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -12026,16 +11554,13 @@ gh repo autolink ls
 
 ### See also
 
-  - [gh repo autolink](./gh_repo_autolink)
-
+- [gh repo autolink](./gh_repo_autolink)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_autolink_view
-
 
 ---
 
@@ -12050,22 +11575,22 @@ View an autolink reference for a repository.
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -12073,16 +11598,13 @@ View an autolink reference for a repository.
 
 ### See also
 
-  - [gh repo autolink](./gh_repo_autolink)
-
+- [gh repo autolink](./gh_repo_autolink)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_clone
-
 
 ---
 
@@ -12112,9 +11634,9 @@ If the repository is a fork, its parent repository will be set as the default re
 
 ### Options
 
-	`-u`, 
-		`--upstream-remote-name <string> (default "upstream")`
-	Upstream remote name when cloning a fork
+    `-u`,
+    	`--upstream-remote-name <string> (default "upstream")`
+    Upstream remote name when cloning a fork
 
 ### Examples
 
@@ -12138,7 +11660,7 @@ $ gh repo clone cli/cli -- --depth=1
 
 ### See also
 
-  - [gh repo](./gh_repo)
+- [gh repo](./gh_repo)
 
 ### In use
 
@@ -12172,14 +11694,11 @@ Resolving deltas: 100% (16051/16051), done.
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_create
-
 
 ---
 
@@ -12213,65 +11732,65 @@ The repo is created with the configured repository default branch, see [https://
 
 ### Options
 
-		`--add-readme`
-	Add a README file to the new repository
+    	`--add-readme`
+    Add a README file to the new repository
 
-	`-c`, 
-		`--clone`
-	Clone the new repository to the current directory
+    `-c`,
+    	`--clone`
+    Clone the new repository to the current directory
 
-	`-d`, 
-		`--description <string>`
-	Description of the repository
+    `-d`,
+    	`--description <string>`
+    Description of the repository
 
-		`--disable-issues`
-	Disable issues in the new repository
+    	`--disable-issues`
+    Disable issues in the new repository
 
-		`--disable-wiki`
-	Disable wiki in the new repository
+    	`--disable-wiki`
+    Disable wiki in the new repository
 
-	`-g`, 
-		`--gitignore <string>`
-	Specify a gitignore template for the repository
+    `-g`,
+    	`--gitignore <string>`
+    Specify a gitignore template for the repository
 
-	`-h`, 
-		`--homepage <URL>`
-	Repository home page URL
+    `-h`,
+    	`--homepage <URL>`
+    Repository home page URL
 
-		`--include-all-branches`
-	Include all branches from template repository
+    	`--include-all-branches`
+    Include all branches from template repository
 
-		`--internal`
-	Make the new repository internal
+    	`--internal`
+    Make the new repository internal
 
-	`-l`, 
-		`--license <string>`
-	Specify an Open Source License for the repository
+    `-l`,
+    	`--license <string>`
+    Specify an Open Source License for the repository
 
-		`--private`
-	Make the new repository private
+    	`--private`
+    Make the new repository private
 
-		`--public`
-	Make the new repository public
+    	`--public`
+    Make the new repository public
 
-		`--push`
-	Push local commits to the new repository
+    	`--push`
+    Push local commits to the new repository
 
-	`-r`, 
-		`--remote <string>`
-	Specify remote name for the new repository
+    `-r`,
+    	`--remote <string>`
+    Specify remote name for the new repository
 
-	`-s`, 
-		`--source <string>`
-	Specify path to local repository to use as source
+    `-s`,
+    	`--source <string>`
+    Specify path to local repository to use as source
 
-	`-t`, 
-		`--team <name>`
-	The name of the organization team to be granted access
+    `-t`,
+    	`--team <name>`
+    The name of the organization team to be granted access
 
-	`-p`, 
-		`--template <repository>`
-	Make the new repository based on a template repository
+    `-p`,
+    	`--template <repository>`
+    Make the new repository based on a template repository
 
 ### ALIASES
 
@@ -12295,16 +11814,13 @@ $ gh repo create my-project --private --source=. --remote=upstream
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_delete
-
 
 ---
 
@@ -12319,8 +11835,8 @@ Delete a GitHub repository.
 
 With no argument, deletes the current repository. Otherwise, deletes the specified repository.
 
-For safety, when no repository argument is provided, the `--yes` flag is ignored 
-and you will be prompted for confirmation. To delete the current repository non-interactively, 
+For safety, when no repository argument is provided, the `--yes` flag is ignored
+and you will be prompted for confirmation. To delete the current repository non-interactively,
 specify it explicitly (e.g., `gh repo delete owner/repo --yes`).
 
 Deletion requires authorization with the `delete_repo` scope.
@@ -12328,21 +11844,18 @@ To authorize, run `gh auth refresh -s delete_repo`
 
 ### Options
 
-		`--yes`
-	Confirm deletion without prompting
+    	`--yes`
+    Confirm deletion without prompting
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_deploy-key
-
 
 ---
 
@@ -12352,30 +11865,27 @@ Manage deploy keys in a repository
 
 ### Available commands
 
-  - [gh repo deploy-key add](./gh_repo_deploy-key_add)
+- [gh repo deploy-key add](./gh_repo_deploy-key_add)
 
-  - [gh repo deploy-key delete](./gh_repo_deploy-key_delete)
+- [gh repo deploy-key delete](./gh_repo_deploy-key_delete)
 
-  - [gh repo deploy-key list](./gh_repo_deploy-key_list)
+- [gh repo deploy-key list](./gh_repo_deploy-key_list)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_deploy-key_add
-
 
 ---
 
@@ -12394,19 +11904,19 @@ deploy keys added by GitHub CLI will be removed as well.
 
 ### Options
 
-	`-w`, 
-		`--allow-write`
-	Allow write access for the key
+    `-w`,
+    	`--allow-write`
+    Allow write access for the key
 
-	`-t`, 
-		`--title <string>`
-	Title of the new key
+    `-t`,
+    	`--title <string>`
+    Title of the new key
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -12418,16 +11928,13 @@ $ gh repo deploy-key add ~/.ssh/gh-test.pub
 
 ### See also
 
-  - [gh repo deploy-key](./gh_repo_deploy-key)
-
+- [gh repo deploy-key](./gh_repo_deploy-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_deploy-key_delete
-
 
 ---
 
@@ -12442,22 +11949,19 @@ gh repo deploy-key delete <key-id>
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh repo deploy-key](./gh_repo_deploy-key)
-
+- [gh repo deploy-key](./gh_repo_deploy-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_deploy-key_list
-
 
 ---
 
@@ -12472,22 +11976,22 @@ gh repo deploy-key list [flags]
 
 ### Options
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -12499,16 +12003,13 @@ gh repo deploy-key ls
 
 ### See also
 
-  - [gh repo deploy-key](./gh_repo_deploy-key)
-
+- [gh repo deploy-key](./gh_repo_deploy-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_edit
-
 
 ---
 
@@ -12525,13 +12026,13 @@ To toggle a setting off, use the `--<flag>=false` syntax.
 
 Changing repository visibility can have unexpected consequences including but not limited to:
 
-  - Losing stars and watchers, affecting repository ranking
+- Losing stars and watchers, affecting repository ranking
 
-  - Detaching public forks from the network
+- Detaching public forks from the network
 
-  - Disabling push rulesets
+- Disabling push rulesets
 
-  - Allowing access to GitHub Actions history and logs
+- Allowing access to GitHub Actions history and logs
 
 When the `--visibility` flag is used, `--accept-visibility-change-consequences` flag is required.
 
@@ -12539,73 +12040,73 @@ For information on all the potential consequences, see [https://gh.io/setting-re
 
 ### Options
 
-		`--accept-visibility-change-consequences`
-	Accept the consequences of changing the repository visibility
+    	`--accept-visibility-change-consequences`
+    Accept the consequences of changing the repository visibility
 
-		`--add-topic <strings>`
-	Add repository topic
+    	`--add-topic <strings>`
+    Add repository topic
 
-		`--allow-forking`
-	Allow forking of an organization repository
+    	`--allow-forking`
+    Allow forking of an organization repository
 
-		`--allow-update-branch`
-	Allow a pull request head branch that is behind its base branch to be updated
+    	`--allow-update-branch`
+    Allow a pull request head branch that is behind its base branch to be updated
 
-		`--default-branch <name>`
-	Set the default branch name for the repository
+    	`--default-branch <name>`
+    Set the default branch name for the repository
 
-		`--delete-branch-on-merge`
-	Delete head branch when pull requests are merged
+    	`--delete-branch-on-merge`
+    Delete head branch when pull requests are merged
 
-	`-d`, 
-		`--description <string>`
-	Description of the repository
+    `-d`,
+    	`--description <string>`
+    Description of the repository
 
-		`--enable-advanced-security`
-	Enable advanced security in the repository
+    	`--enable-advanced-security`
+    Enable advanced security in the repository
 
-		`--enable-auto-merge`
-	Enable auto-merge functionality
+    	`--enable-auto-merge`
+    Enable auto-merge functionality
 
-		`--enable-discussions`
-	Enable discussions in the repository
+    	`--enable-discussions`
+    Enable discussions in the repository
 
-		`--enable-issues`
-	Enable issues in the repository
+    	`--enable-issues`
+    Enable issues in the repository
 
-		`--enable-merge-commit`
-	Enable merging pull requests via merge commit
+    	`--enable-merge-commit`
+    Enable merging pull requests via merge commit
 
-		`--enable-projects`
-	Enable projects in the repository
+    	`--enable-projects`
+    Enable projects in the repository
 
-		`--enable-rebase-merge`
-	Enable merging pull requests via rebase
+    	`--enable-rebase-merge`
+    Enable merging pull requests via rebase
 
-		`--enable-secret-scanning`
-	Enable secret scanning in the repository
+    	`--enable-secret-scanning`
+    Enable secret scanning in the repository
 
-		`--enable-secret-scanning-push-protection`
-	Enable secret scanning push protection in the repository. Secret scanning must be enabled first
+    	`--enable-secret-scanning-push-protection`
+    Enable secret scanning push protection in the repository. Secret scanning must be enabled first
 
-		`--enable-squash-merge`
-	Enable merging pull requests via squashed commit
+    	`--enable-squash-merge`
+    Enable merging pull requests via squashed commit
 
-		`--enable-wiki`
-	Enable wiki in the repository
+    	`--enable-wiki`
+    Enable wiki in the repository
 
-	`-h`, 
-		`--homepage <URL>`
-	Repository home page URL
+    `-h`,
+    	`--homepage <URL>`
+    Repository home page URL
 
-		`--remove-topic <strings>`
-	Remove repository topic
+    	`--remove-topic <strings>`
+    Remove repository topic
 
-		`--template`
-	Make the repository available as a template repository
+    	`--template`
+    Make the repository available as a template repository
 
-		`--visibility <string>`
-	Change the visibility of the repository to {public,private,internal}
+    	`--visibility <string>`
+    Change the visibility of the repository to {public,private,internal}
 
 ### Examples
 
@@ -12619,16 +12120,13 @@ $ gh repo edit --enable-projects=false
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_fork
-
 
 ---
 
@@ -12654,27 +12152,27 @@ Additional `git clone` flags can be passed after `--`.
 
 ### Options
 
-		`--clone`
-	Clone the fork
+    	`--clone`
+    Clone the fork
 
-		`--default-branch-only`
-	Only include the default branch in the fork
+    	`--default-branch-only`
+    Only include the default branch in the fork
 
-		`--fork-name <string>`
-	Rename the forked repository
+    	`--fork-name <string>`
+    Rename the forked repository
 
-		`--org <string>`
-	Create the fork in an organization
+    	`--org <string>`
+    Create the fork in an organization
 
-		`--remote`
-	Add a git remote for the fork
+    	`--remote`
+    Add a git remote for the fork
 
-		`--remote-name <string> (default "origin")`
-	Specify the name for the new remote
+    	`--remote-name <string> (default "origin")`
+    Specify the name for the new remote
 
 ### See also
 
-  - [gh repo](./gh_repo)
+- [gh repo](./gh_repo)
 
 ### In use
 
@@ -12731,14 +12229,11 @@ Cloning into 'cli'...
 ~/Projects$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_gitignore
-
 
 ---
 
@@ -12748,22 +12243,19 @@ List and view available repository gitignore templates
 
 ### Available commands
 
-  - [gh repo gitignore list](./gh_repo_gitignore_list)
+- [gh repo gitignore list](./gh_repo_gitignore_list)
 
-  - [gh repo gitignore view](./gh_repo_gitignore_view)
+- [gh repo gitignore view](./gh_repo_gitignore_view)
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_gitignore_list
-
 
 ---
 
@@ -12782,16 +12274,13 @@ gh repo gitignore ls
 
 ### See also
 
-  - [gh repo gitignore](./gh_repo_gitignore)
-
+- [gh repo gitignore](./gh_repo_gitignore)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_gitignore_view
-
 
 ---
 
@@ -12826,16 +12315,13 @@ $ gh repo gitignore view Python > .gitignore
 
 ### See also
 
-  - [gh repo gitignore](./gh_repo_gitignore)
-
+- [gh repo gitignore](./gh_repo_gitignore)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_license
-
 
 ---
 
@@ -12845,22 +12331,19 @@ Explore repository licenses
 
 ### Available commands
 
-  - [gh repo license list](./gh_repo_license_list)
+- [gh repo license list](./gh_repo_license_list)
 
-  - [gh repo license view](./gh_repo_license_view)
+- [gh repo license view](./gh_repo_license_view)
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_license_list
-
 
 ---
 
@@ -12881,16 +12364,13 @@ gh repo license ls
 
 ### See also
 
-  - [gh repo license](./gh_repo_license)
-
+- [gh repo license](./gh_repo_license)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_license_view
-
 
 ---
 
@@ -12907,9 +12387,9 @@ Run `gh repo license list` to see available commonly used licenses. For even mor
 
 ### Options
 
-	`-w`, 
-		`--web`
-	Open https://choosealicense.com/ in the browser
+    `-w`,
+    	`--web`
+    Open https://choosealicense.com/ in the browser
 
 ### Examples
 
@@ -12932,16 +12412,13 @@ $ gh repo license view MIT > LICENSE.md
 
 ### See also
 
-  - [gh repo license](./gh_repo_license)
-
+- [gh repo license](./gh_repo_license)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_list
-
 
 ---
 
@@ -12960,42 +12437,42 @@ when listing the forks in an organization, the output would not include those ow
 
 ### Options
 
-		`--archived`
-	Show only archived repositories
+    	`--archived`
+    Show only archived repositories
 
-		`--fork`
-	Show only forks
+    	`--fork`
+    Show only forks
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-l`, 
-		`--language <string>`
-	Filter by primary coding language
+    `-l`,
+    	`--language <string>`
+    Filter by primary coding language
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of repositories to list
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of repositories to list
 
-		`--no-archived`
-	Omit archived repositories
+    	`--no-archived`
+    Omit archived repositories
 
-		`--source`
-	Show only non-forks
+    	`--source`
+    Show only non-forks
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--topic <strings>`
-	Filter by topic
+    	`--topic <strings>`
+    Filter by topic
 
-		`--visibility <string>`
-	Filter by repository visibility: {public|private|internal}
+    	`--visibility <string>`
+    Filter by repository visibility: {public|private|internal}
 
 ### ALIASES
 
@@ -13007,16 +12484,13 @@ gh repo ls
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_rename
-
 
 ---
 
@@ -13042,13 +12516,13 @@ For more information on transferring repository ownership, see:
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
-	`-y`, 
-		`--yes`
-	Skip the confirmation prompt
+    `-y`,
+    	`--yes`
+    Skip the confirmation prompt
 
 ### Examples
 
@@ -13062,16 +12536,13 @@ $ gh repo rename -R qux/quux baz
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_set-default
-
 
 ---
 
@@ -13087,25 +12558,25 @@ GitHub API for the locally cloned repository.
 
 gh uses the default repository for things like:
 
-  - viewing and creating pull requests
+- viewing and creating pull requests
 
-  - viewing and creating issues
+- viewing and creating issues
 
-  - viewing and creating releases
+- viewing and creating releases
 
-  - working with GitHub Actions
+- working with GitHub Actions
 
 ### NOTE: gh does not use the default repository for managing repository and environment secrets.
 
 ### Options
 
-	`-u`, 
-		`--unset`
-	Unset the current default repository
+    `-u`,
+    	`--unset`
+    Unset the current default repository
 
-	`-v`, 
-		`--view`
-	View the current default repository
+    `-v`,
+    	`--view`
+    View the current default repository
 
 ### Examples
 
@@ -13126,16 +12597,13 @@ $ gh repo set-default
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_sync
-
 
 ---
 
@@ -13159,16 +12627,16 @@ This can be overridden with the `--source` flag.
 
 ### Options
 
-	`-b`, 
-		`--branch <string>`
-	Branch to sync (default [default branch])
+    `-b`,
+    	`--branch <string>`
+    Branch to sync (default [default branch])
 
-		`--force`
-	Hard reset the branch of the destination repository to match the source repository
+    	`--force`
+    Hard reset the branch of the destination repository to match the source repository
 
-	`-s`, 
-		`--source <string>`
-	Source repository
+    `-s`,
+    	`--source <string>`
+    Source repository
 
 ### Examples
 
@@ -13188,16 +12656,13 @@ $ gh repo sync owner/repo --source owner2/repo2
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_unarchive
-
 
 ---
 
@@ -13214,22 +12679,19 @@ With no argument, unarchives the current repository.
 
 ### Options
 
-	`-y`, 
-		`--yes`
-	Skip the confirmation prompt
+    `-y`,
+    	`--yes`
+    Skip the confirmation prompt
 
 ### See also
 
-  - [gh repo](./gh_repo)
-
+- [gh repo](./gh_repo)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_repo_view
-
 
 ---
 
@@ -13250,24 +12712,24 @@ With `--branch`, view a specific branch of the repository.
 
 ### Options
 
-	`-b`, 
-		`--branch <string>`
-	View a specific branch of the repository
+    `-b`,
+    	`--branch <string>`
+    View a specific branch of the repository
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open a repository in the browser
+    `-w`,
+    	`--web`
+    Open a repository in the browser
 
 ### JSON Fields
 
@@ -13275,7 +12737,7 @@ With `--branch`, view a specific branch of the repository.
 
 ### See also
 
-  - [gh repo](./gh_repo)
+- [gh repo](./gh_repo)
 
 ### In use
 
@@ -13322,14 +12784,11 @@ View this repository on GitHub: https://github.com/owner/repo/
 ~/Projects/my-project$
 ```
 
-
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ruleset
-
 
 ---
 
@@ -13340,17 +12799,17 @@ These commands allow you to view information about them.
 
 ### Available commands
 
-  - [gh ruleset check](./gh_ruleset_check)
+- [gh ruleset check](./gh_ruleset_check)
 
-  - [gh ruleset list](./gh_ruleset_list)
+- [gh ruleset list](./gh_ruleset_list)
 
-  - [gh ruleset view](./gh_ruleset_view)
+- [gh ruleset view](./gh_ruleset_view)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -13366,16 +12825,13 @@ $ gh ruleset check branch-name
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ruleset_check
-
 
 ---
 
@@ -13398,18 +12854,18 @@ repository.
 
 ### Options
 
-		`--default`
-	Check rules on default branch
+    	`--default`
+    Check rules on default branch
 
-	`-w`, 
-		`--web`
-	Open the branch rules page in a web browser
+    `-w`,
+    	`--web`
+    Open the branch rules page in a web browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -13432,16 +12888,13 @@ $ gh ruleset view 23 --org my-org
 
 ### See also
 
-  - [gh ruleset](./gh_ruleset)
-
+- [gh ruleset](./gh_ruleset)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ruleset_list
-
 
 ---
 
@@ -13465,27 +12918,27 @@ Your access token must have the `admin:org` scope to use the `--org` flag, which
 
 ### Options
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of rulesets to list
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of rulesets to list
 
-	`-o`, 
-		`--org <string>`
-	List organization-wide rulesets for the provided organization
+    `-o`,
+    	`--org <string>`
+    List organization-wide rulesets for the provided organization
 
-	`-p`, 
-		`--parents (default true)`
-	Whether to include rulesets configured at higher levels that also apply
+    `-p`,
+    	`--parents (default true)`
+    Whether to include rulesets configured at higher levels that also apply
 
-	`-w`, 
-		`--web`
-	Open the list of rulesets in the web browser
+    `-w`,
+    	`--web`
+    Open the list of rulesets in the web browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -13506,16 +12959,13 @@ $ gh ruleset list --org org-name
 
 ### See also
 
-  - [gh ruleset](./gh_ruleset)
-
+- [gh ruleset](./gh_ruleset)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ruleset_view
-
 
 ---
 
@@ -13537,23 +12987,23 @@ be returned. The default is `true`.
 
 ### Options
 
-	`-o`, 
-		`--org <string>`
-	Organization name if the provided ID is an organization-level ruleset
+    `-o`,
+    	`--org <string>`
+    Organization name if the provided ID is an organization-level ruleset
 
-	`-p`, 
-		`--parents (default true)`
-	Whether to include rulesets configured at higher levels that also apply
+    `-p`,
+    	`--parents (default true)`
+    Whether to include rulesets configured at higher levels that also apply
 
-	`-w`, 
-		`--web`
-	Open the ruleset in the browser
+    `-w`,
+    	`--web`
+    Open the ruleset in the browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -13576,16 +13026,13 @@ $ gh ruleset view 23 --org my-org
 
 ### See also
 
-  - [gh ruleset](./gh_ruleset)
-
+- [gh ruleset](./gh_ruleset)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run
-
 
 ---
 
@@ -13595,38 +13042,35 @@ List, view, and watch recent workflow runs from GitHub Actions.
 
 ### Available commands
 
-  - [gh run cancel](./gh_run_cancel)
+- [gh run cancel](./gh_run_cancel)
 
-  - [gh run delete](./gh_run_delete)
+- [gh run delete](./gh_run_delete)
 
-  - [gh run download](./gh_run_download)
+- [gh run download](./gh_run_download)
 
-  - [gh run list](./gh_run_list)
+- [gh run list](./gh_run_list)
 
-  - [gh run rerun](./gh_run_rerun)
+- [gh run rerun](./gh_run_rerun)
 
-  - [gh run view](./gh_run_view)
+- [gh run view](./gh_run_view)
 
-  - [gh run watch](./gh_run_watch)
+- [gh run watch](./gh_run_watch)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run_cancel
-
 
 ---
 
@@ -13641,27 +13085,24 @@ gh run cancel [<run-id>] [flags]
 
 ### Options
 
-		`--force`
-	Force cancel a workflow run
+    	`--force`
+    Force cancel a workflow run
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh run](./gh_run)
-
+- [gh run](./gh_run)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run_delete
-
 
 ---
 
@@ -13676,9 +13117,9 @@ gh run delete [<run-id>]
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -13692,16 +13133,13 @@ $ gh run delete 12345
 
 ### See also
 
-  - [gh run](./gh_run)
-
+- [gh run](./gh_run)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run_download
-
 
 ---
 
@@ -13724,23 +13162,23 @@ must be used to select an artifact from a specific workflow run.
 
 ### Options
 
-	`-D`, 
-		`--dir <string> (default ".")`
-	The directory to download artifacts into
+    `-D`,
+    	`--dir <string> (default ".")`
+    The directory to download artifacts into
 
-	`-n`, 
-		`--name <stringArray>`
-	Download artifacts that match any of the given names
+    `-n`,
+    	`--name <stringArray>`
+    Download artifacts that match any of the given names
 
-	`-p`, 
-		`--pattern <stringArray>`
-	Download artifacts that match a glob pattern
+    `-p`,
+    	`--pattern <stringArray>`
+    Download artifacts that match a glob pattern
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -13760,16 +13198,13 @@ $ gh run download
 
 ### See also
 
-  - [gh run](./gh_run)
-
+- [gh run](./gh_run)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run_list
-
 
 ---
 
@@ -13789,57 +13224,57 @@ Runs created by organization and enterprise ruleset workflows will not display a
 
 ### Options
 
-	`-a`, 
-		`--all`
-	Include disabled workflows
+    `-a`,
+    	`--all`
+    Include disabled workflows
 
-	`-b`, 
-		`--branch <string>`
-	Filter runs by branch
+    `-b`,
+    	`--branch <string>`
+    Filter runs by branch
 
-	`-c`, 
-		`--commit <SHA>`
-	Filter runs by the SHA of the commit
+    `-c`,
+    	`--commit <SHA>`
+    Filter runs by the SHA of the commit
 
-		`--created <date>`
-	Filter runs by the date it was created
+    	`--created <date>`
+    Filter runs by the date it was created
 
-	`-e`, 
-		`--event <event>`
-	Filter runs by which event triggered the run
+    `-e`,
+    	`--event <event>`
+    Filter runs by which event triggered the run
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-L`, 
-		`--limit <int> (default 20)`
-	Maximum number of runs to fetch
+    `-L`,
+    	`--limit <int> (default 20)`
+    Maximum number of runs to fetch
 
-	`-s`, 
-		`--status <string>`
-	Filter runs by status: {queued|completed|in_progress|requested|waiting|pending|action_required|cancelled|failure|neutral|skipped|stale|startup_failure|success|timed_out}
+    `-s`,
+    	`--status <string>`
+    Filter runs by status: {queued|completed|in_progress|requested|waiting|pending|action_required|cancelled|failure|neutral|skipped|stale|startup_failure|success|timed_out}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-u`, 
-		`--user <string>`
-	Filter runs by user who triggered the run
+    `-u`,
+    	`--user <string>`
+    Filter runs by user who triggered the run
 
-	`-w`, 
-		`--workflow <string>`
-	Filter runs by workflow
+    `-w`,
+    	`--workflow <string>`
+    Filter runs by workflow
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -13851,16 +13286,13 @@ gh run ls
 
 ### See also
 
-  - [gh run](./gh_run)
-
+- [gh run](./gh_run)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run_rerun
-
 
 ---
 
@@ -13889,35 +13321,32 @@ You will need to use databaseId field for triggering job re-runs.
 
 ### Options
 
-	`-d`, 
-		`--debug`
-	Rerun with debug logging
+    `-d`,
+    	`--debug`
+    Rerun with debug logging
 
-		`--failed`
-	Rerun only failed jobs, including dependencies
+    	`--failed`
+    Rerun only failed jobs, including dependencies
 
-	`-j`, 
-		`--job <string>`
-	Rerun a specific job ID from a run, including dependencies
+    `-j`,
+    	`--job <string>`
+    Rerun a specific job ID from a run, including dependencies
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh run](./gh_run)
-
+- [gh run](./gh_run)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run_view
-
 
 ---
 
@@ -13943,47 +13372,47 @@ appear as `UNKNOWN STEP` in the log output.
 
 ### Options
 
-	`-a`, 
-		`--attempt <uint> (default 0)`
-	The attempt number of the workflow run
+    `-a`,
+    	`--attempt <uint> (default 0)`
+    The attempt number of the workflow run
 
-		`--exit-status`
-	Exit with non-zero status if run failed
+    	`--exit-status`
+    Exit with non-zero status if run failed
 
-	`-j`, 
-		`--job <string>`
-	View a specific job ID from a run
+    `-j`,
+    	`--job <string>`
+    View a specific job ID from a run
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-		`--log`
-	View full log for either a run or specific job
+    	`--log`
+    View full log for either a run or specific job
 
-		`--log-failed`
-	View the log for any failed steps in a run or specific job
+    	`--log-failed`
+    View the log for any failed steps in a run or specific job
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-v`, 
-		`--verbose`
-	Show job steps
+    `-v`,
+    	`--verbose`
+    Show job steps
 
-	`-w`, 
-		`--web`
-	Open run in the browser
+    `-w`,
+    	`--web`
+    Open run in the browser
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -14013,16 +13442,13 @@ $ gh run view 0451 --exit-status && echo "run pending or passed"
 
 ### See also
 
-  - [gh run](./gh_run)
-
+- [gh run](./gh_run)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_run_watch
-
 
 ---
 
@@ -14043,21 +13469,21 @@ as it is not currently possible to create a PAT with the `checks:read` permissio
 
 ### Options
 
-		`--compact`
-	Show only relevant/failed steps
+    	`--compact`
+    Show only relevant/failed steps
 
-		`--exit-status`
-	Exit with non-zero status if run fails
+    	`--exit-status`
+    Exit with non-zero status if run fails
 
-	`-i`, 
-		`--interval <int> (default 3)`
-	Refresh interval in seconds
+    `-i`,
+    	`--interval <int> (default 3)`
+    Refresh interval in seconds
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -14074,16 +13500,13 @@ $ gh run watch && notify-send 'run is done!'
 
 ### See also
 
-  - [gh run](./gh_run)
-
+- [gh run](./gh_run)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_search
-
 
 ---
 
@@ -14112,36 +13535,33 @@ $ gh --% search issues -- "my search query -label:bug"
 
 See the following for more information:
 
-  - GitHub search syntax: [https://docs.github.com/en/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#exclude-results-that-match-a-qualifier](https://docs.github.com/en/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#exclude-results-that-match-a-qualifier)
+- GitHub search syntax: [https://docs.github.com/en/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#exclude-results-that-match-a-qualifier](https://docs.github.com/en/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#exclude-results-that-match-a-qualifier)
 
-  - The PowerShell stop parse flag `--%`: [https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parsing?view=powershell-7.5#the-stop-parsing-token](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parsing?view=powershell-7.5#the-stop-parsing-token)
+- The PowerShell stop parse flag `--%`: [https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parsing?view=powershell-7.5#the-stop-parsing-token](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parsing?view=powershell-7.5#the-stop-parsing-token)
 
-  - The Unix-like `--` argument: [https://www.gnu.org/software/bash/manual/bash.html#Shell-Builtin-Commands-1](https://www.gnu.org/software/bash/manual/bash.html#Shell-Builtin-Commands-1)
+- The Unix-like `--` argument: [https://www.gnu.org/software/bash/manual/bash.html#Shell-Builtin-Commands-1](https://www.gnu.org/software/bash/manual/bash.html#Shell-Builtin-Commands-1)
 
 ### Available commands
 
-  - [gh search code](./gh_search_code)
+- [gh search code](./gh_search_code)
 
-  - [gh search commits](./gh_search_commits)
+- [gh search commits](./gh_search_commits)
 
-  - [gh search issues](./gh_search_issues)
+- [gh search issues](./gh_search_issues)
 
-  - [gh search prs](./gh_search_prs)
+- [gh search prs](./gh_search_prs)
 
-  - [gh search repos](./gh_search_repos)
+- [gh search repos](./gh_search_repos)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_search_code
-
 
 ---
 
@@ -14165,46 +13585,46 @@ For more information on handling search queries containing a hyphen, run `gh sea
 
 ### Options
 
-		`--extension <string>`
-	Filter on file extension
+    	`--extension <string>`
+    Filter on file extension
 
-		`--filename <string>`
-	Filter on filename
+    	`--filename <string>`
+    Filter on filename
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-		`--language <string>`
-	Filter results by language
+    	`--language <string>`
+    Filter results by language
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of code results to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of code results to fetch
 
-		`--match <strings>`
-	Restrict search to file contents or file path: {file|path}
+    	`--match <strings>`
+    Restrict search to file contents or file path: {file|path}
 
-		`--owner <strings>`
-	Filter on owner
+    	`--owner <strings>`
+    Filter on owner
 
-	`-R`, 
-		`--repo <strings>`
-	Filter on repository
+    `-R`,
+    	`--repo <strings>`
+    Filter on repository
 
-		`--size <string>`
-	Filter on size range, in kilobytes
+    	`--size <string>`
+    Filter on size range, in kilobytes
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-w`, 
-		`--web`
-	Open the search query in the web browser
+    `-w`,
+    	`--web`
+    Open the search query in the web browser
 
 ### JSON Fields
 
@@ -14234,16 +13654,13 @@ $ gh search code lint --filename package.json
 
 ### See also
 
-  - [gh search](./gh_search)
-
+- [gh search](./gh_search)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_search_commits
-
 
 ---
 
@@ -14266,76 +13683,76 @@ For more information on handling search queries containing a hyphen, run `gh sea
 
 ### Options
 
-		`--author <string>`
-	Filter by author
+    	`--author <string>`
+    Filter by author
 
-		`--author-date <date>`
-	Filter based on authored date
+    	`--author-date <date>`
+    Filter based on authored date
 
-		`--author-email <string>`
-	Filter on author email
+    	`--author-email <string>`
+    Filter on author email
 
-		`--author-name <string>`
-	Filter on author name
+    	`--author-name <string>`
+    Filter on author name
 
-		`--committer <string>`
-	Filter by committer
+    	`--committer <string>`
+    Filter by committer
 
-		`--committer-date <date>`
-	Filter based on committed date
+    	`--committer-date <date>`
+    Filter based on committed date
 
-		`--committer-email <string>`
-	Filter on committer email
+    	`--committer-email <string>`
+    Filter on committer email
 
-		`--committer-name <string>`
-	Filter on committer name
+    	`--committer-name <string>`
+    Filter on committer name
 
-		`--hash <string>`
-	Filter by commit hash
+    	`--hash <string>`
+    Filter by commit hash
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of commits to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of commits to fetch
 
-		`--merge`
-	Filter on merge commits
+    	`--merge`
+    Filter on merge commits
 
-		`--order <string> (default "desc")`
-	Order of commits returned, ignored unless '--sort' flag is specified: {asc|desc}
+    	`--order <string> (default "desc")`
+    Order of commits returned, ignored unless '--sort' flag is specified: {asc|desc}
 
-		`--owner <strings>`
-	Filter on repository owner
+    	`--owner <strings>`
+    Filter on repository owner
 
-		`--parent <string>`
-	Filter by parent hash
+    	`--parent <string>`
+    Filter by parent hash
 
-	`-R`, 
-		`--repo <strings>`
-	Filter on repository
+    `-R`,
+    	`--repo <strings>`
+    Filter on repository
 
-		`--sort <string> (default "best-match")`
-	Sort fetched commits: {author-date|committer-date}
+    	`--sort <string> (default "best-match")`
+    Sort fetched commits: {author-date|committer-date}
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--tree <string>`
-	Filter by tree hash
+    	`--tree <string>`
+    Filter by tree hash
 
-		`--visibility <strings>`
-	Filter based on repository visibility: {public|private|internal}
+    	`--visibility <strings>`
+    Filter based on repository visibility: {public|private|internal}
 
-	`-w`, 
-		`--web`
-	Open the search query in the web browser
+    `-w`,
+    	`--web`
+    Open the search query in the web browser
 
 ### JSON Fields
 
@@ -14365,16 +13782,13 @@ $ gh search commits --author-date="<2022-02-01"
 
 ### See also
 
-  - [gh search](./gh_search)
-
+- [gh search](./gh_search)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_search_issues
-
 
 ---
 
@@ -14401,118 +13815,118 @@ For more information on handling search queries containing a hyphen, run `gh sea
 
 ### Options
 
-		`--app <string>`
-	Filter by GitHub App author
+    	`--app <string>`
+    Filter by GitHub App author
 
-		`--archived`
-	Filter based on the repository archived state {true|false}
+    	`--archived`
+    Filter based on the repository archived state {true|false}
 
-		`--assignee <string>`
-	Filter by assignee
+    	`--assignee <string>`
+    Filter by assignee
 
-		`--author <string>`
-	Filter by author
+    	`--author <string>`
+    Filter by author
 
-		`--closed <date>`
-	Filter on closed at date
+    	`--closed <date>`
+    Filter on closed at date
 
-		`--commenter <user>`
-	Filter based on comments by user
+    	`--commenter <user>`
+    Filter based on comments by user
 
-		`--comments <number>`
-	Filter on number of comments
+    	`--comments <number>`
+    Filter on number of comments
 
-		`--created <date>`
-	Filter based on created at date
+    	`--created <date>`
+    Filter based on created at date
 
-		`--include-prs`
-	Include pull requests in results
+    	`--include-prs`
+    Include pull requests in results
 
-		`--interactions <number>`
-	Filter on number of reactions and comments
+    	`--interactions <number>`
+    Filter on number of reactions and comments
 
-		`--involves <user>`
-	Filter based on involvement of user
+    	`--involves <user>`
+    Filter based on involvement of user
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-		`--label <strings>`
-	Filter on label
+    	`--label <strings>`
+    Filter on label
 
-		`--language <string>`
-	Filter based on the coding language
+    	`--language <string>`
+    Filter based on the coding language
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of results to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of results to fetch
 
-		`--locked`
-	Filter on locked conversation status
+    	`--locked`
+    Filter on locked conversation status
 
-		`--match <strings>`
-	Restrict search to specific field of issue: {title|body|comments}
+    	`--match <strings>`
+    Restrict search to specific field of issue: {title|body|comments}
 
-		`--mentions <user>`
-	Filter based on user mentions
+    	`--mentions <user>`
+    Filter based on user mentions
 
-		`--milestone <title>`
-	Filter by milestone title
+    	`--milestone <title>`
+    Filter by milestone title
 
-		`--no-assignee`
-	Filter on missing assignee
+    	`--no-assignee`
+    Filter on missing assignee
 
-		`--no-label`
-	Filter on missing label
+    	`--no-label`
+    Filter on missing label
 
-		`--no-milestone`
-	Filter on missing milestone
+    	`--no-milestone`
+    Filter on missing milestone
 
-		`--no-project`
-	Filter on missing project
+    	`--no-project`
+    Filter on missing project
 
-		`--order <string> (default "desc")`
-	Order of results returned, ignored unless '--sort' flag is specified: {asc|desc}
+    	`--order <string> (default "desc")`
+    Order of results returned, ignored unless '--sort' flag is specified: {asc|desc}
 
-		`--owner <strings>`
-	Filter on repository owner
+    	`--owner <strings>`
+    Filter on repository owner
 
-		`--project <owner/number>`
-	Filter on project board owner/number
+    	`--project <owner/number>`
+    Filter on project board owner/number
 
-		`--reactions <number>`
-	Filter on number of reactions
+    	`--reactions <number>`
+    Filter on number of reactions
 
-	`-R`, 
-		`--repo <strings>`
-	Filter on repository
+    `-R`,
+    	`--repo <strings>`
+    Filter on repository
 
-		`--sort <string> (default "best-match")`
-	Sort fetched results: {comments|created|interactions|reactions|reactions-+1|reactions--1|reactions-heart|reactions-smile|reactions-tada|reactions-thinking_face|updated}
+    	`--sort <string> (default "best-match")`
+    Sort fetched results: {comments|created|interactions|reactions|reactions-+1|reactions--1|reactions-heart|reactions-smile|reactions-tada|reactions-thinking_face|updated}
 
-		`--state <string>`
-	Filter based on state: {open|closed}
+    	`--state <string>`
+    Filter based on state: {open|closed}
 
-		`--team-mentions <string>`
-	Filter based on team mentions
+    	`--team-mentions <string>`
+    Filter based on team mentions
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--updated <date>`
-	Filter on last updated at date
+    	`--updated <date>`
+    Filter on last updated at date
 
-		`--visibility <strings>`
-	Filter based on repository visibility: {public|private|internal}
+    	`--visibility <strings>`
+    Filter based on repository visibility: {public|private|internal}
 
-	`-w`, 
-		`--web`
-	Open the search query in the web browser
+    `-w`,
+    	`--web`
+    Open the search query in the web browser
 
 ### JSON Fields
 
@@ -14545,16 +13959,13 @@ $ gh search issues --owner github --archived=false
 
 ### See also
 
-  - [gh search](./gh_search)
-
+- [gh search](./gh_search)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_search_prs
-
 
 ---
 
@@ -14581,144 +13992,144 @@ For more information on handling search queries containing a hyphen, run `gh sea
 
 ### Options
 
-		`--app <string>`
-	Filter by GitHub App author
+    	`--app <string>`
+    Filter by GitHub App author
 
-		`--archived`
-	Filter based on the repository archived state {true|false}
+    	`--archived`
+    Filter based on the repository archived state {true|false}
 
-		`--assignee <string>`
-	Filter by assignee
+    	`--assignee <string>`
+    Filter by assignee
 
-		`--author <string>`
-	Filter by author
+    	`--author <string>`
+    Filter by author
 
-	`-B`, 
-		`--base <string>`
-	Filter on base branch name
+    `-B`,
+    	`--base <string>`
+    Filter on base branch name
 
-		`--checks <string>`
-	Filter based on status of the checks: {pending|success|failure}
+    	`--checks <string>`
+    Filter based on status of the checks: {pending|success|failure}
 
-		`--closed <date>`
-	Filter on closed at date
+    	`--closed <date>`
+    Filter on closed at date
 
-		`--commenter <user>`
-	Filter based on comments by user
+    	`--commenter <user>`
+    Filter based on comments by user
 
-		`--comments <number>`
-	Filter on number of comments
+    	`--comments <number>`
+    Filter on number of comments
 
-		`--created <date>`
-	Filter based on created at date
+    	`--created <date>`
+    Filter based on created at date
 
-		`--draft`
-	Filter based on draft state
+    	`--draft`
+    Filter based on draft state
 
-	`-H`, 
-		`--head <string>`
-	Filter on head branch name
+    `-H`,
+    	`--head <string>`
+    Filter on head branch name
 
-		`--interactions <number>`
-	Filter on number of reactions and comments
+    	`--interactions <number>`
+    Filter on number of reactions and comments
 
-		`--involves <user>`
-	Filter based on involvement of user
+    	`--involves <user>`
+    Filter based on involvement of user
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-		`--label <strings>`
-	Filter on label
+    	`--label <strings>`
+    Filter on label
 
-		`--language <string>`
-	Filter based on the coding language
+    	`--language <string>`
+    Filter based on the coding language
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of results to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of results to fetch
 
-		`--locked`
-	Filter on locked conversation status
+    	`--locked`
+    Filter on locked conversation status
 
-		`--match <strings>`
-	Restrict search to specific field of issue: {title|body|comments}
+    	`--match <strings>`
+    Restrict search to specific field of issue: {title|body|comments}
 
-		`--mentions <user>`
-	Filter based on user mentions
+    	`--mentions <user>`
+    Filter based on user mentions
 
-		`--merged`
-	Filter based on merged state
+    	`--merged`
+    Filter based on merged state
 
-		`--merged-at <date>`
-	Filter on merged at date
+    	`--merged-at <date>`
+    Filter on merged at date
 
-		`--milestone <title>`
-	Filter by milestone title
+    	`--milestone <title>`
+    Filter by milestone title
 
-		`--no-assignee`
-	Filter on missing assignee
+    	`--no-assignee`
+    Filter on missing assignee
 
-		`--no-label`
-	Filter on missing label
+    	`--no-label`
+    Filter on missing label
 
-		`--no-milestone`
-	Filter on missing milestone
+    	`--no-milestone`
+    Filter on missing milestone
 
-		`--no-project`
-	Filter on missing project
+    	`--no-project`
+    Filter on missing project
 
-		`--order <string> (default "desc")`
-	Order of results returned, ignored unless '--sort' flag is specified: {asc|desc}
+    	`--order <string> (default "desc")`
+    Order of results returned, ignored unless '--sort' flag is specified: {asc|desc}
 
-		`--owner <strings>`
-	Filter on repository owner
+    	`--owner <strings>`
+    Filter on repository owner
 
-		`--project <owner/number>`
-	Filter on project board owner/number
+    	`--project <owner/number>`
+    Filter on project board owner/number
 
-		`--reactions <number>`
-	Filter on number of reactions
+    	`--reactions <number>`
+    Filter on number of reactions
 
-	`-R`, 
-		`--repo <strings>`
-	Filter on repository
+    `-R`,
+    	`--repo <strings>`
+    Filter on repository
 
-		`--review <string>`
-	Filter based on review status: {none|required|approved|changes_requested}
+    	`--review <string>`
+    Filter based on review status: {none|required|approved|changes_requested}
 
-		`--review-requested <user>`
-	Filter on user or team requested to review
+    	`--review-requested <user>`
+    Filter on user or team requested to review
 
-		`--reviewed-by <user>`
-	Filter on user who reviewed
+    	`--reviewed-by <user>`
+    Filter on user who reviewed
 
-		`--sort <string> (default "best-match")`
-	Sort fetched results: {comments|reactions|reactions-+1|reactions--1|reactions-smile|reactions-thinking_face|reactions-heart|reactions-tada|interactions|created|updated}
+    	`--sort <string> (default "best-match")`
+    Sort fetched results: {comments|reactions|reactions-+1|reactions--1|reactions-smile|reactions-thinking_face|reactions-heart|reactions-tada|interactions|created|updated}
 
-		`--state <string>`
-	Filter based on state: {open|closed}
+    	`--state <string>`
+    Filter based on state: {open|closed}
 
-		`--team-mentions <string>`
-	Filter based on team mentions
+    	`--team-mentions <string>`
+    Filter based on team mentions
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--updated <date>`
-	Filter on last updated at date
+    	`--updated <date>`
+    Filter on last updated at date
 
-		`--visibility <strings>`
-	Filter based on repository visibility: {public|private|internal}
+    	`--visibility <strings>`
+    Filter based on repository visibility: {public|private|internal}
 
-	`-w`, 
-		`--web`
-	Open the search query in the web browser
+    `-w`,
+    	`--web`
+    Open the search query in the web browser
 
 ### JSON Fields
 
@@ -14751,16 +14162,13 @@ $ gh search prs --owner github --archived=false
 
 ### See also
 
-  - [gh search](./gh_search)
-
+- [gh search](./gh_search)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_search_repos
-
 
 ---
 
@@ -14783,81 +14191,81 @@ For more information on handling search queries containing a hyphen, run `gh sea
 
 ### Options
 
-		`--archived`
-	Filter based on the repository archived state {true|false}
+    	`--archived`
+    Filter based on the repository archived state {true|false}
 
-		`--created <date>`
-	Filter based on created at date
+    	`--created <date>`
+    Filter based on created at date
 
-		`--followers <number>`
-	Filter based on number of followers
+    	`--followers <number>`
+    Filter based on number of followers
 
-		`--forks <number>`
-	Filter on number of forks
+    	`--forks <number>`
+    Filter on number of forks
 
-		`--good-first-issues <number>`
-	Filter on number of issues with the 'good first issue' label
+    	`--good-first-issues <number>`
+    Filter on number of issues with the 'good first issue' label
 
-		`--help-wanted-issues <number>`
-	Filter on number of issues with the 'help wanted' label
+    	`--help-wanted-issues <number>`
+    Filter on number of issues with the 'help wanted' label
 
-		`--include-forks <string>`
-	Include forks in fetched repositories: {false|true|only}
+    	`--include-forks <string>`
+    Include forks in fetched repositories: {false|true|only}
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-		`--language <string>`
-	Filter based on the coding language
+    	`--language <string>`
+    Filter based on the coding language
 
-		`--license <strings>`
-	Filter based on license type
+    	`--license <strings>`
+    Filter based on license type
 
-	`-L`, 
-		`--limit <int> (default 30)`
-	Maximum number of repositories to fetch
+    `-L`,
+    	`--limit <int> (default 30)`
+    Maximum number of repositories to fetch
 
-		`--match <strings>`
-	Restrict search to specific field of repository: {name|description|readme}
+    	`--match <strings>`
+    Restrict search to specific field of repository: {name|description|readme}
 
-		`--number-topics <number>`
-	Filter on number of topics
+    	`--number-topics <number>`
+    Filter on number of topics
 
-		`--order <string> (default "desc")`
-	Order of repositories returned, ignored unless '--sort' flag is specified: {asc|desc}
+    	`--order <string> (default "desc")`
+    Order of repositories returned, ignored unless '--sort' flag is specified: {asc|desc}
 
-		`--owner <strings>`
-	Filter on owner
+    	`--owner <strings>`
+    Filter on owner
 
-		`--size <string>`
-	Filter on a size range, in kilobytes
+    	`--size <string>`
+    Filter on a size range, in kilobytes
 
-		`--sort <string> (default "best-match")`
-	Sort fetched repositories: {forks|help-wanted-issues|stars|updated}
+    	`--sort <string> (default "best-match")`
+    Sort fetched repositories: {forks|help-wanted-issues|stars|updated}
 
-		`--stars <number>`
-	Filter on number of stars
+    	`--stars <number>`
+    Filter on number of stars
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-		`--topic <strings>`
-	Filter on topic
+    	`--topic <strings>`
+    Filter on topic
 
-		`--updated <date>`
-	Filter on last updated at date
+    	`--updated <date>`
+    Filter on last updated at date
 
-		`--visibility <strings>`
-	Filter based on visibility: {public|private|internal}
+    	`--visibility <strings>`
+    Filter based on visibility: {public|private|internal}
 
-	`-w`, 
-		`--web`
-	Open the search query in the web browser
+    `-w`,
+    	`--web`
+    Open the search query in the web browser
 
 ### JSON Fields
 
@@ -14890,16 +14298,13 @@ $ gh search repos --archived=false
 
 ### See also
 
-  - [gh search](./gh_search)
-
+- [gh search](./gh_search)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_secret
-
 
 ---
 
@@ -14912,30 +14317,27 @@ GitHub Actions. Run `gh help secret set` to learn how to get started.
 
 ### Available commands
 
-  - [gh secret delete](./gh_secret_delete)
+- [gh secret delete](./gh_secret_delete)
 
-  - [gh secret list](./gh_secret_list)
+- [gh secret list](./gh_secret_list)
 
-  - [gh secret set](./gh_secret_set)
+- [gh secret set](./gh_secret_set)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_secret_delete
-
 
 ---
 
@@ -14948,37 +14350,37 @@ gh secret delete <secret-name> [flags]
 
 Delete a secret on one of the following levels:
 
-  - repository (default): available to GitHub Actions runs or Dependabot in a repository
+- repository (default): available to GitHub Actions runs or Dependabot in a repository
 
-  - environment: available to GitHub Actions runs for a deployment environment in a repository
+- environment: available to GitHub Actions runs for a deployment environment in a repository
 
-  - organization: available to GitHub Actions runs, Dependabot, or Codespaces within an organization
+- organization: available to GitHub Actions runs, Dependabot, or Codespaces within an organization
 
-  - user: available to Codespaces for your user
+- user: available to Codespaces for your user
 
 ### Options
 
-	`-a`, 
-		`--app <string>`
-	Delete a secret for a specific application: {actions|codespaces|dependabot}
+    `-a`,
+    	`--app <string>`
+    Delete a secret for a specific application: {actions|codespaces|dependabot}
 
-	`-e`, 
-		`--env <string>`
-	Delete a secret for an environment
+    `-e`,
+    	`--env <string>`
+    Delete a secret for an environment
 
-	`-o`, 
-		`--org <string>`
-	Delete a secret for an organization
+    `-o`,
+    	`--org <string>`
+    Delete a secret for an organization
 
-	`-u`, 
-		`--user`
-	Delete a secret for your user
+    `-u`,
+    	`--user`
+    Delete a secret for your user
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -14986,16 +14388,13 @@ gh secret remove
 
 ### See also
 
-  - [gh secret](./gh_secret)
-
+- [gh secret](./gh_secret)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_secret_list
-
 
 ---
 
@@ -15008,48 +14407,48 @@ gh secret list [flags]
 
 List secrets on one of the following levels:
 
-  - repository (default): available to GitHub Actions runs or Dependabot in a repository
+- repository (default): available to GitHub Actions runs or Dependabot in a repository
 
-  - environment: available to GitHub Actions runs for a deployment environment in a repository
+- environment: available to GitHub Actions runs for a deployment environment in a repository
 
-  - organization: available to GitHub Actions runs, Dependabot, or Codespaces within an organization
+- organization: available to GitHub Actions runs, Dependabot, or Codespaces within an organization
 
-  - user: available to Codespaces for your user
+- user: available to Codespaces for your user
 
 ### Options
 
-	`-a`, 
-		`--app <string>`
-	List secrets for a specific application: {actions|codespaces|dependabot}
+    `-a`,
+    	`--app <string>`
+    List secrets for a specific application: {actions|codespaces|dependabot}
 
-	`-e`, 
-		`--env <string>`
-	List secrets for an environment
+    `-e`,
+    	`--env <string>`
+    List secrets for an environment
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-o`, 
-		`--org <string>`
-	List secrets for an organization
+    `-o`,
+    	`--org <string>`
+    List secrets for an organization
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
-	`-u`, 
-		`--user`
-	List a secret for your user
+    `-u`,
+    	`--user`
+    List a secret for your user
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -15061,16 +14460,13 @@ gh secret ls
 
 ### See also
 
-  - [gh secret](./gh_secret)
-
+- [gh secret](./gh_secret)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_secret_set
-
 
 ---
 
@@ -15083,13 +14479,13 @@ gh secret set <secret-name> [flags]
 
 Set a value for a secret on one of the following levels:
 
-  - repository (default): available to GitHub Actions runs or Dependabot in a repository
+- repository (default): available to GitHub Actions runs or Dependabot in a repository
 
-  - environment: available to GitHub Actions runs for a deployment environment in a repository
+- environment: available to GitHub Actions runs for a deployment environment in a repository
 
-  - organization: available to GitHub Actions runs, Dependabot, or Codespaces within an organization
+- organization: available to GitHub Actions runs, Dependabot, or Codespaces within an organization
 
-  - user: available to Codespaces for your user
+- user: available to Codespaces for your user
 
 Organization and user secrets can optionally be restricted to only be available to
 specific repositories.
@@ -15098,49 +14494,49 @@ Secret values are locally encrypted before being sent to GitHub.
 
 ### Options
 
-	`-a`, 
-		`--app <string>`
-	Set the application for a secret: {actions|codespaces|dependabot}
+    `-a`,
+    	`--app <string>`
+    Set the application for a secret: {actions|codespaces|dependabot}
 
-	`-b`, 
-		`--body <string>`
-	The value for the secret (reads from standard input if not specified)
+    `-b`,
+    	`--body <string>`
+    The value for the secret (reads from standard input if not specified)
 
-	`-e`, 
-		`--env <environment>`
-	Set deployment environment secret
+    `-e`,
+    	`--env <environment>`
+    Set deployment environment secret
 
-	`-f`, 
-		`--env-file <file>`
-	Load secret names and values from a dotenv-formatted file
+    `-f`,
+    	`--env-file <file>`
+    Load secret names and values from a dotenv-formatted file
 
-		`--no-repos-selected`
-	No repositories can access the organization secret
+    	`--no-repos-selected`
+    No repositories can access the organization secret
 
-		`--no-store`
-	Print the encrypted, base64-encoded value instead of storing it on GitHub
+    	`--no-store`
+    Print the encrypted, base64-encoded value instead of storing it on GitHub
 
-	`-o`, 
-		`--org <organization>`
-	Set organization secret
+    `-o`,
+    	`--org <organization>`
+    Set organization secret
 
-	`-r`, 
-		`--repos <repositories>`
-	List of repositories that can access an organization or user secret
+    `-r`,
+    	`--repos <repositories>`
+    List of repositories that can access an organization or user secret
 
-	`-u`, 
-		`--user`
-	Set a secret for your user
+    `-u`,
+    	`--user`
+    Set a secret for your user
 
-	`-v`, 
-		`--visibility <string> (default "private")`
-	Set visibility for an organization secret: {all|private|selected}
+    `-v`,
+    	`--visibility <string> (default "private")`
+    Set visibility for an organization secret: {all|private|selected}
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -15184,16 +14580,13 @@ $ gh secret set -f - < myfile.txt
 
 ### See also
 
-  - [gh secret](./gh_secret)
-
+- [gh secret](./gh_secret)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ssh-key
-
 
 ---
 
@@ -15203,24 +14596,21 @@ Manage SSH keys registered with your GitHub account.
 
 ### Available commands
 
-  - [gh ssh-key add](./gh_ssh-key_add)
+- [gh ssh-key add](./gh_ssh-key_add)
 
-  - [gh ssh-key delete](./gh_ssh-key_delete)
+- [gh ssh-key delete](./gh_ssh-key_delete)
 
-  - [gh ssh-key list](./gh_ssh-key_list)
+- [gh ssh-key list](./gh_ssh-key_list)
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ssh-key_add
-
 
 ---
 
@@ -15235,25 +14625,22 @@ gh ssh-key add [<key-file>] [flags]
 
 ### Options
 
-	`-t`, 
-		`--title <string>`
-	Title for the new key
+    `-t`,
+    	`--title <string>`
+    Title for the new key
 
-		`--type <string> (default "authentication")`
-	Type of the ssh key: {authentication|signing}
+    	`--type <string> (default "authentication")`
+    Type of the ssh key: {authentication|signing}
 
 ### See also
 
-  - [gh ssh-key](./gh_ssh-key)
-
+- [gh ssh-key](./gh_ssh-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ssh-key_delete
-
 
 ---
 
@@ -15268,22 +14655,19 @@ gh ssh-key delete <id> [flags]
 
 ### Options
 
-	`-y`, 
-		`--yes`
-	Skip the confirmation prompt
+    `-y`,
+    	`--yes`
+    Skip the confirmation prompt
 
 ### See also
 
-  - [gh ssh-key](./gh_ssh-key)
-
+- [gh ssh-key](./gh_ssh-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_ssh-key_list
-
 
 ---
 
@@ -15302,16 +14686,13 @@ gh ssh-key ls
 
 ### See also
 
-  - [gh ssh-key](./gh_ssh-key)
-
+- [gh ssh-key](./gh_ssh-key)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_status
-
 
 ---
 
@@ -15324,25 +14705,25 @@ gh status [flags]
 
 The status command prints information about your work on GitHub across all the repositories you're subscribed to, including:
 
-  - Assigned Issues
+- Assigned Issues
 
-  - Assigned Pull Requests
+- Assigned Pull Requests
 
-  - Review Requests
+- Review Requests
 
-  - Mentions
+- Mentions
 
-  - Repository Activity (new issues/pull requests, comments)
+- Repository Activity (new issues/pull requests, comments)
 
 ### Options
 
-	`-e`, 
-		`--exclude <strings>`
-	Comma separated list of repos to exclude in owner/name format
+    `-e`,
+    	`--exclude <strings>`
+    Comma separated list of repos to exclude in owner/name format
 
-	`-o`, 
-		`--org <string>`
-	Report status within an organization
+    `-o`,
+    	`--org <string>`
+    Report status within an organization
 
 ### Examples
 
@@ -15353,16 +14734,13 @@ $ gh status -o cli # Limit results to a single organization
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_variable
-
 
 ---
 
@@ -15373,32 +14751,29 @@ GitHub Actions or Dependabot. Run `gh help variable set` to learn how to get sta
 
 ### Available commands
 
-  - [gh variable delete](./gh_variable_delete)
+- [gh variable delete](./gh_variable_delete)
 
-  - [gh variable get](./gh_variable_get)
+- [gh variable get](./gh_variable_get)
 
-  - [gh variable list](./gh_variable_list)
+- [gh variable list](./gh_variable_list)
 
-  - [gh variable set](./gh_variable_set)
+- [gh variable set](./gh_variable_set)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_variable_delete
-
 
 ---
 
@@ -15411,27 +14786,27 @@ gh variable delete <variable-name> [flags]
 
 Delete a variable on one of the following levels:
 
-  - repository (default): available to GitHub Actions runs or Dependabot in a repository
+- repository (default): available to GitHub Actions runs or Dependabot in a repository
 
-  - environment: available to GitHub Actions runs for a deployment environment in a repository
+- environment: available to GitHub Actions runs for a deployment environment in a repository
 
-  - organization: available to GitHub Actions runs or Dependabot within an organization
+- organization: available to GitHub Actions runs or Dependabot within an organization
 
 ### Options
 
-	`-e`, 
-		`--env <string>`
-	Delete a variable for an environment
+    `-e`,
+    	`--env <string>`
+    Delete a variable for an environment
 
-	`-o`, 
-		`--org <string>`
-	Delete a variable for an organization
+    `-o`,
+    	`--org <string>`
+    Delete a variable for an organization
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -15439,16 +14814,13 @@ gh variable remove
 
 ### See also
 
-  - [gh variable](./gh_variable)
-
+- [gh variable](./gh_variable)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_variable_get
-
 
 ---
 
@@ -15461,38 +14833,38 @@ gh variable get <variable-name> [flags]
 
 Get a variable on one of the following levels:
 
-  - repository (default): available to GitHub Actions runs or Dependabot in a repository
+- repository (default): available to GitHub Actions runs or Dependabot in a repository
 
-  - environment: available to GitHub Actions runs for a deployment environment in a repository
+- environment: available to GitHub Actions runs for a deployment environment in a repository
 
-  - organization: available to GitHub Actions runs or Dependabot within an organization
+- organization: available to GitHub Actions runs or Dependabot within an organization
 
 ### Options
 
-	`-e`, 
-		`--env <string>`
-	Get a variable for an environment
+    `-e`,
+    	`--env <string>`
+    Get a variable for an environment
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-o`, 
-		`--org <string>`
-	Get a variable for an organization
+    `-o`,
+    	`--org <string>`
+    Get a variable for an organization
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### JSON Fields
 
@@ -15500,16 +14872,13 @@ Get a variable on one of the following levels:
 
 ### See also
 
-  - [gh variable](./gh_variable)
-
+- [gh variable](./gh_variable)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_variable_list
-
 
 ---
 
@@ -15522,38 +14891,38 @@ gh variable list [flags]
 
 List variables on one of the following levels:
 
-  - repository (default): available to GitHub Actions runs or Dependabot in a repository
+- repository (default): available to GitHub Actions runs or Dependabot in a repository
 
-  - environment: available to GitHub Actions runs for a deployment environment in a repository
+- environment: available to GitHub Actions runs for a deployment environment in a repository
 
-  - organization: available to GitHub Actions runs or Dependabot within an organization
+- organization: available to GitHub Actions runs or Dependabot within an organization
 
 ### Options
 
-	`-e`, 
-		`--env <string>`
-	List variables for an environment
+    `-e`,
+    	`--env <string>`
+    List variables for an environment
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-o`, 
-		`--org <string>`
-	List variables for an organization
+    `-o`,
+    	`--org <string>`
+    List variables for an organization
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -15565,16 +14934,13 @@ gh variable ls
 
 ### See also
 
-  - [gh variable](./gh_variable)
-
+- [gh variable](./gh_variable)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_variable_set
-
 
 ---
 
@@ -15587,46 +14953,46 @@ gh variable set <variable-name> [flags]
 
 Set a value for a variable on one of the following levels:
 
-  - repository (default): available to GitHub Actions runs or Dependabot in a repository
+- repository (default): available to GitHub Actions runs or Dependabot in a repository
 
-  - environment: available to GitHub Actions runs for a deployment environment in a repository
+- environment: available to GitHub Actions runs for a deployment environment in a repository
 
-  - organization: available to GitHub Actions runs or Dependabot within an organization
+- organization: available to GitHub Actions runs or Dependabot within an organization
 
 Organization variable can optionally be restricted to only be available to
 specific repositories.
 
 ### Options
 
-	`-b`, 
-		`--body <string>`
-	The value for the variable (reads from standard input if not specified)
+    `-b`,
+    	`--body <string>`
+    The value for the variable (reads from standard input if not specified)
 
-	`-e`, 
-		`--env <environment>`
-	Set deployment environment variable
+    `-e`,
+    	`--env <environment>`
+    Set deployment environment variable
 
-	`-f`, 
-		`--env-file <file>`
-	Load variable names and values from a dotenv-formatted file
+    `-f`,
+    	`--env-file <file>`
+    Load variable names and values from a dotenv-formatted file
 
-	`-o`, 
-		`--org <organization>`
-	Set organization variable
+    `-o`,
+    	`--org <organization>`
+    Set organization variable
 
-	`-r`, 
-		`--repos <repositories>`
-	List of repositories that can access an organization variable
+    `-r`,
+    	`--repos <repositories>`
+    List of repositories that can access an organization variable
 
-	`-v`, 
-		`--visibility <string> (default "private")`
-	Set visibility for an organization variable: {all|private|selected}
+    `-v`,
+    	`--visibility <string> (default "private")`
+    Set visibility for an organization variable: {all|private|selected}
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -15655,16 +15021,13 @@ $ gh variable set -f .env
 
 ### See also
 
-  - [gh variable](./gh_variable)
-
+- [gh variable](./gh_variable)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_workflow
-
 
 ---
 
@@ -15674,34 +15037,31 @@ List, view, and run workflows in GitHub Actions.
 
 ### Available commands
 
-  - [gh workflow disable](./gh_workflow_disable)
+- [gh workflow disable](./gh_workflow_disable)
 
-  - [gh workflow enable](./gh_workflow_enable)
+- [gh workflow enable](./gh_workflow_enable)
 
-  - [gh workflow list](./gh_workflow_list)
+- [gh workflow list](./gh_workflow_list)
 
-  - [gh workflow run](./gh_workflow_run)
+- [gh workflow run](./gh_workflow_run)
 
-  - [gh workflow view](./gh_workflow_view)
+- [gh workflow view](./gh_workflow_view)
 
 ### Options
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh](./gh)
-
+- [gh](./gh)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_workflow_disable
-
 
 ---
 
@@ -15716,22 +15076,19 @@ Disable a workflow, preventing it from running or showing up when listing workfl
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh workflow](./gh_workflow)
-
+- [gh workflow](./gh_workflow)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_workflow_enable
-
 
 ---
 
@@ -15746,22 +15103,19 @@ Enable a workflow, allowing it to be run and show up when listing workflows.
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### See also
 
-  - [gh workflow](./gh_workflow)
-
+- [gh workflow](./gh_workflow)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_workflow_list
-
 
 ---
 
@@ -15776,30 +15130,30 @@ List workflow files, hiding disabled workflows by default.
 
 ### Options
 
-	`-a`, 
-		`--all`
-	Include disabled workflows
+    `-a`,
+    	`--all`
+    Include disabled workflows
 
-	`-q`, 
-		`--jq <expression>`
-	Filter JSON output using a jq expression
+    `-q`,
+    	`--jq <expression>`
+    Filter JSON output using a jq expression
 
-		`--json <fields>`
-	Output JSON with the specified fields
+    	`--json <fields>`
+    Output JSON with the specified fields
 
-	`-L`, 
-		`--limit <int> (default 50)`
-	Maximum number of workflows to fetch
+    `-L`,
+    	`--limit <int> (default 50)`
+    Maximum number of workflows to fetch
 
-	`-t`, 
-		`--template <string>`
-	Format JSON output using a Go template; see "gh help formatting"
+    `-t`,
+    	`--template <string>`
+    Format JSON output using a Go template; see "gh help formatting"
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### ALIASES
 
@@ -15811,16 +15165,13 @@ gh workflow ls
 
 ### See also
 
-  - [gh workflow](./gh_workflow)
-
+- [gh workflow](./gh_workflow)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_workflow_run
-
 
 ---
 
@@ -15838,34 +15189,34 @@ support an `on.workflow_dispatch` trigger in order to be run in this way.
 
 If the workflow file supports inputs, they can be specified in a few ways:
 
-  - Interactively
+- Interactively
 
-  - Via `-f/--raw-field` or `-F/--field` flags
+- Via `-f/--raw-field` or `-F/--field` flags
 
-  - As JSON, via standard input
+- As JSON, via standard input
 
 ### Options
 
-	`-F`, 
-		`--field <key=value>`
-	Add a string parameter in key=value format, respecting @ syntax (see "gh help api").
+    `-F`,
+    	`--field <key=value>`
+    Add a string parameter in key=value format, respecting @ syntax (see "gh help api").
 
-		`--json`
-	Read workflow inputs as JSON via STDIN
+    	`--json`
+    Read workflow inputs as JSON via STDIN
 
-	`-f`, 
-		`--raw-field <key=value>`
-	Add a string parameter in key=value format
+    `-f`,
+    	`--raw-field <key=value>`
+    Add a string parameter in key=value format
 
-	`-r`, 
-		`--ref <string>`
-	Branch or tag name which contains the version of the workflow file you'd like to run
+    `-r`,
+    	`--ref <string>`
+    Branch or tag name which contains the version of the workflow file you'd like to run
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -15888,16 +15239,13 @@ $ echo '{"name":"scully", "greeting":"hello"}' | gh workflow run triage.yml --js
 
 ### See also
 
-  - [gh workflow](./gh_workflow)
-
+- [gh workflow](./gh_workflow)
 
 ---
-
 
 # GitHub CLI | Take GitHub to the command line
 
 **Source:** https://cli.github.com/manual/gh_workflow_view
-
 
 ---
 
@@ -15912,23 +15260,23 @@ gh workflow view [<workflow-id> | <workflow-name> | <filename>] [flags]
 
 ### Options
 
-	`-r`, 
-		`--ref <string>`
-	The branch or tag name which contains the version of the workflow file you'd like to view
+    `-r`,
+    	`--ref <string>`
+    The branch or tag name which contains the version of the workflow file you'd like to view
 
-	`-w`, 
-		`--web`
-	Open workflow in the browser
+    `-w`,
+    	`--web`
+    Open workflow in the browser
 
-	`-y`, 
-		`--yaml`
-	View the workflow yaml file
+    `-y`,
+    	`--yaml`
+    View the workflow yaml file
 
 ### Options inherited from parent commands
 
-	`-R`, 
-		`--repo <[HOST/]OWNER/REPO>`
-	Select another repository using the [HOST/]OWNER/REPO format
+    `-R`,
+    	`--repo <[HOST/]OWNER/REPO>`
+    Select another repository using the [HOST/]OWNER/REPO format
 
 ### Examples
 
@@ -15942,7 +15290,6 @@ $ gh workflow view 0451
 
 ### See also
 
-  - [gh workflow](./gh_workflow)
-
+- [gh workflow](./gh_workflow)
 
 ---

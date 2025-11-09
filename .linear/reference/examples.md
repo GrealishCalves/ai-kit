@@ -75,11 +75,13 @@ Create issue with:
 ### Key Takeaways
 
 ✅ **Use sub-tasks when:**
+
 - Work breakdown is known at planning time
 - Tasks are part of the same feature
 - All sub-tasks must complete before parent is "Done"
 
 ❌ **Don't use sub-tasks for:**
+
 - Bugs discovered during implementation
 - Independent work that can be done separately
 
@@ -113,6 +115,7 @@ Create issue with:
 ### Key Takeaways
 
 ✅ **Simple features:**
+
 - No sub-tasks needed for straightforward work
 - Single issue is sufficient
 - Easier to track and complete
@@ -156,12 +159,14 @@ Create issue relation with:
 ### Key Takeaways
 
 ✅ **Bugs discovered during development:**
+
 - Create separate bug issue (not sub-task)
 - Link to original feature using "related"
 - Can be fixed independently
 - Can be prioritized separately
 
 ❌ **Don't use sub-tasks for:**
+
 - Bugs discovered after planning
 - Issues that weren't known upfront
 
@@ -195,6 +200,7 @@ Create issue with:
 ### Key Takeaways
 
 ✅ **Improvements:**
+
 - Use for enhancing existing functionality
 - Include success metrics in description
 - Prioritize based on impact
@@ -229,6 +235,7 @@ Create issue with:
 ### Key Takeaways
 
 ✅ **Multi-component features:**
+
 - Use multiple component labels
 - Include technical details in description
 - Specify success criteria
@@ -263,6 +270,7 @@ Create issue with:
 ### Key Takeaways
 
 ✅ **Cross-component work:**
+
 - Use all relevant component labels
 - Single issue for cohesive feature
 - Don't split unless work can be done independently
@@ -289,6 +297,7 @@ Create issue relation with:
 ### Key Takeaways
 
 ✅ **Blocking relationships:**
+
 - Use "blocks" type for dependencies
 - Clearly shows what's blocking what
 - Helps with prioritization
@@ -323,6 +332,7 @@ Create issue with:
 ### Key Takeaways
 
 ✅ **Smart contract features:**
+
 - Use `contract` component label
 - Include `infrastructure` for deployment-related work
 - Specify testnet and mainnet deployment steps
@@ -387,6 +397,7 @@ Create issue with:
 ### Key Takeaways
 
 ✅ **Web3 features:**
+
 - Use both `frontend` and `contract` labels for cross-component work
 - Break down into frontend and contract sub-tasks
 - Include wallet connection, contract interaction, and UI display
@@ -396,4 +407,3 @@ Create issue with:
 
 **Last Updated:** 2025-11-02
 **Maintained By:** R&D Team
-

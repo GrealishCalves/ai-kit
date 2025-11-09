@@ -1,36 +1,33 @@
 # Knip Documentation
 
-*Scraped from knip.dev*
+_Scraped from knip.dev_
 
-*Total pages: 49*
-
+_Total pages: 49_
 
 ---
-
 
 # A Brief History Of Knip
 
 **Source:** https://knip.dev/blog/brief-history
 
-
 ---
 
 # A Brief History Of Knip
 
-*Published: 2023-10-15*
+_Published: 2023-10-15_
 
 If you are fond of short lists and brief histories, then this page was written
 just for you!
 
 - 2022-10-04: The [initial commit](https://github.com/webpro-nl/knip/commit/9589dfe22608da7d89f2613383da6db5826226d2). Still so tiny at that point, but the seed
-was planted. Starting out with finding unused files and exports, the name was
-Exportman! 🦸
+  was planted. Starting out with finding unused files and exports, the name was
+  Exportman! 🦸
 
 - 2022-10-09: Big plans and a rename 5 days later, the first published version
-of Knip was [v0.1.2](https://github.com/webpro-nl/knip/tree/0.1.2).
+  of Knip was [v0.1.2](https://github.com/webpro-nl/knip/tree/0.1.2).
 
 - 2022-11-22: Unused dependencies and support for workspaces and plugins in the
-[first alpha of v1](https://github.com/webpro-nl/knip/releases/tag/1.0.0-alpha.0).
+  [first alpha of v1](https://github.com/webpro-nl/knip/releases/tag/1.0.0-alpha.0).
 
 - 2023-01-10: Lots of testing and fixes led to [Knip v1](https://github.com/webpro-nl/knip/tree/1.0.0).
 
@@ -38,32 +35,29 @@ of Knip was [v0.1.2](https://github.com/webpro-nl/knip/tree/0.1.2).
 
 - 2023-10-15: [Introduction of Knip v3](./knip-v3).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/brief-history.md)  
- 
- [ 
-  Previous 
- Slim down to speed up  ](/blog/slim-down-to-speed-up) [ 
-  Next 
- Announcing Knip v3  ](/blog/knip-v3) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/brief-history.md)
+
+[
+Previous
+Slim down to speed up ](/blog/slim-down-to-speed-up) [
+Next
+Announcing Knip v3 ](/blog/knip-v3)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Announcing Knip v3
 
 **Source:** https://knip.dev/blog/knip-v3
 
-
 ---
 
 # Announcing Knip v3
 
-*Published: 2023-10-15*
+_Published: 2023-10-15_
 
 Lots of new users got introduced to Knip, coming with clear bug reports, helpful
 insights, superb reproductions and great suggestions this year. You’re all a
@@ -78,6 +72,7 @@ combined makes me think I’m on the right track which is very motivating to kee
 working on Knip.
 
 ## So… What’s Been Cooking Lately?
+
 [
 Section titled “So… What’s Been Cooking Lately?”](#so-whats-been-cooking-lately)
 
@@ -92,6 +87,7 @@ Section titled “So… What’s Been Cooking Lately?”](#so-whats-been-cooking
 - Some breaking changes, but you probably don’t need to make any changes
 
 ## Breaking Changes
+
 [
 Section titled “Breaking Changes”](#breaking-changes)
 
@@ -103,30 +99,32 @@ on your end:
 - Simplified [exit codes](../reference/cli#exit-code)
 
 - [Production mode](../features/production-mode) now includes types by default (add `--exclude types` for
-previous behavior)
+  previous behavior)
 
 - Removed `--ignore-internal` flag; [`@internal`](../reference/jsdoc-tsdoc-tags#internal) exports ignored in
-production mode now
+  production mode now
 
 - The `--debug-file-filter` flag is removed
 
 - The `jsonExt` reporter is now the default [JSON reporter](../features/reporters#json) (the previous one
-is gone)
+  is gone)
 
 - Moved `typescript` to `peerDependencies` (requires `>=5.0.4`)
 
 ## Installation
+
 [
 Section titled “Installation”](#installation)
 
 Try out the latest Knip v3 release today!
 
- -  [  npm ](#tab-panel-0) 
--  [  pnpm ](#tab-panel-1) 
--  [  bun ](#tab-panel-2) 
--  [  yarn ](#tab-panel-3) 
+- [ npm ](#tab-panel-0)
+- [ pnpm ](#tab-panel-1)
+- [ bun ](#tab-panel-2)
+- [ yarn ](#tab-panel-3)
 
 Terminal window
+
 ```
 
 npm install -D knip
@@ -134,6 +132,7 @@ npm install -D knip
 ```
 
 Terminal window
+
 ```
 
 pnpm add -D knip
@@ -141,6 +140,7 @@ pnpm add -D knip
 ```
 
 Terminal window
+
 ```
 
 bun add -D knip
@@ -148,6 +148,7 @@ bun add -D knip
 ```
 
 Terminal window
+
 ```
 
 yarn add -D knip
@@ -156,32 +157,29 @@ yarn add -D knip
 
 Remember, Knip it before you ship it! Have a great day ☀️
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/knip-v3.mdx)  
- 
- [ 
-  Previous 
- A Brief History Of Knip  ](/blog/brief-history) [ 
-  Next 
- Release Notes v2  ](/blog/release-notes-v2) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/knip-v3.mdx)
+
+[
+Previous
+A Brief History Of Knip ](/blog/brief-history) [
+Next
+Release Notes v2 ](/blog/release-notes-v2)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Announcing Knip v4
 
 **Source:** https://knip.dev/blog/knip-v4
 
-
 ---
 
 # Announcing Knip v4
 
-*Published: 2024-01-16*
+_Published: 2024-01-16_
 
 I’m happy to announce that Knip v4 is available!
 
@@ -190,6 +188,7 @@ ended up really well: significant faster runs and reduced memory usage. In the
 meantime, v3 continued to receive more contributions, plugins and bug fixes.
 
 ## Highlights
+
 [
 Section titled “Highlights”](#highlights)
 
@@ -209,6 +208,7 @@ The actual performance win in your projects depends on various factors like size
 and complexity.
 
 ## Major Changes
+
 [
 Section titled “Major Changes”](#major-changes)
 
@@ -217,6 +217,7 @@ that you will encounter false positives caused by the major refactoring that has
 been done. If you do, [please report](../guides/issue-reproduction)!
 
 ### Unused Class Members
+
 [
 Section titled “Unused Class Members”](#unused-class-members)
 
@@ -224,10 +225,10 @@ Finding unused class members is no longer enabled by default. Here’s why it’
 now opt-in:
 
 - When using Knip for the first time on a large repository it can crash after a
-while with an out of memory error. This is a terrible experience.
+  while with an out of memory error. This is a terrible experience.
 
 - Plenty of codebases don’t use classes at all, keeping TS programs in memory is
-a waste of resources.
+  a waste of resources.
 
 - Many configurations already exclude `classMembers` from the output.
 
@@ -235,6 +236,7 @@ Enable unused class members by using the CLI argument or the configuration
 option:
 
 - Terminal window
+
 ```
 
 knip --include classMembers
@@ -259,6 +261,7 @@ By the way, enum members are “cheap” with the v4 refactor, so those are stil
 included by default.
 
 ### Compilers
+
 [
 Section titled “Compilers”](#compilers)
 
@@ -267,6 +270,7 @@ override them, your custom compilers can stay where they are. This also means
 that you can go back from `knip.ts` to `knip.json` if you prefer.
 
 ### Ignore Files
+
 [
 Section titled “Ignore Files”](#ignore-files)
 
@@ -275,6 +279,7 @@ ignore the files inside this folder you should update to globs like
 `examples/**`.
 
 ## What’s Next?
+
 [
 Section titled “What’s Next?”](#whats-next)
 
@@ -285,6 +290,7 @@ Actions or IDEs like VS Code or WebStorm may further develop.
 Remember, if you are you using Knip at work your company can [sponsor me](https://github.com/sponsors/webpro)!
 
 ## One More Thing…
+
 [
 Section titled “One More Thing…”](#one-more-thing)
 
@@ -303,6 +309,7 @@ export const myExport = 1;
 Then, include or exclude such tagged exports from the report like so:
 
 Terminal window
+
 ```
 
 knip --experimental-tags=+custom
@@ -319,17 +326,20 @@ removed and option(s) added to the Knip configuration file. The docs are in the
 [CLI reference](../reference/cli#--experimental-tags).
 
 ## Let’s Go!
+
 [
 Section titled “Let’s Go!”](#lets-go)
 
 What are you waiting for? Start using Knip v4 today!
 
-  [  npm ](#tab-panel-4) 
--  [  pnpm ](#tab-panel-5) 
--  [  bun ](#tab-panel-6) 
--  [  yarn ](#tab-panel-7) 
+[ npm ](#tab-panel-4)
+
+- [ pnpm ](#tab-panel-5)
+- [ bun ](#tab-panel-6)
+- [ yarn ](#tab-panel-7)
 
 Terminal window
+
 ```
 
 npm install -D knip
@@ -337,6 +347,7 @@ npm install -D knip
 ```
 
 Terminal window
+
 ```
 
 pnpm add -D knip
@@ -344,6 +355,7 @@ pnpm add -D knip
 ```
 
 Terminal window
+
 ```
 
 bun add -D knip
@@ -351,6 +363,7 @@ bun add -D knip
 ```
 
 Terminal window
+
 ```
 
 yarn add -D knip
@@ -359,32 +372,29 @@ yarn add -D knip
 
 Remember, Knip it before you ship it! Have a great day ☀️
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/knip-v4.mdx)  
- 
- [ 
-  Previous 
- Announcing Knip v5  ](/blog/knip-v5) [ 
-  Next 
- Slim down to speed up  ](/blog/slim-down-to-speed-up) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/knip-v4.mdx)
+
+[
+Previous
+Announcing Knip v5 ](/blog/knip-v5) [
+Next
+Slim down to speed up ](/blog/slim-down-to-speed-up)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Announcing Knip v5
 
 **Source:** https://knip.dev/blog/knip-v5
 
-
 ---
 
 # Announcing Knip v5
 
-*Published: 2024-02-10*
+_Published: 2024-02-10_
 
 Today brings the smallest major release so far. Tiny yet mighty!
 
@@ -392,6 +402,7 @@ Below are two cases to demonstrate the change in how unused exports are
 reported.
 
 ## Case 1
+
 [
 Section titled “Case 1”](#case-1)
 
@@ -399,6 +410,7 @@ The first case shows two exports with a namespaced import that references one of
 those exports explicitly:
 
 - knip.js
+
 ```
 
 export const version = 'v5';
@@ -408,6 +420,7 @@ export const getRocket = () => '🚀';
 ```
 
 index.js
+
 ```
 
 import * as NS from './knip.js';
@@ -423,6 +436,7 @@ Previously it would go into the “Unused exports in namespaces” category
 (`exports`).
 
 ## Case 2
+
 [
 Section titled “Case 2”](#case-2)
 
@@ -430,6 +444,7 @@ The second case is similar, but only the imported namespace itself is
 referenced. None of the individual exports is referenced:
 
 index.js
+
 ```
 
 import * as NS from './knip.js';
@@ -444,6 +459,7 @@ Are the `version` and `getRocket` exports used? We can’t know. The same is tru
 for the spread object pattern:
 
 index.js
+
 ```
 
 import * as NS from './knip.js';
@@ -457,12 +473,14 @@ category. This is still the case, but this category is no longer enabled by
 default.
 
 ## Include unused exports in namespaces
+
 [
 Section titled “Include unused exports in namespaces”](#include-unused-exports-in-namespaces)
 
 To enable this type of issues in Knip v5, add this argument to the command:
 
 Terminal window
+
 ```
 
 knip --include nsExports
@@ -472,6 +490,7 @@ knip --include nsExports
 Or in your configuration file:
 
 knip.json
+
 ```
 
 {
@@ -488,6 +507,7 @@ namespaces”.
 Note that `nsExports` and `nsTypes` are split for more granular control.
 
 ## Handling exports in namespaced imports
+
 [
 Section titled “Handling exports in namespaced imports”](#handling-exports-in-namespaced-imports)
 
@@ -495,6 +515,7 @@ You have a few options to handle namespaced imports when it comes to unused
 exports.
 
 ### 1. Use named imports
+
 [
 Section titled “1. Use named imports”](#1-use-named-imports)
 
@@ -502,6 +523,7 @@ Regardless of whether `nsExports` is enabled or not, it’s often good practice 
 replace the namespaced imports with named imports:
 
 index.js
+
 ```
 
 import { version, getRocket } from './knip.js';
@@ -513,12 +535,14 @@ send({ version, getRocket });
 Whenever possible, explicit over implicit is often the better choice.
 
 ### 2. Standardized JSDoc tags
+
 [
 Section titled “2. Standardized JSDoc tags”](#2-standardized-jsdoc-tags)
 
 Using one of the available JSDoc tags like `@public` or `@internal`:
 
 knip.js
+
 ```
 
 export const version = 'v5';
@@ -534,12 +558,14 @@ will exclude the `getRocket` export from the report, even though it isn’t
 explicitly referenced.
 
 ### 3. Arbitrary JSDoc tags
+
 [
 Section titled “3. Arbitrary JSDoc tags”](#3-arbitrary-jsdoc-tags)
 
 Another solution is to tag individual exports arbitrarily:
 
 knip.js
+
 ```
 
 export const version = 'v5';
@@ -553,6 +579,7 @@ export const getRocket = () => '🚀';
 And then exclude the tag like so:
 
 Terminal window
+
 ```
 
 $ knip --experimental-tags=-launch
@@ -568,6 +595,7 @@ will exclude the `getRocket` export from the report, even though it isn’t
 explicitly referenced.
 
 ## A better default
+
 [
 Section titled “A better default”](#a-better-default)
 
@@ -587,17 +615,20 @@ not a new feature, but since semver is all about setting expectations I feel the
 change is large enough to warrant a major bump.
 
 ## Let’s Go!
+
 [
 Section titled “Let’s Go!”](#lets-go)
 
 What are you waiting for? Start using Knip v5 today!
 
-  [  npm ](#tab-panel-8) 
--  [  pnpm ](#tab-panel-9) 
--  [  bun ](#tab-panel-10) 
--  [  yarn ](#tab-panel-11) 
+[ npm ](#tab-panel-8)
+
+- [ pnpm ](#tab-panel-9)
+- [ bun ](#tab-panel-10)
+- [ yarn ](#tab-panel-11)
 
 Terminal window
+
 ```
 
 npm install -D knip
@@ -605,6 +636,7 @@ npm install -D knip
 ```
 
 Terminal window
+
 ```
 
 pnpm add -D knip
@@ -612,6 +644,7 @@ pnpm add -D knip
 ```
 
 Terminal window
+
 ```
 
 bun add -D knip
@@ -619,6 +652,7 @@ bun add -D knip
 ```
 
 Terminal window
+
 ```
 
 yarn add -D knip
@@ -627,53 +661,52 @@ yarn add -D knip
 
 Remember, Knip it before you ship it! Have a great day ☀️
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/knip-v5.mdx)  
- 
- [ 
-  Previous 
- Two Years  ](/blog/two-years) [ 
-  Next 
- Announcing Knip v4  ](/blog/knip-v4) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/knip-v5.mdx)
+
+[
+Previous
+Two Years ](/blog/two-years) [
+Next
+Announcing Knip v4 ](/blog/knip-v4)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Migration to v1
 
 **Source:** https://knip.dev/blog/migration-to-v1
 
-
 ---
 
 # Migration to v1
 
-*2023-01-04*
+_2023-01-04_
 
 When coming from version v0.13.3 or before, there are some breaking changes:
 
 - The `entryFiles` and `projectFiles` options have been renamed to `entry` and
-`project`.
+  `project`.
 
 - The `--dev` argument and `dev: true` option are gone, this is now the default
-mode (see [production mode](../features/production-mode)).
+  mode (see [production mode](../features/production-mode)).
 
 - Workspaces have been moved from the root of the config to the `workspaces` key
-(see [workspaces](../features/monorepos-and-workspaces)).
+  (see [workspaces](../features/monorepos-and-workspaces)).
 
 - The `--dir` argument has been renamed to `--workspace`.
 
 ## Example
+
 [
 Section titled “Example”](#example)
 
 A configuration like this in v0.13.3 or before…
 
-- 
+-
+
 ```
 
 {
@@ -713,17 +746,17 @@ Much cleaner, right? For some more details:
 The `dev` property for the `--dev` flag is now the default mode.
 
 - Use `--production` to analyze only the `entry` and `project` files suffixed
-with `!`.
+  with `!`.
 
 - The glob patterns for both types of test files (`*.spec.ts` and `*.e2e.ts`)
-are no longer needed:
+  are no longer needed:
 
 Regular test files like `*.test.js` and `*.spec.ts` etc. are automatically
 handled by Knip.
 
 - The `*.e2e.ts` files is configured with the Cypress or other plugin. Note
-that Cypress uses `*.cy.ts` for spec files, but this could be overridden
-like so:
+  that Cypress uses `*.cy.ts` for spec files, but this could be overridden
+  like so:
 
 ```
 
@@ -743,55 +776,55 @@ like so:
 
 ```
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/migration-to-v1.md)  
- 
- [ 
-  Previous 
- Release Notes v2  ](/blog/release-notes-v2) [ 
-  Next 
- Unused dependencies  ](/typescript/unused-dependencies) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/migration-to-v1.md)
+
+[
+Previous
+Release Notes v2 ](/blog/release-notes-v2) [
+Next
+Unused dependencies ](/typescript/unused-dependencies)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Release Notes v2
 
 **Source:** https://knip.dev/blog/release-notes-v2
 
-
 ---
 
 # Release Notes v2
 
-*2023-03-22*
+_2023-03-22_
 
 ## Breaking changes
+
 [
 Section titled “Breaking changes”](#breaking-changes)
 
 When coming from v1, there are no breaking changes in terms of configuration.
 
 ## Changes
+
 [
 Section titled “Changes”](#changes)
 
 There are some changes regarding CLI arguments and output:
 
 - Knip now runs on every [workspace][1] automatically (except for the ones in
-`ignoreWorkspaces: []`).
+  `ignoreWorkspaces: []`).
 
 - The “Unlisted or unresolved dependencies” is split in “Unlisted dependencies”
-and “Unresolved imports”.
+  and “Unresolved imports”.
 
 - Bug fixes and increased correctness impact output (potentially causing CI to
-now succeed or fail).
+  now succeed or fail).
 
 ## New features
+
 [
 Section titled “New features”](#new-features)
 
@@ -799,63 +832,62 @@ Rewriting a major part of Knip’s core from scratch allows for some new excitin
 features:
 
 - **Performance**. Files are read only once, and their ASTs are traversed only
-once. Projects of any size will notice the difference. Total running time for
-some projects decreases with 90%.
+  once. Projects of any size will notice the difference. Total running time for
+  some projects decreases with 90%.
 
 - **Compilers**. You can now include other file types such as `.mdx`, `.vue` and
-`.svelte` in the analysis.
+  `.svelte` in the analysis.
 
 Internally, the `ts-morph` dependency is replaced by `typescript` itself.
 
 ## Other improvements
+
 [
 Section titled “Other improvements”](#other-improvements)
 
 - Improved support for workspaces.
 
 - Improved module resolutions, self-referencing imports, and other things you
-don’t want to worry about.
+  don’t want to worry about.
 
 - Configure `ignoreDependencies` and `ignoreBinaries` at the workspace level.
 
 - Simplified plugins model: plugin dependency finder may now return any type of
-dependency in a single array: npm packages, local workspace packages, local
-files, etc. (module and path resolution are handled outside the plugin).
+  dependency in a single array: npm packages, local workspace packages, local
+  files, etc. (module and path resolution are handled outside the plugin).
 
 - Many bugfixes.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/release-notes-v2.md)  
- 
- [ 
-  Previous 
- Announcing Knip v3  ](/blog/knip-v3) [ 
-  Next 
- Migration to v1  ](/blog/migration-to-v1) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/release-notes-v2.md)
+
+[
+Previous
+Announcing Knip v3 ](/blog/knip-v3) [
+Next
+Migration to v1 ](/blog/migration-to-v1)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Slim down to speed up
 
 **Source:** https://knip.dev/blog/slim-down-to-speed-up
 
-
 ---
 
 # Slim down to speed up
 
-*Published: 2023-12-14*
+_Published: 2023-12-14_
 
 **tl;dr;** Memory usage is up to 50% lower, runs are up to 60% faster and you
 can start using v4 canary today. No “unused class members” for the time being,
 but this feature is planned to be restored.
 
 ## Introduction
+
 [
 Section titled “Introduction”](#introduction)
 
@@ -866,6 +898,7 @@ yourself a nice drink and read on if you’re interested in where we are coming
 from, and where we are heading.
 
 ## Projects & Workspaces
+
 [
 Section titled “Projects & Workspaces”](#projects--workspaces)
 
@@ -887,6 +920,7 @@ other, so Knip couldn’t load one project, analyze it and dispose it. This way,
 connections across workspaces would be lost.
 
 ## Shared Workspaces
+
 [
 Section titled “Shared Workspaces”](#shared-workspaces)
 
@@ -903,6 +937,7 @@ TypeScript Language Server method for everything that’s not easy to find. More
 about that later in [the story of findReferences](#the-story-of-findreferences)
 
 ## Serialization
+
 [
 Section titled “Serialization”](#serialization)
 
@@ -917,6 +952,7 @@ memory or on disk). Slimming down by taking class members out of the equation
 simplifies things a lot and paves the way for all sorts of improvements.
 
 ## We Have To Slim Down
+
 [
 Section titled “We Have To Slim Down”](#we-have-to-slim-down)
 
@@ -942,6 +978,7 @@ If you rely on this feature, fear not. I plan to bring it back before the final
 v4, but possibly behind a flag.
 
 ## What’s In Store?
+
 [
 Section titled “What’s In Store?”](#whats-in-store)
 
@@ -950,31 +987,32 @@ really start thinking about significant memory and performance improvements. So
 what’s in store here? A lot!
 
 - We no longer need to keep everything in memory, so workspaces are read and
-disposed in isolation, one at a time. Memory usage will be spread out more
-even. This does not make it faster, but reducing “out of memory” issues is
-definitely a Good Thing™️ in my book.
+  disposed in isolation, one at a time. Memory usage will be spread out more
+  even. This does not make it faster, but reducing “out of memory” issues is
+  definitely a Good Thing™️ in my book.
 
 - Knip could recover from unexpected exits and continue from the last completed
-workspace.
+  workspace.
 
 - The imports and exports are in a format that can be serialized for storage and
-retrieval. This opens up interesting opportunities, such as local caching on
-disk, skipping work in subsequent runs, remote caching, and so on.
+  retrieval. This opens up interesting opportunities, such as local caching on
+  disk, skipping work in subsequent runs, remote caching, and so on.
 
 - Handling workspaces in isolation and serialization result in parallelization
-becoming a possibility. This becomes essential, as module resolution and AST
-creation and traversal are now the slowest parts of the process and are not
-easy to optimize significantly (unless perhaps switching to e.g Rust).
+  becoming a possibility. This becomes essential, as module resolution and AST
+  creation and traversal are now the slowest parts of the process and are not
+  easy to optimize significantly (unless perhaps switching to e.g Rust).
 
 - No longer relying on `findReferences` speeds up the export/import matching
-part part significantly. So far I’ve seen **improvements of up to 60% on total
-runtime**, and my guess is that some larger codebases may profit even more.
+  part part significantly. So far I’ve seen **improvements of up to 60% on total
+  runtime**, and my guess is that some larger codebases may profit even more.
 
 - The serialization format is still being explored and there is no caching yet,
-but having the steps more decoupled is another Good Thing™️ that future me
-should be happy about.
+  but having the steps more decoupled is another Good Thing™️ that future me
+  should be happy about.
 
 ## Back It Up, Please
+
 [
 Section titled “Back It Up, Please”](#back-it-up-please)
 
@@ -983,10 +1021,12 @@ the `--performance` flag when running it on any codebase. Below we have some
 data after linting the [Remix monorepo](https://github.com/remix-run/remix).
 
 ### Knip v3
+
 [
 Section titled “Knip v3”](#knip-v3)
 
 - Terminal window
+
 ```
 
 $ knip --performance
@@ -1008,10 +1048,12 @@ Total running time: 9.7s (mem: 1487.39MB)
 ```
 
 ### Knip v4
+
 [
 Section titled “Knip v4”](#knip-v4)
 
 Terminal window
+
 ```
 
 $ knip --performance
@@ -1035,6 +1077,7 @@ Total running time: 4.3s (mem: 729.67MB)
 ```
 
 ### Takeaways
+
 [
 Section titled “Takeaways”](#takeaways)
 
@@ -1045,14 +1088,15 @@ In v3,`findReferences` is where Knip potentially spends most of its time
 - In v4, total running time is down over 50%
 
 - In v4, memory usage is down 50% (calculated using
-`process.memoryUsage().heapUsage`)
+  `process.memoryUsage().heapUsage`)
 
 - In v4, `getImportsAndExports` is more comprehensive to compensate for the
-absence of `findReferences` - more on that below
+  absence of `findReferences` - more on that below
 
 Remember, unused class members are no longer reported by default in v4.
 
 ## The story of `findReferences`
+
 [
 Section titled “The story of findReferences”](#the-story-of-findreferences)
 
@@ -1061,6 +1105,7 @@ that’s not easy to find. Here’s an example of an export/import match that **
 easy to find:
 
 import.ts
+
 ```
 
 import { MyThing } from './thing.ts';
@@ -1068,6 +1113,7 @@ import { MyThing } from './thing.ts';
 ```
 
 export.ts
+
 ```
 
 export const MyThing = 'cool';
@@ -1079,6 +1125,7 @@ harder to find with static analysis. This is especially true for class members.
 Let’s take a look at the next example:
 
 MyClass.ts
+
 ```
 
 class MyClass {
@@ -1100,6 +1147,7 @@ export const OtherName = MyClass;
 ```
 
 instance.ts
+
 ```
 
 import * as MyNamespace from './MyClass.ts';
@@ -1136,6 +1184,7 @@ In the following example, `referencedExport` was stored as export from
 `namespace.ts`, but it was not imported directly as such:
 
 namespace.ts
+
 ```
 
 export const referencedExport = () => {};
@@ -1143,6 +1192,7 @@ export const referencedExport = () => {};
 ```
 
 index.ts
+
 ```
 
 import * as NS from './namespace.ts';
@@ -1172,6 +1222,7 @@ TypeScript. Knip is still backed by TypeScript, and tries to speed things up by
 shaking things off. In the end it’s all about trade-offs.
 
 ## Let’s Go!
+
 [
 Section titled “Let’s Go!”](#lets-go)
 
@@ -1179,6 +1230,7 @@ You can start using Knip v4 today, feel free to try it out! You might find a
 false positive that wasn’t there in v3, please [report this](https://github.com/webpro-nl/knip/issues).
 
 Terminal window
+
 ```
 
 npm install -D knip@canary
@@ -1187,32 +1239,29 @@ npm install -D knip@canary
 
 Remember, Knip it before you ship it! Have a great day ☀️
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/slim-down-to-speed-up.md)  
- 
- [ 
-  Previous 
- Announcing Knip v4  ](/blog/knip-v4) [ 
-  Next 
- A Brief History Of Knip  ](/blog/brief-history) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/slim-down-to-speed-up.md)
+
+[
+Previous
+Announcing Knip v4 ](/blog/knip-v4) [
+Next
+A Brief History Of Knip ](/blog/brief-history)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # The State of Knip
 
 **Source:** https://knip.dev/blog/state-of-knip
 
-
 ---
 
 # The State of Knip
 
-*Published: 2025-02-28*
+_Published: 2025-02-28_
 
 Honestly, Knip was a bit of a “cursed” project from the get-go. Getting anywhere
 near a level of being broadly-ish valuable requires a good amount of
@@ -1226,6 +1275,7 @@ at numbers such as dependent repositories on GitHub and weekly downloads on npm,
 and bug reports about increasingly less rudimentary issues.
 
 ## Two Cases
+
 [
 Section titled “Two Cases”](#two-cases)
 
@@ -1236,13 +1286,15 @@ Knip (otherwise please consider to read at least [entry files](../explanations/e
 [plugins](../explanations/plugins) first).
 
 ### Case 1: Next.js
+
 [
 Section titled “Case 1: Next.js”](#case-1-nextjs)
 
 Let’s say this default configuration represents, greatly simplified, [the
 default `entry` patterns](../reference/plugins/next#default-configuration) for projects using Next.js:
 
-- 
+-
+
 ```
 
 {
@@ -1265,6 +1317,7 @@ However, the game changes if the project uses the following Next.js
 configuration:
 
 next.config.ts
+
 ```
 
 const nextConfig = {
@@ -1290,6 +1343,7 @@ actually load and execute `next.config.ts` ¹… and trouble is right around the
 corner:
 
 next.config.ts
+
 ```
 
 const nextConfig = {
@@ -1309,6 +1363,7 @@ export default nextConfig;
 ```
 
 Terminal window
+
 ```
 
 $ knip
@@ -1335,6 +1390,7 @@ so far, but is definitely useful in some cases and on the radar.
 **EDIT:** This has been solved in the Next.js plugin in v5.48.0.
 
 ### Case 2: Knip does that?!
+
 [
 Section titled “Case 2: Knip does that?!”](#case-2-knip-does-that)
 
@@ -1346,6 +1402,7 @@ illustration of some of those components.
 Let’s just dive into this example and find out what’s happening:
 
 package.json
+
 ```
 
 {
@@ -1365,15 +1422,16 @@ Orchestration is necessary between various components within Knip, such as:
 Plugins, the Vitest plugin parses `vitest.components.config.ts`
 
 - Custom CLI argument parsing for executables, e.g. `yarn --cwd [dir]` and
-`vitest --config [file]`
+  `vitest --config [file]`
 
 - The workspace graph, to see `packages/frontend` is a descendant workspace of
-the root workspace
+  the root workspace
 
 Patterns like in the script above do not occur only in `package.json` files, but
 could be anywhere. Here’s a similar example in a GitHub Actions workflow:
 
 .github/workflows/test.yml
+
 ```
 
 jobs:
@@ -1404,7 +1462,7 @@ this goal:
 - Assign them to the right workspace
 
 - Run plugins in their own workspace to take entry file patterns from the
-configuration objects
+  configuration objects
 
 - Load and parse configuration files to get referenced dependencies
 
@@ -1416,6 +1474,7 @@ Both the configuration and entry files are then used to start building up the
 module graph.
 
 ## Comprehensive
+
 [
 Section titled “Comprehensive”](#comprehensive)
 
@@ -1437,38 +1496,36 @@ advantage of existing components in the system, and new plugins can be developed
 to further reduce user configuration and false positives.
 
 ## The End
+
 [
 Section titled “The End”](#the-end)
 
 That’s all for today, thanks for reading! Have a great one, and don’t forget:
 Knip it before you ship it! ✂️
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/state-of-knip.md)  
- 
- [ 
-  Previous 
- Related Tooling  ](/reference/related-tooling) [ 
-  Next 
- Two Years  ](/blog/two-years) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/state-of-knip.md)
+
+[
+Previous
+Related Tooling ](/reference/related-tooling) [
+Next
+Two Years ](/blog/two-years)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Two Years
 
 **Source:** https://knip.dev/blog/two-years
 
-
 ---
 
 # Two Years
 
-*Published: 2024-10-04*
+_Published: 2024-10-04_
 
 Exactly two years ago the first commit was pushed to GitHub and the first
 version of Knip was published to the npm registry. The name was initially
@@ -1484,9 +1541,10 @@ codebases with Knip’s help. Every single day I see many of those little red
 blocks for thousands of lines of deleted code and dependencies. Call me crazy,
 but to me this is pure joy and never gets old!    🟩 🟥 🟥 🟥 🟥
 
- Hooray, release the clutter! 
+Hooray, release the clutter!
 
 ## Smiling faces
+
 [
 Section titled “Smiling faces”](#smiling-faces)
 
@@ -1498,6 +1556,7 @@ today’s ecosystem to help with that. Thanks for bearing with me, here’s to a
 more little red blocks in your PRs!    🟩 🟥 🟥 🟥 🟥
 
 ## Updates
+
 [
 Section titled “Updates”](#updates)
 
@@ -1505,10 +1564,10 @@ Why not throw in some freshly cooked updates in [v5.31.0](https://github.com/web
 at it:
 
 - [The auto-fix feature](../features/auto-fix) has been completely revamped, it’s much better and a
-lot more comprehensive! You have to see it to believe it.
+  lot more comprehensive! You have to see it to believe it.
 
 - Knip has upgraded to [Jiti v2](https://github.com/unjs/jiti), resolving a bunch of known issues when
-loading configuration files authored in TypeScript and ESM, such as:
+  loading configuration files authored in TypeScript and ESM, such as:
 
 ```
 
@@ -1528,6 +1587,7 @@ gone!
 Thanks to everyone involved in making this happen, it’s truly much appreciated.
 
 ## Stable
+
 [
 Section titled “Stable”](#stable)
 
@@ -1538,13 +1598,14 @@ includes many enhancements. In fact, Knip has been largely stable since version
 kept the pace for two years now.
 
 ## Projects using Knip
+
 [
 Section titled “Projects using Knip”](#projects-using-knip)
 
 This list of projects using Knip to keep their codebases tidy is something I
 couldn’t be more proud of:
 
- [
+[
 
 ](https://github.com/adobe) [
 
@@ -1558,7 +1619,7 @@ couldn’t be more proud of:
 
 ](https://github.com/aws-samples) [
 
-  03 Logo_Teal
+03 Logo_Teal
 
 ](https://github.com/backstage) [
 
@@ -1583,7 +1644,7 @@ couldn’t be more proud of:
 ](https://github.com/prettier) [
 
 ](https://github.com/getsentry) [
-  Shopify
+Shopify
 
 ](https://github.com/shopify) [
 
@@ -1597,11 +1658,12 @@ couldn’t be more proud of:
 
 ](https://github.com/typescript-eslint) [
 
-](https://github.com/vercel) 
+](https://github.com/vercel)
 
 And so many more on and off the radar. Very, very cool!
 
 ## Sponsors
+
 [
 Section titled “Sponsors”](#sponsors)
 
@@ -1610,58 +1672,57 @@ supporting me along the way. THANK YOU, THANK YOU, THANK YOU!
 
 And eh.. gotta take my chances: how about [joining this awesome club](/sponsors)?
 
- [     
+[
 
-     ](https://datadoghq.com) [   
-  ](https://workleap.com) [   
+     ](https://datadoghq.com) [
 
-  ](https://sourcegraph.com/community) [   
+](https://workleap.com) [
 
-  ](https://birchill.co.jp)
+](https://sourcegraph.com/community) [
 
-  [  ](https://forge42.dev)
+](https://birchill.co.jp)
 
-  [  ](http://ustark.de)
+[ ](https://forge42.dev)
 
-  [  ](https://github.com/samdenty)
+[ ](http://ustark.de)
 
-  [  WebdriverIO   
-   ](https://webdriver.io)
+[ ](https://github.com/samdenty)
 
-  [  ](https://understandlegacycode.com)
+[ WebdriverIO  
+ ](https://webdriver.io)
 
-  [  ](https://github.com/mintuhouse)
+[ ](https://understandlegacycode.com)
 
-  [  ](http://www.midnight-design.at)
+[ ](https://github.com/mintuhouse)
 
-  [  ](https://kodfabrik.se) 
+[ ](http://www.midnight-design.at)
+
+[ ](https://kodfabrik.se)
 
 ## Acknowledgements
+
 [
 Section titled “Acknowledgements”](#acknowledgements)
 
 Thanks to Joshua Goldberg for [emoji-blast](https://www.emojiblast.dev)! 🎉
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/two-years.mdx)  
- 
- [ 
-  Previous 
- The State of Knip  ](/blog/state-of-knip) [ 
-  Next 
- Announcing Knip v5  ](/blog/knip-v5) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/blog/two-years.mdx)
+
+[
+Previous
+The State of Knip ](/blog/state-of-knip) [
+Next
+Announcing Knip v5 ](/blog/knip-v5)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Comparison & Migration
 
 **Source:** https://knip.dev/explanations/comparison-and-migration
-
 
 ---
 
@@ -1679,6 +1740,7 @@ concept of [monorepos/workspaces](../features/monorepos-and-workspaces). Feel fr
 does not handle better, Knip loves to be challenged!
 
 ## Migration
+
 [
 Section titled “Migration”](#migration)
 
@@ -1686,10 +1748,12 @@ A migration consists of deleting the dependency and its configuration file and
 [getting started with Knip](../overview/getting-started). You should end up with less configuration.
 
 ## Comparison
+
 [
 Section titled “Comparison”](#comparison)
 
 ### depcheck
+
 [
 Section titled “depcheck”](#depcheck)
 
@@ -1703,6 +1767,7 @@ as advanced. It also supports compilers (parsers) for non-standard files.
 The following commands are similar:
 
 - Terminal window
+
 ```
 
 depcheck
@@ -1712,6 +1777,7 @@ knip --dependencies
 ```
 
 ### unimported
+
 [
 Section titled “unimported”](#unimported)
 
@@ -1726,6 +1792,7 @@ test files), then this might work well for you.
 The following commands are similar:
 
 Terminal window
+
 ```
 
 unimported
@@ -1737,6 +1804,7 @@ knip --production --dependencies --files
 **Project status**: The project is archived and recommends Knip.
 
 ### ts-prune
+
 [
 Section titled “ts-prune”](#ts-prune)
 
@@ -1748,6 +1816,7 @@ with zero configuration.
 The following commands are similar:
 
 Terminal window
+
 ```
 
 ts-prune
@@ -1761,6 +1830,7 @@ Use `knip --exports` to also include class and enum members.
 **Project status**: The project is archived and recommends Knip.
 
 ### ts-unused-exports
+
 [
 Section titled “ts-unused-exports”](#ts-unused-exports)
 
@@ -1770,6 +1840,7 @@ project
 The following commands are similar:
 
 Terminal window
+
 ```
 
 ts-unused-exports
@@ -1781,6 +1852,7 @@ knip --include exports,types,nsExports,nsTypes
 Use `knip --exports` to also include class and enum members.
 
 ### tsr
+
 [
 Section titled “tsr”](#tsr)
 
@@ -1791,6 +1863,7 @@ on a single `tsconfig.json` file (`includes` and `excludes`) and requires no
 configuration. It removes the `export` keyword or the whole export declaration.
 
 ## Related projects
+
 [
 Section titled “Related projects”](#related-projects)
 
@@ -1813,26 +1886,23 @@ Additional alternative and related projects include:
 In general, the [e18e.dev](https://e18e.dev) website and in particular the [Cleanup](https://e18e.dev/guide/cleanup.html)
 section is a great resource when dealing with technical debt.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/comparison-and-migration.md)  
- 
- [ 
-  Previous 
- Why use Knip?  ](/explanations/why-use-knip) [ 
-  Next 
- Production Mode  ](/features/production-mode) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/comparison-and-migration.md)
+
+[
+Previous
+Why use Knip? ](/explanations/why-use-knip) [
+Next
+Production Mode ](/features/production-mode)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Entry Files
 
 **Source:** https://knip.dev/explanations/entry-files
-
 
 ---
 
@@ -1845,6 +1915,7 @@ and its plugins try to find entry files so you don’t need to configure them
 yourself.
 
 ## Default entry file patterns
+
 [
 Section titled “Default entry file patterns”](#default-entry-file-patterns)
 
@@ -1885,6 +1956,7 @@ The values you set override the default values, they are not merged.
 Also see [FAQ: Where does Knip look for entry files?](../reference/faq#where-does-knip-look-for-entry-files)
 
 ## Plugins
+
 [
 Section titled “Plugins”](#plugins)
 
@@ -1893,6 +1965,7 @@ plugins are enabled in your project, they’ll add additional entry files. See
 [the next page about plugins](./plugins) for more details about this.
 
 ## Scripts in package.json
+
 [
 Section titled “Scripts in package.json”](#scripts-in-packagejson)
 
@@ -1901,6 +1974,7 @@ fields may contain entry files. The `scripts` are also parsed to find entry
 files and dependencies. See [Script Parser](../features/script-parser) for more details.
 
 ## Ignored files
+
 [
 Section titled “Ignored files”](#ignored-files)
 
@@ -1909,32 +1983,30 @@ entry files. This behavior can be disabled by using the [`--no-gitignore`](../re
 flag on the CLI.
 
 ## Configuring project files
+
 [
 Section titled “Configuring project files”](#configuring-project-files)
 
 See [configuring project files](../guides/configuring-project-files) for guidance on tuning `entry` and `project`
 and when to use `ignore`.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/entry-files.md)  
- 
- [ 
-  Previous 
- Screenshots & videos  ](/overview/screenshots-videos) [ 
-  Next 
- Plugins  ](/explanations/plugins) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/entry-files.md)
+
+[
+Previous
+Screenshots & videos ](/overview/screenshots-videos) [
+Next
+Plugins ](/explanations/plugins)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Plugins
 
 **Source:** https://knip.dev/explanations/plugins
-
 
 ---
 
@@ -1947,6 +2019,7 @@ Knip has an extensive and growing [list of built-in plugins](../reference/plugin
 [write a plugin](../guides/writing-a-plugin) so others can benefit too!
 
 ## What does a plugin do?
+
 [
 Section titled “What does a plugin do?”](#what-does-a-plugin-do)
 
@@ -1962,6 +2035,7 @@ plugin will:
 - Define [command-line arguments](#command-line-arguments)
 
 ## Configuration files
+
 [
 Section titled “Configuration files”](#configuration-files)
 
@@ -1973,6 +2047,7 @@ various ways. Knip uses a plugin for each tool to parse configuration files and
 find those dependencies.
 
 ### Example: ESLint
+
 [
 Section titled “Example: ESLint”](#example-eslint)
 
@@ -1980,6 +2055,7 @@ In the first example we look at [the ESLint plugin](../reference/plugins/eslint)
 file patterns include `.eslintrc.json`. Here’s a minimal example:
 
 - .eslintrc.json
+
 ```
 
 {
@@ -2008,6 +2084,7 @@ as unlisted. And vice versa, if there are any ESLint plugins listed in
 `package.json`, but unused, those will be reported as well.
 
 ### Example: Vitest
+
 [
 Section titled “Example: Vitest”](#example-vitest)
 
@@ -2015,6 +2092,7 @@ The second example uses [the Vitest plugin](../reference/plugins/eslint). Here�
 Vitest configuration file:
 
 vitest.config.ts
+
 ```
 
 import { defineConfig } from 'vitest/config';
@@ -2055,6 +2133,7 @@ Plugins parse `config` files to find external dependencies. Knip uses this to
 determine unused and unlisted dependencies.
 
 ## Entry files
+
 [
 Section titled “Entry files”](#entry-files)
 
@@ -2079,6 +2158,7 @@ tools. So you don’t need to repeat this in your Knip configuration.
 For example, let’s say your Playwright configuration contains the following:
 
 playwright.config.ts
+
 ```
 
 import type { PlaywrightTestConfig } from '@playwright/test';
@@ -2102,6 +2182,7 @@ patterns.
 You can still override this behavior in your Knip configuration:
 
 knip.json
+
 ```
 
 {
@@ -2124,6 +2205,7 @@ Summary
 Plugins try hard to automatically add the correct entry files.
 
 ## Entry files from config files
+
 [
 Section titled “Entry files from config files”](#entry-files-from-config-files)
 
@@ -2135,12 +2217,14 @@ you an idea about the various ways Knip and its plugins try to find entry files
 so you don’t need to configure them yourself.
 
 ### Angular
+
 [
 Section titled “Angular”](#angular)
 
 The Angular plugin parses the Angular configuration file. Here’s a fragment:
 
 angular.json
+
 ```
 
 {
@@ -2186,6 +2270,7 @@ Additionally, the Angular plugin returns `tsconfig.app.json` as a configuration
 file for the TypeScript plugin.
 
 ### GitHub Actions
+
 [
 Section titled “GitHub Actions”](#github-actions)
 
@@ -2193,6 +2278,7 @@ This plugin parses workflow YAML files. This fragment contains three `run`
 scripts:
 
 .github/workflows/deploy.yml
+
 ```
 
 jobs:
@@ -2224,12 +2310,14 @@ handed over as a Playwright configuration file.
 Read more about this in [command-line arguments](#command-line-arguments).
 
 ### webpack
+
 [
 Section titled “webpack”](#webpack)
 
 Let’s take a look at this example webpack configuration file:
 
 webpack.config.js
+
 ```
 
 module.exports = env => {
@@ -2275,6 +2363,7 @@ Summary
 Plugins can find additional entry files when parsing config files.
 
 ## Bringing it all together
+
 [
 Section titled “Bringing it all together”](#bringing-it-all-together)
 
@@ -2285,6 +2374,7 @@ plugin to find additional dependencies.
 Let’s take a look at this example Vite configuration file:
 
 vite.config.ts
+
 ```
 
 import { defineConfig } from 'vite';
@@ -2329,6 +2419,7 @@ automatically added as `entry` files for Knip to **statically** resolve the
 Additionally, `./setup-tests.ts` will be added as an `entry` file.
 
 ## Command-Line Arguments
+
 [
 Section titled “Command-Line Arguments”](#command-line-arguments)
 
@@ -2336,6 +2427,7 @@ Plugins may define the arguments where Knip should look for entry files,
 configuration files and dependencies. We’ve already seen some examples above:
 
 Terminal window
+
 ```
 
 node --loader tsx scripts/deploy.ts
@@ -2347,6 +2439,7 @@ playwright test -c playwright.web.config.ts
 Please see [script parser](../features/script-parser) for more details.
 
 ## Summary
+
 [
 Section titled “Summary”](#summary)
 
@@ -2359,28 +2452,25 @@ Plugins are configured with two distinct types of files:
 - `entry` files are added to the module graph
 
 - Both can recursively lead to additional entry files, config files and
-dependencies
+  dependencies
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/plugins.md)  
- 
- [ 
-  Previous 
- Entry Files  ](/explanations/entry-files) [ 
-  Next 
- Why use Knip?  ](/explanations/why-use-knip) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/plugins.md)
+
+[
+Previous
+Entry Files ](/explanations/entry-files) [
+Next
+Why use Knip? ](/explanations/why-use-knip)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Why use Knip?
 
 **Source:** https://knip.dev/explanations/why-use-knip
-
 
 ---
 
@@ -2409,6 +2499,7 @@ features for maximum coverage:
 - [Auto-fix most issues](../features/auto-fix)
 
 ## Less is more
+
 [
 Section titled “Less is more”](#less-is-more)
 
@@ -2418,26 +2509,27 @@ code”:
 - Easier maintenance: things are easier to manage when there’s less of it.
 
 - Improved performance: startup time, build time and/or bundle size can be
-negatively impacted when unused code, files and/or dependencies are included.
-Relying on tree-shaking when bundling code helps, but it’s not a silver
-bullet.
+  negatively impacted when unused code, files and/or dependencies are included.
+  Relying on tree-shaking when bundling code helps, but it’s not a silver
+  bullet.
 
 - Easier onboarding: there should be no doubts about whether files, dependencies
-and exports are actually in use or not. Especially for people new to the
-project and/or taking over responsibilities this is harder to grasp.
+  and exports are actually in use or not. Especially for people new to the
+  project and/or taking over responsibilities this is harder to grasp.
 
 - Prevent regressions: tools like TypeScript, ESLint and Prettier do all sorts
-of checks and linting to report violations and prevent regressions. Knip does
-the same for dependencies, exports and files that are obsolete.
+  of checks and linting to report violations and prevent regressions. Knip does
+  the same for dependencies, exports and files that are obsolete.
 
 - Keeping dead code around has a negative value on readability, as it can be
-misleading and distracting. Even if it serves no purpose it will need to be
-maintained (source: [Safe dead code removal → YAGNI](https://jfmengels.net/safe-dead-code-removal/#yagni-you-arent-gonna-need-it)).
+  misleading and distracting. Even if it serves no purpose it will need to be
+  maintained (source: [Safe dead code removal → YAGNI](https://jfmengels.net/safe-dead-code-removal/#yagni-you-arent-gonna-need-it)).
 
 - Also see [Why are unused dependencies a problem?](../typescript/unused-dependencies#why-are-unused-dependencies-a-problem) and [Why are unused
-exports a problem?](../typescript/unused-exports#why-are-unused-exports-a-problem).
+  exports a problem?](../typescript/unused-exports#why-are-unused-exports-a-problem).
 
 ## Automation
+
 [
 Section titled “Automation”](#automation)
 
@@ -2454,6 +2546,7 @@ Use Knip next to a linter like ESLint or Biome: after removing unused variables
 inside files, Knip might find even more unused code. Rinse and repeat!
 
 ## Comprehensive
+
 [
 Section titled “Comprehensive”](#comprehensive)
 
@@ -2462,17 +2555,18 @@ strategy that addresses all of dependencies, exports and files is in their
 synergy:
 
 - Utilizing plugins to find their dependencies includes the capacity to find
-additional entry and configuration files. This results in more resolved and
-used files. Better coverage gives better insights into unused files and
-exports.
+  additional entry and configuration files. This results in more resolved and
+  used files. Better coverage gives better insights into unused files and
+  exports.
 
 - Analyzing more files reveals more unused exports and dependency usage,
-refining the list of both unused and unlisted dependencies.
+  refining the list of both unused and unlisted dependencies.
 
 - This approach is amplified in a monorepo setting. In fact, files and internal
-dependencies can recursively reference each other (across workspaces).
+  dependencies can recursively reference each other (across workspaces).
 
 ## Greenfield or Legacy
+
 [
 Section titled “Greenfield or Legacy”](#greenfield-or-legacy)
 
@@ -2490,13 +2584,15 @@ the project or doing large refactors. Even a list of results with a few false
 positives is many times better and faster than if you were to do it manually.
 
 ## Unobtrusive
+
 [
 Section titled “Unobtrusive”](#unobtrusive)
 
 Knip does not introduce new syntax for you to learn. This may sound obvious, but
 consider comments like the following:
 
-- 
+-
+
 ```
 
 // eslint-disable-next-line
@@ -2513,33 +2609,30 @@ so you can get rid of false positives? A variety of reasons:
 A false positive may be a bug in Knip, and should be reported, not dismissed.
 
 - Instead of proprietary comments, use [standardized annotations](../reference/jsdoc-tsdoc-tags) that also
-serve as documentation.
+  serve as documentation.
 
 - In the event you want to remove Knip, just uninstall `knip` without having to
-remove useless comments scattered throughout the codebase.
+  remove useless comments scattered throughout the codebase.
 
 Tip: use `@lintignore` in JSDoc comments, so other linters can use the same.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/why-use-knip.md)  
- 
- [ 
-  Previous 
- Plugins  ](/explanations/plugins) [ 
-  Next 
- Comparison & Migration  ](/explanations/comparison-and-migration) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/explanations/why-use-knip.md)
+
+[
+Previous
+Plugins ](/explanations/plugins) [
+Next
+Comparison & Migration ](/explanations/comparison-and-migration)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Auto-fix
 
 **Source:** https://knip.dev/features/auto-fix
-
 
 ---
 
@@ -2569,16 +2662,19 @@ Use a VCS (version control system) like Git to review and undo changes as
 necessary.
 
 ## Flags
+
 [
 Section titled “Flags”](#flags)
 
 ### Fix
+
 [
 Section titled “Fix”](#fix)
 
 Add the `--fix` flag to remove unused exports and dependencies:
 
 - Terminal window
+
 ```
 
 knip --fix
@@ -2588,6 +2684,7 @@ knip --fix
 Add `--allow-remove-files` to allow Knip to remove unused files:
 
 Terminal window
+
 ```
 
 knip --fix --allow-remove-files
@@ -2607,6 +2704,7 @@ Use `--fix-type` to fix only specific issue types:
 Example:
 
 Terminal window
+
 ```
 
 knip --fix-type exports,types
@@ -2616,6 +2714,7 @@ knip --fix-type exports --fix-type types   # same as above
 ```
 
 ### Format
+
 [
 Section titled “Format”](#format)
 
@@ -2624,6 +2723,7 @@ configuration in your project. Supports Biome, deno fmt, dprint and Prettier
 (using [Formatly](https://github.com/JoshuaKGoldberg/formatly)):
 
 Terminal window
+
 ```
 
 knip --fix --format
@@ -2631,16 +2731,19 @@ knip --fix --format
 ```
 
 ## Demo
+
 [
 Section titled “Demo”](#demo)
 
 ## Post-fix
+
 [
 Section titled “Post-fix”](#post-fix)
 
 After Knip has fixed issues, there are four things to consider:
 
 ### 1. Use a formatter
+
 [
 Section titled “1. Use a formatter”](#1-use-a-formatter)
 
@@ -2653,6 +2756,7 @@ Add the `--format` flag to format the modified files using the formatter and
 configuration in your project.
 
 ### 2. Unused variables
+
 [
 Section titled “2. Unused variables”](#2-unused-variables)
 
@@ -2664,18 +2768,20 @@ This may result in more deleted code, and Knip may then find more unused code.
 Rinse and repeat!
 
 ### 3. Unused dependencies
+
 [
 Section titled “3. Unused dependencies”](#3-unused-dependencies)
 
 Verify changes in `package.json` and update dependencies using your package
 manager.
 
- -  [  npm ](#tab-panel-14) 
--  [  pnpm ](#tab-panel-15) 
--  [  bun ](#tab-panel-16) 
--  [  yarn ](#tab-panel-17) 
+- [ npm ](#tab-panel-14)
+- [ pnpm ](#tab-panel-15)
+- [ bun ](#tab-panel-16)
+- [ yarn ](#tab-panel-17)
 
 Terminal window
+
 ```
 
 npm install
@@ -2683,6 +2789,7 @@ npm install
 ```
 
 Terminal window
+
 ```
 
 pnpm install
@@ -2690,6 +2797,7 @@ pnpm install
 ```
 
 Terminal window
+
 ```
 
 bun install
@@ -2697,6 +2805,7 @@ bun install
 ```
 
 Terminal window
+
 ```
 
 yarn
@@ -2704,18 +2813,20 @@ yarn
 ```
 
 ### 4. Install unlisted dependencies
+
 [
 Section titled “4. Install unlisted dependencies”](#4-install-unlisted-dependencies)
 
 If Knip reports unlisted dependencies or binaries, they should be installed
 using the package manager in the project, for example:
 
- -  [  npm ](#tab-panel-18) 
--  [  pnpm ](#tab-panel-19) 
--  [  bun ](#tab-panel-20) 
--  [  yarn ](#tab-panel-21) 
+- [ npm ](#tab-panel-18)
+- [ pnpm ](#tab-panel-19)
+- [ bun ](#tab-panel-20)
+- [ yarn ](#tab-panel-21)
 
 Terminal window
+
 ```
 
 npm install unlisted-package
@@ -2723,6 +2834,7 @@ npm install unlisted-package
 ```
 
 Terminal window
+
 ```
 
 pnpm add unlisted-package
@@ -2730,6 +2842,7 @@ pnpm add unlisted-package
 ```
 
 Terminal window
+
 ```
 
 bun add unlisted-package
@@ -2737,6 +2850,7 @@ bun add unlisted-package
 ```
 
 Terminal window
+
 ```
 
 yarn add unlisted-package
@@ -2744,16 +2858,19 @@ yarn add unlisted-package
 ```
 
 ## Example results
+
 [
 Section titled “Example results”](#example-results)
 
 ### Exports
+
 [
 Section titled “Exports”](#exports)
 
 The `export` keyword for unused exports is removed:
 
 module.ts
+
 ```
 
 export const unused = 1;
@@ -2771,6 +2888,7 @@ The `default` keyword was also removed here.
 Knip removes the whole or part of export declarations:
 
 module.ts
+
 ```
 
 type Snake = 'python' | 'anaconda';
@@ -2790,12 +2908,14 @@ export { Owl, Hawk };
 ```
 
 ### Re-exports
+
 [
 Section titled “Re-exports”](#re-exports)
 
 Knip removes the whole or part of re-exports:
 
 file.js
+
 ```
 
 export { Cat, Dog } from './pets';
@@ -2808,9 +2928,9 @@ export { Elephant } from './jungle'
 
 Also across any chain of re-exports:
 
- -  [  module.ts ](#tab-panel-22) 
--  [  barrel.ts ](#tab-panel-23) 
--  [  index.ts ](#tab-panel-24) 
+- [ module.ts ](#tab-panel-22)
+- [ barrel.ts ](#tab-panel-23)
+- [ index.ts ](#tab-panel-24)
 
 ```
 
@@ -2837,6 +2957,7 @@ export { Hawk } from './barrel.js'
 ```
 
 ### Export assignments
+
 [
 Section titled “Export assignments”](#export-assignments)
 
@@ -2844,6 +2965,7 @@ Knip removes individual exported items in “export assignments”, but does not
 remove the entire export declaration if it’s empty:
 
 file.js
+
 ```
 
 export const { a, b  } = fn();
@@ -2861,12 +2983,14 @@ safe to always remove the whole declaration. This could be improved in the
 future (feel free to open an issue/RFC).
 
 ### Enum members
+
 [
 Section titled “Enum members”](#enum-members)
 
 Unused members of enums are removed:
 
 file.ts
+
 ```
 
 export enum Directions {
@@ -2884,12 +3008,14 @@ export enum Directions {
 ```
 
 ### CommonJS
+
 [
 Section titled “CommonJS”](#commonjs)
 
 Knip supports CommonJS and removes unused exports:
 
 common.js
+
 ```
 
 module.exports = { identifier, unused };
@@ -2906,12 +3032,14 @@ Warning: the right-hand side of such an assignment might have side-effects. Knip
 currently removes the whole declaration (feel free to open an issue/RFC).
 
 ### Dependencies
+
 [
 Section titled “Dependencies”](#dependencies)
 
 Unused dependencies are removed from `package.json`:
 
 package.json
+
 ```
 
 {
@@ -2941,12 +3069,14 @@ package.json
 ```
 
 ### Class members   experimental
+
 [
 Section titled “Class members   ”](#class-members-)
 
 Unused members of classes can be removed:
 
 file.ts
+
 ```
 
 export class Rectangle {
@@ -2979,40 +3109,38 @@ component are unused and will remove those.
 Note that [`classMembers` aren’t included by default](../guides/handling-issues#class-members).
 
 ## What’s not included
+
 [
 Section titled “What’s not included”](#whats-not-included)
 
 Operations that auto-fix does not (yet) perform and why:
 
 - Add unlisted (dev) dependencies to `package.json` (should it go into
-`dependencies` or `devDependencies`? For monorepos in current workspace or
-root?)
+  `dependencies` or `devDependencies`? For monorepos in current workspace or
+  root?)
 
 - Add unlisted binaries (which package and package version contains the used
-binary?)
+  binary?)
 
 - Fix duplicate exports (which one should removed?)
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/auto-fix.mdx)  
- 
- [ 
-  Previous 
- Rules & Filters  ](/features/rules-and-filters) [ 
-  Next 
- Compilers  ](/features/compilers) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/auto-fix.mdx)
+
+[
+Previous
+Rules & Filters ](/features/rules-and-filters) [
+Next
+Compilers ](/features/compilers)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Compilers
 
 **Source:** https://knip.dev/features/compilers
-
 
 ---
 
@@ -3025,6 +3153,7 @@ and external dependencies. So ideally, these files are included when linting the
 project. That’s why Knip supports compilers.
 
 ## Built-in compilers
+
 [
 Section titled “Built-in compilers”](#built-in-compilers)
 
@@ -3054,6 +3183,7 @@ Compilers are enabled only if certain dependencies are found. If that’s not
 working for your project, set `true` and enable any compiler manually:
 
 - knip.ts
+
 ```
 
 export default {
@@ -3069,6 +3199,7 @@ export default {
 ```
 
 ## Custom compilers
+
 [
 Section titled “Custom compilers”](#custom-compilers)
 
@@ -3077,6 +3208,7 @@ Since compilers are functions, the Knip configuration file must be a dynamic
 `.js` or `.ts` file.
 
 ### Interface
+
 [
 Section titled “Interface”](#interface)
 
@@ -3097,6 +3229,7 @@ to Knip. This means you don’t need to add something like `**/*.{ts,vue}` to th
 `entry` or `project` file patterns manually.
 
 ### Examples
+
 [
 Section titled “Examples”](#examples)
 
@@ -3109,12 +3242,14 @@ Section titled “Examples”](#examples)
 - [Vue](#vue)
 
 #### CSS
+
 [
 Section titled “CSS”](#css)
 
 Here’s an example, minimal compiler for CSS files:
 
 knip.ts
+
 ```
 
 export default {
@@ -3134,6 +3269,7 @@ not clear if it should be included. And if so, what would be the best way to
 determine it should be enabled, and what syntax(es) it should support.
 
 #### MDX
+
 [
 Section titled “MDX”](#mdx)
 
@@ -3156,6 +3292,7 @@ export default {
 ```
 
 #### Svelte
+
 [
 Section titled “Svelte”](#svelte)
 
@@ -3181,6 +3318,7 @@ export default {
 ```
 
 #### Vue
+
 [
 Section titled “Vue”](#vue)
 
@@ -3255,26 +3393,23 @@ export default config;
 
 ```
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/compilers.md)  
- 
- [ 
-  Previous 
- Auto-fix  ](/features/auto-fix) [ 
-  Next 
- Reporters & Preprocessors  ](/features/reporters) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/compilers.md)
+
+[
+Previous
+Auto-fix ](/features/auto-fix) [
+Next
+Reporters & Preprocessors ](/features/reporters)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Integrated Monorepos
 
 **Source:** https://knip.dev/features/integrated-monorepos
-
 
 ---
 
@@ -3289,6 +3424,7 @@ Tip
 An integrated monorepo is a single workspace.
 
 ## Entry Files
+
 [
 Section titled “Entry Files”](#entry-files)
 
@@ -3296,6 +3432,7 @@ The default entrypoints files might not be enough. Here’s an idea that might f
 this type of monorepo:
 
 knip.json
+
 ```
 
 {
@@ -3309,6 +3446,7 @@ knip.json
 ```
 
 ## Plugins
+
 [
 Section titled “Plugins”](#plugins)
 
@@ -3320,6 +3458,7 @@ dependencies they import and refer to.
 In that case, we could configure the ESLint and Cypress plugins like this:
 
 knip.json
+
 ```
 
 {
@@ -3343,26 +3482,23 @@ knip.json
 Adapt the file patterns to your project, and the relevant `config` and `entry`
 files and dependencies should no longer be reported as unused.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/integrated-monorepos.md)  
- 
- [ 
-  Previous 
- Monorepos & Workspaces  ](/features/monorepos-and-workspaces) [ 
-  Next 
- Source Mapping  ](/features/source-mapping) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/integrated-monorepos.md)
+
+[
+Previous
+Monorepos & Workspaces ](/features/monorepos-and-workspaces) [
+Next
+Source Mapping ](/features/source-mapping)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Monorepos & Workspaces
 
 **Source:** https://knip.dev/features/monorepos-and-workspaces
-
 
 ---
 
@@ -3375,12 +3511,14 @@ packages in a monorepo. Knip uses the term workspace exclusively to indicate a
 directory that has a `package.json`.
 
 ## Configuration
+
 [
 Section titled “Configuration”](#configuration)
 
 Here’s example configuration with custom `entry` and `project` patterns:
 
 - knip.json
+
 ```
 
 {
@@ -3432,6 +3570,7 @@ level are ignored. Use the workspace named `"."` for those (like in the example
 above).
 
 ## Workspaces
+
 [
 Section titled “Workspaces”](#workspaces)
 
@@ -3456,6 +3595,7 @@ For projects with only a root `package.json`, please see [integrated
 monorepos](./integrated-monorepos).
 
 ## Additional workspaces
+
 [
 Section titled “Additional workspaces”](#additional-workspaces)
 
@@ -3465,12 +3605,14 @@ their path to the `workspaces` configuration object the same way as
 `"packages/cli": {}` in the example above.
 
 ## Source mapping
+
 [
 Section titled “Source mapping”](#source-mapping)
 
 See [Source Mapping](./source-mapping).
 
 ## Additional options
+
 [
 Section titled “Additional options”](#additional-options)
 
@@ -3494,6 +3636,7 @@ Use `--debug` for verbose output and see the workspaces Knip includes, their
 configurations, enabled plugins, glob options and resolved files.
 
 ## Lint a single workspace
+
 [
 Section titled “Lint a single workspace”](#lint-a-single-workspace)
 
@@ -3501,6 +3644,7 @@ Use the `--workspace` (or `-W`) argument to focus on a single workspace (and let
 Knip run faster). Example:
 
 Terminal window
+
 ```
 
 knip --workspace packages/my-lib
@@ -3511,7 +3655,7 @@ This will include the target workspace, but also ancestor and dependent
 workspaces. For two reasons:
 
 - Ancestor workspaces may list dependencies in `package.json` the linted
-workspace uses.
+  workspace uses.
 
 - Dependent workspaces may reference exports from the linted workspace.
 
@@ -3521,26 +3665,23 @@ To lint the workspace in isolation, there are two options:
 
 - Run Knip from inside the workspace directory.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/monorepos-and-workspaces.md)  
- 
- [ 
-  Previous 
- Production Mode  ](/features/production-mode) [ 
-  Next 
- Integrated Monorepos  ](/features/integrated-monorepos) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/monorepos-and-workspaces.md)
+
+[
+Previous
+Production Mode ](/features/production-mode) [
+Next
+Integrated Monorepos ](/features/integrated-monorepos)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Production Mode
 
 **Source:** https://knip.dev/features/production-mode
-
 
 ---
 
@@ -3554,6 +3695,7 @@ deleted. Knip features a “production mode” to focus only on the code that yo
 ship.
 
 ## Configuration
+
 [
 Section titled “Configuration”](#configuration)
 
@@ -3561,6 +3703,7 @@ To tell Knip what is production code, add an exclamation mark behind each
 `pattern!` that represents production code:
 
 - knip.json
+
 ```
 
 {
@@ -3579,6 +3722,7 @@ need to modify your configuration at all.
 Then run Knip with the `--production` flag:
 
 Terminal window
+
 ```
 
 knip --production
@@ -3590,7 +3734,7 @@ Here’s what’s included in production mode:
 Only `entry` and `project` patterns suffixed with `!`
 
 - Only production `entry` file patterns exported by plugins (such as Next.js and
-Remix)
+  Remix)
 
 - Only the `start` and `postinstall` scripts
 
@@ -3611,6 +3755,7 @@ In case files like mocks and test helpers are reported as unused files, use
 negated patterns to exclude those files in production mode:
 
 knip.json
+
 ```
 
 {
@@ -3627,13 +3772,14 @@ Also see [configuring project files](../guides/configuring-project-files) to ali
 production mode.
 
 ## Strict Mode
+
 [
 Section titled “Strict Mode”](#strict-mode)
 
 Additionally, the `--strict` flag can be added to:
 
 - Consider `dependencies` (not `devDependencies`) when finding unused or
-unlisted dependencies
+  unlisted dependencies
 
 - Include `peerDependencies` when finding unused or unlisted dependencies
 
@@ -3642,6 +3788,7 @@ unlisted dependencies
 - Type-only imports should be in `devDependencies`
 
 Terminal window
+
 ```
 
 knip --production --strict
@@ -3651,44 +3798,44 @@ knip --production --strict
 Using `--strict` implies `--production`, so the latter can be omitted.
 
 ## Types
+
 [
 Section titled “Types”](#types)
 
 Add `--exclude types` if you don’t want to include types in the report:
 
 Terminal window
+
 ```
 
 knip --production --exclude types
 
 ```
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/production-mode.md)  
- 
- [ 
-  Previous 
- Comparison & Migration  ](/explanations/comparison-and-migration) [ 
-  Next 
- Monorepos & Workspaces  ](/features/monorepos-and-workspaces) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/production-mode.md)
+
+[
+Previous
+Comparison & Migration ](/explanations/comparison-and-migration) [
+Next
+Monorepos & Workspaces ](/features/monorepos-and-workspaces)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Reporters & Preprocessors
 
 **Source:** https://knip.dev/features/reporters
-
 
 ---
 
 # Reporters & Preprocessors
 
 ## Built-in Reporters
+
 [
 Section titled “Built-in Reporters”](#built-in-reporters)
 
@@ -3713,6 +3860,7 @@ Knip provides the following built-in reporters:
 Example usage:
 
 Terminal window
+
 ```
 
 knip --reporter compact
@@ -3720,6 +3868,7 @@ knip --reporter compact
 ```
 
 ### JSON
+
 [
 Section titled “JSON”](#json)
 
@@ -3820,6 +3969,7 @@ object per file structured like this:
 The keys match the [reported issue types](../reference/issue-types). Example usage:
 
 Terminal window
+
 ```
 
 knip --reporter json
@@ -3827,6 +3977,7 @@ knip --reporter json
 ```
 
 ### Github Actions
+
 [
 Section titled “Github Actions”](#github-actions)
 
@@ -3835,6 +3986,7 @@ TODO
 Example usage:
 
 Terminal window
+
 ```
 
 knip --reporter github-actions
@@ -3842,6 +3994,7 @@ knip --reporter github-actions
 ```
 
 ### Markdown
+
 [
 Section titled “Markdown”](#markdown)
 
@@ -3878,6 +4031,7 @@ Markdown tables separated by issue types as headings, for example:
 ```
 
 ### Disclosure
+
 [
 Section titled “Disclosure”](#disclosure)
 
@@ -3908,9 +4062,9 @@ dangling.js
 
 ```
 
-unused-dep     package.json
+unused-dep package.json
 
-my-package     package.json
+my-package package.json
 
 ```
 
@@ -3921,7 +4075,7 @@ my-package     package.json
 The above can be copy-pasted where HTML and Markdown is supported, such as a
 GitHub issue or pull request, and renders like so:
 
-  Unused files (2)
+Unused files (2)
 
 ```
 
@@ -3931,7 +4085,7 @@ dangling.js
 
 ```
 
-  Unused dependencies (2)
+Unused dependencies (2)
 
 ```
 
@@ -3942,6 +4096,7 @@ my-package     package.json
 ```
 
 ### CodeClimate
+
 [
 Section titled “CodeClimate”](#codeclimate)
 
@@ -3993,6 +4148,7 @@ $ knip --reporter codeclimate
 ```
 
 ## Custom Reporters
+
 [
 Section titled “Custom Reporters”](#custom-reporters)
 
@@ -4005,6 +4161,7 @@ to write issues to `stdout`, a JSON or CSV file, or sent to a service. It
 supports a local JavaScript or TypeScript file or an external dependency.
 
 ### Local
+
 [
 Section titled “Local”](#local)
 
@@ -4046,6 +4203,7 @@ sent to a service.
 Here’s a most minimal reporter example:
 
 ./my-reporter.ts
+
 ```
 
 import type { Reporter } from 'knip';
@@ -4065,6 +4223,7 @@ export default reporter;
 Example usage:
 
 Terminal window
+
 ```
 
 knip --reporter ./my-reporter.ts
@@ -4072,6 +4231,7 @@ knip --reporter ./my-reporter.ts
 ```
 
 ### External
+
 [
 Section titled “External”](#external)
 
@@ -4080,6 +4240,7 @@ function of the `main` script (default: `index.js`) will be invoked with the
 `ReporterOptions`, just like a local reporter.
 
 ## Preprocessors
+
 [
 Section titled “Preprocessors”](#preprocessors)
 
@@ -4105,6 +4266,7 @@ npm packages as preprocessors.
 Example preprocessor:
 
 ./preprocess.ts
+
 ```
 
 import type { Preprocessor } from 'knip';
@@ -4124,32 +4286,30 @@ export default preprocess;
 Example usage:
 
 Terminal window
+
 ```
 
 knip --preprocessor ./preprocess.ts
 
 ```
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/reporters.md)  
- 
- [ 
-  Previous 
- Compilers  ](/features/compilers) [ 
-  Next 
- Script Parser  ](/features/script-parser) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/reporters.md)
+
+[
+Previous
+Compilers ](/features/compilers) [
+Next
+Script Parser ](/features/script-parser)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Rules & Filters
 
 **Source:** https://knip.dev/features/rules-and-filters
-
 
 ---
 
@@ -4163,11 +4323,12 @@ few examples:
 - You don’t want to see unused `type`, `interface` and `enum` exports reported.
 
 - Specific issue types should be printed, but not counted against the total
-error count.
+  error count.
 
 If you’re looking to handle one-off exceptions, also see [JSDoc tags](../reference/jsdoc-tsdoc-tags).
 
 ## Filters
+
 [
 Section titled “Filters”](#filters)
 
@@ -4179,6 +4340,7 @@ Use `--include` to report only specific issue types. The following example
 commands do the same:
 
 - Terminal window
+
 ```
 
 knip --include files --include dependencies
@@ -4191,6 +4353,7 @@ Or the other way around, use `--exclude` to ignore the types you’re not
 interested in:
 
 Terminal window
+
 ```
 
 knip --include files --exclude enumMembers,duplicates
@@ -4200,6 +4363,7 @@ knip --include files --exclude enumMembers,duplicates
 Also see the [list of issue types](../reference/issue-types).
 
 ### Shorthands
+
 [
 Section titled “Shorthands”](#shorthands)
 
@@ -4215,7 +4379,7 @@ The `--dependencies` flag includes:
 
 - `unresolved`
 
-- 
+-
 
 The `--exports` flag includes:
 
@@ -4227,11 +4391,12 @@ The `--exports` flag includes:
 
 - `duplicates`
 
-- 
+-
 
 The `--files` flag is a shortcut for `--include files`
 
 ## Rules
+
 [
 Section titled “Rules”](#rules)
 
@@ -4243,6 +4408,7 @@ ValueDefaultPrintedCountedDescription`"error"`✓✓✓Similar to the `--include
 Example:
 
 knip.json
+
 ```
 
 {
@@ -4270,6 +4436,7 @@ The rules are modeled after the ESLint `rules` configuration, and could be
 extended in the future.
 
 ## Rules or filters?
+
 [
 Section titled “Rules or filters?”](#rules-or-filters)
 
@@ -4281,30 +4448,27 @@ fine-grained configuration.
 - Rules could be extended in the future.
 
 - Filters can be set in configuration and from CLI (rules only in
-configuration).
+  configuration).
 
 - Filters have shorthands (rules don’t have this).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/rules-and-filters.md)  
- 
- [ 
-  Previous 
- Source Mapping  ](/features/source-mapping) [ 
-  Next 
- Auto-fix  ](/features/auto-fix) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/rules-and-filters.md)
+
+[
+Previous
+Source Mapping ](/features/source-mapping) [
+Next
+Auto-fix ](/features/auto-fix)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Script Parser
 
 **Source:** https://knip.dev/features/script-parser
-
 
 ---
 
@@ -4324,6 +4488,7 @@ files and configuration files in various places:
 Shell scripts can be read and statically analyzed, but they’re not executed.
 
 ## package.json
+
 [
 Section titled “package.json”](#packagejson)
 
@@ -4331,6 +4496,7 @@ The `main`, `bin`, `exports` and `scripts` fields may contain entry files. Let�
 take a look at this example:
 
 - package.json
+
 ```
 
 {
@@ -4384,6 +4550,7 @@ From this example, Knip automatically adds the following files as entry files:
 - `server.ts`
 
 ### Excluded files
+
 [
 Section titled “Excluded files”](#excluded-files)
 
@@ -4395,6 +4562,7 @@ Knip does not add scripts without a standard extension. For instance, the
 or parsed by Knip.
 
 ### CLI Arguments
+
 [
 Section titled “CLI Arguments”](#cli-arguments)
 
@@ -4440,6 +4608,7 @@ Such executables and their arguments are all defined in plugins separately for
 fine-grained results.
 
 ## Scripts
+
 [
 Section titled “Scripts”](#scripts)
 
@@ -4447,15 +4616,15 @@ Plugins may also use the script parser to extract entry files and dependencies
 from commands. A few examples:
 
 - GitHub Actions: workflow files may contain `run` commands (e.g.
-`.github/workflows/ci.yml`)
+  `.github/workflows/ci.yml`)
 
 - Husky & Lefthook: Git hooks such as `.git/hooks/pre-push` contain scripts;
-also `lefthook.yml` has `run` commands
+  also `lefthook.yml` has `run` commands
 
 - Lint Staged: configuration values are all commands
 
 - Nx: task executors and `nx:run-commands` executors in `project.json` contains
-scripts
+  scripts
 
 - Release It: `hooks` contain commands
 
@@ -4464,9 +4633,10 @@ Plugins can also return configuration files. Some examples:
 - The Angular plugin detects `options.tsConfig` as a TypeScript config file
 
 - The GitHub Actions plugin parses `run` commands which may contain
-configuration file paths
+  configuration file paths
 
 ## Source Code
+
 [
 Section titled “Source Code”](#source-code)
 
@@ -4476,6 +4646,7 @@ few more (rather obscure) things that Knip detects in the process. Below are
 examples of additional scripts Knip parses to find entry files and dependencies.
 
 ### bun
+
 [
 Section titled “bun”](#bun)
 
@@ -4496,6 +4667,7 @@ Parsing the script results in the `boxen` binary (the `boxen-cli` dependency) as
 referenced (twice).
 
 ### execa
+
 [
 Section titled “execa”](#execa)
 
@@ -4512,6 +4684,7 @@ Parsing the script results in `hydrate.js` added as an entry file and the `c8`
 binary/dependency as referenced.
 
 ### zx
+
 [
 Section titled “zx”](#zx)
 
@@ -4526,26 +4699,23 @@ await $`node scripts/parse.js`;
 
 This will add `scripts/parse.js` as an entry file.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/script-parser.md)  
- 
- [ 
-  Previous 
- Reporters & Preprocessors  ](/features/reporters) [ 
-  Next 
- Configuring Project Files  ](/guides/configuring-project-files) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/script-parser.md)
+
+[
+Previous
+Reporters & Preprocessors ](/features/reporters) [
+Next
+Configuring Project Files ](/guides/configuring-project-files)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Source Mapping
 
 **Source:** https://knip.dev/features/source-mapping
-
 
 ---
 
@@ -4559,6 +4729,7 @@ That’s why Knip tries to map such build artifacts back to their original sourc
 files and analyze those instead. This is done based on `tsconfig.json` settings.
 
 ## Example 1: package.json
+
 [
 Section titled “Example 1: package.json”](#example-1-packagejson)
 
@@ -4566,6 +4737,7 @@ Let’s look at an example case with `package.json` and `tsconfig.json` files, a
 see how “dist” files are mapped to “src” files.
 
 - package.json
+
 ```
 
 {
@@ -4597,6 +4769,7 @@ see how “dist” files are mapped to “src” files.
 With this TypeScript configuration:
 
 tsconfig.json
+
 ```
 
 {
@@ -4622,7 +4795,7 @@ tsconfig.json
 - `./dist/*.js` is in a `dist` folder and mapped to `./src/**/*.{js,ts}` (¹)
 
 - `./dist/internal/*` is translated to `./dist/internal/**` and files in this
-directory and deeper are ignored when globbing entry files
+  directory and deeper are ignored when globbing entry files
 
 (¹) full extensions list is actually: `js`, `mjs`, `cjs`, `jsx`, `ts`, `tsx`,
 `mts`, `cts`
@@ -4636,6 +4809,7 @@ as entry files. By default, unused exports of entry files are not reported. Use
 [includeEntryExports](../reference/configuration#includeentryexports) to include them.
 
 ## Example 2: monorepo
+
 [
 Section titled “Example 2: monorepo”](#example-2-monorepo)
 
@@ -4643,6 +4817,7 @@ Let’s say we have this module in a monorepo that imports `helper` from another
 workspace in the same monorepo:
 
 index.js
+
 ```
 
 import { helper } from '@org/shared';
@@ -4652,6 +4827,7 @@ import { helper } from '@org/shared';
 The target workspace `@org/shared` has this `package.json`:
 
 package.json
+
 ```
 
 {
@@ -4679,26 +4855,23 @@ exists, Knip will use that file instead of `dist/index.js`.
 Currently this only works based on `tsconfig.json`, in the future more source
 mappings may be added.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/source-mapping.md)  
- 
- [ 
-  Previous 
- Integrated Monorepos  ](/features/integrated-monorepos) [ 
-  Next 
- Rules & Filters  ](/features/rules-and-filters) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/features/source-mapping.md)
+
+[
+Previous
+Integrated Monorepos ](/features/integrated-monorepos) [
+Next
+Rules & Filters ](/features/rules-and-filters)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Configuring Project Files
 
 **Source:** https://knip.dev/guides/configuring-project-files
-
 
 ---
 
@@ -4713,16 +4886,17 @@ TL;DR;
 - Start with defaults. Only add targeted `entry` overrides when needed.
 
 - Use `project` patterns (with negations) to define “what belongs to the
-codebase” for unused file detection.
+  codebase” for unused file detection.
 
 - Use production mode to exclude tests and other non-production files.
 
 - Use `ignore` only to suppress issues in specific files. It does not exclude
-files from analysis.
+  files from analysis.
 
 Let’s dive in and expand on all of these.
 
 ## Entry files
+
 [
 Section titled “Entry files”](#entry-files)
 
@@ -4731,16 +4905,18 @@ Avoid adding too many files as `entry` files:
 - Knip does not report [unused exports](../typescript/unused-exports) in entry files by default.
 
 - Proper `entry` and `project` patterns allow Knip to find unused files and
-exports.
+  exports.
 
 ## Unused files
+
 [
 Section titled “Unused files”](#unused-files)
 
 Files are reported as unused if they are in the set of `project` files, but are
 not resolved from the `entry` files:
 
-- 
+-
+
 ```
 
 unused files = project files - (entry files + resolved files)
@@ -4759,6 +4935,7 @@ Use `ignore` to suppress issues in matching files; it does not remove those
 files from analysis.
 
 ## Negated patterns
+
 [
 Section titled “Negated patterns”](#negated-patterns)
 
@@ -4794,6 +4971,7 @@ positives)? Use negated `project` patterns:
 ❌   Don’t use `ignore` for generated artifacts:
 
 knip.json
+
 ```
 
 {
@@ -4809,6 +4987,7 @@ knip.json
 ✅   Do define your project boundaries:
 
 knip.json
+
 ```
 
 {
@@ -4833,6 +5012,7 @@ of the analysis and don’t appear in unused file detection at all
 - increases performance by analyzing only source files
 
 ## Ignore issues in specific files
+
 [
 Section titled “Ignore issues in specific files”](#ignore-issues-in-specific-files)
 
@@ -4857,6 +5037,7 @@ intentionally contains unused exports (e.g. generated files exporting
 Also see [ignoreExportsUsedInFile](../reference/configuration#ignoreexportsusedinfile) for a more targeted approach.
 
 ## Production Mode
+
 [
 Section titled “Production Mode”](#production-mode)
 
@@ -4915,6 +5096,7 @@ is ineffective, because they’re `entry` files.
 ✅   Do this instead:
 
 Terminal window
+
 ```
 
 knip --production
@@ -4946,6 +5128,7 @@ Use the exclamation mark (`!`) on both ends (`!`) to exclude files in production
 mode.
 
 ## Defaults & Plugins
+
 [
 Section titled “Defaults & Plugins”](#defaults--plugins)
 
@@ -4974,26 +5157,23 @@ Next to this, there are other places where [Knip looks for entry files](../expla
 Additionally, [plugins have plenty of entry files configured](../explanations/plugins#entry-files) that are
 automatically added as well.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/configuring-project-files.md)  
- 
- [ 
-  Previous 
- Script Parser  ](/features/script-parser) [ 
-  Next 
- Troubleshooting  ](/guides/troubleshooting) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/configuring-project-files.md)
+
+[
+Previous
+Script Parser ](/features/script-parser) [
+Next
+Troubleshooting ](/guides/troubleshooting)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Contributing to Knip
 
 **Source:** https://knip.dev/guides/contributing
-
 
 ---
 
@@ -5017,26 +5197,23 @@ running quickly.
 The main goal of Knip is to keep projects clean & tidy. Everything that
 contributes to that goal is welcome!
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/contributing.md)  
- 
- [ 
-  Previous 
- Issue Reproduction  ](/guides/issue-reproduction) [ 
-  Next 
- Namespace Imports  ](/guides/namespace-imports) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/contributing.md)
+
+[
+Previous
+Issue Reproduction ](/guides/issue-reproduction) [
+Next
+Namespace Imports ](/guides/namespace-imports)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Handling Issues
 
 **Source:** https://knip.dev/guides/handling-issues
-
 
 ---
 
@@ -5062,6 +5239,7 @@ of unused files will also reduce the number of unused dependencies.
 - [Unused exports](#unused-exports)
 
 ## Unused files
+
 [
 Section titled “Unused files”](#unused-files)
 
@@ -5069,7 +5247,8 @@ Getting the list of unused files right trickles down into the other issue types
 as well, so we start here. Files are reported as unused if they are in the set
 of `project` files, but not in the set of files resolved from the `entry` files:
 
-- 
+-
+
 ```
 
 unused files = project files - (entry files + resolved files)
@@ -5103,6 +5282,7 @@ In most cases you can add `entry` patterns manually.
 Use `--files` to [filter the report](../features/rules-and-filters#filters) and focus only on unused files:
 
 Terminal window
+
 ```
 
 knip --files
@@ -5120,6 +5300,7 @@ project files](./configuring-project-files). Learn why and when to use `entry`, 
 mode and `ignore` patterns for better results and performance.
 
 ### Missing generated files
+
 [
 Section titled “Missing generated files”](#missing-generated-files)
 
@@ -5136,6 +5317,7 @@ If Knip still reports false positives, you may need to strategically add an
 `entry` file manually.
 
 ### Dynamic import specifiers
+
 [
 Section titled “Dynamic import specifiers”](#dynamic-import-specifiers)
 
@@ -5150,6 +5332,7 @@ const entry = await import(path.join(baseDir, 'entry.ts'));
 **Solution**: add `entry.ts` to `entry` patterns.
 
 ### Unsupported arguments in scripts
+
 [
 Section titled “Unsupported arguments in scripts”](#unsupported-arguments-in-scripts)
 
@@ -5179,6 +5362,7 @@ This works the same for any script, also those in GitHub Actions workflows or
 Git hooks. See [script parser](../features/script-parser) for more details about Knip’s script parser.
 
 ### Unsupported file formats
+
 [
 Section titled “Unsupported file formats”](#unsupported-file-formats)
 
@@ -5206,6 +5390,7 @@ additional compilers can be added for for any file type. The recommended
 solution is usually to add the file as shown in each example as an `entry` file.
 
 ### Missing plugin
+
 [
 Section titled “Missing plugin”](#missing-plugin)
 
@@ -5215,16 +5400,17 @@ as unused because there is no plugin yet that would include those files. Two
 examples:
 
 - Configuration file `tool.config.js` contains a reference to the package
-`"@tool/plugin"` → both the file and the dependency are reported as unused.
+  `"@tool/plugin"` → both the file and the dependency are reported as unused.
 
 - A framework automatically imports all files matching `src/models/*.ts` → those
-files are reported as unused.
+  files are reported as unused.
 
 **Solution**: [create a new plugin](./writing-a-plugin) for the tool or framework that’s not [in
 the list](../reference/plugins) yet. Or work around it and add `entry` patterns and maybe ignore a
 dependency or two (using [`ignoreDependencies`](../reference/configuration#ignoredependencies)).
 
 ### Incomplete plugin
+
 [
 Section titled “Incomplete plugin”](#incomplete-plugin)
 
@@ -5235,6 +5421,7 @@ file pattern yet. See the [plugins section of entry files](../explanations/plugi
 for existing plugins. Or even better: send a pull request to improve the plugin.
 
 ### TypeScript path aliases in monorepos
+
 [
 Section titled “TypeScript path aliases in monorepos”](#typescript-path-aliases-in-monorepos)
 
@@ -5246,6 +5433,7 @@ Knip, it’s better to be explicit and list other workspaces as dependencies in
 **Solution**: move such “workspace aliases” from `compilerOptions`…
 
 tsconfig.json
+
 ```
 
 {
@@ -5267,6 +5455,7 @@ tsconfig.json
 …to `dependencies` or `devDependencies` in `package.json`:
 
 package.json
+
 ```
 
 {
@@ -5289,6 +5478,7 @@ from now on.
 Also see [FAQ: Why can’t I use path aliases to reference other workspaces?](../reference/faq#why-cant-i-use-path-aliases-to-reference-other-workspaces)
 
 ### Relative paths across workspaces
+
 [
 Section titled “Relative paths across workspaces”](#relative-paths-across-workspaces)
 
@@ -5318,6 +5508,7 @@ from now on.
 Also see [TypeScript path aliases in monorepos](#typescript-path-aliases-in-monorepos).
 
 ### Integrated monorepos
+
 [
 Section titled “Integrated monorepos”](#integrated-monorepos)
 
@@ -5329,6 +5520,7 @@ in a (mono)repo with a single `package.json`.
 configure plugins to target those configuration files.
 
 ### Auto-mocking or auto-imports
+
 [
 Section titled “Auto-mocking or auto-imports”](#auto-mocking-or-auto-imports)
 
@@ -5362,6 +5554,7 @@ negated `project` patterns:
 ```
 
 ## Unused dependencies
+
 [
 Section titled “Unused dependencies”](#unused-dependencies)
 
@@ -5382,6 +5575,7 @@ Use `--dependencies` to [filter the report](../features/rules-and-filters#filter
 to dependencies:
 
 Terminal window
+
 ```
 
 knip --dependencies
@@ -5395,6 +5589,7 @@ it’s also listed in an descendent workspace, and referenced only in the
 descendent workspace.
 
 ### Missing or incomplete plugin
+
 [
 Section titled “Missing or incomplete plugin”](#missing-or-incomplete-plugin)
 
@@ -5407,6 +5602,7 @@ temporary stopgap that fixes your situation, but it’s better to create a new
 plugin or fix an existing one.
 
 ### Unrecognized reference
+
 [
 Section titled “Unrecognized reference”](#unrecognized-reference)
 
@@ -5420,10 +5616,12 @@ If a binary (or “executable”) is referenced you’ll want to use `ignoreBina
 instead. See [unlisted binaries](#unlisted-binaries).
 
 ### Type Definition Packages
+
 [
 Section titled “Type Definition Packages”](#type-definition-packages)
 
 #### Bundled types
+
 [
 Section titled “Bundled types”](#bundled-types)
 
@@ -5443,6 +5641,7 @@ obsolete respectively.
 **Solution**: remove the types dependency (often `@types/...`)
 
 #### Production types
+
 [
 Section titled “Production types”](#production-types)
 
@@ -5455,6 +5654,7 @@ and expects those in `devDependencies`.
 **Solution**: list exceptions in [ignoreDependencies](../reference/configuration#ignoredependencies).
 
 ### Unlisted dependencies
+
 [
 Section titled “Unlisted dependencies”](#unlisted-dependencies)
 
@@ -5473,6 +5673,7 @@ control, security and stability.
 `devDependencies`.
 
 ### Unlisted binaries
+
 [
 Section titled “Unlisted binaries”](#unlisted-binaries)
 
@@ -5491,6 +5692,7 @@ installed from npm are not reported as unlisted (details: [list of ignored
 binaries in source](https://github.com/webpro-nl/knip/blob/b70958a58ea255ee7a7831e404786da807ca93d7/packages/knip/src/constants.ts#L37-L139)).
 
 #### Missing binaries
+
 [
 Section titled “Missing binaries”](#missing-binaries)
 
@@ -5542,6 +5744,7 @@ intention without an explicit `--yes` or `--no-install` flag.
 or consider the binary and package(s) referenced, respectively.
 
 ## Unresolved imports
+
 [
 Section titled “Unresolved imports”](#unresolved-imports)
 
@@ -5557,6 +5760,7 @@ references. The most common causes for unresolved imports:
 - [External aliased imports](#external-aliased-imports)
 
 ### Template strings
+
 [
 Section titled “Template strings”](#template-strings)
 
@@ -5577,6 +5781,7 @@ patterns. For external dependencies, add the dependency to the
 `ignoreDependencies` list.
 
 ### Extensionless imports
+
 [
 Section titled “Extensionless imports”](#extensionless-imports)
 
@@ -5585,6 +5790,7 @@ such as for `.svg` files. Bundlers like Webpack may support this, but Knip does
 not. Here’s an example:
 
 App.vue
+
 ```
 
 import Component from './Component'; // → Should resolve to ./Component.vue
@@ -5601,6 +5807,7 @@ The recommendation is to always add the extension when importing such files,
 similar to how standard ES Modules specifies file extensions are necessary.
 
 ### Unrecognized path aliases
+
 [
 Section titled “Unrecognized path aliases”](#unrecognized-path-aliases)
 
@@ -5611,6 +5818,7 @@ but not those in e.g. Webpack or Vite configurations.
 [`ignoreUnresolved`](../reference/configuration#ignoreunresolved) as a last resort.
 
 ### External aliased imports
+
 [
 Section titled “External aliased imports”](#external-aliased-imports)
 
@@ -5621,6 +5829,7 @@ components. Such imports are reported as unused. Use the [`paths` configuration
 option](#integrated-monorepos) to tell Knip where to find the icon types:
 
 knip.json
+
 ```
 
 {
@@ -5641,6 +5850,7 @@ types](#build-artifacts-and-ignored-files)).
 **Solution**: try [—include-libs](#external-libraries) or configure [paths](../reference/configuration#paths).
 
 ## Unused exports
+
 [
 Section titled “Unused exports”](#unused-exports)
 
@@ -5656,6 +5866,7 @@ Use the `--exports` flag to [filter](../features/rules-and-filters#filters) and 
 exports:
 
 Terminal window
+
 ```
 
 knip --exports
@@ -5666,6 +5877,7 @@ Use [includeEntryExports](../reference/configuration#includeentryexports) to rep
 This can be set per workspace.
 
 ### Namespace enumerations
+
 [
 Section titled “Namespace enumerations”](#namespace-enumerations)
 
@@ -5679,14 +5891,15 @@ individually, include the `nsExports` issue type to disable the heuristic.
 See [namespace imports](../guides/namespace-imports) to see all related patterns.
 
 ### External libraries
+
 [
 Section titled “External libraries”](#external-libraries)
 
 Are the exports consumed or imported by an external library, resulting in a
 non-standard consumption of your exports? Here’s an example:
 
- -  [  index.js ](#tab-panel-12) 
--  [  components.js ](#tab-panel-13) 
+- [ index.js ](#tab-panel-12)
+- [ components.js ](#tab-panel-13)
 
 ```
 
@@ -5723,6 +5936,7 @@ export being referenced.
 [—include-libs](../reference/cli#--include-libs) flag:
 
 Terminal window
+
 ```
 
 knip --include-libs
@@ -5734,6 +5948,7 @@ if you need it. This flag is implied when [classMembers](#class-members) are inc
 feature comes with roughly the same performance penalty).
 
 ### Exclude exports from the report
+
 [
 Section titled “Exclude exports from the report”](#exclude-exports-from-the-report)
 
@@ -5754,6 +5969,7 @@ Add the file to the `entry` file patterns array in the configuration.
 - Re-export the unused export(s) from an entry file.
 
 ### Missing unused exports?
+
 [
 Section titled “Missing unused exports?”](#missing-unused-exports)
 
@@ -5766,6 +5982,7 @@ The exports of non-standard extensions like `.astro`, `.mdx`, `.vue` or
 how to include them.
 
 ### Class members
+
 [
 Section titled “Class members”](#class-members)
 
@@ -5773,6 +5990,7 @@ Unused members of exported classes are not reported by default, here’s how to
 enable them:
 
 Terminal window
+
 ```
 
 knip --include classMembers
@@ -5789,6 +6007,7 @@ Classes exported from entry files are ignored, and so are their members. Use
 in entry files.
 
 ### Enum members
+
 [
 Section titled “Enum members”](#enum-members)
 
@@ -5796,6 +6015,7 @@ Unused enums and unused members of exported enums are reported by default.
 Reporting such members can be disabled:
 
 Terminal window
+
 ```
 
 knip --exclude enumMembers
@@ -5809,6 +6029,7 @@ Enums exported from entry files are ignored, and so are their members. Use
 in entry files.
 
 ## Feedback or false positives?
+
 [
 Section titled “Feedback or false positives?”](#feedback-or-false-positives)
 
@@ -5816,26 +6037,23 @@ If you believe Knip incorrectly reports something as unused (i.e. there’s a
 false positive), feel free to create a [minimal reproduction](../guides/issue-reproduction) and open an
 issue on GitHub. It’ll make Knip better for everyone!
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/handling-issues.mdx)  
- 
- [ 
-  Previous 
- Troubleshooting  ](/guides/troubleshooting) [ 
-  Next 
- Issue Reproduction  ](/guides/issue-reproduction) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/handling-issues.mdx)
+
+[
+Previous
+Troubleshooting ](/guides/troubleshooting) [
+Next
+Issue Reproduction ](/guides/issue-reproduction)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Issue Reproduction
 
 **Source:** https://knip.dev/guides/issue-reproduction
-
 
 ---
 
@@ -5876,6 +6094,7 @@ Providing this with an issue description will help us help you and improve the
 chances the issue can be looked into efficiently and in a timely manner.
 
 ## Before opening an issue
+
 [
 Section titled “Before opening an issue”](#before-opening-an-issue)
 
@@ -5893,6 +6112,7 @@ Please file only a single issue at a time, so each of them can be labeled and
 tracked separately.
 
 ## Templates
+
 [
 Section titled “Templates”](#templates)
 
@@ -5905,6 +6125,7 @@ Shoutout to [CodeSandbox](https://codesandbox.io) and [StackBlitz](https://stack
 free dev containers!
 
 ## Alternatives
+
 [
 Section titled “Alternatives”](#alternatives)
 
@@ -5924,6 +6145,7 @@ If you’re unable to create a reproduction using one of the methods described
 then please clearly explain this in the issue or [contact me](https://github.com/webpro).
 
 ## Pull Request
+
 [
 Section titled “Pull Request”](#pull-request)
 
@@ -5931,26 +6153,23 @@ The optimal way is to add fixtures and failing tests to the Knip repository, and
 open a pull request to discuss the issue! Also see [instructions for
 development](https://github.com/webpro-nl/knip/blob/main/.github/DEVELOPMENT.md).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/issue-reproduction.md)  
- 
- [ 
-  Previous 
- Handling Issues  ](/guides/handling-issues) [ 
-  Next 
- Contributing to Knip  ](/guides/contributing) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/issue-reproduction.md)
+
+[
+Previous
+Handling Issues ](/guides/handling-issues) [
+Next
+Contributing to Knip ](/guides/contributing)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Namespace Imports
 
 **Source:** https://knip.dev/guides/namespace-imports
-
 
 ---
 
@@ -5960,12 +6179,14 @@ The intention of exports used through namespace imports may not always be clear
 to Knip. Here’s a guide to better understand how Knip handles such exports.
 
 ## Example
+
 [
 Section titled “Example”](#example)
 
 We start off by having two exports:
 
 - my-namespace.js
+
 ```
 
 export const version = 'v5';
@@ -5978,6 +6199,7 @@ The next snippet shows how to import all the exports above on a namespace. All
 exports of the `my-namespace.js` module will be members on the `NS` object:
 
 my-module.ts
+
 ```
 
 import * as NS from './my-namespace.js';
@@ -5989,10 +6211,11 @@ send(NS);
 ```
 
 The intention of export usage is not always clear. In the example above is
-`version` or `getRocket` used? We’re not sure, but we *probably* don’t want them
+`version` or `getRocket` used? We’re not sure, but we _probably_ don’t want them
 to be reported as unused. The same goes for the next example:
 
 my-module.ts
+
 ```
 
 import * as NS from './my-namespace.js';
@@ -6008,6 +6231,7 @@ individual exports are considered separately again and `getRocket` will be
 marked as unused:
 
 index.ts
+
 ```
 
 import { NS } from './my-module.js';
@@ -6017,6 +6241,7 @@ const version = NS.version;
 ```
 
 ## The default heuristic
+
 [
 Section titled “The default heuristic”](#the-default-heuristic)
 
@@ -6031,12 +6256,14 @@ any property access, all exports on that namespace are considered used.
 Below are a few more examples, and a way to disable this default behavior.
 
 ## Examples
+
 [
 Section titled “Examples”](#examples)
 
 Let’s take a look at more examples:
 
 my-namespace.ts
+
 ```
 
 export const start = 1;
@@ -6048,6 +6275,7 @@ export const end = 1;
 In the following cases all exports of `my-namespace.ts` are considered used:
 
 index.ts
+
 ```
 
 import * as NS from './my-namespace.js';
@@ -6085,6 +6313,7 @@ export = NS;
 However, this is no longer the case when one of the properties is accessed:
 
 index.js
+
 ```
 
 import * as NS from './namespace.js';
@@ -6099,6 +6328,7 @@ In this case, the `end` export will be reported as unused, even though the `NS`
 object itself is referenced on its own as well.
 
 ## Include `nsExports` and `nsTypes`
+
 [
 Section titled “Include nsExports and nsTypes”](#include-nsexports-and-nstypes)
 
@@ -6118,26 +6348,23 @@ export on a namespace individually, include the `nsExports` issue type:
 Or use the `--include nsExports` argument from the CLI. The `nsTypes` can be
 added as well to do the same for exported types.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/namespace-imports.md)  
- 
- [ 
-  Previous 
- Contributing to Knip  ](/guides/contributing) [ 
-  Next 
- Performance  ](/guides/performance) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/namespace-imports.md)
+
+[
+Previous
+Contributing to Knip ](/guides/contributing) [
+Next
+Performance ](/guides/performance)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Performance
 
 **Source:** https://knip.dev/guides/performance
-
 
 ---
 
@@ -6152,12 +6379,14 @@ but it might still be good to understand inefficient patterns for Knip.
 Use the `--debug` and `--performance` flags to find potential bottlenecks.
 
 ## Cache
+
 [
 Section titled “Cache”](#cache)
 
 Use `--cache` to speed up consecutive runs.
 
 ## Ignoring files
+
 [
 Section titled “Ignoring files”](#ignoring-files)
 
@@ -6169,6 +6398,7 @@ Read [configuring project files](./configuring-project-files) for details and ex
 configuration may have a significant impact on performance.
 
 ## Workspace sharing
+
 [
 Section titled “Workspace sharing”](#workspace-sharing)
 
@@ -6181,6 +6411,7 @@ With the `--debug` flag you can see how many programs Knip uses. Look for
 messages like this:
 
 Terminal window
+
 ```
 
 ...
@@ -6214,6 +6445,7 @@ sequentially to spread out memory usage more evenly, which may prevent crashes
 on large monorepos.
 
 ## Language Service
+
 [
 Section titled “Language Service”](#language-service)
 
@@ -6224,6 +6456,7 @@ expensive, as TypeScript needs to set up symbols and caching for the rather slow
 There are two cases that enforce Knip to install the LS.
 
 ### 1. Class members
+
 [
 Section titled “1. Class members”](#1-class-members)
 
@@ -6231,6 +6464,7 @@ The `findReferences` function is used to find unused members of imported classes
 (i.e. when the issue type `classMembers` is included).
 
 ### 2. Include external type definitions
+
 [
 Section titled “2. Include external type definitions”](#2-include-external-type-definitions)
 
@@ -6240,6 +6474,7 @@ external dependencies. This will also install the LS to access its
 that weren’t referenced to during default procedure go through this.
 
 ## Metrics
+
 [
 Section titled “Metrics”](#metrics)
 
@@ -6248,6 +6483,7 @@ functions (e.g. `findReferences`) are invoked and how much time is spent in
 those functions. Example usage:
 
 Terminal window
+
 ```
 
 knip --include classMembers --performance
@@ -6255,32 +6491,30 @@ knip --include classMembers --performance
 ```
 
 ## A last resort
+
 [
 Section titled “A last resort”](#a-last-resort)
 
 In case Knip is unbearably slow (or even crashes), you could resort to [lint
 individual workspaces](../features/monorepos-and-workspaces#lint-a-single-workspace).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/performance.md)  
- 
- [ 
-  Previous 
- Namespace Imports  ](/guides/namespace-imports) [ 
-  Next 
- Using Knip in CI  ](/guides/using-knip-in-ci) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/performance.md)
+
+[
+Previous
+Namespace Imports ](/guides/namespace-imports) [
+Next
+Using Knip in CI ](/guides/using-knip-in-ci)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Troubleshooting
 
 **Source:** https://knip.dev/guides/troubleshooting
-
 
 ---
 
@@ -6308,6 +6542,7 @@ a long way towards success. When a bit of configuration doesn’t improve things
 consider [opening an issue](https://github.com/webpro-nl/knip/issues/new/choose).
 
 ## Lint issues reported by Knip
+
 [
 Section titled “Lint issues reported by Knip”](#lint-issues-reported-by-knip)
 
@@ -6321,6 +6556,7 @@ reproduction](./issue-reproduction) first.
 Exit code 1 indicates a successful run, but lint issues were found.
 
 ## Exceptions thrown by Knip
+
 [
 Section titled “Exceptions thrown by Knip”](#exceptions-thrown-by-knip)
 
@@ -6337,6 +6573,7 @@ first.
 Exit code 2 indicates an exception was thrown by Knip.
 
 ## Debug
+
 [
 Section titled “Debug”](#debug)
 
@@ -6344,6 +6581,7 @@ To better understand why Knip reports what it does, run it in debug mode by
 adding `--debug` to the command:
 
 - Terminal window
+
 ```
 
 knip --debug
@@ -6365,6 +6603,7 @@ Included workspaces
 - Compiled non-standard source files
 
 ## Trace
+
 [
 Section titled “Trace”](#trace)
 
@@ -6383,18 +6622,21 @@ It’s like a reversed module graph. Instead of traversing imports it goes in th
 opposite direction and shows where exports are imported.
 
 #### Legend
+
 [
 Section titled “Legend”](#legend)
 
 Description`✓`Contains import and reference to the export`x`Is not imported`◯`Entry file
 
 ## Opening an issue
+
 [
 Section titled “Opening an issue”](#opening-an-issue)
 
 If you want to open an issue, please see [issue reproduction](./issue-reproduction).
 
 ## Understanding Knip
+
 [
 Section titled “Understanding Knip”](#understanding-knip)
 
@@ -6405,32 +6647,30 @@ check out features like [production mode](../features/production-mode) and [mono
 In a more general sense, [Why use Knip?](../explanations/why-use-knip) explains what Knip can do for you.
 
 ## Asking for help
+
 [
 Section titled “Asking for help”](#asking-for-help)
 
 If you can’t find your answer in any of the aforementioned resources, feel free
 to [open an issue on GitHub](https://github.com/webpro-nl/knip/issues).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/troubleshooting.md)  
- 
- [ 
-  Previous 
- Configuring Project Files  ](/guides/configuring-project-files) [ 
-  Next 
- Handling Issues  ](/guides/handling-issues) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/troubleshooting.md)
+
+[
+Previous
+Configuring Project Files ](/guides/configuring-project-files) [
+Next
+Handling Issues ](/guides/handling-issues)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Using Knip in CI
 
 **Source:** https://knip.dev/guides/using-knip-in-ci
-
 
 ---
 
@@ -6444,12 +6684,14 @@ remove them.
 Knip will exit the process with code `1` if there are one or more issues.
 
 ## GitHub Actions
+
 [
 Section titled “GitHub Actions”](#github-actions)
 
 Here’s an example workflow configuration for GitHub Actions:
 
-- 
+-
+
 ```
 
 name: Lint project
@@ -6481,12 +6723,14 @@ jobs:
 ```
 
 ## Notes
+
 [
 Section titled “Notes”](#notes)
 
 In CI environments, the [—no-progress](../reference/cli#--no-progress) flag is set automatically.
 
 ## Related features
+
 [
 Section titled “Related features”](#related-features)
 
@@ -6499,31 +6743,29 @@ Section titled “Related features”](#related-features)
 - [—reporter](../reference/cli#--reporter-reporter)
 
 ## Related reading
+
 [
 Section titled “Related reading”](#related-reading)
 
 - [Why use Knip?](../explanations/why-use-knip)
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/using-knip-in-ci.md)  
- 
- [ 
-  Previous 
- Performance  ](/guides/performance) [ 
-  Next 
- Working with CommonJS  ](/guides/working-with-commonjs) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/using-knip-in-ci.md)
+
+[
+Previous
+Performance ](/guides/performance) [
+Next
+Working with CommonJS ](/guides/working-with-commonjs)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Working with CommonJS
 
 **Source:** https://knip.dev/guides/working-with-commonjs
-
 
 ---
 
@@ -6615,39 +6857,38 @@ module.exports = { __esModule: true, A, B };
 The `__esModule` key could be named differently (but makes sense given it’s an
 informal “CJS/ESM interop” standard amongst compilers and bundlers).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/working-with-commonjs.md)  
- 
- [ 
-  Previous 
- Using Knip in CI  ](/guides/using-knip-in-ci) [ 
-  Next 
- Writing A Plugin  ](/writing-a-plugin) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/guides/working-with-commonjs.md)
+
+[
+Previous
+Using Knip in CI ](/guides/using-knip-in-ci) [
+Next
+Writing A Plugin ](/writing-a-plugin)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Configuration
 
 **Source:** https://knip.dev/overview/configuration
-
 
 ---
 
 # Configuration
 
 ## Defaults
+
 [
 Section titled “Defaults”](#defaults)
 
 Knip has good defaults and aims for “zero config”. Here’s a simplified version
 of the default configuration:
 
-- 
+-
+
 ```
 
 {
@@ -6670,6 +6911,7 @@ configuration file. Then read [configuring project files](../guides/configuring-
 `ignore` patterns.
 
 ## Location
+
 [
 Section titled “Location”](#location)
 
@@ -6696,6 +6938,7 @@ By default, Knip will look for a configuration file with the following names:
 If you want to use a custom file name or path, use the `--config` flag:
 
 Terminal window
+
 ```
 
 knip --config path/to/knip.json
@@ -6703,6 +6946,7 @@ knip --config path/to/knip.json
 ```
 
 ## Customize
+
 [
 Section titled “Customize”](#customize)
 
@@ -6711,6 +6955,7 @@ Here’s an example custom configuration to include `.js` files in the `scripts`
 folder:
 
 knip.json
+
 ```
 
 {
@@ -6744,6 +6989,7 @@ Knip looks in many places for entry files. Learn more about this in the next
 page about [entry files](../explanations/entry-files).
 
 ## Configuration Options
+
 [
 Section titled “Configuration Options”](#configuration-options)
 
@@ -6753,6 +6999,7 @@ To use JavaScript or TypeScript in the configuration file, see [dynamic
 configuration](../reference/dynamic-configuration).
 
 ## What’s next?
+
 [
 Section titled “What’s next?”](#whats-next)
 
@@ -6773,26 +7020,23 @@ Having troubles configuring Knip?
 
 Search this website using the bar at the top (`Ctrl+K` or `⌘+K`).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/configuration.md)  
- 
- [ 
-  Previous 
- Getting Started  ](/overview/getting-started) [ 
-  Next 
- Features  ](/overview/features) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/configuration.md)
+
+[
+Previous
+Getting Started ](/overview/getting-started) [
+Next
+Features ](/overview/features)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Features
 
 **Source:** https://knip.dev/overview/features
-
 
 ---
 
@@ -6804,37 +7048,36 @@ issues](../reference/issue-types).
 Also see [related tooling](../reference/related-tooling).
 
 ## Overview
+
 [
 Section titled “Overview”](#overview)
 
-NameDescription or example[Auto-fix](../features/auto-fix)Use `--fix` to auto-fix issues[Cache](../reference/cli#--cache)Use `--cache` to speed up consecutive runs[CommonJS](../guides/working-with-commonjs)Traditional JavaScript is just fine[Compilers](../features/compilers)Support for Astro, MDX, Svelte, Vue and custom compilers[Debug](../guides/troubleshooting#issues-reported-by-knip)Use `--debug` for troubleshooting[Filters](../features/rules-and-filters#filters)Exclude or focus on specific issue types[Format](../features/auto-fix#format)Add `--format` to `--fix` and auto-format modified files[JSDoc tags](../reference/jsdoc-tsdoc-tags)Exclude specific exports from the report[Memory usage](../reference/cli#--memory)Use `--memory` for detailed memory usage insights[Monorepos](../features/monorepos-and-workspaces)Workspaces are first-class citizen[Performance](../reference/cli#--performance)Use `--performance` for detailed timing insights[Plugins](../explanations/plugins)Over 100 plugins with custom entry paths and config parsing[Preprocessors](../features/reporters#preprocessors)Preprocess issues before being reported[Production mode](../features/production-mode)Use `--production` to lint only production code[Reporters](../features/reporters)Choose from many built-in reporters or use your own[Rules](../features/rules-and-filters#rules)Exclude or focus on specific issue types[Script parser](../features/script-parser)Shell scripts and `package.json` contain entry paths and dependencies[Trace](../guides/troubleshooting#trace)Trace exports to find where they are used[Watch mode](../reference/cli#--watch)Use `--watch` for live updates of unused files and exports[Workspace](../features/monorepos-and-workspaces#lint-a-single-workspace)Use `--workspace` to lint a single workspace in a monorepo 
-  
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/features.md)  
- 
- [ 
-  Previous 
- Configuration  ](/overview/configuration) [ 
-  Next 
- Screenshots & videos  ](/overview/screenshots-videos) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+NameDescription or example[Auto-fix](../features/auto-fix)Use `--fix` to auto-fix issues[Cache](../reference/cli#--cache)Use `--cache` to speed up consecutive runs[CommonJS](../guides/working-with-commonjs)Traditional JavaScript is just fine[Compilers](../features/compilers)Support for Astro, MDX, Svelte, Vue and custom compilers[Debug](../guides/troubleshooting#issues-reported-by-knip)Use `--debug` for troubleshooting[Filters](../features/rules-and-filters#filters)Exclude or focus on specific issue types[Format](../features/auto-fix#format)Add `--format` to `--fix` and auto-format modified files[JSDoc tags](../reference/jsdoc-tsdoc-tags)Exclude specific exports from the report[Memory usage](../reference/cli#--memory)Use `--memory` for detailed memory usage insights[Monorepos](../features/monorepos-and-workspaces)Workspaces are first-class citizen[Performance](../reference/cli#--performance)Use `--performance` for detailed timing insights[Plugins](../explanations/plugins)Over 100 plugins with custom entry paths and config parsing[Preprocessors](../features/reporters#preprocessors)Preprocess issues before being reported[Production mode](../features/production-mode)Use `--production` to lint only production code[Reporters](../features/reporters)Choose from many built-in reporters or use your own[Rules](../features/rules-and-filters#rules)Exclude or focus on specific issue types[Script parser](../features/script-parser)Shell scripts and `package.json` contain entry paths and dependencies[Trace](../guides/troubleshooting#trace)Trace exports to find where they are used[Watch mode](../reference/cli#--watch)Use `--watch` for live updates of unused files and exports[Workspace](../features/monorepos-and-workspaces#lint-a-single-workspace)Use `--workspace` to lint a single workspace in a monorepo
+
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/features.md)
+
+[
+Previous
+Configuration ](/overview/configuration) [
+Next
+Screenshots & videos ](/overview/screenshots-videos)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Getting Started
 
 **Source:** https://knip.dev/overview/getting-started
-
 
 ---
 
 # Getting Started
 
 ## Requirements
+
 [
 Section titled “Requirements”](#requirements)
 
@@ -6843,17 +7086,19 @@ Knip v5 requires Node.js v18.18.0 or higher. Or Bun.
 Want to try Knip without installation? Visit [the playground](/playground).
 
 ## Installation
+
 [
 Section titled “Installation”](#installation)
 
 This is the easiest and recommended way to install Knip:
 
- -  [  npm ](#tab-panel-25) 
--  [  pnpm ](#tab-panel-26) 
--  [  bun ](#tab-panel-27) 
--  [  yarn ](#tab-panel-28) 
+- [ npm ](#tab-panel-25)
+- [ pnpm ](#tab-panel-26)
+- [ bun ](#tab-panel-27)
+- [ yarn ](#tab-panel-28)
 
 - Terminal window
+
 ```
 
 npm init @knip/config
@@ -6861,6 +7106,7 @@ npm init @knip/config
 ```
 
 Terminal window
+
 ```
 
 pnpm create @knip/config
@@ -6868,6 +7114,7 @@ pnpm create @knip/config
 ```
 
 Terminal window
+
 ```
 
 bun create @knip/config
@@ -6875,6 +7122,7 @@ bun create @knip/config
 ```
 
 Terminal window
+
 ```
 
 yarn create @knip/config
@@ -6883,12 +7131,14 @@ yarn create @knip/config
 
 Now you can run Knip to lint your project:
 
-  [  npm ](#tab-panel-29) 
--  [  pnpm ](#tab-panel-30) 
--  [  bun ](#tab-panel-31) 
--  [  yarn ](#tab-panel-32) 
+[ npm ](#tab-panel-29)
+
+- [ pnpm ](#tab-panel-30)
+- [ bun ](#tab-panel-31)
+- [ yarn ](#tab-panel-32)
 
 Terminal window
+
 ```
 
 npm run knip
@@ -6896,6 +7146,7 @@ npm run knip
 ```
 
 Terminal window
+
 ```
 
 pnpm knip
@@ -6903,6 +7154,7 @@ pnpm knip
 ```
 
 Terminal window
+
 ```
 
 bun knip
@@ -6910,6 +7162,7 @@ bun knip
 ```
 
 Terminal window
+
 ```
 
 yarn knip
@@ -6921,17 +7174,19 @@ Knip will lint your project and report unused dependencies, exports and files.
 You can skip the rest of this page and go to [configuration](./configuration).
 
 ## Manual
+
 [
 Section titled “Manual”](#manual)
 
 Alternatively, manually install Knip using your package manager:
 
- -  [  npm ](#tab-panel-33) 
--  [  pnpm ](#tab-panel-34) 
--  [  bun ](#tab-panel-35) 
--  [  yarn ](#tab-panel-36) 
+- [ npm ](#tab-panel-33)
+- [ pnpm ](#tab-panel-34)
+- [ bun ](#tab-panel-35)
+- [ yarn ](#tab-panel-36)
 
 Terminal window
+
 ```
 
 npm install -D knip typescript @types/node
@@ -6939,6 +7194,7 @@ npm install -D knip typescript @types/node
 ```
 
 Terminal window
+
 ```
 
 pnpm add -D knip typescript @types/node
@@ -6946,6 +7202,7 @@ pnpm add -D knip typescript @types/node
 ```
 
 Terminal window
+
 ```
 
 bun add -D knip typescript @types/node
@@ -6953,6 +7210,7 @@ bun add -D knip typescript @types/node
 ```
 
 Terminal window
+
 ```
 
 yarn add -D knip typescript @types/node
@@ -6966,6 +7224,7 @@ compatibility with your project. No worries, they’re probably in your
 Then add a `knip` script to your `package.json`:
 
 package.json
+
 ```
 
 {
@@ -6983,16 +7242,18 @@ package.json
 ```
 
 ## Without installation
+
 [
 Section titled “Without installation”](#without-installation)
 
 To run Knip without adding it to your project:
 
- -  [  npm ](#tab-panel-37) 
--  [  pnpm ](#tab-panel-38) 
--  [  bun ](#tab-panel-39) 
+- [ npm ](#tab-panel-37)
+- [ pnpm ](#tab-panel-38)
+- [ bun ](#tab-panel-39)
 
 Terminal window
+
 ```
 
 npx knip
@@ -7000,6 +7261,7 @@ npx knip
 ```
 
 Terminal window
+
 ```
 
 pnpm dlx knip
@@ -7007,6 +7269,7 @@ pnpm dlx knip
 ```
 
 Terminal window
+
 ```
 
 bunx knip
@@ -7016,30 +7279,28 @@ bunx knip
 In this scenario `typescript` and `@types/node` are expected to be installed
 already.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/getting-started.mdx)  
- 
-  [ 
-  Next 
- Configuration  ](/overview/configuration) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/getting-started.mdx)
+
+[
+Next
+Configuration ](/overview/configuration)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Screenshots & videos
 
 **Source:** https://knip.dev/overview/screenshots-videos
-
 
 ---
 
 # Screenshots & videos
 
 ## Watch & auto-fix
+
 [
 Section titled “Watch & auto-fix”](#watch--auto-fix)
 
@@ -7049,6 +7310,7 @@ Studio Code:
 This works in any terminal. See [—watch](../reference/cli#--watch) and [auto-fix](../features/auto-fix) for more details.
 
 ## Trace
+
 [
 Section titled “Trace”](#trace)
 
@@ -7058,6 +7320,7 @@ TypeScript codebase:
 See [Trace](../guides/troubleshooting#trace) for more details.
 
 ## Performance
+
 [
 Section titled “Performance”](#performance)
 
@@ -7065,36 +7328,35 @@ An example screenshot showing `--performance` output for the Knip codebase:
 
 Also see [—performance](../reference/cli#--performance).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/screenshots-videos.md)  
- 
- [ 
-  Previous 
- Features  ](/overview/features) [ 
-  Next 
- Entry Files  ](/explanations/entry-files) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/overview/screenshots-videos.md)
+
+[
+Previous
+Features ](/overview/features) [
+Next
+Entry Files ](/explanations/entry-files)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # CLI Arguments
 
 **Source:** https://knip.dev/reference/cli
-
 
 ---
 
 # CLI Arguments
 
 ## General
+
 [
 Section titled “General”](#general)
 
 ### `--help`
+
 [
 Section titled “--help”](#--help)
 
@@ -7103,6 +7365,7 @@ Shortcut: `-h`
 Prints a summary of this page.
 
 ### `--version`
+
 [
 Section titled “--version”](#--version)
 
@@ -7111,6 +7374,7 @@ Shortcut: `-V`
 Print the version number.
 
 ### `--no-progress`
+
 [
 Section titled “--no-progress”](#--no-progress)
 
@@ -7120,12 +7384,14 @@ Don’t show dynamic progress updates. Progress is automatically disabled in CI
 environments.
 
 ### `knip-bun`
+
 [
 Section titled “knip-bun”](#knip-bun)
 
 Run Knip using the Bun runtime (instead of Node.js + jiti).
 
 - Terminal window
+
 ```
 
 knip-bun
@@ -7138,12 +7404,14 @@ Requires [Bun](https://bun.sh) to be installed. Also see [known issues](../refer
 issues this might help with.
 
 ### NO_COLOR
+
 [
 Section titled “NO_COLOR”](#no_color)
 
 The default reporters use the [NO_COLOR](https://no-color.org/) friendly [picocolors](https://www.npmjs.com/package/picocolors):
 
 Terminal window
+
 ```
 
 NO_COLOR=1 knip
@@ -7151,10 +7419,12 @@ NO_COLOR=1 knip
 ```
 
 ## Troubleshooting
+
 [
 Section titled “Troubleshooting”](#troubleshooting)
 
 ### `--debug`
+
 [
 Section titled “--debug”](#--debug)
 
@@ -7163,10 +7433,12 @@ Shortcut: `-d`
 Show debug output.
 
 ### `--memory`
+
 [
 Section titled “--memory”](#--memory)
 
 Terminal window
+
 ```
 
 knip --memory
@@ -7215,12 +7487,14 @@ Can be used with [—isolate-workspaces](#--isolate-workspaces) to see the diffe
 collection during the process.
 
 ### `--memory-realtime`
+
 [
 Section titled “--memory-realtime”](#--memory-realtime)
 
 Use this if Knip crashes to still see memory usage info over time:
 
 Terminal window
+
 ```
 
 knip --memory-realtime
@@ -7240,6 +7514,7 @@ heapUsed  heapTotal  freemem
 ```
 
 ### `--performance`
+
 [
 Section titled “--performance”](#--performance)
 
@@ -7247,6 +7522,7 @@ Use this flag to get the count and execution time of potentially expensive
 functions in a table. Example:
 
 Terminal window
+
 ```
 
 $ knip --performance
@@ -7291,6 +7567,7 @@ This is not yet available in Bun, since it does not support
 `performance.timerify` ([GitHub issue](https://github.com/oven-sh/bun/issues/9271)).
 
 ### `--performance-fn`
+
 [
 Section titled “--performance-fn”](#--performance-fn)
 
@@ -7298,6 +7575,7 @@ Limit the output of `--performance` to a single function to minimize the
 overhead of the `timerify` Node.js built-in and focus on that function alone:
 
 Terminal window
+
 ```
 
 $ knip --performance-fn resolveSync
@@ -7315,6 +7593,7 @@ Total running time: 12.9s
 ```
 
 ### `--trace`
+
 [
 Section titled “--trace”](#--trace)
 
@@ -7323,22 +7602,26 @@ Trace exports to see where they are imported.
 Also see [Trace](../guides/troubleshooting#trace).
 
 ### `--trace-export [name]`
+
 [
 Section titled “--trace-export [name]”](#--trace-export-name)
 
 Trace export name to see where it’s imported. Implies [—trace](#--trace).
 
 ### `--trace-file [path]`
+
 [
 Section titled “--trace-file [path]”](#--trace-file-path)
 
 Trace file to see where its exports are imported. Implies [—trace](#--trace).
 
 ## Configuration
+
 [
 Section titled “Configuration”](#configuration)
 
 ### `--config [file]`
+
 [
 Section titled “--config [file]”](#--config-file)
 
@@ -7361,6 +7644,7 @@ Use an alternative path for the configuration file. Default locations:
 Shortcut: `-c`
 
 ### `--tsConfig [file]`
+
 [
 Section titled “--tsConfig [file]”](#--tsconfig-file)
 
@@ -7373,6 +7657,7 @@ Using `-t jsconfig.json` is also supported.
 Default location: `tsconfig.json`
 
 ### `--workspace [dir]`
+
 [
 Section titled “--workspace [dir]”](#--workspace-dir)
 
@@ -7382,6 +7667,7 @@ The default behavior is to lint all configured workspaces.
 Shortcut: `-W`
 
 ### `--directory [dir]`
+
 [
 Section titled “--directory [dir]”](#--directory-dir)
 
@@ -7390,12 +7676,14 @@ Default: `cwd` (current directory)
 Run the process from a different directory.
 
 ### `--no-gitignore`
+
 [
 Section titled “--no-gitignore”](#--no-gitignore)
 
 Ignore `.gitignore` files.
 
 ### `--include-entry-exports`
+
 [
 Section titled “--include-entry-exports”](#--include-entry-exports)
 
@@ -7403,6 +7691,7 @@ When a repository is self-contained or private, you may want to include entry
 files when reporting unused exports:
 
 Terminal window
+
 ```
 
 knip --include-entry-exports
@@ -7412,6 +7701,7 @@ knip --include-entry-exports
 Also see [includeEntryExports](./configuration#includeentryexports).
 
 ### `--include-libs`
+
 [
 Section titled “--include-libs”](#--include-libs)
 
@@ -7419,6 +7709,7 @@ Getting false positives for exports consumed by external libraries? Try the
 `--include-libs` flag:
 
 Terminal window
+
 ```
 
 knip --include-libs
@@ -7428,6 +7719,7 @@ knip --include-libs
 Also see [external libs](../guides/handling-issues#external-libraries).
 
 ### `--isolate-workspaces`
+
 [
 Section titled “--isolate-workspaces”](#--isolate-workspaces)
 
@@ -7437,10 +7729,12 @@ flag disables this behavior and creates one program per workspace, which is
 slower but memory usage is spread more evenly over time.
 
 ## Modes
+
 [
 Section titled “Modes”](#modes)
 
 ### `--production`
+
 [
 Section titled “--production”](#--production)
 
@@ -7459,6 +7753,7 @@ test files
 Read more at [Production Mode](../features/production-mode).
 
 ### `--strict`
+
 [
 Section titled “--strict”](#--strict)
 
@@ -7468,12 +7763,14 @@ mode](#--production).
 Read more at [Production Mode](../features/production-mode).
 
 ### `--fix`
+
 [
 Section titled “--fix”](#--fix)
 
 Read more at [auto-fix](../features/auto-fix).
 
 ### `--cache`
+
 [
 Section titled “--cache”](#--cache)
 
@@ -7484,6 +7781,7 @@ traversal) are cached. Conservative. Cache strategy based on file meta data
 (modification time + file size).
 
 ### `--cache-location`
+
 [
 Section titled “--cache-location”](#--cache-location)
 
@@ -7492,6 +7790,7 @@ Provide alternative cache location.
 Default location: `./node_modules/.cache/knip`
 
 ### `--watch`
+
 [
 Section titled “--watch”](#--watch)
 
@@ -7502,6 +7801,7 @@ Watch mode focuses on imports and exports in source files. During watch mode,
 changes in `package.json` or `node_modules` may not cause an updated report.
 
 ## Filters
+
 [
 Section titled “Filters”](#filters)
 
@@ -7533,6 +7833,7 @@ Available [issue types](./issue-types) when filtering output using `--include` o
 - `duplicates`
 
 ### `--exclude`
+
 [
 Section titled “--exclude”](#--exclude)
 
@@ -7541,6 +7842,7 @@ Exclude provided issue types from report. Can be comma-separated or repeated.
 Example:
 
 Terminal window
+
 ```
 
 knip --exclude classMembers,enumMembers
@@ -7550,6 +7852,7 @@ knip --exclude classMembers --exclude enumMembers
 ```
 
 ### `--include`
+
 [
 Section titled “--include”](#--include)
 
@@ -7558,6 +7861,7 @@ Report only provided issue types. Can be comma-separated or repeated.
 Example:
 
 Terminal window
+
 ```
 
 knip --include files,dependencies
@@ -7567,12 +7871,14 @@ knip --include files --include dependencies
 ```
 
 ### `--dependencies`
+
 [
 Section titled “--dependencies”](#--dependencies)
 
 Shortcut to include all types of dependency issues:
 
 Terminal window
+
 ```
 
 --include dependencies,optionalPeerDependencies,unlisted,binaries,unresolved
@@ -7580,12 +7886,14 @@ Terminal window
 ```
 
 ### `--exports`
+
 [
 Section titled “--exports”](#--exports)
 
 Shortcut to include all types of export issues:
 
 Terminal window
+
 ```
 
 --include exports,nsExports,classMembers,types,nsTypes,enumMembers,duplicates
@@ -7593,12 +7901,14 @@ Terminal window
 ```
 
 ### `--experimental-tags`
+
 [
 Section titled “--experimental-tags”](#--experimental-tags)
 
 Deprecated. Use [—tags](#--tags) instead.
 
 ### `--tags`
+
 [
 Section titled “--tags”](#--tags)
 
@@ -7628,6 +7938,7 @@ And then include (`+`) or exclude (`-`) these tagged exports from the report
 like so:
 
 Terminal window
+
 ```
 
 knip --tags=-lintignore,-internal
@@ -7644,6 +7955,7 @@ notation below is valid and will report only exports tagged `@lintignore` or
 `@internal`:
 
 Terminal window
+
 ```
 
 knip --tags @lintignore --tags @internal
@@ -7651,10 +7963,12 @@ knip --tags @lintignore --tags @internal
 ```
 
 ## Reporters & Preprocessors
+
 [
 Section titled “Reporters & Preprocessors”](#reporters--preprocessors)
 
 ### `--reporter [reporter]`
+
 [
 Section titled “--reporter [reporter]”](#--reporter-reporter)
 
@@ -7673,6 +7987,7 @@ Available reporters:
 Can be repeated. Example:
 
 Terminal window
+
 ```
 
 knip --reporter compact
@@ -7682,6 +7997,7 @@ knip --reporter compact
 Also see [Reporters & Preprocessors](../features/reporters).
 
 ### `--reporter-options [json]`
+
 [
 Section titled “--reporter-options [json]”](#--reporter-options-json)
 
@@ -7691,6 +8007,7 @@ example)
 Example:
 
 Terminal window
+
 ```
 
 knip --reporter codeowners --reporter-options '{"path":".github/CODEOWNERS"}'
@@ -7698,6 +8015,7 @@ knip --reporter codeowners --reporter-options '{"path":".github/CODEOWNERS"}'
 ```
 
 ### `--preprocessor [preprocessor]`
+
 [
 Section titled “--preprocessor [preprocessor]”](#--preprocessor-preprocessor)
 
@@ -7706,6 +8024,7 @@ Preprocess the results before providing it to the reporters.
 Can be repeated. Examples:
 
 Terminal window
+
 ```
 
 knip --preprocessor ./my-preprocessor.ts
@@ -7713,6 +8032,7 @@ knip --preprocessor ./my-preprocessor.ts
 ```
 
 Terminal window
+
 ```
 
 knip --preprocessor preprocessor-package
@@ -7720,12 +8040,14 @@ knip --preprocessor preprocessor-package
 ```
 
 ### `--preprocessor-options [json]`
+
 [
 Section titled “--preprocessor-options [json]”](#--preprocessor-options-json)
 
 Pass extra options to the preprocessor as JSON string.
 
 Terminal window
+
 ```
 
 knip --preprocessor ./preproc.ts --preprocessor-options '{"key":"value"}'
@@ -7735,6 +8057,7 @@ knip --preprocessor ./preproc.ts --preprocessor-options '{"key":"value"}'
 Also see [Reporters & Preprocessors](../features/reporters).
 
 ## Exit code
+
 [
 Section titled “Exit code”](#exit-code)
 
@@ -7743,49 +8066,50 @@ The default exit codes:
 CodeDescription`0`Knip ran successfully, no lint issues`1`Knip ran successfully, but there is at least one lint issues`2`Knip did not run successfully due to bad input or internal error
 
 ### `--no-exit-code`
+
 [
 Section titled “--no-exit-code”](#--no-exit-code)
 
 Always exit with code zero (`0`), even when there are lint issues.
 
 ### `--max-issues`
+
 [
 Section titled “--max-issues”](#--max-issues)
 
 Maximum number of issues before non-zero exit code. Default: `0`
 
 ### `--no-config-hints`
+
 [
 Section titled “--no-config-hints”](#--no-config-hints)
 
 Suppress configuration hints.
 
 ### `--treat-config-hints-as-errors`
+
 [
 Section titled “--treat-config-hints-as-errors”](#--treat-config-hints-as-errors)
 
 Exit with non-zero code (`1`) if there are any configuration hints.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/cli.md)  
- 
- [ 
-  Previous 
- Argument Parsing  ](/writing-a-plugin/argument-parsing) [ 
-  Next 
- Configuration  ](/reference/configuration) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/cli.md)
+
+[
+Previous
+Argument Parsing ](/writing-a-plugin/argument-parsing) [
+Next
+Configuration ](/reference/configuration)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Configuration
 
 **Source:** https://knip.dev/reference/configuration
-
 
 ---
 
@@ -7794,10 +8118,12 @@ Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content
 This page lists all configuration file options.
 
 ## File Types
+
 [
 Section titled “File Types”](#file-types)
 
 ### JSON Schema
+
 [
 Section titled “JSON Schema”](#json-schema)
 
@@ -7808,6 +8134,7 @@ provide an otherwise invalid configuration option.
 In JSON, use the provided JSON schema:
 
 - knip.json
+
 ```
 
 {
@@ -7819,12 +8146,14 @@ In JSON, use the provided JSON schema:
 ```
 
 ### JSONC
+
 [
 Section titled “JSONC”](#jsonc)
 
 In JSONC, use the provided JSONC schema:
 
 knip.jsonc
+
 ```
 
 {
@@ -7838,16 +8167,19 @@ knip.jsonc
 Use JSONC if you want to use comments and/or trailing commas.
 
 ### TypeScript
+
 [
 Section titled “TypeScript”](#typescript)
 
 See [dynamic configuration](../reference/dynamic-configuration) about dynamic and typed configuration files.
 
 ## Project
+
 [
 Section titled “Project”](#project)
 
 ### `entry`
+
 [
 Section titled “entry”](#entry)
 
@@ -7855,6 +8187,7 @@ Array of glob patterns to find entry files. Prefix with `!` for negation.
 Example:
 
 knip.json
+
 ```
 
 {
@@ -7868,12 +8201,14 @@ knip.json
 Also see [configuration](../overview/configuration) and [entry files](../explanations/entry-files).
 
 ### `project`
+
 [
 Section titled “project”](#project-1)
 
 Array of glob patterns to find project files. Example:
 
 knip.json
+
 ```
 
 {
@@ -7887,6 +8222,7 @@ knip.json
 Also see [configuration](../overview/configuration) and [entry files](../explanations/entry-files).
 
 ### `paths`
+
 [
 Section titled “paths”](#paths)
 
@@ -7896,6 +8232,7 @@ configuration, but does not automatically use other types of import aliases.
 They can be configured manually:
 
 knip.json
+
 ```
 
 {
@@ -7920,6 +8257,7 @@ Path values are an array of relative paths.
 - Paths without an `*` are exact matches.
 
 ## Workspaces
+
 [
 Section titled “Workspaces”](#workspaces)
 
@@ -7940,6 +8278,7 @@ monorepo folder structure.
 Also see [Monorepos and workspaces](../features/monorepos-and-workspaces).
 
 ## Plugins
+
 [
 Section titled “Plugins”](#plugins)
 
@@ -7952,6 +8291,7 @@ There are a few options to modify the behavior of a plugin:
 - Disable a plugin by setting its value to `false`
 
 knip.json
+
 ```
 
 {
@@ -7983,28 +8323,33 @@ there, and vice versa.
 Also see [Plugins](../explanations/plugins).
 
 ## Rules & Filters
+
 [
 Section titled “Rules & Filters”](#rules--filters)
 
 ### `rules`
+
 [
 Section titled “rules”](#rules)
 
 See [Rules & Filters](../features/rules-and-filters#filters).
 
 ### `include`
+
 [
 Section titled “include”](#include)
 
 See [Rules & Filters](../features/rules-and-filters#filters).
 
 ### `exclude`
+
 [
 Section titled “exclude”](#exclude)
 
 See [Rules & Filters](../features/rules-and-filters#filters).
 
 ### `tags`
+
 [
 Section titled “tags”](#tags)
 
@@ -8063,12 +8408,14 @@ notation below is valid and will report only exports tagged `@lintignore` or
 Also see [JSDoc & TSDoc Tags](./jsdoc-tsdoc-tags).
 
 ### `treatConfigHintsAsErrors`
+
 [
 Section titled “treatConfigHintsAsErrors”](#treatconfighintsaserrors)
 
 Exit with non-zero code (1) if there are any configuration hints.
 
 knip.json
+
 ```
 
 {
@@ -8080,10 +8427,12 @@ knip.json
 ```
 
 ## Ignore Issues
+
 [
 Section titled “Ignore Issues”](#ignore-issues)
 
 ### `ignore`
+
 [
 Section titled “ignore”](#ignore)
 
@@ -8096,6 +8445,7 @@ production mode) instead.
 Array of glob patterns to ignore issues from matching files. Example:
 
 knip.json
+
 ```
 
 {
@@ -8107,6 +8457,7 @@ knip.json
 ```
 
 ### `ignoreFiles`
+
 [
 Section titled “ignoreFiles”](#ignorefiles)
 
@@ -8118,6 +8469,7 @@ remain analyzed for other issues (exports, dependencies, unresolved) but should
 not be considered for unused file detection.
 
 knip.json
+
 ```
 
 {
@@ -8131,6 +8483,7 @@ knip.json
 Suffix an item with `!` to enable it only in production mode.
 
 ### `ignoreBinaries`
+
 [
 Section titled “ignoreBinaries”](#ignorebinaries)
 
@@ -8138,6 +8491,7 @@ Exclude binaries that are used but not provided by any dependency from the
 report. Value is an array of binary names or regular expressions. Example:
 
 knip.json
+
 ```
 
 {
@@ -8151,6 +8505,7 @@ knip.json
 Actual regular expressions can be used in dynamic configurations:
 
 knip.ts
+
 ```
 
 export default {
@@ -8164,6 +8519,7 @@ export default {
 Suffix an item with `!` to enable it only in production mode.
 
 ### `ignoreDependencies`
+
 [
 Section titled “ignoreDependencies”](#ignoredependencies)
 
@@ -8171,6 +8527,7 @@ Array of package names to exclude from the report. Regular expressions allowed.
 Example:
 
 knip.json
+
 ```
 
 {
@@ -8184,6 +8541,7 @@ knip.json
 Actual regular expressions can be used in dynamic configurations:
 
 knip.ts
+
 ```
 
 export default {
@@ -8197,6 +8555,7 @@ export default {
 Suffix an item with `!` to enable it only in production mode.
 
 ### `ignoreMembers`
+
 [
 Section titled “ignoreMembers”](#ignoremembers)
 
@@ -8204,6 +8563,7 @@ Array of class and enum members to exclude from the report. Regular expressions
 allowed. Example:
 
 knip.json
+
 ```
 
 {
@@ -8217,6 +8577,7 @@ knip.json
 Actual regular expressions can be used in dynamic configurations.
 
 ### `ignoreUnresolved`
+
 [
 Section titled “ignoreUnresolved”](#ignoreunresolved)
 
@@ -8224,6 +8585,7 @@ Array of specifiers to exclude from the report. Regular expressions allowed.
 Example:
 
 knip.json
+
 ```
 
 {
@@ -8237,6 +8599,7 @@ knip.json
 Actual regular expressions can be used in dynamic configurations:
 
 knip.ts
+
 ```
 
 export default {
@@ -8248,12 +8611,14 @@ export default {
 ```
 
 ### `ignoreWorkspaces`
+
 [
 Section titled “ignoreWorkspaces”](#ignoreworkspaces)
 
 Array of workspaces to ignore, globs allowed. Example:
 
 knip.json
+
 ```
 
 {
@@ -8275,6 +8640,7 @@ knip.json
 Suffix an item with `!` to enable it only in production mode.
 
 ### `ignoreIssues`
+
 [
 Section titled “ignoreIssues”](#ignoreissues)
 
@@ -8284,6 +8650,7 @@ ignoring specific issues (like unused exports) in generated files while still
 reporting other issues in those same files.
 
 knip.json
+
 ```
 
 {
@@ -8301,10 +8668,12 @@ knip.json
 ```
 
 ## Exports
+
 [
 Section titled “Exports”](#exports)
 
 ### `ignoreExportsUsedInFile`
+
 [
 Section titled “ignoreExportsUsedInFile”](#ignoreexportsusedinfile)
 
@@ -8314,6 +8683,7 @@ option available. With this option enabled, when something is also no longer
 used internally, it will be reported as unused.
 
 knip.json
+
 ```
 
 {
@@ -8327,6 +8697,7 @@ knip.json
 In a more fine-grained manner, to ignore only specific issue types:
 
 knip.json
+
 ```
 
 {
@@ -8344,6 +8715,7 @@ knip.json
 ```
 
 ### `includeEntryExports`
+
 [
 Section titled “includeEntryExports”](#includeentryexports)
 
@@ -8352,6 +8724,7 @@ repository (or workspace) is self-contained or private, you may want to include
 entry files when reporting unused exports:
 
 knip.json
+
 ```
 
 {
@@ -8372,6 +8745,7 @@ Set this option at root level to enable this globally, or within workspace
 configurations individually.
 
 ## Compilers
+
 [
 Section titled “Compilers”](#compilers)
 
@@ -8383,6 +8757,7 @@ Since compilers are functions, they can only be used in dynamic configuration
 files (`.js` or `.ts`), not in JSON configuration files.
 
 ### `compilers`
+
 [
 Section titled “compilers”](#compilers-1)
 
@@ -8390,42 +8765,41 @@ Override built-in compilers or add custom compilers for additional file types.
 
 Also see [Compilers](../features/compilers).
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/configuration.md)  
- 
- [ 
-  Previous 
- CLI Arguments  ](/reference/cli) [ 
-  Next 
- Dynamic Configuration  ](/reference/dynamic-configuration) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/configuration.md)
+
+[
+Previous
+CLI Arguments ](/reference/cli) [
+Next
+Dynamic Configuration ](/reference/dynamic-configuration)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Dynamic Configuration
 
 **Source:** https://knip.dev/reference/dynamic-configuration
-
 
 ---
 
 # Dynamic Configuration
 
 ## TypeScript
+
 [
 Section titled “TypeScript”](#typescript)
 
 Instead of a JSON file, you can use a JavaScript or TypeScript file for a
 dynamic configuration and type annotations:
 
- -  [  TypeScript ](#tab-panel-40) 
--  [  JavaScript ](#tab-panel-41) 
+- [ TypeScript ](#tab-panel-40)
+- [ JavaScript ](#tab-panel-41)
 
 - knip.ts
+
 ```
 
 import type { KnipConfig } from 'knip';
@@ -8443,6 +8817,7 @@ export default config;
 ```
 
 knip.js
+
 ```
 
 /** @type {import('knip').KnipConfig} */
@@ -8460,16 +8835,19 @@ export default config;
 ```
 
 ## Function
+
 [
 Section titled “Function”](#function)
 
 You can export a regular or async function that returns the configuration object
 as well:
 
-  [  TypeScript ](#tab-panel-42) 
--  [  JavaScript ](#tab-panel-43) 
+[ TypeScript ](#tab-panel-42)
+
+- [ JavaScript ](#tab-panel-43)
 
 knip.ts
+
 ```
 
 import type { KnipConfig } from 'knip';
@@ -8493,6 +8871,7 @@ export default config;
 ```
 
 knip.js
+
 ```
 
 const config = async () => ({
@@ -8507,32 +8886,30 @@ export default config;
 
 ```
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/dynamic-configuration.mdx)  
- 
- [ 
-  Previous 
- Configuration  ](/reference/configuration) [ 
-  Next 
- FAQ  ](/reference/faq) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/dynamic-configuration.mdx)
+
+[
+Previous
+Configuration ](/reference/configuration) [
+Next
+FAQ ](/reference/faq)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # FAQ
 
 **Source:** https://knip.dev/reference/faq
-
 
 ---
 
 # FAQ
 
 ## Introduction
+
 [
 Section titled “Introduction”](#introduction)
 
@@ -8552,10 +8929,12 @@ why certain things work the way they do. Here and there it’s intentionally a b
 more in-depth than the rest of the docs.
 
 ## Comparison
+
 [
 Section titled “Comparison”](#comparison)
 
 ### Why isn’t Knip an ESLint plugin?
+
 [
 Section titled “Why isn’t Knip an ESLint plugin?”](#why-isnt-knip-an-eslint-plugin)
 
@@ -8569,6 +8948,7 @@ no such tool exists today, even more so when it comes to monorepos.
 File-oriented linters like ESLint are complementary to Knip.
 
 ### Isn’t tree-shaking enough?
+
 [
 Section titled “Isn’t tree-shaking enough?”](#isnt-tree-shaking-enough)
 
@@ -8598,10 +8978,12 @@ Besides those differences, Knip has a broader scope:
 - Handle more [types of issues](./issue-types) (such as unlisted dependencies).
 
 ## Synergy
+
 [
 Section titled “Synergy”](#synergy)
 
 ### Why does Knip have plugins?
+
 [
 Section titled “Why does Knip have plugins?”](#why-does-knip-have-plugins)
 
@@ -8624,6 +9006,7 @@ point to a file in another workspace in the same monorepo, e.g.
 imports of internal modules or external dependencies, and so on.
 
 ### Why is Knip so heavily engineered?
+
 [
 Section titled “Why is Knip so heavily engineered?”](#why-is-knip-so-heavily-engineered)
 
@@ -8643,10 +9026,12 @@ dependencies to build up the graphs is also exactly what’s meant by
 [“comprehensive” here](../explanations/why-use-knip#comprehensive).
 
 ## Building the graphs
+
 [
 Section titled “Building the graphs”](#building-the-graphs)
 
 ### Where does Knip look for entry files?
+
 [
 Section titled “Where does Knip look for entry files?”](#where-does-knip-look-for-entry-files)
 
@@ -8668,7 +9053,8 @@ Section titled “Where does Knip look for entry files?”](#where-does-knip-loo
 
 - Through scripts inside template strings in source files such as:
 
-- 
+-
+
 ```
 
 await $({ stdio: 'inherit' })`c8 node hydrate.js`; // execa
@@ -8722,6 +9108,7 @@ Entry files are added to the module graph. [Module resolution](#module-resolutio
 in additional entry files recursively until no more entry files are found.
 
 ### What does Knip look for in source files?
+
 [
 Section titled “What does Knip look for in source files?”](#what-does-knip-look-for-in-source-files)
 
@@ -8733,13 +9120,14 @@ all nodes of the generated AST to find:
 - Exports
 
 - Accessed properties on namespace imports and re-exports to track individual
-export usage
+  export usage
 
 - Calls to `require.resolve` and `import.meta.resolve`
 
 - Scripts in template strings (passed to [script parser](../features/script-parser))
 
 ### What’s in the graphs?
+
 [
 Section titled “What’s in the graphs?”](#whats-in-the-graphs)
 
@@ -8784,6 +9172,7 @@ The graphs allows to report more interesting details, such as:
 - List of all used (OS) binaries not installed in `node_modules`
 
 ### Why doesn’t Knip just read the lockfile?
+
 [
 Section titled “Why doesn’t Knip just read the lockfile?”](#why-doesnt-knip-just-read-the-lockfile)
 
@@ -8792,15 +9181,17 @@ required is in the lockfile as well, which would be more efficient. However,
 there are a few issues with this approach:
 
 - It requires lockfile parsing for each lockfile format and version of each
-package manager.
+  package manager.
 
 - The lockfile doesn’t contain whether the package [has types included](../guides/handling-issues#types-packages).
 
 ## Module Resolution
+
 [
 Section titled “Module Resolution”](#module-resolution)
 
 ### Why doesn’t Knip use an existing module resolver?
+
 [
 Section titled “Why doesn’t Knip use an existing module resolver?”](#why-doesnt-knip-use-an-existing-module-resolver)
 
@@ -8818,10 +9209,10 @@ seem to meet all requirements to be usable on its own by Knip:
 - Support self-referencing imports
 
 - Rewire `package.json#main` build artifacts like `dist/module.js` to its source
-at `src/module.ts`
+  at `src/module.ts`
 
 - Don’t resolve to type definition paths like `module.d.ts` but source code at
-`module.js`
+  `module.js`
 
 A few strategies have been tried and tweaked, and Knip currently uses a
 combination of [oxc-resolver](https://oxc.rs/docs/guide/usage/resolver.html), the TypeScript module resolver and a few
@@ -8832,6 +9223,7 @@ Everything else is handled by `oxc-resolver` for things like [script parsing](..
 and resolving references to files in other workspaces.
 
 ### How does Knip handle non-standard import syntax?
+
 [
 Section titled “How does Knip handle non-standard import syntax?”](#how-does-knip-handle-non-standard-import-syntax)
 
@@ -8840,6 +9232,7 @@ webpack loaders or Vite asset imports. Knip strips off the prefixes and suffixes
 in import specifiers like this:
 
 component.ts
+
 ```
 
 import Icon from './icon.svg?raw';
@@ -8852,10 +9245,12 @@ In this example, the `style-loader` and `css-loader` dependencies should be
 dependencies found in webpack configuration, handled by Knip’s webpack plugin.
 
 ## TypeScript
+
 [
 Section titled “TypeScript”](#typescript)
 
 ### What’s the difference between workspaces, projects and programs?
+
 [
 Section titled “What’s the difference between workspaces, projects and programs?”](#whats-the-difference-between-workspaces-projects-and-programs)
 
@@ -8873,6 +9268,7 @@ utilizes [workspace sharing](../guides/performance#workspace-sharing). That’s 
 “Installed 2 programs for 29 workspaces”.
 
 ### Why doesn’t Knip match my TypeScript project structure?
+
 [
 Section titled “Why doesn’t Knip match my TypeScript project structure?”](#why-doesnt-knip-match-my-typescript-project-structure)
 
@@ -8895,6 +9291,7 @@ Note that any directory with a `package.json` not listed in the root
 have it handled as a separate workspace.
 
 ### Why doesn’t Knip analyze workspaces in isolation by default?
+
 [
 Section titled “Why doesn’t Knip analyze workspaces in isolation by default?”](#why-doesnt-knip-analyze-workspaces-in-isolation-by-default)
 
@@ -8908,6 +9305,7 @@ allows the module resolver (one per program) to do some more caching.
 Also see [workspace sharing](../guides/performance#workspace-sharing).
 
 ### Why doesn’t Knip just use `ts.findReferences`?
+
 [
 Section titled “Why doesn’t Knip just use ts.findReferences?”](#why-doesnt-knip-just-use-tsfindreferences)
 
@@ -8928,6 +9326,7 @@ included). In case analysis of exports requires type information of external
 dependencies, the [`--include-libs ` flag](../guides/handling-issues#external-libraries) will trigger the same.
 
 ### Why can’t I use path aliases to reference other workspaces?
+
 [
 Section titled “Why can’t I use path aliases to reference other workspaces?”](#why-cant-i-use-path-aliases-to-reference-other-workspaces)
 
@@ -8945,6 +9344,7 @@ issues with this standard approach either.
 Also see the example in [TypeScript path aliases in monorepos](../guides/handling-issues#typescript-path-aliases-in-monorepos).
 
 ### What’s up with that configurable `tsconfig.json` location?
+
 [
 Section titled “What’s up with that configurable tsconfig.json location?”](#whats-up-with-that-configurable-tsconfigjson-location)
 
@@ -8961,6 +9361,7 @@ workspace. The TypeScript plugin extracts referenced external dependencies such
 as those in `extends`, `compilerOptions.types` and JSX settings:
 
 tsconfig.json
+
 ```
 
 {
@@ -8981,24 +9382,27 @@ From this example, Knip can determine whether the `@tsconfig/node20` and
 `hastscript` dependencies are properly listed in `package.json`.
 
 #### Notes
+
 [
 Section titled “Notes”](#notes)
 
 - The TypeScript plugin doesn’t add support for TypeScript to Knip (that’s
-already built-in). Like other plugins, it extracts dependencies from
-`tsconfig.json`. With the `typescript.config` option an alternative location
-for `tsconfig.json` can be set per workspace.
+  already built-in). Like other plugins, it extracts dependencies from
+  `tsconfig.json`. With the `typescript.config` option an alternative location
+  for `tsconfig.json` can be set per workspace.
 
 - In case path aliases from `compilerOptions.paths` aren’t picked up by Knip,
-either use `--tsConfig [file]` to target a different `tsconfig.json`, or
-manually add [paths](../reference/configuration#paths) to the Knip configuration. The latter can be done per
-workspace.
+  either use `--tsConfig [file]` to target a different `tsconfig.json`, or
+  manually add [paths](../reference/configuration#paths) to the Knip configuration. The latter can be done per
+  workspace.
 
 ## Compilers
+
 [
 Section titled “Compilers”](#compilers)
 
 ### How does Knip handle Svelte or Astro files?
+
 [
 Section titled “How does Knip handle Svelte or Astro files?”](#how-does-knip-handle-svelte-or-astro-files)
 
@@ -9014,6 +9418,7 @@ override them with the compilers in your project, and add additional ones for
 other file types.
 
 ### Why are the exports of my `.vue` files not used?
+
 [
 Section titled “Why are the exports of my .vue files not used?”](#why-are-the-exports-of-my-vue-files-not-used)
 
@@ -9023,10 +9428,12 @@ statements. Override the built-in Vue “compiler” with the real one in your
 project. Also see the answer to the previous question and [Compilers](../features/compilers).
 
 ## Miscellaneous
+
 [
 Section titled “Miscellaneous”](#miscellaneous)
 
 ### Why isn’t production mode the default?
+
 [
 Section titled “Why isn’t production mode the default?”](#why-isnt-production-mode-the-default)
 
@@ -9039,15 +9446,16 @@ dependencies. Plugins add only production entry files.
 Which mode should’ve been the default? They both have their merits:
 
 - Production mode catches dead production code and dependencies. This mode has
-the most impact on UX, since less code tends to be faster and safer.
+  the most impact on UX, since less code tends to be faster and safer.
 
 - Default mode potentially catches more issues, e.g. lots of unused plugins of
-tooling, including most issues found in production mode. This mode has the
-most impact on DX, for the same reason.
+  tooling, including most issues found in production mode. This mode has the
+  most impact on DX, for the same reason.
 
 Also see [production mode](../features/production-mode).
 
 ### Why doesn’t Knip have…?
+
 [
 Section titled “Why doesn’t Knip have…?”](#why-doesnt-knip-have)
 
@@ -9076,35 +9484,32 @@ Unused interface/type members
 - Improve internal code structures and accessibility to support contributions
 
 - One-shot dead code removal (more comprehensive removal of unused variables,
-duplicate exports, dead code, etc).
+  duplicate exports, dead code, etc).
 
 - Replace dependencies for better performance and correctness, such as for shell
-script parsing, module resolution and globbing with “unignores”.
+  script parsing, module resolution and globbing with “unignores”.
 
 These are all interesting ideas, but most increase the API surface area, and all
 require more development efforts and maintenance. Time is limited and
 [sponsorships](/sponsors) currently don’t cover - this can change though!
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/faq.md)  
- 
- [ 
-  Previous 
- Dynamic Configuration  ](/reference/dynamic-configuration) [ 
-  Next 
- Issue Types  ](/reference/issue-types) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/faq.md)
+
+[
+Previous
+Dynamic Configuration ](/reference/dynamic-configuration) [
+Next
+Issue Types ](/reference/issue-types)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Issue Types
 
 **Source:** https://knip.dev/reference/issue-types
-
 
 ---
 
@@ -9115,43 +9520,42 @@ Knip reports the following types of issues:
 TitleDescriptionKeyUnused filesUnable to find a reference to this file🔧`files`Unused dependenciesUnable to find a reference to this dependency🔧`dependencies`Unused devDependenciesUnable to find a reference to this devDependency🔧`dependencies`Referenced optional peerDependenciesOptional peer dependency is referenced`dependencies`Unlisted dependenciesUsed dependencies not listed in package.json`unlisted`Unlisted binariesBinaries from dependencies not listed in package.json`binaries`Unresolved importsUnable to resolve this (import) specifier`unresolved`Unused exportsUnable to find a reference to this export🔧`exports`Unused exported typesUnable to find a reference to this exported type🔧`types`Exports in used namespaceNamespace with export is referenced, but not export itself🔧 🟠`nsExports`Exported types in used namespaceNamespace with type is referenced, but not type itself🔧 🟠`nsTypes`Unused exported enum membersUnable to find a reference to this enum member🔧`enumMembers`Unused exported class membersUnable to find a reference to this class member🔧 🟠`classMembers`Duplicate exportsThis is exported more than once`duplicates`
 
 ## Legend
+
 [
 Section titled “Legend”](#legend)
 
 Description🔧[Auto-fixable](../features/auto-fix) issue types🟠Not included by default (include with [filters](../features/rules-and-filters#filters))
 
 ## Notes
+
 [
 Section titled “Notes”](#notes)
 
 - When an issue type has zero issues, it is not shown.
 
 - The `devDependencies` and `optionalPeerDependencies` are covered in a single
-key for all `dependencies`. In [strict production mode](../features/production-mode#strict-mode), `devDependencies`
-are not included.
+  key for all `dependencies`. In [strict production mode](../features/production-mode#strict-mode), `devDependencies`
+  are not included.
 
 - The `types` issue type includes `enum`, `interface` and `type` exports.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/issue-types.md)  
- 
- [ 
-  Previous 
- FAQ  ](/reference/faq) [ 
-  Next 
- JSDoc & TSDoc Tags  ](/reference/jsdoc-tsdoc-tags) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/issue-types.md)
+
+[
+Previous
+FAQ ](/reference/faq) [
+Next
+JSDoc & TSDoc Tags ](/reference/jsdoc-tsdoc-tags)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # JSDoc & TSDoc Tags
 
 **Source:** https://knip.dev/reference/jsdoc-tsdoc-tags
-
 
 ---
 
@@ -9174,6 +9578,7 @@ JSDoc comments always start with `/**` (not `//`) and can be single or
 multi-line.
 
 ## Tags
+
 [
 Section titled “Tags”](#tags)
 
@@ -9196,6 +9601,7 @@ And then include (`+`) or exclude (`-`) these tagged exports from the report
 like so:
 
 Terminal window
+
 ```
 
 knip --tags=-lintignore,-internal
@@ -9205,6 +9611,7 @@ knip --tags=-lintignore,-internal
 Tags can also be [configured in `knip.json`](./configuration#tags).
 
 ## `@public`
+
 [
 Section titled “@public”](#public)
 
@@ -9232,6 +9639,7 @@ This tag can also be used to make exceptions in entry files when using
 [JSDoc: @public](https://jsdoc.app/tags-public.html) and [TSDoc: @public](https://tsdoc.org/pages/tags/public/)
 
 ## `@internal`
+
 [
 Section titled “@internal”](#internal)
 
@@ -9259,6 +9667,7 @@ when using production mode you’ll need to help Knip out by tagging them as
 [TSDoc: @internal](https://tsdoc.org/pages/tags/internal/)
 
 ## `@alias`
+
 [
 Section titled “@alias”](#alias)
 
@@ -9283,6 +9692,7 @@ duplicates from being reported.
 [JSDoc: @alias](https://jsdoc.app/tags-alias.html)
 
 ## `@beta`
+
 [
 Section titled “@beta”](#beta)
 
@@ -9291,26 +9701,23 @@ Works identical to [`@public`](#public). Knip ignores other tags like `@alpha` a
 
 [TSDoc: @beta](https://tsdoc.org/pages/tags/beta/)
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/jsdoc-tsdoc-tags.md)  
- 
- [ 
-  Previous 
- Issue Types  ](/reference/issue-types) [ 
-  Next 
- Known Issues  ](/reference/known-issues) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/jsdoc-tsdoc-tags.md)
+
+[
+Previous
+Issue Types ](/reference/issue-types) [
+Next
+Known Issues ](/reference/known-issues)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Known Issues
 
 **Source:** https://knip.dev/reference/known-issues
-
 
 ---
 
@@ -9319,6 +9726,7 @@ Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content
 This page contains a list of known issues you might run into when using Knip.
 
 ## Exceptions from config files
+
 [
 Section titled “Exceptions from config files”](#exceptions-from-config-files)
 
@@ -9334,18 +9742,20 @@ loads configuration files:
 - Missing environment variable
 
 - Relative path (e.g. which is sometimes not resolved from correct directory,
-try `import.meta.dirname` or `__dirname`)
+  try `import.meta.dirname` or `__dirname`)
 
 As a last resort, the [plugin can be disabled](./configuration#plugins).
 
 ## Path aliases in config files
+
 [
 Section titled “Path aliases in config files”](#path-aliases-in-config-files)
 
 Loading the configuration file (e.g. `cypress.config.ts`) for one of Knip’s
 plugins may give an error:
 
-- 
+-
+
 ```
 
 Analyzing workspace ....
@@ -9374,12 +9784,14 @@ Rewrite the import in the configuration file to a relative import.
 - [Disable the plugin](./configuration#plugins) (not recommended, try the other options first).
 
 ## Nx Daemon
+
 [
 Section titled “Nx Daemon”](#nx-daemon)
 
 In Nx projects you might encounter this error:
 
 Terminal window
+
 ```
 
 NX   Daemon process terminated and closed the connection
@@ -9389,32 +9801,30 @@ NX   Daemon process terminated and closed the connection
 The solution is to [disable the Nx Daemon](https://nx.dev/concepts/nx-daemon#turning-it-off):
 
 Terminal window
+
 ```
 
 NX_DAEMON=false knip
 
 ```
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/known-issues.md)  
- 
- [ 
-  Previous 
- JSDoc & TSDoc Tags  ](/reference/jsdoc-tsdoc-tags) [ 
-  Next 
- Plugins (115)  ](/reference/plugins) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/known-issues.md)
+
+[
+Previous
+JSDoc & TSDoc Tags ](/reference/jsdoc-tsdoc-tags) [
+Next
+Plugins (115) ](/reference/plugins)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Plugins (115)
 
 **Source:** https://knip.dev/reference/plugins
-
 
 ---
 
@@ -9650,26 +10060,23 @@ Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content
 
 - [yorkie](/reference/plugins/yorkie)
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/plugins.md)  
- 
- [ 
-  Previous 
- Known Issues  ](/reference/known-issues) [ 
-  Next 
- Related Tooling  ](/reference/related-tooling) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/plugins.md)
+
+[
+Previous
+Known Issues ](/reference/known-issues) [
+Next
+Related Tooling ](/reference/related-tooling)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Related Tooling
 
 **Source:** https://knip.dev/reference/related-tooling
-
 
 ---
 
@@ -9678,6 +10085,7 @@ Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content
 This is an overview of related tooling for features Knip does not support.
 
 ## Unused variables
+
 [
 Section titled “Unused variables”](#unused-variables)
 
@@ -9692,6 +10100,7 @@ valiant way. Using input from any of the above linters, it actually removes a
 lot more unused code. This pairs great with Knip.
 
 ## Unused properties
+
 [
 Section titled “Unused properties”](#unused-properties)
 
@@ -9703,6 +10112,7 @@ Knip does support finding unused members of enums and classes, and exported
 values and types on imported namespaces.
 
 ## Circular dependencies
+
 [
 Section titled “Circular dependencies”](#circular-dependencies)
 
@@ -9710,32 +10120,30 @@ Knip has no issues with circular dependencies, and does not report them. Tools
 that do support this include [DPDM](https://github.com/acrazing/dpdm), [Madge](https://github.com/pahen/madge) and [skott](https://github.com/antoine-coulon/skott).
 
 ## Cleanup
+
 [
 Section titled “Cleanup”](#cleanup)
 
 The [e18e.dev](https://e18e.dev) website and in particular the [Cleanup](https://e18e.dev/guide/cleanup.html) section is a great
 resource when dealing with technical debt.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/related-tooling.md)  
- 
- [ 
-  Previous 
- Plugins (115)  ](/reference/plugins) [ 
-  Next 
- The State of Knip  ](/blog/state-of-knip) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/reference/related-tooling.md)
+
+[
+Previous
+Plugins (115) ](/reference/plugins) [
+Next
+The State of Knip ](/blog/state-of-knip)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Unused dependencies
 
 **Source:** https://knip.dev/typescript/unused-dependencies
-
 
 ---
 
@@ -9746,6 +10154,7 @@ and TypeScript projects. And it comes with many more features to remove clutter
 and keep your projects in great shape.
 
 ## Why are unused dependencies a problem?
+
 [
 Section titled “Why are unused dependencies a problem?”](#why-are-unused-dependencies-a-problem)
 
@@ -9753,10 +10162,10 @@ Having unused dependencies in your `package.json` is an issue for various
 reasons:
 
 - They might end up in the final production bundle, increasing size and load
-times for end users.
+  times for end users.
 
 - They waste space in `node_modules` and add to the installation time of the
-project.
+  project.
 
 - They slow down tooling such as linters and bundlers that analyze dependencies.
 
@@ -9773,6 +10182,7 @@ project.
 - They usually come with transitive dependencies that have the same issues.
 
 ## How do I find unused dependencies?
+
 [
 Section titled “How do I find unused dependencies?”](#how-do-i-find-unused-dependencies)
 
@@ -9783,6 +10193,7 @@ JavaScript and TypeScript projects tidy.
 It’s easy to [get started](../overview/getting-started) and make package management easier and more fun!
 
 ## How does Knip identify unused dependencies?
+
 [
 Section titled “How does Knip identify unused dependencies?”](#how-does-knip-identify-unused-dependencies)
 
@@ -9792,6 +10203,7 @@ Knip has many heuristics, [plugins](../reference/plugins) and [compilers](../fea
 process.
 
 ## Can Knip remove unused dependencies?
+
 [
 Section titled “Can Knip remove unused dependencies?”](#can-knip-remove-unused-dependencies)
 
@@ -9800,6 +10212,7 @@ manager like npm or pnpm for you. Add the `--fix` argument to [auto-fix](../feat
 remove unused dependencies from `package.json`.
 
 ## Can Knip detect missing dependencies?
+
 [
 Section titled “Can Knip detect missing dependencies?”](#can-knip-detect-missing-dependencies)
 
@@ -9809,6 +10222,7 @@ avoid relying on transitive dependencies that can cause version mismatches and
 breakage.
 
 ## Does Knip work with monorepos?
+
 [
 Section titled “Does Knip work with monorepos?”](#does-knip-work-with-monorepos)
 
@@ -9819,6 +10233,7 @@ For instance, if a dependency is listed in the root `package.json` it does not
 need to be listed in other workspaces. Except if you enable `--strict` checking.
 
 ## Does Knip separate dependencies and devDependencies?
+
 [
 Section titled “Does Knip separate dependencies and devDependencies?”](#does-knip-separate-dependencies-and-devdependencies)
 
@@ -9828,26 +10243,24 @@ code and dependencies that would otherwise only be referenced by tests and other
 tooling. This allows you to remove both unused exported code and their tests.
 
 ## Does Knip work with my package manager?
+
 [
 Section titled “Does Knip work with my package manager?”](#does-knip-work-with-my-package-manager)
 
 Yes, Knip works with any package manager: npm, pnpm, Bun and Yarn are all
 supported. It’s easy to [get started](../overview/getting-started) with any package manager.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/typescript/unused-dependencies.md)  
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/typescript/unused-dependencies.md)
 
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Unused exports
 
 **Source:** https://knip.dev/typescript/unused-exports
-
 
 ---
 
@@ -9858,6 +10271,7 @@ Knip’s core features. And it comes with even more features to identify and
 remove clutter to keep your projects in great shape.
 
 ## Why are unused exports a problem?
+
 [
 Section titled “Why are unused exports a problem?”](#why-are-unused-exports-a-problem)
 
@@ -9872,12 +10286,13 @@ Having unused exports in your codebase is problematic for several reasons:
 - They make refactoring and maintaining the codebase more difficult.
 
 - They slow down tooling that analyze the codebase, such as bundlers, linters
-and type checkers.
+  and type checkers.
 
 - They may represent dead code that is no longer needed but hasn’t been cleaned
-up.
+  up.
 
 ## How do I find unused exports?
+
 [
 Section titled “How do I find unused exports?”](#how-do-i-find-unused-exports)
 
@@ -9889,6 +10304,7 @@ that are not imported anywhere, and reports them.
 files and provide a detailed report of unused exports, and much more.
 
 ## How does Knip identify unused exports?
+
 [
 Section titled “How does Knip identify unused exports?”](#how-does-knip-identify-unused-exports)
 
@@ -9900,6 +10316,7 @@ Knip supports JavaScript and TypeScript projects, and handles both [CommonJS](..
 and ES Modules syntax.
 
 ## Can Knip remove unused exports?
+
 [
 Section titled “Can Knip remove unused exports?”](#can-knip-remove-unused-exports)
 
@@ -9911,6 +10328,7 @@ It’s always recommended to review the changes made by Knip before committing
 them to ensure no unintended modifications were made.
 
 ## Can Knip handle large codebases?
+
 [
 Section titled “Can Knip handle large codebases?”](#can-knip-handle-large-codebases)
 
@@ -9919,6 +10337,7 @@ sharing](../guides/performance#workspace-sharing) to efficiently analyze large m
 more fun to manage and optimize large multi-package projects.
 
 ## Does Knip work with my favorite editor or IDE?
+
 [
 Section titled “Does Knip work with my favorite editor or IDE?”](#does-knip-work-with-my-favorite-editor-or-ide)
 
@@ -9928,6 +10347,7 @@ file names and positions in a format IDEs like VS Code and WebStorm understand
 to easily navigate around.
 
 ## How is Knip different from ESLint for finding unused exports?
+
 [
 Section titled “How is Knip different from ESLint for finding unused exports?”](#how-is-knip-different-from-eslint-for-finding-unused-exports)
 
@@ -9940,20 +10360,17 @@ would miss.
 
 Also see [Why isn’t Knip an ESLint plugin?](../reference/faq#why-isnt-knip-an-eslint-plugin)
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/typescript/unused-exports.md)  
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/typescript/unused-exports.md)
 
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Writing A Plugin
 
 **Source:** https://knip.dev/writing-a-plugin
-
 
 ---
 
@@ -9980,12 +10397,14 @@ There’s a handy command available to easily [create a new plugin](#create-a-ne
 started right away.
 
 ## Example 1: entry
+
 [
 Section titled “Example 1: entry”](#example-1-entry)
 
 Let’s dive right in. Here’s the entire source code of the Tailwind plugin:
 
-- 
+-
+
 ```
 
 import type { IsPluginEnabled, Plugin } from '../../types/config.js';
@@ -10019,6 +10438,7 @@ export default {
 Yes, that’s the entire plugin! Let’s go over each item one by one:
 
 ### 1. `title`
+
 [
 Section titled “1. title”](#1-title)
 
@@ -10026,6 +10446,7 @@ The title of the plugin displayed in the [list of plugins](../reference/plugins)
 output.
 
 ### 2. `enablers`
+
 [
 Section titled “2. enablers”](#2-enablers)
 
@@ -10034,6 +10455,7 @@ An array of strings to match one or more dependencies in `package.json` so the
 Regular expressions are allowed as well.
 
 ### 3. `isEnabled`
+
 [
 Section titled “3. isEnabled”](#3-isenabled)
 
@@ -10044,6 +10466,7 @@ listed in `package.json`.
 This function can be kept straightforward with the `hasDependency` helper.
 
 ### 4. `entry`
+
 [
 Section titled “4. entry”](#4-entry)
 
@@ -10056,6 +10479,7 @@ The next example shows how to handle a tool that has its own particular
 configuration object.
 
 ## Example 2: config
+
 [
 Section titled “Example 2: config”](#example-2-config)
 
@@ -10128,6 +10552,7 @@ export default {
 Here’s an example `config` file that will be handled by this plugin:
 
 .nycrc.json
+
 ```
 
 {
@@ -10143,6 +10568,7 @@ Here’s an example `config` file that will be handled by this plugin:
 Compared to the first example, this plugin has two new variables:
 
 ### 5. `config`
+
 [
 Section titled “5. config”](#5-config)
 
@@ -10151,6 +10577,7 @@ tool. Knip loads matching files and passes the results (i.e. its default export)
 into the `resolveConfig` function:
 
 ### 6. `resolveConfig`
+
 [
 Section titled “6. resolveConfig”](#6-resolveconfig)
 
@@ -10171,10 +10598,12 @@ points](../explanations/plugins#entry-files-from-config-files)
 - The `config` file references dependencies by strings (not import statements)
 
 ## Example 3: entry paths
+
 [
 Section titled “Example 3: entry paths”](#example-3-entry-paths)
 
 ### 7. entry and production
+
 [
 Section titled “7. entry and production”](#7-entry-and-production)
 
@@ -10226,6 +10655,7 @@ the default export so they will be displayed in the plugin’s documentation as
 default values.
 
 ## Example 4: Use the AST directly
+
 [
 Section titled “Example 4: Use the AST directly”](#example-4-use-the-ast-directly)
 
@@ -10284,6 +10714,7 @@ const resolveConfig: ResolveConfig<AstroConfig> = async config => {
 This is why plugins can implement the `resolveFromAST` function.
 
 ### 7. resolveFromAST
+
 [
 Section titled “7. resolveFromAST”](#7-resolvefromast)
 
@@ -10390,6 +10821,7 @@ export default {
 ```
 
 ## Inputs
+
 [
 Section titled “Inputs”](#inputs)
 
@@ -10401,6 +10833,7 @@ will be.
 Find all the details over at [Writing A Plugin → Inputs](./writing-a-plugin/inputs).
 
 ## Argument Parsing
+
 [
 Section titled “Argument Parsing”](#argument-parsing)
 
@@ -10411,12 +10844,14 @@ tool.
 Read more in [Writing A Plugin → Argument Parsing](./writing-a-plugin/argument-parsing).
 
 ## Create a new plugin
+
 [
 Section titled “Create a new plugin”](#create-a-new-plugin)
 
 The easiest way to create a new plugin is to use the `create-plugin` script:
 
 Terminal window
+
 ```
 
 cd packages/knip
@@ -10431,6 +10866,7 @@ the plugin to the JSON Schema and TypeScript types.
 Run the test for your new plugin using one of the following commands:
 
 Terminal window
+
 ```
 
 pnpm tsx --test test/plugins/tool.test.ts
@@ -10442,6 +10878,7 @@ bun test test/plugins/tool.test.ts
 You’re ready to implement and submit a new Knip plugin! 🆕 🎉
 
 ## Wrapping Up
+
 [
 Section titled “Wrapping Up”](#wrapping-up)
 
@@ -10454,26 +10891,23 @@ individual plugin pages](../reference/plugins) from the exported plugin values.
 Thanks for reading. If you have been following this guide to create a new
 plugin, this might be the right time to open a pull request!
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/writing-a-plugin/index.md)  
- 
- [ 
-  Previous 
- Working with CommonJS  ](/guides/working-with-commonjs) [ 
-  Next 
- Inputs  ](/writing-a-plugin/inputs) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/writing-a-plugin/index.md)
+
+[
+Previous
+Working with CommonJS ](/guides/working-with-commonjs) [
+Next
+Inputs ](/writing-a-plugin/inputs)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Argument Parsing
 
 **Source:** https://knip.dev/writing-a-plugin/argument-parsing
-
 
 ---
 
@@ -10512,6 +10946,7 @@ Also see [type definitions](https://github.com/webpro-nl/knip/blob/main/packages
 - [string](#string)
 
 ## alias
+
 [
 Section titled “alias”](#alias)
 
@@ -10532,6 +10967,7 @@ Example:
 Also see [nodeImportArgs](#nodeimportargs).
 
 ## args
+
 [
 Section titled “args”](#args)
 
@@ -10551,6 +10987,7 @@ Example:
 ```
 
 ## binaries
+
 [
 Section titled “binaries”](#binaries)
 
@@ -10571,6 +11008,7 @@ Example:
 Default: plugin name, e.g. for the ESLint plugin the value is `["eslint"]`
 
 ## boolean
+
 [
 Section titled “boolean”](#boolean)
 
@@ -10578,6 +11016,7 @@ Mark arguments as boolean. By default, arguments are expected to have string
 values.
 
 ## config
+
 [
 Section titled “config”](#config)
 
@@ -10616,6 +11055,7 @@ This will mark e.g. `tsc -p tsconfig.lib.json` as a configuration file and it
 will be handled by `resolveConfig` of the (typescript) plugin.
 
 ## fromArgs
+
 [
 Section titled “fromArgs”](#fromargs)
 
@@ -10637,6 +11077,7 @@ Example:
 Then this script:
 
 Terminal window
+
 ```
 
 nodemon --exec "node index.js"
@@ -10646,6 +11087,7 @@ nodemon --exec "node index.js"
 Will have `"node index.js"` being parsed as a new script.
 
 ## nodeImportArgs
+
 [
 Section titled “nodeImportArgs”](#nodeimportargs)
 
@@ -10674,6 +11116,7 @@ Example:
 ```
 
 ## positional
+
 [
 Section titled “positional”](#positional)
 
@@ -10695,6 +11138,7 @@ The `tsx` plugin has this and `"tsx script.ts"` as a script will result in the
 `script.ts` file being an entry point.
 
 ## resolve
+
 [
 Section titled “resolve”](#resolve)
 
@@ -10716,6 +11160,7 @@ Now for a script like `"program --plugin package"` this will result in
 `"package"` being resolved as a dependency.
 
 ## resolveInputs
+
 [
 Section titled “resolveInputs”](#resolveinputs)
 
@@ -10734,32 +11179,30 @@ Return inputs from parsed arguments
 ```
 
 ## string
+
 [
 Section titled “string”](#string)
 
 Mark arguments as string. This is the default, but number-looking arguments are
 returned as numbers by minimist.
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/writing-a-plugin/argument-parsing.md)  
- 
- [ 
-  Previous 
- Inputs  ](/writing-a-plugin/inputs) [ 
-  Next 
- CLI Arguments  ](/reference/cli) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/writing-a-plugin/argument-parsing.md)
+
+[
+Previous
+Inputs ](/writing-a-plugin/inputs) [
+Next
+CLI Arguments ](/reference/cli)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
 [Lars Kappert](https://www.webpro.nl)
 
-
 ---
-
 
 # Inputs
 
 **Source:** https://knip.dev/writing-a-plugin/inputs
-
 
 ---
 
@@ -10793,6 +11236,7 @@ Here’s an overview of all input type functions:
 - [Options](#options)
 
 ## toEntry
+
 [
 Section titled “toEntry”](#toentry)
 
@@ -10800,6 +11244,7 @@ An `entry` input is just like an `entry` in the configuration. It should either
 be an absolute or relative path, and glob patterns are allowed.
 
 ## toProductionEntry
+
 [
 Section titled “toProductionEntry”](#toproductionentry)
 
@@ -10807,6 +11252,7 @@ A production `entry` input is just like an `production` in the configuration. It
 should either be an absolute or relative path, and it can have glob patterns.
 
 ## toProject
+
 [
 Section titled “toProject”](#toproject)
 
@@ -10815,6 +11261,7 @@ It should either be an absolute or relative path, and (negated) glob patterns
 are allowed.
 
 ## toDependency
+
 [
 Section titled “toDependency”](#todependency)
 
@@ -10822,6 +11269,7 @@ The `dependency` indicates the entry is a dependency, belonging in either the
 `"dependencies"` or `"devDependencies"` section of `package.json`.
 
 ## toProductionDependency
+
 [
 Section titled “toProductionDependency”](#toproductiondependency)
 
@@ -10829,6 +11277,7 @@ The production `dependency` indicates the entry is a production dependency,
 expected to be listed in `"dependencies"`.
 
 ## toDeferResolve
+
 [
 Section titled “toDeferResolve”](#todeferresolve)
 
@@ -10842,6 +11291,7 @@ If this does not lead to a resolution, the specifier will be reported under
 “unresolved imports”.
 
 ## toDeferResolveEntry
+
 [
 Section titled “toDeferResolveEntry”](#todeferresolveentry)
 
@@ -10850,6 +11300,7 @@ for entry files only (not dependencies) and unresolved inputs are ignored. It’
 different from `toEntry` as glob patterns are not supported.
 
 ## toConfig
+
 [
 Section titled “toConfig”](#toconfig)
 
@@ -10871,6 +11322,7 @@ For instance, the Angular plugin uses this to tell Knip about its `tsConfig`
 value in `angular.json` projects.
 
 ## toBinary
+
 [
 Section titled “toBinary”](#tobinary)
 
@@ -10880,6 +11332,7 @@ workflow YAML files or husky scripts. Using this input type, a binary is
 “assigned” to the dependency that has it as a `"bin"` in their `package.json`.
 
 ## toAlias
+
 [
 Section titled “toAlias”](#toalias)
 
@@ -10887,6 +11340,7 @@ The `alias` input type adds path aliases to the core module resolver. They’re
 added to `compilerOptions.paths` so the syntax is identical.
 
 ## Options
+
 [
 Section titled “Options”](#options)
 
@@ -10894,6 +11348,7 @@ When creating inputs from specifiers, an extra `options` object as the second
 argument can be provided.
 
 ### dir
+
 [
 Section titled “dir”](#dir)
 
@@ -10930,6 +11385,7 @@ Knip now understands `esbuild` is a dependency of the workspace in the
 `packages/app` directory.
 
 ### optional
+
 [
 Section titled “optional”](#optional)
 
@@ -10937,6 +11393,7 @@ Use the `optional` flag to indicate the dependency is optional. Then, a
 dependency won’t be flagged as unlisted if it isn’t.
 
 ### allowIncludeExports
+
 [
 Section titled “allowIncludeExports”](#allowincludeexports)
 
@@ -10961,17 +11418,16 @@ toProductionEntry('./entry.ts', { allowIncludeExports: true });
 
 ```
 
- [
-Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/writing-a-plugin/inputs.md)  
- 
- [ 
-  Previous 
- Writing A Plugin  ](/writing-a-plugin) [ 
-  Next 
- Argument Parsing  ](/writing-a-plugin/argument-parsing) 
-    
- [ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
-[Lars Kappert](https://www.webpro.nl)
+[
+Edit page](https://github.com/webpro-nl/knip/edit/main/packages/docs/src/content/docs/writing-a-plugin/inputs.md)
 
+[
+Previous
+Writing A Plugin ](/writing-a-plugin) [
+Next
+Argument Parsing ](/writing-a-plugin/argument-parsing)
+
+[ISC License](https://github.com/webpro-nl/knip/blob/main/packages/knip/license) © 2024
+[Lars Kappert](https://www.webpro.nl)
 
 ---

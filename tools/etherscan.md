@@ -35,6 +35,7 @@ END_BLOCK=99999999
 ## Network Configuration
 
 **Base Sepolia Testnet**
+
 - **Chain ID**: `84532`
 - **API Endpoint**: `https://api.etherscan.io/v2/api`
 - **Explorer**: `https://sepolia.basescan.org`
@@ -48,6 +49,7 @@ END_BLOCK=99999999
 **Endpoint:** `module=account&action=txlist`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `account`
 - `action` - Set to `txlist`
@@ -60,12 +62,14 @@ END_BLOCK=99999999
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Get last 5 transactions for address
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=txlist&address=${USER_ADDRESS}&startblock=${START_BLOCK}&endblock=${END_BLOCK}&page=1&offset=5&sort=desc&apikey=${ETHERSCAN_API_KEY}" | jaq '.result[0:2]'
 ```
 
 **Response:**
+
 ```json
 {
   "status": "1",
@@ -94,6 +98,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=txl
 **Endpoint:** `module=account&action=txlistinternal`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `account`
 - `action` - Set to `txlistinternal`
@@ -106,12 +111,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=txl
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Get internal transactions (contract calls)
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=txlistinternal&address=${CONTRACT_ADDRESS}&startblock=${START_BLOCK}&endblock=${END_BLOCK}&page=1&offset=10&sort=desc&apikey=${ETHERSCAN_API_KEY}" | jaq '.'
 ```
 
 **Response:**
+
 ```json
 {
   "status": "1",
@@ -141,6 +148,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=txl
 **Endpoint:** `module=account&action=tokentx`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `account`
 - `action` - Set to `tokentx`
@@ -152,12 +160,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=txl
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Get token transfers for address
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=tokentx&contractaddress=${TOKEN_ADDRESS}&address=${USER_ADDRESS}&page=1&offset=10&sort=desc&apikey=${ETHERSCAN_API_KEY}" | jaq '.'
 ```
 
 **Response:**
+
 ```json
 {
   "status": "1",
@@ -186,6 +196,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=tok
 **Endpoint:** `module=account&action=tokenbalance`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `account`
 - `action` - Set to `tokenbalance`
@@ -195,12 +206,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=tok
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Get token balance for address
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=tokenbalance&contractaddress=${TOKEN_ADDRESS}&address=${USER_ADDRESS}&tag=latest&apikey=${ETHERSCAN_API_KEY}" | jaq '.'
 ```
 
 **Response:**
+
 ```json
 {
   "status": "1",
@@ -216,6 +229,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=tok
 **Endpoint:** `module=account&action=balance`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `account`
 - `action` - Set to `balance`
@@ -224,12 +238,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=tok
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Get ETH balance for address
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=balance&address=${USER_ADDRESS}&tag=latest&apikey=${ETHERSCAN_API_KEY}" | jaq '.'
 ```
 
 **Response:**
+
 ```json
 {
   "status": "1",
@@ -247,6 +263,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=bal
 **Endpoint:** `module=logs&action=getLogs`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `logs`
 - `action` - Set to `getLogs`
@@ -263,12 +280,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=account&action=bal
 - `apikey` - Your Etherscan API key
 
 **Example 1: Get All Events**
+
 ```bash
 # Get all events from contract
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=logs&action=getLogs&address=${CONTRACT_ADDRESS}&fromBlock=${START_BLOCK}&toBlock=latest&apikey=${ETHERSCAN_API_KEY}" | jaq '.result[] | {topics, blockNumber, transactionHash}'
 ```
 
 **Example 2: Filter by Event Signature**
+
 ```bash
 # Define event signature (e.g., Transfer event)
 EVENT_SIGNATURE=0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
@@ -278,6 +297,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=logs&action=getLog
 ```
 
 **Example 3: Filter by User Address**
+
 ```bash
 # Pad user address to 32 bytes for topic filtering
 USER_TOPIC=0x000000000000000000000000${USER_ADDRESS#0x}
@@ -287,6 +307,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=logs&action=getLog
 ```
 
 **Response:**
+
 ```json
 {
   "status": "1",
@@ -294,11 +315,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=logs&action=getLog
   "result": [
     {
       "address": "0x...",
-      "topics": [
-        "0x47105a6d7f6f25c847bcb185cea1dbdcbcf7b89f22370b5fc878607fbd71a1e7",
-        "0x0000000000000000000000000000000000000000000000000000000000000001",
-        "0x00000000000000000000000083f83aa00e1ec088149a1cf15fab7a91aa4813c7"
-      ],
+      "topics": ["0x47105a6d7f6f25c847bcb185cea1dbdcbcf7b89f22370b5fc878607fbd71a1e7", "0x0000000000000000000000000000000000000000000000000000000000000001", "0x00000000000000000000000083f83aa00e1ec088149a1cf15fab7a91aa4813c7"],
       "data": "0x00000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680",
       "blockNumber": "0x1db5c8c",
       "timeStamp": "0x6543210a",
@@ -321,6 +338,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=logs&action=getLog
 **Endpoint:** `module=transaction&action=getstatus`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `transaction`
 - `action` - Set to `getstatus`
@@ -328,12 +346,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=logs&action=getLog
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Check transaction status
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=transaction&action=getstatus&txhash=${TX_HASH}&apikey=${ETHERSCAN_API_KEY}" | jaq '.'
 ```
 
 **Response:**
+
 ```json
 {
   "status": "1",
@@ -354,6 +374,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=transaction&action
 **Endpoint:** `module=proxy&action=eth_getTransactionReceipt`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `proxy`
 - `action` - Set to `eth_getTransactionReceipt`
@@ -361,12 +382,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=transaction&action
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Get transaction receipt with logs
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=proxy&action=eth_getTransactionReceipt&txhash=${TX_HASH}&apikey=${ETHERSCAN_API_KEY}" | jaq '.'
 ```
 
 **Response:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -395,6 +418,7 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=proxy&action=eth_g
 **Endpoint:** `module=proxy&action=eth_getTransactionByHash`
 
 **Parameters:**
+
 - `chainid` - Chain ID (84532 for Base Sepolia)
 - `module` - Set to `proxy`
 - `action` - Set to `eth_getTransactionByHash`
@@ -402,12 +426,14 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=proxy&action=eth_g
 - `apikey` - Your Etherscan API key
 
 **Example:**
+
 ```bash
 # Get transaction details
 curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=proxy&action=eth_getTransactionByHash&txhash=${TX_HASH}&apikey=${ETHERSCAN_API_KEY}" | jaq '.result'
 ```
 
 **Response:**
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -438,18 +464,21 @@ curl -s "https://api.etherscan.io/v2/api?chainid=84532&module=proxy&action=eth_g
 ### Common Event Signatures
 
 **ERC-20 Transfer Event**
+
 ```bash
 # Transfer(address indexed from, address indexed to, uint256 value)
 TRANSFER_TOPIC=0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 ```
 
 **ERC-721 Transfer Event**
+
 ```bash
 # Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
 NFT_TRANSFER_TOPIC=0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 ```
 
 **ERC-20 Approval Event**
+
 ```bash
 # Approval(address indexed owner, address indexed spender, uint256 value)
 APPROVAL_TOPIC=0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925
@@ -458,12 +487,14 @@ APPROVAL_TOPIC=0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b92
 ### Topic Encoding
 
 **Address to Topic (32 bytes, left-padded)**
+
 ```bash
 # Convert address to topic format
 USER_TOPIC=0x000000000000000000000000${USER_ADDRESS#0x}
 ```
 
 **Number to Topic (32 bytes, left-padded hex)**
+
 ```bash
 # Example: tokenId 123 = 0x7b
 TOKEN_ID_TOPIC=0x000000000000000000000000000000000000000000000000000000000000007b
@@ -472,6 +503,7 @@ TOKEN_ID_TOPIC=0x000000000000000000000000000000000000000000000000000000000000007
 ### Data Decoding
 
 **Wei to Human-Readable**
+
 ```bash
 # ETH uses 18 decimals
 # 1 ETH = 1000000000000000000 wei
@@ -485,6 +517,7 @@ echo "scale=6; 10000000 / 1000000" | bc
 ```
 
 **Hex to Decimal**
+
 ```bash
 # Convert hex value to decimal
 echo $((16#989680))
@@ -492,6 +525,7 @@ echo $((16#989680))
 ```
 
 **Extract Data from Event Log**
+
 ```bash
 # Event data is hex-encoded, 32 bytes per parameter
 # Example data: 0x00000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680
@@ -586,11 +620,13 @@ jaq -r '.result[] | [.blockNumber, .hash] | @tsv'
 ## Best Practices
 
 ### Rate Limits
+
 - Free tier: 5 requests/second
 - Use block ranges to limit query scope
 - Cache responses when possible
 
 ### Error Handling
+
 ```bash
 # Check response status
 RESPONSE=$(curl -s "https://api.etherscan.io/v2/api?...")
@@ -604,6 +640,7 @@ fi
 ```
 
 ### Security
+
 - **ALWAYS** load API key from `.env` file
 - **NEVER** commit `.env` to git (add to `.gitignore`)
 - API keys are read-only by default
@@ -613,6 +650,7 @@ fi
 ## Quick Reference
 
 ### Base Sepolia Network
+
 ```bash
 CHAIN_ID=84532
 API_BASE=https://api.etherscan.io/v2/api
@@ -620,6 +658,7 @@ EXPLORER=https://sepolia.basescan.org
 ```
 
 ### Common Modules
+
 - `account` - Account-related queries (transactions, balances)
 - `logs` - Event logs and contract events
 - `transaction` - Transaction status and details
@@ -628,6 +667,7 @@ EXPLORER=https://sepolia.basescan.org
 - `stats` - Network statistics
 
 ### Common Actions
+
 - `txlist` - Get normal transactions
 - `txlistinternal` - Get internal transactions
 - `tokentx` - Get ERC-20 token transfers
@@ -646,4 +686,3 @@ EXPLORER=https://sepolia.basescan.org
 - **Base Sepolia Explorer**: https://sepolia.basescan.org
 - **Supported Chains**: https://docs.etherscan.io/supported-chains
 - **Rate Limits**: https://docs.etherscan.io/resources/rate-limits
-

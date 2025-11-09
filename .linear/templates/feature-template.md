@@ -109,11 +109,13 @@ Brief description of the implementation strategy.
 Choose at least ONE:
 
 **Core Components:**
+
 - `frontend` - Web app, UI components, client-side logic
 - `backend` - API, services, workers, server-side logic
 - `contract` - Smart contracts, blockchain interactions
 
 **Additional Components:**
+
 - `database` - Schema, queries, migrations
 - `infrastructure` - CI/CD, monitoring, hosting
 - `api` - REST, GraphQL, webhooks

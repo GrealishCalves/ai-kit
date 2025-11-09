@@ -15,18 +15,18 @@ Total pages: 27
 The Model Context Protocol uses string-based version identifiers following the format
 `YYYY-MM-DD`, to indicate the last date backwards incompatible changes were made.
 
-  The protocol version will *not* be incremented when the
-  protocol is updated, as long as the changes maintain backwards compatibility. This allows
-  for incremental improvements while preserving interoperability.
+The protocol version will _not_ be incremented when the
+protocol is updated, as long as the changes maintain backwards compatibility. This allows
+for incremental improvements while preserving interoperability.
 
 ## Revisions
 
 Revisions may be marked as:
 
-* **Draft**: in-progress specifications, not yet ready for consumption.
-* **Current**: the current protocol version, which is ready for use and may continue to
+- **Draft**: in-progress specifications, not yet ready for consumption.
+- **Current**: the current protocol version, which is ready for use and may continue to
   receive backwards compatible changes.
-* **Final**: past, complete specifications that will not be changed.
+- **Final**: past, complete specifications that will not be changed.
 
 The **current** protocol version is [**2025-06-18**](/specification/2025-06-18/).
 
@@ -73,16 +73,16 @@ appear in all capitals, as shown here.
 
 MCP provides a standardized way for applications to:
 
-* Share contextual information with language models
-* Expose tools and capabilities to AI systems
-* Build composable integrations and workflows
+- Share contextual information with language models
+- Expose tools and capabilities to AI systems
+- Build composable integrations and workflows
 
 The protocol uses [JSON-RPC](https://www.jsonrpc.org/) 2.0 messages to establish
 communication between:
 
-* **Hosts**: LLM applications that initiate connections
-* **Clients**: Connectors within the host application
-* **Servers**: Services that provide context and capabilities
+- **Hosts**: LLM applications that initiate connections
+- **Clients**: Connectors within the host application
+- **Servers**: Services that provide context and capabilities
 
 MCP takes some inspiration from the
 [Language Server Protocol](https://microsoft.github.io/language-server-protocol/), which
@@ -94,31 +94,31 @@ and tools into the ecosystem of AI applications.
 
 ### Base Protocol
 
-* [JSON-RPC](https://www.jsonrpc.org/) message format
-* Stateful connections
-* Server and client capability negotiation
+- [JSON-RPC](https://www.jsonrpc.org/) message format
+- Stateful connections
+- Server and client capability negotiation
 
 ### Features
 
 Servers offer any of the following features to clients:
 
-* **Resources**: Context and data, for the user or the AI model to use
-* **Prompts**: Templated messages and workflows for users
-* **Tools**: Functions for the AI model to execute
+- **Resources**: Context and data, for the user or the AI model to use
+- **Prompts**: Templated messages and workflows for users
+- **Tools**: Functions for the AI model to execute
 
 Clients may offer the following features to servers:
 
-* **Sampling**: Server-initiated agentic behaviors and recursive LLM interactions
-* **Roots**: Server-initiated inquiries into uri or filesystem boundaries to operate in
-* **Elicitation**: Server-initiated requests for additional information from users
+- **Sampling**: Server-initiated agentic behaviors and recursive LLM interactions
+- **Roots**: Server-initiated inquiries into uri or filesystem boundaries to operate in
+- **Elicitation**: Server-initiated requests for additional information from users
 
 ### Additional Utilities
 
-* Configuration
-* Progress tracking
-* Cancellation
-* Error reporting
-* Logging
+- Configuration
+- Progress tracking
+- Cancellation
+- Error reporting
+- Logging
 
 ## Security and Trust & Safety
 
@@ -129,30 +129,30 @@ considerations that all implementors must carefully address.
 ### Key Principles
 
 1. **User Consent and Control**
-   * Users must explicitly consent to and understand all data access and operations
-   * Users must retain control over what data is shared and what actions are taken
-   * Implementors should provide clear UIs for reviewing and authorizing activities
+   - Users must explicitly consent to and understand all data access and operations
+   - Users must retain control over what data is shared and what actions are taken
+   - Implementors should provide clear UIs for reviewing and authorizing activities
 
 2. **Data Privacy**
-   * Hosts must obtain explicit user consent before exposing user data to servers
-   * Hosts must not transmit resource data elsewhere without user consent
-   * User data should be protected with appropriate access controls
+   - Hosts must obtain explicit user consent before exposing user data to servers
+   - Hosts must not transmit resource data elsewhere without user consent
+   - User data should be protected with appropriate access controls
 
 3. **Tool Safety**
-   * Tools represent arbitrary code execution and must be treated with appropriate
+   - Tools represent arbitrary code execution and must be treated with appropriate
      caution.
-     * In particular, descriptions of tool behavior such as annotations should be
+     - In particular, descriptions of tool behavior such as annotations should be
        considered untrusted, unless obtained from a trusted server.
-   * Hosts must obtain explicit user consent before invoking any tool
-   * Users should understand what each tool does before authorizing its use
+   - Hosts must obtain explicit user consent before invoking any tool
+   - Users should understand what each tool does before authorizing its use
 
 4. **LLM Sampling Controls**
-   * Users must explicitly approve any LLM sampling requests
-   * Users should control:
-     * Whether sampling occurs at all
-     * The actual prompt that will be sent
-     * What results the server can see
-   * The protocol intentionally limits server visibility into prompts
+   - Users must explicitly approve any LLM sampling requests
+   - Users should control:
+     - Whether sampling occurs at all
+     - The actual prompt that will be sent
+     - What results the server can see
+   - The protocol intentionally limits server visibility into prompts
 
 ### Implementation Guidelines
 
@@ -187,63 +187,61 @@ interface Annotations {
   priority?: number;
 }
 Optional annotations for the client. The client can use annotations to inform how objects are used or displayed
- `Optional`audienceaudience?: Role[]
+`Optional`audienceaudience?: Role[]
 Describes who the intended customer of this object or data is.
 
 It can include multiple entries to indicate content useful for multiple audiences (e.g., `["user", "assistant"]`).
- `Optional`lastModifiedlastModified?: string
+`Optional`lastModifiedlastModified?: string
 The moment the resource was last modified, as an ISO 8601 formatted string.
 
 Should be an ISO 8601 formatted string (e.g., "2025-01-12T15:00:58Z").
 
 Examples: last activity timestamp in an open file, timestamp when the resource
 was attached, etc.
- `Optional`prioritypriority?: number
+`Optional`prioritypriority?: number
 Describes how important this data is for operating the server.
 
 A value of 1 means "most important," and indicates that the data is
 effectively required, while 0 means "least important," and indicates that
 the data is entirely optional.
- TJS-type
+TJS-type
 number
-
 
 ### `AudioContent`
 
 interface AudioContent {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: Annotations;
   data: string;
   mimeType: string;
   type: "audio";
 }
 Audio provided to or from an LLM.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`annotationsannotations?: Annotations
+`Optional`annotationsannotations?: Annotations
 Optional annotations for the client.
- datadata: string
+datadata: string
 The base64-encoded audio data.
- mimeTypemimeType: string
+mimeTypemimeType: string
 The MIME type of the audio. Different providers may support different audio types.
-
 
 ### `BlobResourceContents`
 
 interface BlobResourceContents {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   blob: string;
   mimeType?: string;
   uri: string;
 }
 The contents of a specific resource or sub-resource.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from ResourceContents.\_meta
 blobblob: string
 A base64-encoded string representing the binary data of the item.
- `Optional`mimeTypemimeType?: string
+`Optional`mimeTypemimeType?: string
 The MIME type of this resource, if known.
 
 Inherited from ResourceContents.mimeType
@@ -270,17 +268,16 @@ interface ClientCapabilities {
   sampling?: object;
 }
 Capabilities a client may support. Known capabilities are defined here, in this schema, but this is not a closed set: any client can define its own, additional capabilities.
- `Optional`elicitationelicitation?: object
+`Optional`elicitationelicitation?: object
 Present if the client supports elicitation from the server.
- `Optional`experimentalexperimental?: { [key: string]: object }
+`Optional`experimentalexperimental?: { [key: string]: object }
 Experimental, non-standard capabilities that the client supports.
- `Optional`rootsroots?: { listChanged?: boolean }
+`Optional`rootsroots?: { listChanged?: boolean }
 Present if the client supports listing roots.
- Type declaration`Optional`listChanged?: boolean
+Type declaration`Optional`listChanged?: boolean
 Whether the client supports notifications for changes to the roots list.
- `Optional`samplingsampling?: object
+`Optional`samplingsampling?: object
 Present if the client supports sampling from an LLM.
-
 
 ### `ContentBlock`
 
@@ -296,11 +293,10 @@ ContentBlock:
 Cursor: string
 An opaque token used to represent a cursor for pagination.
 
-
 ### `EmbeddedResource`
 
 interface EmbeddedResource {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: Annotations;
   resource: TextResourceContents | BlobResourceContents;
   type: "resource";
@@ -309,17 +305,15 @@ The contents of a resource, embedded into a prompt or tool call result.
 
 It is up to the client how best to render embedded resources for the benefit
 of the LLM and/or the user.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`annotationsannotations?: Annotations
+`Optional`annotationsannotations?: Annotations
 Optional annotations for the client.
-
 
 ### `EmptyResult`
 
 EmptyResult: Result
 A response that indicates success but carries no data.
-
 
 ### `EnumSchema`
 
@@ -334,22 +328,21 @@ interface EnumSchema {
 ### `ImageContent`
 
 interface ImageContent {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: Annotations;
   data: string;
   mimeType: string;
   type: "image";
 }
 An image provided to or from an LLM.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`annotationsannotations?: Annotations
+`Optional`annotationsannotations?: Annotations
 Optional annotations for the client.
- datadata: string
+datadata: string
 The base64-encoded image data.
- mimeTypemimeType: string
+mimeTypemimeType: string
 The MIME type of the image. Different providers may support different image types.
-
 
 ### `Implementation`
 
@@ -359,7 +352,7 @@ interface Implementation {
   version: string;
 }
 Describes the name and version of an MCP implementation, with an optional title for UI representation.
- namename: string
+namename: string
 Intended for programmatic or logical use, but used as a display name in past specs or fallback (if title isn't present).
 
 Inherited from BaseMetadata.name
@@ -381,13 +374,12 @@ interface JSONRPCError {
   jsonrpc: "2.0";
 }
 A response to a request that indicates an error occurred.
- errorerror: { code: number; data?: unknown; message: string }Type declarationcode: number
+errorerror: { code: number; data?: unknown; message: string }Type declarationcode: number
 The error type that occurred.
- `Optional`data?: unknown
+`Optional`data?: unknown
 Additional information about the error. The value of this member is defined by the sender (e.g. detailed error information, nested errors etc.).
- message: string
+message: string
 A short description of the error. The message SHOULD be limited to a concise single sentence.
-
 
 ### `JSONRPCNotification`
 
@@ -397,7 +389,7 @@ interface JSONRPCNotification {
   params?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown };
 }
 A notification which does not expect a response.
- `Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
+`Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Notification.params
@@ -409,17 +401,17 @@ interface JSONRPCRequest {
   jsonrpc: "2.0";
   method: string;
   params?: {
-    \_meta?: { progressToken?: ProgressToken; [key: string]: unknown };
+    _meta?: { progressToken?: ProgressToken; [key: string]: unknown };
     [key: string]: unknown;
   };
 }
 A request that expects a response.
- `Optional`paramsparams?: {
-  \_meta?: { progressToken?: ProgressToken; [key: string]: unknown };
+`Optional`paramsparams?: {
+  _meta?: { progressToken?: ProgressToken; [key: string]: unknown };
   [key: string]: unknown;
 }Type declaration[key: string]: unknown`Optional`\_meta?: { progressToken?: ProgressToken; [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`progressToken?: ProgressToken
+`Optional`progressToken?: ProgressToken
 If specified, the caller is requesting out-of-band progress notifications for this request (as represented by notifications/progress). The value of this parameter is an opaque token that will be attached to any subsequent notifications. The receiver is not obligated to provide these notifications.
 
 Inherited from Request.params
@@ -432,7 +424,6 @@ interface JSONRPCResponse {
   result: Result;
 }
 A successful (non-error) response to a request.
-
 
 ### `LoggingLevel`
 
@@ -449,7 +440,6 @@ The severity of a log message.
 
 These map to syslog message severities, as specified in RFC-5424: [https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1](https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1)
 
-
 ### `ModelHint`
 
 interface ModelHint {
@@ -459,13 +449,13 @@ Hints to use for model selection.
 
 Keys not declared here are currently left unspecified by the spec and are up
 to the client to interpret.
- `Optional`namename?: string
+`Optional`namename?: string
 A hint for a model name.
 
 The client SHOULD treat this as a substring of a model name; for example:
-  `claude-3-5-sonnet` should match `claude-3-5-sonnet-20241022` `sonnet` should match `claude-3-5-sonnet-20241022`, `claude-3-sonnet-20240229`, etc. `claude` should match any Claude model
+`claude-3-5-sonnet` should match `claude-3-5-sonnet-20241022` `sonnet` should match `claude-3-5-sonnet-20241022`, `claude-3-sonnet-20240229`, etc. `claude` should match any Claude model
 The client MAY also map the string to a different provider's model name or a different model family, as long as it fills a similar niche; for example:
-  `gemini-1.5-flash` could match `claude-3-haiku-20240307`
+`gemini-1.5-flash` could match `claude-3-haiku-20240307`
 
 ### `ModelPreferences`
 
@@ -478,7 +468,7 @@ interface ModelPreferences {
 The server's preferences for model selection, requested of the client during sampling.
 
 Because LLMs can vary along multiple dimensions, choosing the "best" model is
-rarely straightforward.  Different models excel in different areas—some are
+rarely straightforward. Different models excel in different areas—some are
 faster but less capable, others are more capable but more expensive, and so
 on. This interface allows servers to express their priorities across multiple
 dimensions to help clients make an appropriate selection for their use case.
@@ -486,13 +476,13 @@ dimensions to help clients make an appropriate selection for their use case.
 These preferences are always advisory. The client MAY ignore them. It is also
 up to the client to decide how to interpret these preferences and how to
 balance them against other considerations.
- `Optional`costPrioritycostPriority?: number
+`Optional`costPrioritycostPriority?: number
 How much to prioritize cost when selecting a model. A value of 0 means cost
 is not important, while a value of 1 means cost is the most important
 factor.
- TJS-type
+TJS-type
 number
- `Optional`hintshints?: ModelHint[]
+`Optional`hintshints?: ModelHint[]
 Optional hints to use for model selection.
 
 If multiple hints are specified, the client MUST evaluate them in order
@@ -500,19 +490,18 @@ If multiple hints are specified, the client MUST evaluate them in order
 
 The client SHOULD prioritize these hints over the numeric priorities, but
 MAY still use the priorities to select from ambiguous matches.
- `Optional`intelligencePriorityintelligencePriority?: number
+`Optional`intelligencePriorityintelligencePriority?: number
 How much to prioritize intelligence and capabilities when selecting a
 model. A value of 0 means intelligence is not important, while a value of 1
 means intelligence is the most important factor.
- TJS-type
+TJS-type
 number
- `Optional`speedPriorityspeedPriority?: number
+`Optional`speedPriorityspeedPriority?: number
 How much to prioritize sampling speed (latency) when selecting a model. A
 value of 0 means speed is not important, while a value of 1 means speed is
 the most important factor.
- TJS-type
+TJS-type
 number
-
 
 ### `NumberSchema`
 
@@ -534,30 +523,28 @@ PrimitiveSchemaDefinition:
 Restricted schema definitions that only allow primitive types
 without nested objects or arrays.
 
-
 ### `ProgressToken`
 
 ProgressToken: string | number
 A progress token, used to associate progress notifications with the original request.
 
-
 ### `Prompt`
 
 interface Prompt {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   arguments?: PromptArgument[];
   description?: string;
   name: string;
   title?: string;
 }
 A prompt or prompt template that the server offers.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`argumentsarguments?: PromptArgument[]
+`Optional`argumentsarguments?: PromptArgument[]
 A list of arguments to use for templating the prompt.
- `Optional`descriptiondescription?: string
+`Optional`descriptiondescription?: string
 An optional description of what this prompt provides
- namename: string
+namename: string
 Intended for programmatic or logical use, but used as a display name in past specs or fallback (if title isn't present).
 
 Inherited from BaseMetadata.name
@@ -580,15 +567,15 @@ interface PromptArgument {
   title?: string;
 }
 Describes an argument that a prompt can accept.
- `Optional`descriptiondescription?: string
+`Optional`descriptiondescription?: string
 A human-readable description of the argument.
- namename: string
+namename: string
 Intended for programmatic or logical use, but used as a display name in past specs or fallback (if title isn't present).
 
 Inherited from BaseMetadata.name
 `Optional`requiredrequired?: boolean
 Whether this argument must be provided.
- `Optional`titletitle?: string
+`Optional`titletitle?: string
 Intended for UI and end-user contexts — optimized to be human-readable and easily understood,
 even by those unfamiliar with domain-specific terminology.
 
@@ -609,7 +596,6 @@ Describes a message returned as part of a prompt.
 This is similar to `SamplingMessage`, but also supports the embedding of
 resources from the MCP server.
 
-
 ### `PromptReference`
 
 interface PromptReference {
@@ -618,7 +604,7 @@ interface PromptReference {
   type: "ref/prompt";
 }
 Identifies a prompt.
- namename: string
+namename: string
 Intended for programmatic or logical use, but used as a display name in past specs or fallback (if title isn't present).
 
 Inherited from BaseMetadata.name
@@ -637,11 +623,10 @@ Inherited from BaseMetadata.title
 RequestId: string | number
 A uniquely identifying ID for a request in JSON-RPC.
 
-
 ### `Resource`
 
 interface Resource {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: Annotations;
   description?: string;
   mimeType?: string;
@@ -651,17 +636,17 @@ interface Resource {
   uri: string;
 }
 A known resource that the server is capable of reading.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`annotationsannotations?: Annotations
+`Optional`annotationsannotations?: Annotations
 Optional annotations for the client.
- `Optional`descriptiondescription?: string
+`Optional`descriptiondescription?: string
 A description of what this resource represents.
 
 This can be used by clients to improve the LLM's understanding of available resources. It can be thought of like a "hint" to the model.
- `Optional`mimeTypemimeType?: string
+`Optional`mimeTypemimeType?: string
 The MIME type of this resource, if known.
- namename: string
+namename: string
 Intended for programmatic or logical use, but used as a display name in past specs or fallback (if title isn't present).
 
 Inherited from BaseMetadata.name
@@ -669,7 +654,7 @@ Inherited from BaseMetadata.name
 The size of the raw resource content, in bytes (i.e., before base64 encoding or any tokenization), if known.
 
 This can be used by Hosts to display file sizes and estimate context window usage.
- `Optional`titletitle?: string
+`Optional`titletitle?: string
 Intended for UI and end-user contexts — optimized to be human-readable and easily understood,
 even by those unfamiliar with domain-specific terminology.
 
@@ -681,40 +666,38 @@ Inherited from BaseMetadata.title
 uriuri: string
 The URI of this resource.
 
-
 ### `ResourceContents`
 
 interface ResourceContents {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   mimeType?: string;
   uri: string;
 }
 The contents of a specific resource or sub-resource.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`mimeTypemimeType?: string
+`Optional`mimeTypemimeType?: string
 The MIME type of this resource, if known.
- uriuri: string
+uriuri: string
 The URI of this resource.
-
 
 ### `ResourceLink`
 
 interface ResourceLink {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: Annotations;
   description?: string;
   mimeType?: string;
   name: string;
   size?: number;
   title?: string;
-  type: "resource\_link";
+  type: "resource_link";
   uri: string;
 }
 A resource that the server is capable of reading, included in a prompt or tool call result.
 
 Note: resource links returned by tools are not guaranteed to appear in the results of `resources/list` requests.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Resource.\_meta
@@ -759,7 +742,7 @@ Inherited from Resource.uri
 ### `ResourceTemplate`
 
 interface ResourceTemplate {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: Annotations;
   description?: string;
   mimeType?: string;
@@ -768,17 +751,17 @@ interface ResourceTemplate {
   uriTemplate: string;
 }
 A template description for resources available on the server.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`annotationsannotations?: Annotations
+`Optional`annotationsannotations?: Annotations
 Optional annotations for the client.
- `Optional`descriptiondescription?: string
+`Optional`descriptiondescription?: string
 A description of what this template is for.
 
 This can be used by clients to improve the LLM's understanding of available resources. It can be thought of like a "hint" to the model.
- `Optional`mimeTypemimeType?: string
+`Optional`mimeTypemimeType?: string
 The MIME type for all resources that match this template. This should only be included if all resources matching this template have the same type.
- namename: string
+namename: string
 Intended for programmatic or logical use, but used as a display name in past specs or fallback (if title isn't present).
 
 Inherited from BaseMetadata.name
@@ -794,7 +777,6 @@ Inherited from BaseMetadata.title
 uriTemplateuriTemplate: string
 A URI template (according to RFC 6570) that can be used to construct resource URIs.
 
-
 ### `ResourceTemplateReference`
 
 interface ResourceTemplateReference {
@@ -802,44 +784,40 @@ interface ResourceTemplateReference {
   uri: string;
 }
 A reference to a resource or resource template definition.
- uriuri: string
+uriuri: string
 The URI or URI template of the resource.
-
 
 ### `Result`
 
 interface Result {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   [key: string]: unknown;
-}`Optional`\_meta\_meta?: { [key: string]: unknown }
+}`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
-
 
 ### `Role`
 
 Role: "user" | "assistant"
 The sender or recipient of messages and data in a conversation.
 
-
 ### `Root`
 
 interface Root {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   name?: string;
   uri: string;
 }
 Represents a root directory or file that the server can operate on.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`namename?: string
+`Optional`namename?: string
 An optional name for the root. This can be used to provide a human-readable
 identifier for the root, which may be useful for display purposes or for
 referencing the root in other parts of the application.
- uriuri: string
+uriuri: string
 The URI identifying the root. This must start with file:// for now.
 This restriction may be relaxed in future versions of the protocol to allow
 other URI schemes.
-
 
 ### `SamplingMessage`
 
@@ -848,7 +826,6 @@ interface SamplingMessage {
   role: Role;
 }
 Describes a message issued to or received from an LLM API.
-
 
 ### `ServerCapabilities`
 
@@ -861,27 +838,26 @@ interface ServerCapabilities {
   tools?: { listChanged?: boolean };
 }
 Capabilities that a server may support. Known capabilities are defined here, in this schema, but this is not a closed set: any server can define its own, additional capabilities.
- `Optional`completionscompletions?: object
+`Optional`completionscompletions?: object
 Present if the server supports argument autocompletion suggestions.
- `Optional`experimentalexperimental?: { [key: string]: object }
+`Optional`experimentalexperimental?: { [key: string]: object }
 Experimental, non-standard capabilities that the server supports.
- `Optional`logginglogging?: object
+`Optional`logginglogging?: object
 Present if the server supports sending log messages to the client.
- `Optional`promptsprompts?: { listChanged?: boolean }
+`Optional`promptsprompts?: { listChanged?: boolean }
 Present if the server offers any prompt templates.
- Type declaration`Optional`listChanged?: boolean
+Type declaration`Optional`listChanged?: boolean
 Whether this server supports notifications for changes to the prompt list.
- `Optional`resourcesresources?: { listChanged?: boolean; subscribe?: boolean }
+`Optional`resourcesresources?: { listChanged?: boolean; subscribe?: boolean }
 Present if the server offers any resources to read.
- Type declaration`Optional`listChanged?: boolean
+Type declaration`Optional`listChanged?: boolean
 Whether this server supports notifications for changes to the resource list.
- `Optional`subscribe?: boolean
+`Optional`subscribe?: boolean
 Whether this server supports subscribing to resource updates.
- `Optional`toolstools?: { listChanged?: boolean }
+`Optional`toolstools?: { listChanged?: boolean }
 Present if the server offers any tools to call.
- Type declaration`Optional`listChanged?: boolean
+Type declaration`Optional`listChanged?: boolean
 Whether this server supports notifications for changes to the tool list.
-
 
 ### `StringSchema`
 
@@ -897,30 +873,29 @@ interface StringSchema {
 ### `TextContent`
 
 interface TextContent {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: Annotations;
   text: string;
   type: "text";
 }
 Text provided to or from an LLM.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`annotationsannotations?: Annotations
+`Optional`annotationsannotations?: Annotations
 Optional annotations for the client.
- texttext: string
+texttext: string
 The text content of the message.
-
 
 ### `TextResourceContents`
 
 interface TextResourceContents {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   mimeType?: string;
   text: string;
   uri: string;
 }
 The contents of a specific resource or sub-resource.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from ResourceContents.\_meta
@@ -930,7 +905,7 @@ The MIME type of this resource, if known.
 Inherited from ResourceContents.mimeType
 texttext: string
 The text of the item. This must only be set if the item can actually be represented as text (not binary data).
- uriuri: string
+uriuri: string
 The URI of this resource.
 
 Inherited from ResourceContents.uri
@@ -938,7 +913,7 @@ Inherited from ResourceContents.uri
 ### `Tool`
 
 interface Tool {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   annotations?: ToolAnnotations;
   description?: string;
   inputSchema: {
@@ -955,23 +930,23 @@ interface Tool {
   title?: string;
 }
 Definition for a tool the client can call.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`annotationsannotations?: ToolAnnotations
+`Optional`annotationsannotations?: ToolAnnotations
 Optional additional tool information.
 
 Display name precedence order is: title, annotations.title, then name.
- `Optional`descriptiondescription?: string
+`Optional`descriptiondescription?: string
 A human-readable description of the tool.
 
 This can be used by clients to improve the LLM's understanding of available tools. It can be thought of like a "hint" to the model.
- inputSchemainputSchema: {
+inputSchemainputSchema: {
   properties?: { [key: string]: object };
   required?: string[];
   type: "object";
 }
 A JSON Schema object defining the expected parameters for the tool.
- namename: string
+namename: string
 Intended for programmatic or logical use, but used as a display name in past specs or fallback (if title isn't present).
 
 Inherited from BaseMetadata.name
@@ -982,7 +957,7 @@ Inherited from BaseMetadata.name
 }
 An optional JSON Schema object defining the structure of the tool's output returned in
 the structuredContent field of a CallToolResult.
- `Optional`titletitle?: string
+`Optional`titletitle?: string
 Intended for UI and end-user contexts — optimized to be human-readable and easily understood,
 even by those unfamiliar with domain-specific terminology.
 
@@ -1009,34 +984,33 @@ tool behavior (including descriptive properties like `title`).
 
 Clients should never make tool use decisions based on ToolAnnotations
 received from untrusted servers.
- `Optional`destructiveHintdestructiveHint?: boolean
+`Optional`destructiveHintdestructiveHint?: boolean
 If true, the tool may perform destructive updates to its environment.
 If false, the tool performs only additive updates.
 
 (This property is meaningful only when `readOnlyHint == false`)
 
 Default: true
- `Optional`idempotentHintidempotentHint?: boolean
+`Optional`idempotentHintidempotentHint?: boolean
 If true, calling the tool repeatedly with the same arguments
 will have no additional effect on the its environment.
 
 (This property is meaningful only when `readOnlyHint == false`)
 
 Default: false
- `Optional`openWorldHintopenWorldHint?: boolean
+`Optional`openWorldHintopenWorldHint?: boolean
 If true, this tool may interact with an "open world" of external
 entities. If false, the tool's domain of interaction is closed.
 For example, the world of a web search tool is open, whereas that
 of a memory tool is not.
 
 Default: true
- `Optional`readOnlyHintreadOnlyHint?: boolean
+`Optional`readOnlyHintreadOnlyHint?: boolean
 If true, the tool does not modify its environment.
 
 Default: false
- `Optional`titletitle?: string
+`Optional`titletitle?: string
 A human-readable title for the tool.
-
 
 ## `completion/complete`
 
@@ -1051,42 +1025,41 @@ interface CompleteRequest {
   };
 }
 A request from the client to the server, to ask for completion options.
- paramsparams: {
+paramsparams: {
   argument: { name: string; value: string };
   context?: { arguments?: { [key: string]: string } };
   ref: PromptReference | ResourceTemplateReference;
 }Type declarationargument: { name: string; value: string }
 The argument's information
- name: string
+name: string
 The name of the argument
- value: string
+value: string
 The value of the argument to use for completion matching.
- `Optional`context?: { arguments?: { [key: string]: string } }
+`Optional`context?: { arguments?: { [key: string]: string } }
 Additional, optional context for completions
- `Optional`arguments?: { [key: string]: string }
+`Optional`arguments?: { [key: string]: string }
 Previously-resolved variables in a URI template or prompt.
- ref: PromptReference | ResourceTemplateReference
+ref: PromptReference | ResourceTemplateReference
 Overrides Request.params
 
 ### `CompleteResult`
 
 interface CompleteResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   completion: { hasMore?: boolean; total?: number; values: string[] };
   [key: string]: unknown;
 }
 The server's response to a completion/complete request
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
 completioncompletion: { hasMore?: boolean; total?: number; values: string[] }Type declaration`Optional`hasMore?: boolean
 Indicates whether there are additional completion options beyond those provided in the current response, even if the exact total is unknown.
- `Optional`total?: number
+`Optional`total?: number
 The total number of completion options available. This can exceed the number of values actually sent in the response.
- values: string[]
+values: string[]
 An array of completion values. Must not exceed 100 items.
-
 
 ## `elicitation/create`
 
@@ -1104,7 +1077,7 @@ interface ElicitRequest {
   };
 }
 A request from the server to elicit additional information from the user via the client.
- paramsparams: {
+paramsparams: {
   message: string;
   requestedSchema: {
     properties: { [key: string]: PrimitiveSchemaDefinition };
@@ -1113,7 +1086,7 @@ A request from the server to elicit additional information from the user via the
   };
 }Type declarationmessage: string
 The message to present to the user.
- requestedSchema: {
+requestedSchema: {
   properties: { [key: string]: PrimitiveSchemaDefinition };
   required?: string[];
   type: "object";
@@ -1126,22 +1099,21 @@ Overrides Request.params
 ### `ElicitResult`
 
 interface ElicitResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   action: "accept" | "decline" | "cancel";
   content?: { [key: string]: string | number | boolean };
   [key: string]: unknown;
 }
 The client's response to an elicitation request.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
 actionaction: "accept" | "decline" | "cancel"
 The user action in response to the elicitation.
-  "accept": User submitted the form/confirmed the action "decline": User explicitly declined the action "cancel": User dismissed without making an explicit choice  `Optional`contentcontent?: { [key: string]: string | number | boolean }
+"accept": User submitted the form/confirmed the action "decline": User explicitly declined the action "cancel": User dismissed without making an explicit choice `Optional`contentcontent?: { [key: string]: string | number | boolean }
 The submitted form data, only present when action is "accept".
 Contains values matching the requested schema.
-
 
 ## `initialize`
 
@@ -1156,7 +1128,7 @@ interface InitializeRequest {
   };
 }
 This request is sent from the client to the server when it first connects, asking it to begin initialization.
- paramsparams: {
+paramsparams: {
   capabilities: ClientCapabilities;
   clientInfo: Implementation;
   protocolVersion: string;
@@ -1168,7 +1140,7 @@ Overrides Request.params
 ### `InitializeResult`
 
 interface InitializeResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   capabilities: ServerCapabilities;
   instructions?: string;
   protocolVersion: string;
@@ -1176,7 +1148,7 @@ interface InitializeResult {
   [key: string]: unknown;
 }
 After receiving an initialize request from the client, the server sends this response.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
@@ -1184,9 +1156,8 @@ Inherited from Result.\_meta
 Instructions describing how to use the server and its features.
 
 This can be used by clients to improve the LLM's understanding of available tools, resources, etc. It can be thought of like a "hint" to the model. For example, this information MAY be added to the system prompt.
- protocolVersionprotocolVersion: string
+protocolVersionprotocolVersion: string
 The version of the Model Context Protocol that the server wants to use. This may not match the version that the client requested. If the client cannot support this version, it MUST disconnect.
-
 
 ## `logging/setLevel`
 
@@ -1197,7 +1168,7 @@ interface SetLevelRequest {
   params: { level: LoggingLevel };
 }
 A request from the client to the server, to enable or adjust logging.
- paramsparams: { level: LoggingLevel }Type declarationlevel: LoggingLevel
+paramsparams: { level: LoggingLevel }Type declarationlevel: LoggingLevel
 The level of logging that the client wants to receive from the server. The server should send all logs at this level and higher (i.e., more severe) to the client as notifications/message.
 
 Overrides Request.params
@@ -1217,9 +1188,9 @@ The request SHOULD still be in-flight, but due to communication latency, it is a
 This notification indicates that the result will be unused, so any associated processing SHOULD cease.
 
 A client MUST NOT attempt to cancel its `initialize` request.
- paramsparams: { reason?: string; requestId: RequestId }Type declaration`Optional`reason?: string
+paramsparams: { reason?: string; requestId: RequestId }Type declaration`Optional`reason?: string
 An optional string describing the reason for the cancellation. This MAY be logged or presented to the user.
- requestId: RequestId
+requestId: RequestId
 The ID of the request to cancel.
 
 This MUST correspond to the ID of a request previously issued in the same direction.
@@ -1235,7 +1206,7 @@ interface InitializedNotification {
   params?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown };
 }
 This notification is sent from the client to the server after initialization has finished.
- `Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
+`Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Notification.params
@@ -1249,11 +1220,11 @@ interface LoggingMessageNotification {
   params: { data: unknown; level: LoggingLevel; logger?: string };
 }
 Notification of a log message passed from server to client. If no logging/setLevel request has been sent from the client, the server MAY decide which messages to send automatically.
- paramsparams: { data: unknown; level: LoggingLevel; logger?: string }Type declarationdata: unknown
+paramsparams: { data: unknown; level: LoggingLevel; logger?: string }Type declarationdata: unknown
 The data to be logged, such as a string message or an object. Any JSON serializable type is allowed here.
- level: LoggingLevel
+level: LoggingLevel
 The severity of this log message.
- `Optional`logger?: string
+`Optional`logger?: string
 An optional name of the logger issuing this message.
 
 Overrides Notification.params
@@ -1272,22 +1243,22 @@ interface ProgressNotification {
   };
 }
 An out-of-band notification used to inform the receiver of a progress update for a long-running request.
- paramsparams: {
+paramsparams: {
   message?: string;
   progress: number;
   progressToken: ProgressToken;
   total?: number;
 }Type declaration`Optional`message?: string
 An optional message describing the current progress.
- progress: number
+progress: number
 The progress thus far. This should increase every time progress is made, even if the total is unknown.
- TJS-type
+TJS-type
 number
- progressToken: ProgressToken
+progressToken: ProgressToken
 The progress token which was given in the initial request, used to associate this notification with the request that is proceeding.
- `Optional`total?: number
+`Optional`total?: number
 Total number of items to process (or total progress required), if known.
- TJS-type
+TJS-type
 number
 
 Overrides Notification.params
@@ -1297,11 +1268,11 @@ Overrides Notification.params
 ### `PromptListChangedNotification`
 
 interface PromptListChangedNotification {
-  method: "notifications/prompts/list\_changed";
+  method: "notifications/prompts/list_changed";
   params?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown };
 }
 An optional notification from the server to the client, informing it that the list of prompts it offers has changed. This may be issued by servers without any previous subscription from the client.
- `Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
+`Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Notification.params
@@ -1311,11 +1282,11 @@ Inherited from Notification.params
 ### `ResourceListChangedNotification`
 
 interface ResourceListChangedNotification {
-  method: "notifications/resources/list\_changed";
+  method: "notifications/resources/list_changed";
   params?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown };
 }
 An optional notification from the server to the client, informing it that the list of resources it can read from has changed. This may be issued by servers without any previous subscription from the client.
- `Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
+`Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Notification.params
@@ -1329,7 +1300,7 @@ interface ResourceUpdatedNotification {
   params: { uri: string };
 }
 A notification from the server to the client, informing it that a resource has changed and may need to be read again. This should only be sent if the client previously sent a resources/subscribe request.
- paramsparams: { uri: string }Type declarationuri: string
+paramsparams: { uri: string }Type declarationuri: string
 The URI of the resource that has been updated. This might be a sub-resource of the one that the client actually subscribed to.
 
 Overrides Notification.params
@@ -1339,13 +1310,13 @@ Overrides Notification.params
 ### `RootsListChangedNotification`
 
 interface RootsListChangedNotification {
-  method: "notifications/roots/list\_changed";
+  method: "notifications/roots/list_changed";
   params?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown };
 }
 A notification from the client to the server, informing it that the list of roots has changed.
 This notification should be sent whenever the client adds, removes, or modifies any root.
 The server should then request an updated list of roots using the ListRootsRequest.
- `Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
+`Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Notification.params
@@ -1355,11 +1326,11 @@ Inherited from Notification.params
 ### `ToolListChangedNotification`
 
 interface ToolListChangedNotification {
-  method: "notifications/tools/list\_changed";
+  method: "notifications/tools/list_changed";
   params?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown };
 }
 An optional notification from the server to the client, informing it that the list of tools it offers has changed. This may be issued by servers without any previous subscription from the client.
- `Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
+`Optional`paramsparams?: { \_meta?: { [key: string]: unknown }; [key: string]: unknown }Type declaration[key: string]: unknown`Optional`\_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Notification.params
@@ -1371,17 +1342,17 @@ Inherited from Notification.params
 interface PingRequest {
   method: "ping";
   params?: {
-    \_meta?: { progressToken?: ProgressToken; [key: string]: unknown };
+    _meta?: { progressToken?: ProgressToken; [key: string]: unknown };
     [key: string]: unknown;
   };
 }
 A ping, issued by either the server or the client, to check that the other party is still alive. The receiver must promptly respond, or else may be disconnected.
- `Optional`paramsparams?: {
-  \_meta?: { progressToken?: ProgressToken; [key: string]: unknown };
+`Optional`paramsparams?: {
+  _meta?: { progressToken?: ProgressToken; [key: string]: unknown };
   [key: string]: unknown;
 }Type declaration[key: string]: unknown`Optional`\_meta?: { progressToken?: ProgressToken; [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`progressToken?: ProgressToken
+`Optional`progressToken?: ProgressToken
 If specified, the caller is requesting out-of-band progress notifications for this request (as represented by notifications/progress). The value of this parameter is an opaque token that will be attached to any subsequent notifications. The receiver is not obligated to provide these notifications.
 
 Inherited from Request.params
@@ -1395,9 +1366,9 @@ interface GetPromptRequest {
   params: { arguments?: { [key: string]: string }; name: string };
 }
 Used by the client to get a prompt provided by the server.
- paramsparams: { arguments?: { [key: string]: string }; name: string }Type declaration`Optional`arguments?: { [key: string]: string }
+paramsparams: { arguments?: { [key: string]: string }; name: string }Type declaration`Optional`arguments?: { [key: string]: string }
 Arguments to use for templating the prompt.
- name: string
+name: string
 The name of the prompt or prompt template.
 
 Overrides Request.params
@@ -1405,19 +1376,18 @@ Overrides Request.params
 ### `GetPromptResult`
 
 interface GetPromptResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   description?: string;
   messages: PromptMessage[];
   [key: string]: unknown;
 }
 The server's response to a prompts/get request from the client.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
 `Optional`descriptiondescription?: string
 An optional description for the prompt.
-
 
 ## `prompts/list`
 
@@ -1428,7 +1398,7 @@ interface ListPromptsRequest {
   params?: { cursor?: string };
 }
 Sent from the client to request a list of prompts and prompt templates the server has.
- `Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
+`Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
 An opaque token representing the current pagination position.
 If provided, the server should return results starting after this cursor.
 
@@ -1437,13 +1407,13 @@ Inherited from PaginatedRequest.params
 ### `ListPromptsResult`
 
 interface ListPromptsResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   nextCursor?: string;
   prompts: Prompt[];
   [key: string]: unknown;
 }
 The server's response to a prompts/list request from the client.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from PaginatedResult.\_meta
@@ -1462,7 +1432,7 @@ interface ListResourcesRequest {
   params?: { cursor?: string };
 }
 Sent from the client to request a list of resources the server has.
- `Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
+`Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
 An opaque token representing the current pagination position.
 If provided, the server should return results starting after this cursor.
 
@@ -1471,13 +1441,13 @@ Inherited from PaginatedRequest.params
 ### `ListResourcesResult`
 
 interface ListResourcesResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   nextCursor?: string;
   resources: Resource[];
   [key: string]: unknown;
 }
 The server's response to a resources/list request from the client.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from PaginatedResult.\_meta
@@ -1496,7 +1466,7 @@ interface ReadResourceRequest {
   params: { uri: string };
 }
 Sent from the client to the server, to read a specific resource URI.
- paramsparams: { uri: string }Type declarationuri: string
+paramsparams: { uri: string }Type declarationuri: string
 The URI of the resource to read. The URI can use any protocol; it is up to the server how to interpret it.
 
 Overrides Request.params
@@ -1504,12 +1474,12 @@ Overrides Request.params
 ### `ReadResourceResult`
 
 interface ReadResourceResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   contents: (TextResourceContents | BlobResourceContents)[];
   [key: string]: unknown;
 }
 The server's response to a resources/read request from the client.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
@@ -1523,7 +1493,7 @@ interface SubscribeRequest {
   params: { uri: string };
 }
 Sent from the client to request resources/updated notifications from the server whenever a particular resource changes.
- paramsparams: { uri: string }Type declarationuri: string
+paramsparams: { uri: string }Type declarationuri: string
 The URI of the resource to subscribe to. The URI can use any protocol; it is up to the server how to interpret it.
 
 Overrides Request.params
@@ -1537,7 +1507,7 @@ interface ListResourceTemplatesRequest {
   params?: { cursor?: string };
 }
 Sent from the client to request a list of resource templates the server has.
- `Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
+`Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
 An opaque token representing the current pagination position.
 If provided, the server should return results starting after this cursor.
 
@@ -1546,13 +1516,13 @@ Inherited from PaginatedRequest.params
 ### `ListResourceTemplatesResult`
 
 interface ListResourceTemplatesResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   nextCursor?: string;
   resourceTemplates: ResourceTemplate[];
   [key: string]: unknown;
 }
 The server's response to a resources/templates/list request from the client.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from PaginatedResult.\_meta
@@ -1571,7 +1541,7 @@ interface UnsubscribeRequest {
   params: { uri: string };
 }
 Sent from the client to request cancellation of resources/updated notifications from the server. This should follow a previous resources/subscribe request.
- paramsparams: { uri: string }Type declarationuri: string
+paramsparams: { uri: string }Type declarationuri: string
 The URI of the resource to unsubscribe from.
 
 Overrides Request.params
@@ -1583,7 +1553,7 @@ Overrides Request.params
 interface ListRootsRequest {
   method: "roots/list";
   params?: {
-    \_meta?: { progressToken?: ProgressToken; [key: string]: unknown };
+    _meta?: { progressToken?: ProgressToken; [key: string]: unknown };
     [key: string]: unknown;
   };
 }
@@ -1594,12 +1564,12 @@ on.
 
 This request is typically used when the server needs to understand the file system
 structure or access specific locations that the client has permission to read from.
- `Optional`paramsparams?: {
-  \_meta?: { progressToken?: ProgressToken; [key: string]: unknown };
+`Optional`paramsparams?: {
+  _meta?: { progressToken?: ProgressToken; [key: string]: unknown };
   [key: string]: unknown;
 }Type declaration[key: string]: unknown`Optional`\_meta?: { progressToken?: ProgressToken; [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
- `Optional`progressToken?: ProgressToken
+`Optional`progressToken?: ProgressToken
 If specified, the caller is requesting out-of-band progress notifications for this request (as represented by notifications/progress). The value of this parameter is an opaque token that will be attached to any subsequent notifications. The receiver is not obligated to provide these notifications.
 
 Inherited from Request.params
@@ -1607,14 +1577,14 @@ Inherited from Request.params
 ### `ListRootsResult`
 
 interface ListRootsResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   roots: Root[];
   [key: string]: unknown;
 }
 The client's response to a roots/list request from the server.
 This result contains an array of Root objects, each representing a root directory
 or file that the server can operate on.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
@@ -1637,7 +1607,7 @@ interface CreateMessageRequest {
   };
 }
 A request from the server to sample an LLM via the client. The client has full discretion over which model to select. The client should also inform the user before beginning sampling, to allow them to inspect the request (human in the loop) and decide whether to approve it.
- paramsparams: {
+paramsparams: {
   includeContext?: "none" | "thisServer" | "allServers";
   maxTokens: number;
   messages: SamplingMessage[];
@@ -1648,17 +1618,17 @@ A request from the server to sample an LLM via the client. The client has full d
   temperature?: number;
 }Type declaration`Optional`includeContext?: "none" | "thisServer" | "allServers"
 A request to include context from one or more MCP servers (including the caller), to be attached to the prompt. The client MAY ignore this request.
- maxTokens: number
+maxTokens: number
 The requested maximum number of tokens to sample (to prevent runaway completions).
 
 The client MAY choose to sample fewer tokens than the requested maximum.
- messages: SamplingMessage[]`Optional`metadata?: object
+messages: SamplingMessage[]`Optional`metadata?: object
 Optional metadata to pass through to the LLM provider. The format of this metadata is provider-specific.
- `Optional`modelPreferences?: ModelPreferences
+`Optional`modelPreferences?: ModelPreferences
 The server's preferences for which model to select. The client MAY ignore these preferences.
- `Optional`stopSequences?: string[]`Optional`systemPrompt?: string
+`Optional`stopSequences?: string[]`Optional`systemPrompt?: string
 An optional system prompt the server wants to use for sampling. The client MAY modify or omit this prompt.
- `Optional`temperature?: numberTJS-type
+`Optional`temperature?: numberTJS-type
 number
 
 Overrides Request.params
@@ -1666,23 +1636,22 @@ Overrides Request.params
 ### `CreateMessageResult`
 
 interface CreateMessageResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   content: TextContent | ImageContent | AudioContent;
   model: string;
   role: Role;
   stopReason?: string;
   [key: string]: unknown;
 }
-The client's response to a sampling/create\_message request from the server. The client should inform the user before returning the sampled message, to allow them to inspect the response (human in the loop) and decide whether to allow the server to see it.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+The client's response to a sampling/create_message request from the server. The client should inform the user before returning the sampled message, to allow them to inspect the response (human in the loop) and decide whether to allow the server to see it.
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
 modelmodel: string
 The name of the model that generated the message.
- `Optional`stopReasonstopReason?: string
+`Optional`stopReasonstopReason?: string
 The reason why sampling stopped, if known.
-
 
 ## `tools/call`
 
@@ -1694,24 +1663,23 @@ interface CallToolRequest {
 }
 Used by the client to invoke a tool provided by the server.
 
-
 ### `CallToolResult`
 
 interface CallToolResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   content: ContentBlock[];
   isError?: boolean;
   structuredContent?: { [key: string]: unknown };
   [key: string]: unknown;
 }
 The server's response to a tool call.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from Result.\_meta
 contentcontent: ContentBlock[]
 A list of content objects that represent the unstructured result of the tool call.
- `Optional`isErrorisError?: boolean
+`Optional`isErrorisError?: boolean
 Whether the tool call ended in an error.
 
 If not set, this is assumed to be false (the call was successful).
@@ -1724,9 +1692,8 @@ and self-correct.
 However, any errors in finding the tool, an error indicating that the
 server does not support tool calls, or any other exceptional conditions,
 should be reported as an MCP error response.
- `Optional`structuredContentstructuredContent?: { [key: string]: unknown }
+`Optional`structuredContentstructuredContent?: { [key: string]: unknown }
 An optional JSON object that represents the structured result of the tool call.
-
 
 ## `tools/list`
 
@@ -1737,7 +1704,7 @@ interface ListToolsRequest {
   params?: { cursor?: string };
 }
 Sent from the client to request a list of tools the server has.
- `Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
+`Optional`paramsparams?: { cursor?: string }Type declaration`Optional`cursor?: string
 An opaque token representing the current pagination position.
 If provided, the server should return results starting after this cursor.
 
@@ -1746,13 +1713,13 @@ Inherited from PaginatedRequest.params
 ### `ListToolsResult`
 
 interface ListToolsResult {
-  \_meta?: { [key: string]: unknown };
+  _meta?: { [key: string]: unknown };
   nextCursor?: string;
   tools: Tool[];
   [key: string]: unknown;
 }
 The server's response to a tools/list request from the client.
- `Optional`\_meta\_meta?: { [key: string]: unknown }
+`Optional`\_meta_meta?: { [key: string]: unknown }
 See General fields: `\_meta` for notes on `\_meta` usage.
 
 Inherited from PaginatedResult.\_meta
@@ -1787,21 +1754,21 @@ However, implementations are free to expose tools through any interface pattern 
 suits their needs—the protocol itself does not mandate any specific user
 interaction model.
 
-  For trust & safety and security, there **SHOULD** always
-  be a human in the loop with the ability to deny tool invocations.
+For trust & safety and security, there **SHOULD** always
+be a human in the loop with the ability to deny tool invocations.
 
-  Applications **SHOULD**:
+Applications **SHOULD**:
 
-  * Provide UI that makes clear which tools are being exposed to the AI model
-  * Insert clear visual indicators when tools are invoked
-  * Present confirmation prompts to the user for operations, to ensure a human is in the
-    loop
+- Provide UI that makes clear which tools are being exposed to the AI model
+- Insert clear visual indicators when tools are invoked
+- Present confirmation prompts to the user for operations, to ensure a human is in the
+  loop
 
 ## Capabilities
 
 Servers that support tools **MUST** declare the `tools` capability:
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "tools": {
@@ -1823,7 +1790,7 @@ To discover available tools, clients send a `tools/list` request. This operation
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -1836,7 +1803,7 @@ To discover available tools, clients send a `tools/list` request. This operation
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -1869,7 +1836,7 @@ To invoke a tool, clients send a `tools/call` request:
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -1885,7 +1852,7 @@ To invoke a tool, clients send a `tools/call` request:
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -1906,7 +1873,7 @@ To invoke a tool, clients send a `tools/call` request:
 When the list of available tools changes, servers that declared the `listChanged`
 capability **SHOULD** send a notification:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/tools/list_changed"
@@ -1915,7 +1882,7 @@ capability **SHOULD** send a notification:
 
 ## Message Flow
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant LLM
     participant Client
@@ -1945,12 +1912,12 @@ sequenceDiagram
 
 A tool definition includes:
 
-* `name`: Unique identifier for the tool
-* `title`: Optional human-readable name of the tool for display purposes.
-* `description`: Human-readable description of functionality
-* `inputSchema`: JSON Schema defining expected parameters
-* `outputSchema`: Optional JSON Schema defining expected output structure
-* `annotations`: optional properties describing tool behavior
+- `name`: Unique identifier for the tool
+- `title`: Optional human-readable name of the tool for display purposes.
+- `description`: Human-readable description of functionality
+- `inputSchema`: JSON Schema defining expected parameters
+- `outputSchema`: Optional JSON Schema defining expected output structure
+- `annotations`: optional properties describing tool behavior
 
   For trust & safety and security, clients **MUST** consider
   tool annotations to be untrusted unless they come from trusted servers.
@@ -1961,15 +1928,15 @@ Tool results may contain [**structured**](#structured-content) or **unstructured
 
 **Unstructured** content is returned in the `content` field of a result, and can contain multiple content items of different types:
 
-  All content types (text, image, audio, resource links, and embedded resources)
-  support optional
-  [annotations](/specification/2025-06-18/server/resources#annotations) that
-  provide metadata about audience, priority, and modification times. This is the
-  same annotation format used by resources and prompts.
+All content types (text, image, audio, resource links, and embedded resources)
+support optional
+[annotations](/specification/2025-06-18/server/resources#annotations) that
+provide metadata about audience, priority, and modification times. This is the
+same annotation format used by resources and prompts.
 
 #### Text Content
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "text",
   "text": "Tool result text"
@@ -1978,7 +1945,7 @@ Tool results may contain [**structured**](#structured-content) or **unstructured
 
 #### Image Content
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "image",
   "data": "base64-encoded-data",
@@ -1995,7 +1962,7 @@ This example demonstrates the use of an optional Annotation.
 
 #### Audio Content
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "audio",
   "data": "base64-encoded-audio-data",
@@ -2008,7 +1975,7 @@ This example demonstrates the use of an optional Annotation.
 A tool **MAY** return links to [Resources](/specification/2025-06-18/server/resources), to provide additional context
 or data. In this case, the tool will return a URI that can be subscribed to or fetched by the client:
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "resource_link",
   "uri": "file:///project/src/main.rs",
@@ -2024,15 +1991,15 @@ or data. In this case, the tool will return a URI that can be subscribed to or f
 
 Resource links support the same [Resource annotations](/specification/2025-06-18/server/resources#annotations) as regular resources to help clients understand how to use them.
 
-  Resource links returned by tools are not guaranteed to appear in the results
-  of a `resources/list` request.
+Resource links returned by tools are not guaranteed to appear in the results
+of a `resources/list` request.
 
 #### Embedded Resources
 
 [Resources](/specification/2025-06-18/server/resources) **MAY** be embedded to provide additional context
 or data using a suitable [URI scheme](./resources#common-uri-schemes). Servers that use embedded resources **SHOULD** implement the `resources` capability:
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "resource",
   "resource": {
@@ -2062,12 +2029,12 @@ For backwards compatibility, a tool that returns structured content SHOULD also 
 Tools may also provide an output schema for validation of structured results.
 If an output schema is provided:
 
-* Servers **MUST** provide structured results that conform to this schema.
-* Clients **SHOULD** validate structured results against this schema.
+- Servers **MUST** provide structured results that conform to this schema.
+- Clients **SHOULD** validate structured results against this schema.
 
 Example tool with output schema:
 
-```json  theme={null}
+```json theme={null}
 {
   "name": "get_weather_data",
   "title": "Weather Data Retriever",
@@ -2105,7 +2072,7 @@ Example tool with output schema:
 
 Example valid response for this tool:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 5,
@@ -2127,28 +2094,28 @@ Example valid response for this tool:
 
 Providing an output schema helps clients and LLMs understand and properly handle structured tool outputs by:
 
-* Enabling strict schema validation of responses
-* Providing type information for better integration with programming languages
-* Guiding clients and LLMs to properly parse and utilize the returned data
-* Supporting better documentation and developer experience
+- Enabling strict schema validation of responses
+- Providing type information for better integration with programming languages
+- Guiding clients and LLMs to properly parse and utilize the returned data
+- Supporting better documentation and developer experience
 
 ## Error Handling
 
 Tools use two error reporting mechanisms:
 
 1. **Protocol Errors**: Standard JSON-RPC errors for issues like:
-   * Unknown tools
-   * Invalid arguments
-   * Server errors
+   - Unknown tools
+   - Invalid arguments
+   - Server errors
 
 2. **Tool Execution Errors**: Reported in tool results with `isError: true`:
-   * API failures
-   * Invalid input data
-   * Business logic errors
+   - API failures
+   - Invalid input data
+   - Business logic errors
 
 Example protocol error:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 3,
@@ -2161,7 +2128,7 @@ Example protocol error:
 
 Example tool execution error:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 4,
@@ -2180,18 +2147,18 @@ Example tool execution error:
 ## Security Considerations
 
 1. Servers **MUST**:
-   * Validate all tool inputs
-   * Implement proper access controls
-   * Rate limit tool invocations
-   * Sanitize tool outputs
+   - Validate all tool inputs
+   - Implement proper access controls
+   - Rate limit tool invocations
+   - Sanitize tool outputs
 
 2. Clients **SHOULD**:
-   * Prompt for user confirmation on sensitive operations
-   * Show tool inputs to the user before calling the server, to avoid malicious or
+   - Prompt for user confirmation on sensitive operations
+   - Show tool inputs to the user before calling the server, to avoid malicious or
      accidental data exfiltration
-   * Validate tool results before passing to LLM
-   * Implement timeouts for tool calls
-   * Log tool usage for audit purposes
+   - Validate tool results before passing to LLM
+   - Implement timeouts for tool calls
+   - Log tool usage for audit purposes
 
 ---
 
@@ -2216,9 +2183,9 @@ determining how to incorporate context based on their needs.
 
 For example, applications could:
 
-* Expose resources through UI elements for explicit selection, in a tree or list view
-* Allow the user to search through and filter available resources
-* Implement automatic context inclusion, based on heuristics or the AI model's selection
+- Expose resources through UI elements for explicit selection, in a tree or list view
+- Allow the user to search through and filter available resources
+- Implement automatic context inclusion, based on heuristics or the AI model's selection
 
 However, implementations are free to expose resources through any interface pattern that
 suits their needs—the protocol itself does not mandate any specific user
@@ -2228,7 +2195,7 @@ interaction model.
 
 Servers that support resources **MUST** declare the `resources` capability:
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "resources": {
@@ -2241,15 +2208,15 @@ Servers that support resources **MUST** declare the `resources` capability:
 
 The capability supports two optional features:
 
-* `subscribe`: whether the client can subscribe to be notified of changes to individual
+- `subscribe`: whether the client can subscribe to be notified of changes to individual
   resources.
-* `listChanged`: whether the server will emit notifications when the list of available
+- `listChanged`: whether the server will emit notifications when the list of available
   resources changes.
 
 Both `subscribe` and `listChanged` are optional—servers can support neither,
 either, or both:
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "resources": {} // Neither feature supported
@@ -2257,7 +2224,7 @@ either, or both:
 }
 ```
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "resources": {
@@ -2267,7 +2234,7 @@ either, or both:
 }
 ```
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "resources": {
@@ -2286,7 +2253,7 @@ supports [pagination](/specification/2025-06-18/server/utilities/pagination).
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -2299,7 +2266,7 @@ supports [pagination](/specification/2025-06-18/server/utilities/pagination).
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -2324,7 +2291,7 @@ To retrieve resource contents, clients send a `resources/read` request:
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -2337,7 +2304,7 @@ To retrieve resource contents, clients send a `resources/read` request:
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -2363,7 +2330,7 @@ auto-completed through [the completion API](/specification/2025-06-18/server/uti
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 3,
@@ -2373,7 +2340,7 @@ auto-completed through [the completion API](/specification/2025-06-18/server/uti
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 3,
@@ -2396,7 +2363,7 @@ auto-completed through [the completion API](/specification/2025-06-18/server/uti
 When the list of available resources changes, servers that declared the `listChanged`
 capability **SHOULD** send a notification:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/resources/list_changed"
@@ -2410,7 +2377,7 @@ to specific resources and receive notifications when they change:
 
 **Subscribe Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 4,
@@ -2423,7 +2390,7 @@ to specific resources and receive notifications when they change:
 
 **Update Notification:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/resources/updated",
@@ -2436,7 +2403,7 @@ to specific resources and receive notifications when they change:
 
 ## Message Flow
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Client
     participant Server
@@ -2465,12 +2432,12 @@ sequenceDiagram
 
 A resource definition includes:
 
-* `uri`: Unique identifier for the resource
-* `name`: The name of the resource.
-* `title`: Optional human-readable name of the resource for display purposes.
-* `description`: Optional description
-* `mimeType`: Optional MIME type
-* `size`: Optional size in bytes
+- `uri`: Unique identifier for the resource
+- `name`: The name of the resource.
+- `title`: Optional human-readable name of the resource for display purposes.
+- `description`: Optional description
+- `mimeType`: Optional MIME type
+- `size`: Optional size in bytes
 
 ### Resource Contents
 
@@ -2478,7 +2445,7 @@ Resources can contain either text or binary data:
 
 #### Text Content
 
-```json  theme={null}
+```json theme={null}
 {
   "uri": "file:///example.txt",
   "name": "example.txt",
@@ -2490,7 +2457,7 @@ Resources can contain either text or binary data:
 
 #### Binary Content
 
-```json  theme={null}
+```json theme={null}
 {
   "uri": "file:///example.png",
   "name": "example.png",
@@ -2504,13 +2471,13 @@ Resources can contain either text or binary data:
 
 Resources, resource templates and content blocks support optional annotations that provide hints to clients about how to use or display the resource:
 
-* **`audience`**: An array indicating the intended audience(s) for this resource. Valid values are `"user"` and `"assistant"`. For example, `["user", "assistant"]` indicates content useful for both.
-* **`priority`**: A number from 0.0 to 1.0 indicating the importance of this resource. A value of 1 means "most important" (effectively required), while 0 means "least important" (entirely optional).
-* **`lastModified`**: An ISO 8601 formatted timestamp indicating when the resource was last modified (e.g., `"2025-01-12T15:00:58Z"`).
+- **`audience`**: An array indicating the intended audience(s) for this resource. Valid values are `"user"` and `"assistant"`. For example, `["user", "assistant"]` indicates content useful for both.
+- **`priority`**: A number from 0.0 to 1.0 indicating the importance of this resource. A value of 1 means "most important" (effectively required), while 0 means "least important" (entirely optional).
+- **`lastModified`**: An ISO 8601 formatted timestamp indicating when the resource was last modified (e.g., `"2025-01-12T15:00:58Z"`).
 
 Example resource with annotations:
 
-```json  theme={null}
+```json theme={null}
 {
   "uri": "file:///project/README.md",
   "name": "README.md",
@@ -2526,9 +2493,9 @@ Example resource with annotations:
 
 Clients can use these annotations to:
 
-* Filter resources based on their intended audience
-* Prioritize which resources to include in context
-* Display modification times or sort by recency
+- Filter resources based on their intended audience
+- Prioritize which resources to include in context
+- Display modification times or sort by recency
 
 ## Common URI Schemes
 
@@ -2570,12 +2537,12 @@ taking the above guidance in to account.
 
 Servers **SHOULD** return standard JSON-RPC errors for common failure cases:
 
-* Resource not found: `-32002`
-* Internal errors: `-32603`
+- Resource not found: `-32002`
+- Internal errors: `-32603`
 
 Example error:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 5,
@@ -2630,7 +2597,7 @@ model.
 Servers that support prompts **MUST** declare the `prompts` capability during
 [initialization](/specification/2025-06-18/basic/lifecycle#initialization):
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "prompts": {
@@ -2652,7 +2619,7 @@ supports [pagination](/specification/2025-06-18/server/utilities/pagination).
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -2665,7 +2632,7 @@ supports [pagination](/specification/2025-06-18/server/utilities/pagination).
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -2696,7 +2663,7 @@ auto-completed through [the completion API](/specification/2025-06-18/server/uti
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -2712,7 +2679,7 @@ auto-completed through [the completion API](/specification/2025-06-18/server/uti
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -2736,7 +2703,7 @@ auto-completed through [the completion API](/specification/2025-06-18/server/uti
 When the list of available prompts changes, servers that declared the `listChanged`
 capability **SHOULD** send a notification:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/prompts/list_changed"
@@ -2745,7 +2712,7 @@ capability **SHOULD** send a notification:
 
 ## Message Flow
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Client
     participant Server
@@ -2772,17 +2739,17 @@ sequenceDiagram
 
 A prompt definition includes:
 
-* `name`: Unique identifier for the prompt
-* `title`: Optional human-readable name of the prompt for display purposes.
-* `description`: Optional human-readable description
-* `arguments`: Optional list of arguments for customization
+- `name`: Unique identifier for the prompt
+- `title`: Optional human-readable name of the prompt for display purposes.
+- `description`: Optional human-readable description
+- `arguments`: Optional list of arguments for customization
 
 ### PromptMessage
 
 Messages in a prompt can contain:
 
-* `role`: Either "user" or "assistant" to indicate the speaker
-* `content`: One of the following content types:
+- `role`: Either "user" or "assistant" to indicate the speaker
+- `content`: One of the following content types:
 
   All content types in prompt messages support optional
   [annotations](/specification/2025-06-18/server/resources#annotations) for
@@ -2792,7 +2759,7 @@ Messages in a prompt can contain:
 
 Text content represents plain text messages:
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "text",
   "text": "The text content of the message"
@@ -2805,7 +2772,7 @@ This is the most common content type used for natural language interactions.
 
 Image content allows including visual information in messages:
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "image",
   "data": "base64-encoded-image-data",
@@ -2820,7 +2787,7 @@ multi-modal interactions where visual context is important.
 
 Audio content allows including audio information in messages:
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "audio",
   "data": "base64-encoded-audio-data",
@@ -2835,7 +2802,7 @@ multi-modal interactions where audio context is important.
 
 Embedded resources allow referencing server-side resources directly in messages:
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "resource",
   "resource": {
@@ -2850,9 +2817,9 @@ Embedded resources allow referencing server-side resources directly in messages:
 
 Resources can contain either text or binary (blob) data and **MUST** include:
 
-* A valid resource URI
-* The appropriate MIME type
-* Either text content or base64-encoded blob data
+- A valid resource URI
+- The appropriate MIME type
+- Either text content or base64-encoded blob data
 
 Embedded resources enable prompts to seamlessly incorporate server-managed content like
 documentation, code samples, or other reference materials directly into the conversation
@@ -2862,9 +2829,9 @@ flow.
 
 Servers **SHOULD** return standard JSON-RPC errors for common failure cases:
 
-* Invalid prompt name: `-32602` (Invalid params)
-* Missing required arguments: `-32602` (Invalid params)
-* Internal errors: `-32603` (Internal error)
+- Invalid prompt name: `-32602` (Invalid params)
+- Missing required arguments: `-32602` (Invalid params)
+- Internal errors: `-32603` (Internal error)
 
 ## Implementation Considerations
 
@@ -2891,10 +2858,10 @@ Servers provide the fundamental building blocks for adding context to language m
 MCP. These primitives enable rich interactions between clients, servers, and language
 models:
 
-* **Prompts**: Pre-defined templates or instructions that guide language model
+- **Prompts**: Pre-defined templates or instructions that guide language model
   interactions
-* **Resources**: Structured data or content that provides additional context to the model
-* **Tools**: Executable functions that allow models to perform actions or retrieve
+- **Resources**: Structured data or content that provides additional context to the model
+- **Tools**: Executable functions that allow models to perform actions or retrieve
   information
 
 Each primitive can be summarized in the following control hierarchy:
@@ -2917,7 +2884,7 @@ Explore these key primitives in more detail below:
 
 **Protocol Revision**: 2025-06-18
 
-  Elicitation is newly introduced in this version of the MCP specification and its design may evolve in future protocol versions.
+Elicitation is newly introduced in this version of the MCP specification and its design may evolve in future protocol versions.
 
 The Model Context Protocol (MCP) provides a standardized way for servers to request additional
 information from users through the client during interactions. This flow allows clients to
@@ -2928,28 +2895,28 @@ Servers request structured data from users with JSON schemas to validate respons
 ## User Interaction Model
 
 Elicitation in MCP allows servers to implement interactive workflows by enabling user input
-requests to occur *nested* inside other MCP server features.
+requests to occur _nested_ inside other MCP server features.
 
 Implementations are free to expose elicitation through any interface pattern that suits
 their needs—the protocol itself does not mandate any specific user interaction
 model.
 
-  For trust & safety and security:
+For trust & safety and security:
 
-  * Servers **MUST NOT** use elicitation to request sensitive information.
+- Servers **MUST NOT** use elicitation to request sensitive information.
 
-  Applications **SHOULD**:
+Applications **SHOULD**:
 
-  * Provide UI that makes it clear which server is requesting information
-  * Allow users to review and modify their responses before sending
-  * Respect user privacy and provide clear decline and cancel options
+- Provide UI that makes it clear which server is requesting information
+- Allow users to review and modify their responses before sending
+- Respect user privacy and provide clear decline and cancel options
 
 ## Capabilities
 
 Clients that support elicitation **MUST** declare the `elicitation` capability during
 [initialization](/specification/2025-06-18/basic/lifecycle#initialization):
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "elicitation": {}
@@ -2967,7 +2934,7 @@ To request information from a user, servers send an `elicitation/create` request
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -2989,7 +2956,7 @@ To request information from a user, servers send an `elicitation/create` request
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3006,7 +2973,7 @@ To request information from a user, servers send an `elicitation/create` request
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -3039,7 +3006,7 @@ To request information from a user, servers send an `elicitation/create` request
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -3056,7 +3023,7 @@ To request information from a user, servers send an `elicitation/create` request
 
 **Reject Response Example:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -3068,7 +3035,7 @@ To request information from a user, servers send an `elicitation/create` request
 
 **Cancel Response Example:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 2,
@@ -3080,7 +3047,7 @@ To request information from a user, servers send an `elicitation/create` request
 
 ## Message Flow
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant User
     participant Client
@@ -3103,7 +3070,7 @@ sequenceDiagram
 
 The `requestedSchema` field allows servers to define the structure of the expected response using a restricted subset of JSON Schema. To simplify implementation for clients, elicitation schemas are limited to flat objects with primitive properties only:
 
-```json  theme={null}
+```json theme={null}
 "requestedSchema": {
   "type": "object",
   "properties": {
@@ -3128,7 +3095,7 @@ The schema is restricted to these primitive types:
 
 1. **String Schema**
 
-   ```json  theme={null}
+   ```json theme={null}
    {
      "type": "string",
      "title": "Display Name",
@@ -3143,7 +3110,7 @@ The schema is restricted to these primitive types:
 
 2. **Number Schema**
 
-   ```json  theme={null}
+   ```json theme={null}
    {
      "type": "number", // or "integer"
      "title": "Display Name",
@@ -3155,7 +3122,7 @@ The schema is restricted to these primitive types:
 
 3. **Boolean Schema**
 
-   ```json  theme={null}
+   ```json theme={null}
    {
      "type": "boolean",
      "title": "Display Name",
@@ -3165,7 +3132,7 @@ The schema is restricted to these primitive types:
    ```
 
 4. **Enum Schema**
-   ```json  theme={null}
+   ```json theme={null}
    {
      "type": "string",
      "title": "Display Name",
@@ -3187,7 +3154,7 @@ Note that complex nested structures, arrays of objects, and other advanced JSON 
 
 Elicitation responses use a three-action model to clearly distinguish between different user actions:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3204,22 +3171,22 @@ Elicitation responses use a three-action model to clearly distinguish between di
 The three response actions are:
 
 1. **Accept** (`action: "accept"`): User explicitly approved and submitted with data
-   * The `content` field contains the submitted data matching the requested schema
-   * Example: User clicked "Submit", "OK", "Confirm", etc.
+   - The `content` field contains the submitted data matching the requested schema
+   - Example: User clicked "Submit", "OK", "Confirm", etc.
 
 2. **Decline** (`action: "decline"`): User explicitly declined the request
-   * The `content` field is typically omitted
-   * Example: User clicked "Reject", "Decline", "No", etc.
+   - The `content` field is typically omitted
+   - Example: User clicked "Reject", "Decline", "No", etc.
 
 3. **Cancel** (`action: "cancel"`): User dismissed without making an explicit choice
-   * The `content` field is typically omitted
-   * Example: User closed the dialog, clicked outside, pressed Escape, etc.
+   - The `content` field is typically omitted
+   - Example: User closed the dialog, clicked outside, pressed Escape, etc.
 
 Servers should handle each state appropriately:
 
-* **Accept**: Process the submitted data
-* **Decline**: Handle explicit decline (e.g., offer alternatives)
-* **Cancel**: Handle dismissal (e.g., prompt again later)
+- **Accept**: Process the submitted data
+- **Decline**: Handle explicit decline (e.g., offer alternatives)
+- **Cancel**: Handle dismissal (e.g., prompt again later)
 
 ## Security Considerations
 
@@ -3251,27 +3218,27 @@ context from MCP servers in their prompts.
 ## User Interaction Model
 
 Sampling in MCP allows servers to implement agentic behaviors, by enabling LLM calls to
-occur *nested* inside other MCP server features.
+occur _nested_ inside other MCP server features.
 
 Implementations are free to expose sampling through any interface pattern that suits
 their needs—the protocol itself does not mandate any specific user interaction
 model.
 
-  For trust & safety and security, there **SHOULD** always
-  be a human in the loop with the ability to deny sampling requests.
+For trust & safety and security, there **SHOULD** always
+be a human in the loop with the ability to deny sampling requests.
 
-  Applications **SHOULD**:
+Applications **SHOULD**:
 
-  * Provide UI that makes it easy and intuitive to review sampling requests
-  * Allow users to view and edit prompts before sending
-  * Present generated responses for review before delivery
+- Provide UI that makes it easy and intuitive to review sampling requests
+- Allow users to view and edit prompts before sending
+- Present generated responses for review before delivery
 
 ## Capabilities
 
 Clients that support sampling **MUST** declare the `sampling` capability during
 [initialization](/specification/2025-06-18/basic/lifecycle#initialization):
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "sampling": {}
@@ -3287,7 +3254,7 @@ To request a language model generation, servers send a `sampling/createMessage` 
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3319,7 +3286,7 @@ To request a language model generation, servers send a `sampling/createMessage` 
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3337,7 +3304,7 @@ To request a language model generation, servers send a `sampling/createMessage` 
 
 ## Message Flow
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Server
     participant Client
@@ -3371,7 +3338,7 @@ Sampling messages can contain:
 
 #### Text Content
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "text",
   "text": "The message content"
@@ -3380,7 +3347,7 @@ Sampling messages can contain:
 
 #### Image Content
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "image",
   "data": "base64-encoded-image-data",
@@ -3390,7 +3357,7 @@ Sampling messages can contain:
 
 #### Audio Content
 
-```json  theme={null}
+```json theme={null}
 {
   "type": "audio",
   "data": "base64-encoded-audio-data",
@@ -3412,9 +3379,9 @@ priorities with optional model hints:
 
 Servers express their needs through three normalized priority values (0-1):
 
-* `costPriority`: How important is minimizing costs? Higher values prefer cheaper models.
-* `speedPriority`: How important is low latency? Higher values prefer faster models.
-* `intelligencePriority`: How important are advanced capabilities? Higher values prefer
+- `costPriority`: How important is minimizing costs? Higher values prefer cheaper models.
+- `speedPriority`: How important is low latency? Higher values prefer faster models.
+- `intelligencePriority`: How important are advanced capabilities? Higher values prefer
   more capable models.
 
 #### Model Hints
@@ -3422,14 +3389,14 @@ Servers express their needs through three normalized priority values (0-1):
 While priorities help select models based on characteristics, `hints` allow servers to
 suggest specific models or model families:
 
-* Hints are treated as substrings that can match model names flexibly
-* Multiple hints are evaluated in order of preference
-* Clients **MAY** map hints to equivalent models from different providers
-* Hints are advisory—clients make final model selection
+- Hints are treated as substrings that can match model names flexibly
+- Multiple hints are evaluated in order of preference
+- Clients **MAY** map hints to equivalent models from different providers
+- Hints are advisory—clients make final model selection
 
 For example:
 
-```json  theme={null}
+```json theme={null}
 {
   "hints": [
     { "name": "claude-3-sonnet" }, // Prefer Sonnet-class models
@@ -3451,7 +3418,7 @@ Clients **SHOULD** return errors for common failure cases:
 
 Example error:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3503,7 +3470,7 @@ interaction model.
 Clients that support roots **MUST** declare the `roots` capability during
 [initialization](/specification/2025-06-18/basic/lifecycle#initialization):
 
-```json  theme={null}
+```json theme={null}
 {
   "capabilities": {
     "roots": {
@@ -3524,7 +3491,7 @@ To retrieve roots, servers send a `roots/list` request:
 
 **Request:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3534,7 +3501,7 @@ To retrieve roots, servers send a `roots/list` request:
 
 **Response:**
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3553,7 +3520,7 @@ To retrieve roots, servers send a `roots/list` request:
 
 When roots change, clients that support `listChanged` **MUST** send a notification:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/roots/list_changed"
@@ -3562,7 +3529,7 @@ When roots change, clients that support `listChanged` **MUST** send a notificati
 
 ## Message Flow
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Server
     participant Client
@@ -3583,15 +3550,15 @@ sequenceDiagram
 
 A root definition includes:
 
-* `uri`: Unique identifier for the root. This **MUST** be a `file://` URI in the current
+- `uri`: Unique identifier for the root. This **MUST** be a `file://` URI in the current
   specification.
-* `name`: Optional human-readable name for display purposes.
+- `name`: Optional human-readable name for display purposes.
 
 Example roots for different use cases:
 
 #### Project Directory
 
-```json  theme={null}
+```json theme={null}
 {
   "uri": "file:///home/user/projects/myproject",
   "name": "My Project"
@@ -3600,7 +3567,7 @@ Example roots for different use cases:
 
 #### Multiple Repositories
 
-```json  theme={null}
+```json theme={null}
 [
   {
     "uri": "file:///home/user/repos/frontend",
@@ -3617,12 +3584,12 @@ Example roots for different use cases:
 
 Clients **SHOULD** return standard JSON-RPC errors for common failure cases:
 
-* Client does not support roots: `-32601` (Method not found)
-* Internal errors: `-32603`
+- Client does not support roots: `-32601` (Method not found)
+- Internal errors: `-32603`
 
 Example error:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -3639,29 +3606,29 @@ Example error:
 ## Security Considerations
 
 1. Clients **MUST**:
-   * Only expose roots with appropriate permissions
-   * Validate all root URIs to prevent path traversal
-   * Implement proper access controls
-   * Monitor root accessibility
+   - Only expose roots with appropriate permissions
+   - Validate all root URIs to prevent path traversal
+   - Implement proper access controls
+   - Monitor root accessibility
 
 2. Servers **SHOULD**:
-   * Handle cases where roots become unavailable
-   * Respect root boundaries during operations
-   * Validate all paths against provided roots
+   - Handle cases where roots become unavailable
+   - Respect root boundaries during operations
+   - Validate all paths against provided roots
 
 ## Implementation Guidelines
 
 1. Clients **SHOULD**:
-   * Prompt users for consent before exposing roots to servers
-   * Provide clear user interfaces for root management
-   * Validate root accessibility before exposing
-   * Monitor for root changes
+   - Prompt users for consent before exposing roots to servers
+   - Provide clear user interfaces for root management
+   - Validate root accessibility before exposing
+   - Monitor for root changes
 
 2. Servers **SHOULD**:
-   * Check for roots capability before usage
-   * Handle root list changes gracefully
-   * Respect root boundaries in operations
-   * Cache root information appropriately
+   - Check for roots capability before usage
+   - Handle root list changes gracefully
+   - Respect root boundaries in operations
+   - Cache root information appropriately
 
 ---
 
@@ -3709,7 +3676,7 @@ which MCP client initiated the request.
 
 ##### Normal OAuth proxy usage (preserves user consent)
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant UA as User-Agent (Browser)
     participant MC as MCP Client
@@ -3737,7 +3704,7 @@ sequenceDiagram
 
 ##### Malicious OAuth proxy usage (skips user consent)
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant UA as User-Agent (Browser)
     participant M as MCP Proxy Server
@@ -3774,7 +3741,7 @@ attack becomes possible:
 3. An attacker later sends the user a malicious link containing a crafted authorization request which contains a malicious redirect URI along with a new dynamically registered client ID
 4. When the user clicks the link, their browser still has the consent cookie from the previous legitimate request
 5. The third-party authorization server detects the cookie and skips the consent screen
-6. The MCP authorization code is redirected to the attacker's server (specified in the crafted redirect\_uri during dynamic client registration)
+6. The MCP authorization code is redirected to the attacker's server (specified in the crafted redirect_uri during dynamic client registration)
 7. The attacker exchanges the stolen authorization code for access tokens for the MCP server without the user's explicit approval
 8. Attacker now has access to the third-party API as the compromised user
 
@@ -3785,24 +3752,24 @@ registered client before forwarding to third-party authorization servers (which 
 
 ### Token Passthrough
 
-"Token passthrough" is an anti-pattern where an MCP server accepts tokens from an MCP client without validating that the tokens were properly issued *to the MCP server* and "passing them through" to the downstream API.
+"Token passthrough" is an anti-pattern where an MCP server accepts tokens from an MCP client without validating that the tokens were properly issued _to the MCP server_ and "passing them through" to the downstream API.
 
 #### Risks
 
 Token passthrough is explicitly forbidden in the [authorization specification](/specification/2025-06-18/basic/authorization) as it introduces a number of security risks, that include:
 
-* **Security Control Circumvention**
-  * The MCP Server or downstream APIs might implement important security controls like rate limiting, request validation, or traffic monitoring, that depend on the token audience or other credential constraints. If clients can obtain and use tokens directly with the downstream APIs without the MCP server validating them properly or ensuring that the tokens are issued for the right service, they bypass these controls.
-* **Accountability and Audit Trail Issues**
-  * The MCP Server will be unable to identify or distinguish between MCP Clients when clients are calling with an upstream-issued access token which may be opaque to the MCP Server.
-  * The downstream Resource Server’s logs may show requests that appear to come from a different source with a different identity, rather than the MCP server that is actually forwarding the tokens.
-  * Both factors make incident investigation, controls, and auditing more difficult.
-  * If the MCP Server passes tokens without validating their claims (e.g., roles, privileges, or audience) or other metadata, a malicious actor in possession of a stolen token can use the server as a proxy for data exfiltration.
-* **Trust Boundary Issues**
-  * The downstream Resource Server grants trust to specific entities. This trust might include assumptions about origin or client behavior patterns. Breaking this trust boundary could lead to unexpected issues.
-  * If the token is accepted by multiple services without proper validation, an attacker compromising one service can use the token to access other connected services.
-* **Future Compatibility Risk**
-  * Even if an MCP Server starts as a "pure proxy" today, it might need to add security controls later. Starting with proper token audience separation makes it easier to evolve the security model.
+- **Security Control Circumvention**
+  - The MCP Server or downstream APIs might implement important security controls like rate limiting, request validation, or traffic monitoring, that depend on the token audience or other credential constraints. If clients can obtain and use tokens directly with the downstream APIs without the MCP server validating them properly or ensuring that the tokens are issued for the right service, they bypass these controls.
+- **Accountability and Audit Trail Issues**
+  - The MCP Server will be unable to identify or distinguish between MCP Clients when clients are calling with an upstream-issued access token which may be opaque to the MCP Server.
+  - The downstream Resource Server’s logs may show requests that appear to come from a different source with a different identity, rather than the MCP server that is actually forwarding the tokens.
+  - Both factors make incident investigation, controls, and auditing more difficult.
+  - If the MCP Server passes tokens without validating their claims (e.g., roles, privileges, or audience) or other metadata, a malicious actor in possession of a stolen token can use the server as a proxy for data exfiltration.
+- **Trust Boundary Issues**
+  - The downstream Resource Server grants trust to specific entities. This trust might include assumptions about origin or client behavior patterns. Breaking this trust boundary could lead to unexpected issues.
+  - If the token is accepted by multiple services without proper validation, an attacker compromising one service can use the token to access other connected services.
+- **Future Compatibility Risk**
+  - Even if an MCP Server starts as a "pure proxy" today, it might need to add security controls later. Starting with proper token audience separation makes it easier to evolve the security model.
 
 #### Mitigation
 
@@ -3814,7 +3781,7 @@ Session hijacking is an attack vector where a client is provided a session ID by
 
 #### Session Hijack Prompt Injection
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Client
     participant ServerA
@@ -3840,7 +3807,7 @@ sequenceDiagram
 
 #### Session Hijack Impersonation
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Client
     participant Server
@@ -3865,8 +3832,8 @@ When you have multiple stateful HTTP servers that handle MCP requests, the follo
 1. The client connects to **Server A** and receives a session ID.
 
 2. The attacker obtains an existing session ID and sends a malicious event to **Server B** with said session ID.
-   * When a server supports [redelivery/resumable streams](/specification/2025-06-18/basic/transports#resumability-and-redelivery), deliberately terminating the request before receiving the response could lead to it being resumed by the original client via the GET request for server sent events.
-   * If a particular server initiates server sent events as a consequence of a tool call such as a `notifications/tools/list_changed`, where it is possible to affect the tools that are offered by the server, a client could end up with tools that they were not aware were enabled.
+   - When a server supports [redelivery/resumable streams](/specification/2025-06-18/basic/transports#resumability-and-redelivery), deliberately terminating the request before receiving the response could lead to it being resumed by the original client via the GET request for server sent events.
+   - If a particular server initiates server sent events as a consequence of a tool call such as a `notifications/tools/list_changed`, where it is possible to affect the tools that are offered by the server, a client could end up with tools that they were not aware were enabled.
 
 3. **Server B** enqueues the event (associated with session ID) into a shared queue.
 
@@ -3920,10 +3887,10 @@ owners. This specification defines the authorization flow for HTTP-based transpo
 
 Authorization is **OPTIONAL** for MCP implementations. When supported:
 
-* Implementations using an HTTP-based transport **SHOULD** conform to this specification.
-* Implementations using an STDIO transport **SHOULD NOT** follow this specification, and
+- Implementations using an HTTP-based transport **SHOULD** conform to this specification.
+- Implementations using an STDIO transport **SHOULD NOT** follow this specification, and
   instead retrieve credentials from the environment.
-* Implementations using alternative transports **MUST** follow established security best
+- Implementations using alternative transports **MUST** follow established security best
   practices for their protocol.
 
 ### Standards Compliance
@@ -3932,24 +3899,24 @@ This authorization mechanism is based on established specifications listed below
 implements a selected subset of their features to ensure security and interoperability
 while maintaining simplicity:
 
-* OAuth 2.1 IETF DRAFT ([draft-ietf-oauth-v2-1-13](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13))
-* OAuth 2.0 Authorization Server Metadata
+- OAuth 2.1 IETF DRAFT ([draft-ietf-oauth-v2-1-13](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13))
+- OAuth 2.0 Authorization Server Metadata
   ([RFC8414](https://datatracker.ietf.org/doc/html/rfc8414))
-* OAuth 2.0 Dynamic Client Registration Protocol
+- OAuth 2.0 Dynamic Client Registration Protocol
   ([RFC7591](https://datatracker.ietf.org/doc/html/rfc7591))
-* OAuth 2.0 Protected Resource Metadata ([RFC9728](https://datatracker.ietf.org/doc/html/rfc9728))
+- OAuth 2.0 Protected Resource Metadata ([RFC9728](https://datatracker.ietf.org/doc/html/rfc9728))
 
 ## Authorization Flow
 
 ### Roles
 
-A protected *MCP server* acts as an [OAuth 2.1 resource server](https://www.ietf.org/archive/id/draft-ietf-oauth-v2-1-13.html#name-roles),
+A protected _MCP server_ acts as an [OAuth 2.1 resource server](https://www.ietf.org/archive/id/draft-ietf-oauth-v2-1-13.html#name-roles),
 capable of accepting and responding to protected resource requests using access tokens.
 
-An *MCP client* acts as an [OAuth 2.1 client](https://www.ietf.org/archive/id/draft-ietf-oauth-v2-1-13.html#name-roles),
+An _MCP client_ acts as an [OAuth 2.1 client](https://www.ietf.org/archive/id/draft-ietf-oauth-v2-1-13.html#name-roles),
 making protected resource requests on behalf of a resource owner.
 
-The *authorization server* is responsible for interacting with the user (if necessary) and issuing access tokens for use at the MCP server.
+The _authorization server_ is responsible for interacting with the user (if necessary) and issuing access tokens for use at the MCP server.
 The implementation details of the authorization server are beyond the scope of this specification. It may be hosted with the
 resource server or a separate entity. The [Authorization Server Discovery section](#authorization-server-discovery)
 specifies how an MCP server indicates the location of its corresponding authorization server to a client.
@@ -3988,7 +3955,7 @@ guidance on implementation details.
 Implementors should note that Protected Resource Metadata documents can define multiple authorization servers. The responsibility for selecting which authorization server to use lies with the MCP client, following the guidelines specified in
 [RFC9728 Section 7.6 "Authorization Servers"](https://datatracker.ietf.org/doc/html/rfc9728#name-authorization-servers).
 
-MCP servers **MUST** use the HTTP header `WWW-Authenticate` when returning a *401 Unauthorized* to indicate the location of the resource server metadata URL
+MCP servers **MUST** use the HTTP header `WWW-Authenticate` when returning a _401 Unauthorized_ to indicate the location of the resource server metadata URL
 as described in [RFC9728 Section 5.1 "WWW-Authenticate Response"](https://datatracker.ietf.org/doc/html/rfc9728#name-www-authenticate-response).
 
 MCP clients **MUST** be able to parse `WWW-Authenticate` headers and respond appropriately to `HTTP 401 Unauthorized` responses from the MCP server.
@@ -4002,7 +3969,7 @@ specification to obtain the information required to interact with the authorizat
 
 The following diagram outlines an example flow:
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant C as Client
     participant M as MCP Server (Resource Server)
@@ -4039,12 +4006,12 @@ to allow MCP clients to obtain OAuth client IDs without user interaction. This p
 standardized way for clients to automatically register with new authorization servers, which is crucial
 for MCP because:
 
-* Clients may not know all possible MCP servers and their authorization servers in advance.
-* Manual registration would create friction for users.
-* It enables seamless connection to new MCP servers and their authorization servers.
-* Authorization servers can implement their own registration policies.
+- Clients may not know all possible MCP servers and their authorization servers in advance.
+- Manual registration would create friction for users.
+- It enables seamless connection to new MCP servers and their authorization servers.
+- Authorization servers can implement their own registration policies.
 
-Any authorization servers that *do not* support Dynamic Client Registration need to provide
+Any authorization servers that _do not_ support Dynamic Client Registration need to provide
 alternative ways to obtain a client ID (and, if applicable, client credentials). For one of
 these authorization servers, MCP clients will have to either:
 
@@ -4058,7 +4025,7 @@ these authorization servers, MCP clients will have to either:
 
 The complete Authorization flow proceeds as follows:
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant B as User-Agent (Browser)
     participant C as Client
@@ -4116,15 +4083,15 @@ MCP clients **SHOULD** provide the most specific URI that they can for the MCP s
 
 Examples of valid canonical URIs:
 
-* `https://mcp.example.com/mcp`
-* `https://mcp.example.com`
-* `https://mcp.example.com:8443`
-* `https://mcp.example.com/server/mcp` (when path component is necessary to identify individual MCP server)
+- `https://mcp.example.com/mcp`
+- `https://mcp.example.com`
+- `https://mcp.example.com:8443`
+- `https://mcp.example.com/server/mcp` (when path component is necessary to identify individual MCP server)
 
 Examples of invalid canonical URIs:
 
-* `mcp.example.com` (missing scheme)
-* `https://mcp.example.com#fragment` (contains fragment)
+- `mcp.example.com` (missing scheme)
+- `https://mcp.example.com#fragment` (contains fragment)
 
 > **Note:** While both `https://mcp.example.com/` (with trailing slash) and `https://mcp.example.com` (without trailing slash) are technically valid absolute URIs according to [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), implementations **SHOULD** consistently use the form without the trailing slash for better interoperability unless the trailing slash is semantically significant for the specific resource.
 
@@ -4158,7 +4125,7 @@ even if they are part of the same logical session.
 
 Example request:
 
-```http  theme={null}
+```http theme={null}
 GET /mcp HTTP/1.1
 Host: mcp.example.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
@@ -4201,8 +4168,8 @@ Implementations **MUST** follow OAuth 2.1 security best practices as laid out in
 [RFC 8707](https://www.rfc-editor.org/rfc/rfc8707.html) Resource Indicators provide critical security benefits by binding tokens to their intended
 audiences **when the Authorization Server supports the capability**. To enable current and future adoption:
 
-* MCP clients **MUST** include the `resource` parameter in authorization and token requests as specified in the [Resource Parameter Implementation](#resource-parameter-implementation) section
-* MCP servers **MUST** validate that tokens presented to them were specifically issued for their use
+- MCP clients **MUST** include the `resource` parameter in authorization and token requests as specified in the [Resource Parameter Implementation](#resource-parameter-implementation) section
+- MCP servers **MUST** validate that tokens presented to them were specifically issued for their use
 
 The [Security Best Practices document](/specification/2025-06-18/basic/security_best_practices#token-passthrough)
 outlines why token audience validation is crucial and why token passthrough is explicitly forbidden.
@@ -4307,18 +4274,18 @@ It is also possible for clients and servers to implement
 
 In the **stdio** transport:
 
-* The client launches the MCP server as a subprocess.
-* The server reads JSON-RPC messages from its standard input (`stdin`) and sends messages
+- The client launches the MCP server as a subprocess.
+- The server reads JSON-RPC messages from its standard input (`stdin`) and sends messages
   to its standard output (`stdout`).
-* Messages are individual JSON-RPC requests, notifications, or responses.
-* Messages are delimited by newlines, and **MUST NOT** contain embedded newlines.
-* The server **MAY** write UTF-8 strings to its standard error (`stderr`) for logging
+- Messages are individual JSON-RPC requests, notifications, or responses.
+- Messages are delimited by newlines, and **MUST NOT** contain embedded newlines.
+- The server **MAY** write UTF-8 strings to its standard error (`stderr`) for logging
   purposes. Clients **MAY** capture, forward, or ignore this logging.
-* The server **MUST NOT** write anything to its `stdout` that is not a valid MCP message.
-* The client **MUST NOT** write anything to the server's `stdin` that is not a valid MCP
+- The server **MUST NOT** write anything to its `stdout` that is not a valid MCP message.
+- The client **MUST NOT** write anything to the server's `stdin` that is not a valid MCP
   message.
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Client
     participant Server Process
@@ -4335,10 +4302,10 @@ sequenceDiagram
 
 ## Streamable HTTP
 
-  This replaces the [HTTP+SSE
-  transport](/specification/2024-11-05/basic/transports#http-with-sse) from
-  protocol version 2024-11-05. See the [backwards compatibility](#backwards-compatibility)
-  guide below.
+This replaces the [HTTP+SSE
+transport](/specification/2024-11-05/basic/transports#http-with-sse) from
+protocol version 2024-11-05. See the [backwards compatibility](#backwards-compatibility)
+guide below.
 
 In the **Streamable HTTP** transport, the server operates as an independent process that
 can handle multiple client connections. This transport uses HTTP POST and GET requests.
@@ -4369,33 +4336,33 @@ MCP endpoint.
 1. The client **MUST** use HTTP POST to send JSON-RPC messages to the MCP endpoint.
 2. The client **MUST** include an `Accept` header, listing both `application/json` and
    `text/event-stream` as supported content types.
-3. The body of the POST request **MUST** be a single JSON-RPC *request*, *notification*, or *response*.
-4. If the input is a JSON-RPC *response* or *notification*:
-   * If the server accepts the input, the server **MUST** return HTTP status code 202
+3. The body of the POST request **MUST** be a single JSON-RPC _request_, _notification_, or _response_.
+4. If the input is a JSON-RPC _response_ or _notification_:
+   - If the server accepts the input, the server **MUST** return HTTP status code 202
      Accepted with no body.
-   * If the server cannot accept the input, it **MUST** return an HTTP error status code
-     (e.g., 400 Bad Request). The HTTP response body **MAY** comprise a JSON-RPC *error
-     response* that has no `id`.
-5. If the input is a JSON-RPC *request*, the server **MUST** either
+   - If the server cannot accept the input, it **MUST** return an HTTP error status code
+     (e.g., 400 Bad Request). The HTTP response body **MAY** comprise a JSON-RPC _error
+     response_ that has no `id`.
+5. If the input is a JSON-RPC _request_, the server **MUST** either
    return `Content-Type: text/event-stream`, to initiate an SSE stream, or
    `Content-Type: application/json`, to return one JSON object. The client **MUST**
    support both these cases.
 6. If the server initiates an SSE stream:
-   * The SSE stream **SHOULD** eventually include JSON-RPC *response* for the
-     JSON-RPC *request* sent in the POST body.
-   * The server **MAY** send JSON-RPC *requests* and *notifications* before sending the
-     JSON-RPC *response*. These messages **SHOULD** relate to the originating client
-     *request*.
-   * The server **SHOULD NOT** close the SSE stream before sending the JSON-RPC *response*
-     for the received JSON-RPC *request*, unless the [session](#session-management)
+   - The SSE stream **SHOULD** eventually include JSON-RPC _response_ for the
+     JSON-RPC _request_ sent in the POST body.
+   - The server **MAY** send JSON-RPC _requests_ and _notifications_ before sending the
+     JSON-RPC _response_. These messages **SHOULD** relate to the originating client
+     _request_.
+   - The server **SHOULD NOT** close the SSE stream before sending the JSON-RPC _response_
+     for the received JSON-RPC _request_, unless the [session](#session-management)
      expires.
-   * After the JSON-RPC *response* has been sent, the server **SHOULD** close the SSE
+   - After the JSON-RPC _response_ has been sent, the server **SHOULD** close the SSE
      stream.
-   * Disconnection **MAY** occur at any time (e.g., due to network conditions).
+   - Disconnection **MAY** occur at any time (e.g., due to network conditions).
      Therefore:
-     * Disconnection **SHOULD NOT** be interpreted as the client cancelling its request.
-     * To cancel, the client **SHOULD** explicitly send an MCP `CancelledNotification`.
-     * To avoid message loss due to disconnection, the server **MAY** make the stream
+     - Disconnection **SHOULD NOT** be interpreted as the client cancelling its request.
+     - To cancel, the client **SHOULD** explicitly send an MCP `CancelledNotification`.
+     - To avoid message loss due to disconnection, the server **MAY** make the stream
        [resumable](#resumability-and-redelivery).
 
 ### Listening for Messages from the Server
@@ -4409,21 +4376,21 @@ MCP endpoint.
    this HTTP GET, or else return HTTP 405 Method Not Allowed, indicating that the server
    does not offer an SSE stream at this endpoint.
 4. If the server initiates an SSE stream:
-   * The server **MAY** send JSON-RPC *requests* and *notifications* on the stream.
-   * These messages **SHOULD** be unrelated to any concurrently-running JSON-RPC
-     *request* from the client.
-   * The server **MUST NOT** send a JSON-RPC *response* on the stream **unless**
+   - The server **MAY** send JSON-RPC _requests_ and _notifications_ on the stream.
+   - These messages **SHOULD** be unrelated to any concurrently-running JSON-RPC
+     _request_ from the client.
+   - The server **MUST NOT** send a JSON-RPC _response_ on the stream **unless**
      [resuming](#resumability-and-redelivery) a stream associated with a previous client
      request.
-   * The server **MAY** close the SSE stream at any time.
-   * The client **MAY** close the SSE stream at any time.
+   - The server **MAY** close the SSE stream at any time.
+   - The client **MAY** close the SSE stream at any time.
 
 ### Multiple Connections
 
 1. The client **MAY** remain connected to multiple SSE streams simultaneously.
 2. The server **MUST** send each of its JSON-RPC messages on only one of the connected
    streams; that is, it **MUST NOT** broadcast the same message across multiple streams.
-   * The risk of message loss **MAY** be mitigated by making the stream
+   - The risk of message loss **MAY** be mitigated by making the stream
      [resumable](#resumability-and-redelivery).
 
 ### Resumability and Redelivery
@@ -4433,20 +4400,20 @@ lost:
 
 1. Servers **MAY** attach an `id` field to their SSE events, as described in the
    [SSE standard](https://html.spec.whatwg.org/multipage/server-sent-events.html#event-stream-interpretation).
-   * If present, the ID **MUST** be globally unique across all streams within that
+   - If present, the ID **MUST** be globally unique across all streams within that
      [session](#session-management)—or all streams with that specific client, if session
      management is not in use.
 2. If the client wishes to resume after a broken connection, it **SHOULD** issue an HTTP
    GET to the MCP endpoint, and include the
    [`Last-Event-ID`](https://html.spec.whatwg.org/multipage/server-sent-events.html#the-last-event-id-header)
    header to indicate the last event ID it received.
-   * The server **MAY** use this header to replay messages that would have been sent
-     after the last event ID, *on the stream that was disconnected*, and to resume the
+   - The server **MAY** use this header to replay messages that would have been sent
+     after the last event ID, _on the stream that was disconnected_, and to resume the
      stream from that point.
-   * The server **MUST NOT** replay messages that would have been delivered on a
+   - The server **MUST NOT** replay messages that would have been delivered on a
      different stream.
 
-In other words, these event IDs should be assigned by servers on a *per-stream* basis, to
+In other words, these event IDs should be assigned by servers on a _per-stream_ basis, to
 act as a cursor within that particular stream.
 
 ### Session Management
@@ -4458,14 +4425,14 @@ servers which want to establish stateful sessions:
 1. A server using the Streamable HTTP transport **MAY** assign a session ID at
    initialization time, by including it in an `Mcp-Session-Id` header on the HTTP
    response containing the `InitializeResult`.
-   * The session ID **SHOULD** be globally unique and cryptographically secure (e.g., a
+   - The session ID **SHOULD** be globally unique and cryptographically secure (e.g., a
      securely generated UUID, a JWT, or a cryptographic hash).
-   * The session ID **MUST** only contain visible ASCII characters (ranging from 0x21 to
+   - The session ID **MUST** only contain visible ASCII characters (ranging from 0x21 to
      0x7E).
 2. If an `Mcp-Session-Id` is returned by the server during initialization, clients using
    the Streamable HTTP transport **MUST** include it in the `Mcp-Session-Id` header on
    all of their subsequent HTTP requests.
-   * Servers that require a session ID **SHOULD** respond to requests without an
+   - Servers that require a session ID **SHOULD** respond to requests without an
      `Mcp-Session-Id` header (other than initialization) with HTTP 400 Bad Request.
 3. The server **MAY** terminate the session at any time, after which it **MUST** respond
    to requests containing that session ID with HTTP 404 Not Found.
@@ -4475,12 +4442,12 @@ servers which want to establish stateful sessions:
 5. Clients that no longer need a particular session (e.g., because the user is leaving
    the client application) **SHOULD** send an HTTP DELETE to the MCP endpoint with the
    `Mcp-Session-Id` header, to explicitly terminate the session.
-   * The server **MAY** respond to this request with HTTP 405 Method Not Allowed,
+   - The server **MAY** respond to this request with HTTP 405 Method Not Allowed,
      indicating that the server does not allow clients to terminate sessions.
 
 ### Sequence Diagram
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Client
     participant Server
@@ -4535,7 +4502,7 @@ For example: `MCP-Protocol-Version: 2025-06-18`
 The protocol version sent by the client **SHOULD** be the one [negotiated during
 initialization](/specification/2025-06-18/basic/lifecycle#version-negotiation).
 
-For backwards compatibility, if the server does *not* receive an `MCP-Protocol-Version`
+For backwards compatibility, if the server does _not_ receive an `MCP-Protocol-Version`
 header, and has no other way to identify the version - for example, by relying on the
 protocol version negotiated during initialization - the server **SHOULD** assume protocol
 version `2025-03-26`.
@@ -4551,9 +4518,9 @@ protocol version 2024-11-05) as follows:
 
 **Servers** wanting to support older clients should:
 
-* Continue to host both the SSE and POST endpoints of the old transport, alongside the
+- Continue to host both the SSE and POST endpoints of the old transport, alongside the
   new "MCP endpoint" defined for the Streamable HTTP transport.
-  * It is also possible to combine the old POST endpoint and the new MCP endpoint, but
+  - It is also possible to combine the old POST endpoint and the new MCP endpoint, but
     this may introduce unneeded complexity.
 
 **Clients** wanting to support older servers should:
@@ -4562,13 +4529,13 @@ protocol version 2024-11-05) as follows:
    old transport or the new transport.
 2. Attempt to POST an `InitializeRequest` to the server URL, with an `Accept` header as
    defined above:
-   * If it succeeds, the client can assume this is a server supporting the new Streamable
+   - If it succeeds, the client can assume this is a server supporting the new Streamable
      HTTP transport.
-   * If it fails with an HTTP 4xx status code (e.g., 405 Method Not Allowed or 404 Not
+   - If it fails with an HTTP 4xx status code (e.g., 405 Method Not Allowed or 404 Not
      Found):
-     * Issue a GET request to the server URL, expecting that this will open an SSE stream
+     - Issue a GET request to the server URL, expecting that this will open an SSE stream
        and return an `endpoint` event as the first event.
-     * When the `endpoint` event arrives, the client can assume this is a server running
+     - When the `endpoint` event arrives, the client can assume this is a server running
        the old HTTP+SSE transport, and should use that transport for all subsequent
        communication.
 
@@ -4600,7 +4567,7 @@ connections that ensures proper capability negotiation and state management.
 2. **Operation**: Normal protocol communication
 3. **Shutdown**: Graceful termination of the connection
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Client
     participant Server
@@ -4629,17 +4596,17 @@ sequenceDiagram
 The initialization phase **MUST** be the first interaction between client and server.
 During this phase, the client and server:
 
-* Establish protocol version compatibility
-* Exchange and negotiate capabilities
-* Share implementation details
+- Establish protocol version compatibility
+- Exchange and negotiate capabilities
+- Share implementation details
 
 The client **MUST** initiate this phase by sending an `initialize` request containing:
 
-* Protocol version supported
-* Client capabilities
-* Client implementation information
+- Protocol version supported
+- Client capabilities
+- Client implementation information
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -4664,7 +4631,7 @@ The client **MUST** initiate this phase by sending an `initialize` request conta
 
 The server **MUST** respond with its own capabilities and information:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -4696,17 +4663,17 @@ The server **MUST** respond with its own capabilities and information:
 After successful initialization, the client **MUST** send an `initialized` notification
 to indicate it is ready to begin normal operations:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "method": "notifications/initialized"
 }
 ```
 
-* The client **SHOULD NOT** send requests other than
+- The client **SHOULD NOT** send requests other than
   [pings](/specification/2025-06-18/basic/utilities/ping) before the server has responded to the
   `initialize` request.
-* The server **SHOULD NOT** send requests other than
+- The server **SHOULD NOT** send requests other than
   [pings](/specification/2025-06-18/basic/utilities/ping) and
   [logging](/specification/2025-06-18/server/utilities/logging) before receiving the `initialized`
   notification.
@@ -4714,19 +4681,19 @@ to indicate it is ready to begin normal operations:
 #### Version Negotiation
 
 In the `initialize` request, the client **MUST** send a protocol version it supports.
-This **SHOULD** be the *latest* version supported by the client.
+This **SHOULD** be the _latest_ version supported by the client.
 
 If the server supports the requested protocol version, it **MUST** respond with the same
 version. Otherwise, the server **MUST** respond with another protocol version it
-supports. This **SHOULD** be the *latest* version supported by the server.
+supports. This **SHOULD** be the _latest_ version supported by the server.
 
 If the client does not support the version in the server's response, it **SHOULD**
 disconnect.
 
-  If using HTTP, the client **MUST** include the `MCP-Protocol-Version:
+If using HTTP, the client **MUST** include the `MCP-Protocol-Version:
 ` HTTP header on all subsequent requests to the MCP
-  server.
-  For details, see [the Protocol Version Header section in Transports](/specification/2025-06-18/basic/transports#protocol-version-header).
+server.
+For details, see [the Protocol Version Header section in Transports](/specification/2025-06-18/basic/transports#protocol-version-header).
 
 #### Capability Negotiation
 
@@ -4750,9 +4717,9 @@ Key capabilities include:
 
 Capability objects can describe sub-capabilities like:
 
-* `listChanged`: Support for list change notifications (for prompts, resources, and
+- `listChanged`: Support for list change notifications (for prompts, resources, and
   tools)
-* `subscribe`: Support for subscribing to individual items' changes (resources only)
+- `subscribe`: Support for subscribing to individual items' changes (resources only)
 
 ### Operation
 
@@ -4761,8 +4728,8 @@ negotiated capabilities.
 
 Both parties **MUST**:
 
-* Respect the negotiated protocol version
-* Only use capabilities that were successfully negotiated
+- Respect the negotiated protocol version
+- Only use capabilities that were successfully negotiated
 
 ### Shutdown
 
@@ -4809,13 +4776,13 @@ misbehaving client or server.
 
 Implementations **SHOULD** be prepared to handle these error cases:
 
-* Protocol version mismatch
-* Failure to negotiate required capabilities
-* Request [timeouts](#timeouts)
+- Protocol version mismatch
+- Failure to negotiate required capabilities
+- Request [timeouts](#timeouts)
 
 Example initialization error:
 
-```json  theme={null}
+```json theme={null}
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -4842,13 +4809,13 @@ Example initialization error:
 
 The Model Context Protocol consists of several key components that work together:
 
-* **Base Protocol**: Core JSON-RPC message types
-* **Lifecycle Management**: Connection initialization, capability negotiation, and
+- **Base Protocol**: Core JSON-RPC message types
+- **Lifecycle Management**: Connection initialization, capability negotiation, and
   session control
-* **Authorization**: Authentication and authorization framework for HTTP-based transports
-* **Server Features**: Resources, prompts, and tools exposed by servers
-* **Client Features**: Sampling and root directory lists provided by clients
-* **Utilities**: Cross-cutting concerns like logging and argument completion
+- **Authorization**: Authentication and authorization framework for HTTP-based transports
+- **Server Features**: Resources, prompts, and tools exposed by servers
+- **Client Features**: Sampling and root directory lists provided by clients
+- **Utilities**: Cross-cutting concerns like logging and argument completion
 
 All implementations **MUST** support the base protocol and lifecycle management
 components. Other components **MAY** be implemented based on the specific needs of the
@@ -4868,7 +4835,7 @@ these types of messages:
 
 Requests are sent from the client to the server or vice versa, to initiate an operation.
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   jsonrpc: "2.0";
   id: string | number;
@@ -4879,16 +4846,16 @@ Requests are sent from the client to the server or vice versa, to initiate an op
 }
 ```
 
-* Requests **MUST** include a string or integer ID.
-* Unlike base JSON-RPC, the ID **MUST NOT** be `null`.
-* The request ID **MUST NOT** have been previously used by the requestor within the same
+- Requests **MUST** include a string or integer ID.
+- Unlike base JSON-RPC, the ID **MUST NOT** be `null`.
+- The request ID **MUST NOT** have been previously used by the requestor within the same
   session.
 
 ### Responses
 
 Responses are sent in reply to requests, containing the result or error of the operation.
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   jsonrpc: "2.0";
   id: string | number;
@@ -4903,20 +4870,20 @@ Responses are sent in reply to requests, containing the result or error of the o
 }
 ```
 
-* Responses **MUST** include the same ID as the request they correspond to.
-* **Responses** are further sub-categorized as either **successful results** or
+- Responses **MUST** include the same ID as the request they correspond to.
+- **Responses** are further sub-categorized as either **successful results** or
   **errors**. Either a `result` or an `error` **MUST** be set. A response **MUST NOT**
   set both.
-* Results **MAY** follow any JSON object structure, while errors **MUST** include an
+- Results **MAY** follow any JSON object structure, while errors **MUST** include an
   error code and message at minimum.
-* Error codes **MUST** be integers.
+- Error codes **MUST** be integers.
 
 ### Notifications
 
 Notifications are sent from the client to the server or vice versa, as a one-way message.
 The receiver **MUST NOT** send a response.
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   jsonrpc: "2.0";
   method: string;
@@ -4926,7 +4893,7 @@ The receiver **MUST NOT** send a response.
 }
 ```
 
-* Notifications **MUST NOT** include an ID.
+- Notifications **MUST NOT** include an ID.
 
 ## Auth
 
@@ -4971,16 +4938,16 @@ may reserve particular names for purpose-specific metadata, as declared in those
 
 **Prefix:**
 
-* If specified, MUST be a series of labels separated by dots (`.`), followed by a slash (`/`).
-  * Labels MUST start with a letter and end with a letter or digit; interior characters can be letters, digits, or hyphens (`-`).
-* Any prefix beginning with zero or more valid labels, followed by `modelcontextprotocol` or `mcp`, followed by any valid label,
+- If specified, MUST be a series of labels separated by dots (`.`), followed by a slash (`/`).
+  - Labels MUST start with a letter and end with a letter or digit; interior characters can be letters, digits, or hyphens (`-`).
+- Any prefix beginning with zero or more valid labels, followed by `modelcontextprotocol` or `mcp`, followed by any valid label,
   is **reserved** for MCP use.
-  * For example: `modelcontextprotocol.io/`, `mcp.dev/`, `api.modelcontextprotocol.org/`, and `tools.mcp.com/` are all reserved.
+  - For example: `modelcontextprotocol.io/`, `mcp.dev/`, `api.modelcontextprotocol.org/`, and `tools.mcp.com/` are all reserved.
 
 **Name:**
 
-* Unless empty, MUST begin and end with an alphanumeric character (`[a-z0-9A-Z]`).
-* MAY contain hyphens (`-`), underscores (`_`), dots (`.`), and alphanumerics in between.
+- Unless empty, MUST begin and end with an alphanumeric character (`[a-z0-9A-Z]`).
+- MAY contain hyphens (`-`), underscores (`_`), dots (`.`), and alphanumerics in between.
 
 ---
 
@@ -4998,7 +4965,7 @@ on context exchange and sampling coordination between clients and servers.
 
 ## Core Components
 
-```mermaid  theme={null}
+```mermaid theme={null}
 graph LR
     subgraph "Application Host Process"
         H[Host]
@@ -5041,22 +5008,22 @@ Resource C")]
 
 The host process acts as the container and coordinator:
 
-* Creates and manages multiple client instances
-* Controls client connection permissions and lifecycle
-* Enforces security policies and consent requirements
-* Handles user authorization decisions
-* Coordinates AI/LLM integration and sampling
-* Manages context aggregation across clients
+- Creates and manages multiple client instances
+- Controls client connection permissions and lifecycle
+- Enforces security policies and consent requirements
+- Handles user authorization decisions
+- Coordinates AI/LLM integration and sampling
+- Manages context aggregation across clients
 
 ### Clients
 
 Each client is created by the host and maintains an isolated server connection:
 
-* Establishes one stateful session per server
-* Handles protocol negotiation and capability exchange
-* Routes protocol messages bidirectionally
-* Manages subscriptions and notifications
-* Maintains security boundaries between servers
+- Establishes one stateful session per server
+- Handles protocol negotiation and capability exchange
+- Routes protocol messages bidirectionally
+- Manages subscriptions and notifications
+- Maintains security boundaries between servers
 
 A host application creates and manages multiple clients, with each client having a 1:1
 relationship with a particular server.
@@ -5065,11 +5032,11 @@ relationship with a particular server.
 
 Servers provide specialized context and capabilities:
 
-* Expose resources, tools and prompts via MCP primitives
-* Operate independently with focused responsibilities
-* Request sampling through client interfaces
-* Must respect security constraints
-* Can be local processes or remote services
+- Expose resources, tools and prompts via MCP primitives
+- Operate independently with focused responsibilities
+- Request sampling through client interfaces
+- Must respect security constraints
+- Can be local processes or remote services
 
 ## Design Principles
 
@@ -5077,31 +5044,31 @@ MCP is built on several key design principles that inform its architecture and
 implementation:
 
 1. **Servers should be extremely easy to build**
-   * Host applications handle complex orchestration responsibilities
-   * Servers focus on specific, well-defined capabilities
-   * Simple interfaces minimize implementation overhead
-   * Clear separation enables maintainable code
+   - Host applications handle complex orchestration responsibilities
+   - Servers focus on specific, well-defined capabilities
+   - Simple interfaces minimize implementation overhead
+   - Clear separation enables maintainable code
 
 2. **Servers should be highly composable**
-   * Each server provides focused functionality in isolation
-   * Multiple servers can be combined seamlessly
-   * Shared protocol enables interoperability
-   * Modular design supports extensibility
+   - Each server provides focused functionality in isolation
+   - Multiple servers can be combined seamlessly
+   - Shared protocol enables interoperability
+   - Modular design supports extensibility
 
 3. **Servers should not be able to read the whole conversation, nor "see into" other
    servers**
-   * Servers receive only necessary contextual information
-   * Full conversation history stays with the host
-   * Each server connection maintains isolation
-   * Cross-server interactions are controlled by the host
-   * Host process enforces security boundaries
+   - Servers receive only necessary contextual information
+   - Full conversation history stays with the host
+   - Each server connection maintains isolation
+   - Cross-server interactions are controlled by the host
+   - Host process enforces security boundaries
 
 4. **Features can be added to servers and clients progressively**
-   * Core protocol provides minimal required functionality
-   * Additional capabilities can be negotiated as needed
-   * Servers and clients evolve independently
-   * Protocol designed for future extensibility
-   * Backwards compatibility is maintained
+   - Core protocol provides minimal required functionality
+   - Additional capabilities can be negotiated as needed
+   - Servers and clients evolve independently
+   - Protocol designed for future extensibility
+   - Backwards compatibility is maintained
 
 ## Capability Negotiation
 
@@ -5109,13 +5076,13 @@ The Model Context Protocol uses a capability-based negotiation system where clie
 servers explicitly declare their supported features during initialization. Capabilities
 determine which protocol features and primitives are available during a session.
 
-* Servers declare capabilities like resource subscriptions, tool support, and prompt
+- Servers declare capabilities like resource subscriptions, tool support, and prompt
   templates
-* Clients declare capabilities like sampling support and notification handling
-* Both parties must respect declared capabilities throughout the session
-* Additional capabilities can be negotiated through extensions to the protocol
+- Clients declare capabilities like sampling support and notification handling
+- Both parties must respect declared capabilities throughout the session
+- Additional capabilities can be negotiated through extensions to the protocol
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant Host
     participant Client
@@ -5154,12 +5121,12 @@ sequenceDiagram
 Each capability unlocks specific protocol features for use during the session. For
 example:
 
-* Implemented [server features](/specification/2025-06-18/server) must be advertised in the
+- Implemented [server features](/specification/2025-06-18/server) must be advertised in the
   server's capabilities
-* Emitting resource subscription notifications requires the server to declare
+- Emitting resource subscription notifications requires the server to declare
   subscription support
-* Tool invocation requires the server to declare tool capabilities
-* [Sampling](/specification/2025-06-18/client) requires the client to declare support in its
+- Tool invocation requires the server to declare tool capabilities
+- [Sampling](/specification/2025-06-18/client) requires the client to declare support in its
   capabilities
 
 This capability negotiation ensures clients and servers have a clear understanding of
@@ -5231,18 +5198,17 @@ The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) is an int
 
 The Inspector runs directly through `npx` without requiring installation:
 
-```bash  theme={null}
+```bash theme={null}
 npx @modelcontextprotocol/inspector
 ```
 
-```bash  theme={null}
+```bash theme={null}
 npx @modelcontextprotocol/inspector
 ```
 
 #### Inspecting servers from npm or PyPI
 
 A common way to start server packages from [npm](https://npmjs.com) or [PyPI](https://pypi.org).
-
 
     ```bash  theme={null}
     npx -y @modelcontextprotocol/inspector npx
@@ -5260,12 +5226,10 @@ A common way to start server packages from [npm](https://npmjs.com) or [PyPI](ht
     npx @modelcontextprotocol/inspector uvx mcp-server-git --repository ~/code/mcp/servers.git
     ```
 
-
 #### Inspecting locally developed servers
 
 To inspect servers locally developed or downloaded as a repository, the most common
 way is:
-
 
     ```bash  theme={null}
     npx @modelcontextprotocol/inspector node path/to/server/index.js args...
@@ -5282,70 +5246,66 @@ way is:
       args...
     ```
 
-
 Please carefully read any attached README for the most accurate instructions.
 
 ## Feature overview
-
-
 
 The Inspector provides several features for interacting with your MCP server:
 
 ### Server connection pane
 
-* Allows selecting the [transport](/legacy/concepts/transports) for connecting to the server
-* For local servers, supports customizing the command-line arguments and environment
+- Allows selecting the [transport](/legacy/concepts/transports) for connecting to the server
+- For local servers, supports customizing the command-line arguments and environment
 
 ### Resources tab
 
-* Lists all available resources
-* Shows resource metadata (MIME types, descriptions)
-* Allows resource content inspection
-* Supports subscription testing
+- Lists all available resources
+- Shows resource metadata (MIME types, descriptions)
+- Allows resource content inspection
+- Supports subscription testing
 
 ### Prompts tab
 
-* Displays available prompt templates
-* Shows prompt arguments and descriptions
-* Enables prompt testing with custom arguments
-* Previews generated messages
+- Displays available prompt templates
+- Shows prompt arguments and descriptions
+- Enables prompt testing with custom arguments
+- Previews generated messages
 
 ### Tools tab
 
-* Lists available tools
-* Shows tool schemas and descriptions
-* Enables tool testing with custom inputs
-* Displays tool execution results
+- Lists available tools
+- Shows tool schemas and descriptions
+- Enables tool testing with custom inputs
+- Displays tool execution results
 
 ### Notifications pane
 
-* Presents all logs recorded from the server
-* Shows notifications received from the server
+- Presents all logs recorded from the server
+- Shows notifications received from the server
 
 ## Best practices
 
 ### Development workflow
 
 1. Start Development
-   * Launch Inspector with your server
-   * Verify basic connectivity
-   * Check capability negotiation
+   - Launch Inspector with your server
+   - Verify basic connectivity
+   - Check capability negotiation
 
 2. Iterative testing
-   * Make server changes
-   * Rebuild the server
-   * Reconnect the Inspector
-   * Test affected features
-   * Monitor messages
+   - Make server changes
+   - Rebuild the server
+   - Reconnect the Inspector
+   - Test affected features
+   - Monitor messages
 
 3. Test edge cases
-   * Invalid inputs
-   * Missing prompt arguments
-   * Concurrent operations
-   * Verify error handling and error responses
+   - Invalid inputs
+   - Missing prompt arguments
+   - Concurrent operations
+   - Verify error handling and error responses
 
 ## Next steps
-
 
     Check out the MCP Inspector source code
 
@@ -5367,41 +5327,20 @@ Build MCP servers and clients using our official SDKs. All SDKs provide the same
 
 ## Available SDKs
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Getting Started
 
 Each SDK provides the same functionality but follows the idioms and best practices of its language. All SDKs support:
 
-* Creating MCP servers that expose tools, resources, and prompts
-* Building MCP clients that can connect to any MCP server
-* Local and remote transport protocols
-* Protocol compliance with type safety
+- Creating MCP servers that expose tools, resources, and prompts
+- Building MCP clients that can connect to any MCP server
+- Local and remote transport protocols
+- Protocol compliance with type safety
 
 Visit the SDK page for your chosen language to find installation instructions, documentation, and examples.
 
 ## Next Steps
 
 Ready to start building with MCP? Choose your path:
-
 
     Learn how to create your first MCP server
 
@@ -5422,7 +5361,6 @@ Ready to start building with MCP? Choose your path:
 In this tutorial, you'll learn how to build an LLM-powered chatbot client that connects to MCP servers.
 
 Before you begin, it helps to have gone through our [Build an MCP Server](/docs/develop/build-server) tutorial so you can understand how clients and servers communicate.
-
 
     [You can find the complete code for this tutorial here.](https://github.com/modelcontextprotocol/quickstart-resources/tree/main/mcp-client-python)
 
@@ -6593,15 +6531,17 @@ Before you begin, it helps to have gone through our [Build an MCP Server](/docs/
     ```kotlin  theme={null}
     fun main(args: Array) = runBlocking {
         if (args.isEmpty()) throw IllegalArgumentException("Usage: java -jar /build/libs/kotlin-mcp-client-0.1.0-all.jar
+
 ")
-        val serverPath = args.first()
-        val client = MCPClient()
-        client.use {
-            client.connectToServer(serverPath)
-            client.chatLoop()
-        }
-    }
-    ```
+val serverPath = args.first()
+val client = MCPClient()
+client.use {
+client.connectToServer(serverPath)
+client.chatLoop()
+}
+}
+
+````
 
     ## Running the client
 
@@ -6919,13 +6859,7 @@ Before you begin, it helps to have gone through our [Build an MCP Server](/docs/
 
     Here's an example of what it should look like it connected to a weather server quickstart:
 
-
-
-
-
-
 ## Next steps
-
 
     Check out our gallery of official MCP servers and implementations
 
@@ -6949,9 +6883,7 @@ In this tutorial, we'll build a simple MCP weather server and connect it to a ho
 
 We'll build a server that exposes two tools: `get_alerts` and `get_forecast`. Then we'll connect the server to an MCP host (in this case, Claude for Desktop):
 
-
-
-  Servers can connect to any client. We've chosen Claude for Desktop here for simplicity, but we also have guides on [building your own client](/docs/develop/build-client) as well as a [list of other clients here](/clients).
+Servers can connect to any client. We've chosen Claude for Desktop here for simplicity, but we also have guides on [building your own client](/docs/develop/build-client) as well as a [list of other clients here](/clients).
 
 ### Core MCP Concepts
 
@@ -6962,7 +6894,6 @@ MCP servers can provide three main types of capabilities:
 3. **[Prompts](/docs/learn/server-concepts#prompts)**: Pre-written templates that help users accomplish specific tasks
 
 This tutorial will primarily focus on tools.
-
 
     Let's get started with building our weather server! [You can find the complete code for what we'll be building here.](https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python)
 
@@ -8652,27 +8583,18 @@ This tutorial will primarily focus on tools.
     2. Launch it by running `dotnet run /ABSOLUTE/PATH/TO/PROJECT`
        Save the file, and restart **Claude for Desktop**.
 
-
 ### Test with commands
 
-Let's make sure Claude for Desktop is picking up the two tools we've exposed in our `weather` server. You can do this by looking for the "Search and tools"  icon:
-
-
+Let's make sure Claude for Desktop is picking up the two tools we've exposed in our `weather` server. You can do this by looking for the "Search and tools" icon:
 
 After clicking on the slider icon, you should see two tools listed:
-
-
 
 If your server isn't being picked up by Claude for Desktop, proceed to the [Troubleshooting](#troubleshooting) section for debugging tips.
 
 If the tool settings icon has shown up, you can now test your server by running the following commands in Claude for Desktop:
 
-* What's the weather in Sacramento?
-* What are the active weather alerts in Texas?
-
-
-
-
+- What's the weather in Sacramento?
+- What are the active weather alerts in Texas?
 
   Since this is the US National Weather service, the queries will only work for US locations.
 
@@ -8688,7 +8610,6 @@ When you ask a question:
 6. The response is displayed to you!
 
 ## Troubleshooting
-
 
     **Getting logs from Claude for Desktop**
 
@@ -8751,11 +8672,9 @@ When you ask a question:
 
     This isn't an error - it just means there are no current weather alerts for that state. Try a different state or check during severe weather.
 
-
-  For more advanced troubleshooting, check out our guide on [Debugging MCP](/legacy/tools/debugging)
+For more advanced troubleshooting, check out our guide on [Debugging MCP](/legacy/tools/debugging)
 
 ## Next steps
-
 
     Learn how to build your own MCP client that can connect to your server
 
@@ -8797,13 +8716,12 @@ Custom Connectors serve as the bridge between Claude and remote MCP servers. The
 
 With Custom Connectors, you can:
 
-* [Connect Claude to existing remote MCP servers](https://support.anthropic.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp) provided by third-party developers
-* [Build your own remote MCP servers to connect with any tool](https://support.anthropic.com/en/articles/11503834-building-custom-connectors-via-remote-mcp-servers)
+- [Connect Claude to existing remote MCP servers](https://support.anthropic.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp) provided by third-party developers
+- [Build your own remote MCP servers to connect with any tool](https://support.anthropic.com/en/articles/11503834-building-custom-connectors-via-remote-mcp-servers)
 
 ## Connecting to a Remote MCP Server
 
 The process of connecting Claude to a remote MCP server involves adding a Custom Connector through the [Claude interface](https://claude.ai/). This establishes a secure connection between Claude and your chosen remote server.
-
 
     Open Claude in your browser and navigate to the settings page. You can access this by clicking on your profile icon and selecting "Settings" from the dropdown menu. Once in settings, locate and click on the "Connectors" section in the sidebar.
 
@@ -8859,7 +8777,6 @@ The process of connecting Claude to a remote MCP server involves adding a Custom
 
     Navigate back to the Connectors settings and click on your connected server. Here you can enable or disable specific tools, set usage limits, and configure other security parameters according to your needs.
 
-
 ## Best Practices for Using Remote MCP Servers
 
 When working with remote MCP servers, consider these recommendations to ensure a secure and efficient experience:
@@ -8871,7 +8788,6 @@ When working with remote MCP servers, consider these recommendations to ensure a
 ## Next Steps
 
 Now that you've connected Claude to a remote MCP server, you can explore its capabilities in your conversations. Try using the connected tools to automate tasks, access external data, or integrate with your existing workflows.
-
 
     Create custom remote MCP servers to integrate with proprietary tools and
     services
@@ -8889,7 +8805,6 @@ Now that you've connected Claude to a remote MCP server, you can explore its cap
 
     Dive deeper into how MCP works and its architecture
 
-
 Remote MCP servers unlock powerful possibilities for extending Claude's capabilities. As you become familiar with these integrations, you'll discover new ways to streamline your workflows and accomplish complex tasks more efficiently.
 
 ---
@@ -8906,8 +8821,6 @@ Model Context Protocol (MCP) servers extend AI applications' capabilities by pro
 
 This guide demonstrates how to connect to local MCP servers using Claude Desktop as an example, one of the [many clients that support MCP](/clients). While we focus on Claude Desktop's implementation, the concepts apply broadly to other MCP-compatible clients. By the end of this tutorial, Claude will be able to interact with files on your computer, create new documents, organize folders, and search through your file system—all with your explicit permission for each action.
 
-
-
 ## Prerequisites
 
 Before starting this tutorial, ensure you have the following installed on your system:
@@ -8922,9 +8835,9 @@ If you already have Claude Desktop installed, verify you're running the latest v
 
 The Filesystem Server and many other MCP servers require Node.js to run. Verify your Node.js installation by opening a terminal or command prompt and running:
 
-```bash  theme={null}
+```bash theme={null}
 node --version
-```
+````
 
 If Node.js is not installed, download it from [nodejs.org](https://nodejs.org/). We recommend the LTS (Long Term Support) version for stability.
 
@@ -8932,17 +8845,16 @@ If Node.js is not installed, download it from [nodejs.org](https://nodejs.org/).
 
 MCP servers are programs that run on your computer and provide specific capabilities to Claude Desktop through a standardized protocol. Each server exposes tools that Claude can use to perform actions, with your approval. The Filesystem Server we'll install provides tools for:
 
-* Reading file contents and directory structures
-* Creating new files and directories
-* Moving and renaming files
-* Searching for files by name or content
+- Reading file contents and directory structures
+- Creating new files and directories
+- Moving and renaming files
+- Searching for files by name or content
 
 All actions require your explicit approval before execution, ensuring you maintain full control over what Claude can access and modify.
 
 ## Installing the Filesystem Server
 
 The process involves configuring Claude Desktop to automatically start the Filesystem Server whenever you launch the application. This configuration is done through a JSON file that tells Claude Desktop which servers to run and how to connect to them.
-
 
     Start by accessing the Claude Desktop settings. Click on the Claude menu in your system's menu bar (not the settings within the Claude window itself) and select "Settings..."
 
@@ -9043,29 +8955,25 @@ The process involves configuring Claude Desktop to automatically start the Files
 
     If the server indicator doesn't appear, refer to the [Troubleshooting](#troubleshooting) section for debugging steps.
 
-
 ## Using the Filesystem Server
 
 With the Filesystem Server connected, Claude can now interact with your file system. Try these example requests to explore the capabilities:
 
 ### File Management Examples
 
-* **"Can you write a poem and save it to my desktop?"** - Claude will compose a poem and create a new text file on your desktop
-* **"What work-related files are in my downloads folder?"** - Claude will scan your downloads and identify work-related documents
-* **"Please organize all images on my desktop into a new folder called 'Images'"** - Claude will create a folder and move image files into it
+- **"Can you write a poem and save it to my desktop?"** - Claude will compose a poem and create a new text file on your desktop
+- **"What work-related files are in my downloads folder?"** - Claude will scan your downloads and identify work-related documents
+- **"Please organize all images on my desktop into a new folder called 'Images'"** - Claude will create a folder and move image files into it
 
 ### How Approval Works
 
 Before executing any file system operation, Claude will request your approval. This ensures you maintain control over all actions:
-
-
 
 Review each request carefully before approving. You can always deny a request if you're not comfortable with the proposed action.
 
 ## Troubleshooting
 
 If you encounter issues setting up or using the Filesystem Server, these solutions address common problems:
-
 
     1. Restart Claude Desktop completely
     2. Check your `claude_desktop_config.json` file syntax
@@ -9147,12 +9055,9 @@ If you encounter issues setting up or using the Filesystem Server, these solutio
       npm install -g npm
       ```
 
-
-
 ## Next Steps
 
 Now that you've successfully connected Claude Desktop to a local MCP server, explore these options to expand your setup:
-
 
     Browse our collection of official and community-created MCP servers for
     additional capabilities
@@ -9181,7 +9086,7 @@ Now that you've successfully connected Claude Desktop to a local MCP server, exp
 
 MCP clients are instantiated by host applications to communicate with particular MCP servers. The host application, like Claude.ai or an IDE, manages the overall user experience and coordinates multiple clients. Each client handles one direct communication with one server.
 
-Understanding the distinction is important: the *host* is the application users interact with, while *clients* are the protocol-level components that enable server connections.
+Understanding the distinction is important: the _host_ is the application users interact with, while _clients_ are the protocol-level components that enable server connections.
 
 ## Core Client Features
 
@@ -9203,7 +9108,7 @@ Elicitation provides a structured way for servers to gather necessary informatio
 
 **Elicitation flow:**
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant User
     participant Client
@@ -9226,7 +9131,7 @@ The flow enables dynamic information gathering. Servers can request specific dat
 
 **Elicitation components example:**
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   method: "elicitation/requestInput",
   params: {
@@ -9288,7 +9193,7 @@ Roots are a mechanism for clients to communicate filesystem access boundaries to
 
 **Root structure:**
 
-```json  theme={null}
+```json theme={null}
 {
   "uri": "file:///Users/agent/travel-planning",
   "name": "Travel Planning Workspace"
@@ -9303,9 +9208,9 @@ A travel agent working with multiple client trips benefits from roots to organiz
 
 The client provides filesystem roots to the travel planning server:
 
-* `file:///Users/agent/travel-planning` - Main workspace containing all travel files
-* `file:///Users/agent/travel-templates` - Reusable itinerary templates and resources
-* `file:///Users/agent/client-documents` - Client passports and travel documents
+- `file:///Users/agent/travel-planning` - Main workspace containing all travel files
+- `file:///Users/agent/travel-templates` - Reusable itinerary templates and resources
+- `file:///Users/agent/client-documents` - Client passports and travel documents
 
 When the agent creates a Barcelona itinerary, well-behaved servers respect these boundaries—accessing templates, saving the new itinerary, and referencing client documents within the specified roots. Servers typically access files within roots by using relative paths from the root directories or by utilizing file search tools that respect the root boundaries.
 
@@ -9337,7 +9242,7 @@ Sampling enables servers to perform AI-dependent tasks without directly integrat
 
 **Sampling flow:**
 
-```mermaid  theme={null}
+```mermaid theme={null}
 sequenceDiagram
     participant LLM
     participant User
@@ -9367,7 +9272,7 @@ The flow ensures security through multiple human-in-the-loop checkpoints. Users 
 
 **Request parameters example:**
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   messages: [
     {
@@ -9426,17 +9331,18 @@ Common examples include file system servers for document access, database server
 
 Servers provide functionality through three building blocks:
 
-| Feature       | Explanation                                                                                                                                                                             | Examples                                                           | Who controls it |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | --------------- |
-| **Tools**     | Functions that your LLM can actively call, and decides when to use them based on user requests. Tools can write to databases, call external APIs, modify files, or trigger other logic. | Search flights
+| Feature   | Explanation                                                                                                                                                                             | Examples       | Who controls it |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | --------------- |
+| **Tools** | Functions that your LLM can actively call, and decides when to use them based on user requests. Tools can write to databases, call external APIs, modify files, or trigger other logic. | Search flights |
+
 Send messages
-Create calendar events      | Model           |
-| **Resources** | Passive data sources that provide read-only access to information for context, such as file contents, database schemas, or API documentation.                                           | Retrieve documents
+Create calendar events | Model |
+| **Resources** | Passive data sources that provide read-only access to information for context, such as file contents, database schemas, or API documentation. | Retrieve documents
 Access knowledge bases
-Read calendars | Application     |
-| **Prompts**   | Pre-built instruction templates that tell the model to work with specific tools and resources.                                                                                          | Plan a vacation
+Read calendars | Application |
+| **Prompts** | Pre-built instruction templates that tell the model to work with specific tools and resources. | Plan a vacation
 Summarize my meetings
-Draft an email     | User            |
+Draft an email | User |
 
 We will use a hypothetical scenario to demonstrate the role of each of these features, and show how they can work together.
 
@@ -9457,7 +9363,7 @@ Tools are schema-defined interfaces that LLMs can invoke. MCP uses JSON Schema f
 
 **Example tool definition:**
 
-```typescript  theme={null}
+```typescript theme={null}
 {
   name: "searchFlights",
   description: "Search for available flights",
@@ -9507,10 +9413,10 @@ Tools are model-controlled, meaning AI models can discover and invoke them autom
 
 For trust and safety, applications can implement user control through various mechanisms, such as:
 
-* Displaying available tools in the UI, enabling users to define whether a tool should be made available in specific interactions
-* Approval dialogs for individual tool executions
-* Permission settings for pre-approving certain safe operations
-* Activity logs that show all tool executions with their results
+- Displaying available tools in the UI, enabling users to define whether a tool should be made available in specific interactions
+- Approval dialogs for individual tool executions
+- Permission settings for pre-approving certain safe operations
+- Activity logs that show all tool executions with their results
 
 ### Resources
 
@@ -9524,10 +9430,10 @@ Each resource has a unique URI (e.g., `file:///path/to/document.md`) and declare
 
 Resources support two discovery patterns:
 
-* **Direct Resources** - fixed URIs that point to specific data. Example: `calendar://events/2024` - returns calendar availability for 2024
-* **Resource Templates** - dynamic URIs with parameters for flexible queries. Example:
-  * `travel://activities/{city}/{category}` - returns activities by city and category
-  * `travel://activities/barcelona/museums` - returns all museums in Barcelona
+- **Direct Resources** - fixed URIs that point to specific data. Example: `calendar://events/2024` - returns calendar availability for 2024
+- **Resource Templates** - dynamic URIs with parameters for flexible queries. Example:
+  - `travel://activities/{city}/{category}` - returns activities by city and category
+  - `travel://activities/barcelona/museums` - returns all museums in Barcelona
 
 Resource Templates include metadata such as title, description, and expected MIME type, making them discoverable and self-documenting.
 
@@ -9544,9 +9450,9 @@ Resource Templates include metadata such as title, description, and expected MIM
 
 Continuing with the travel planning example, resources provide the AI application with access to relevant information:
 
-* **Calendar data** (`calendar://events/2024`) - Checks user availability
-* **Travel documents** (`file:///Documents/Travel/passport.pdf`) - Accesses important documents
-* **Previous itineraries** (`trips://history/barcelona-2023`) - References past trips and preferences
+- **Calendar data** (`calendar://events/2024`) - Checks user availability
+- **Travel documents** (`file:///Documents/Travel/passport.pdf`) - Accesses important documents
+- **Previous itineraries** (`trips://history/barcelona-2023`) - References past trips and preferences
 
 The AI application retrieves these resources and decides how to process them, whether selecting a subset of data using embeddings or keyword search, or passing raw data directly to the model.
 
@@ -9554,7 +9460,7 @@ In this case, it provides calendar data, weather information, and travel prefere
 
 **Resource Template Examples:**
 
-```json  theme={null}
+```json theme={null}
 {
   "uriTemplate": "weather://forecast/{city}/{date}",
   "name": "weather-forecast",
@@ -9578,8 +9484,8 @@ These templates enable flexible queries. For weather data, users can access fore
 
 Dynamic resources support parameter completion. For example:
 
-* Typing "Par" as input for `weather://forecast/{city}` might suggest "Paris" or "Park City"
-* Typing "JFK" for `flights://search/{airport}` might suggest "JFK - John F. Kennedy International"
+- Typing "Par" as input for `weather://forecast/{city}` might suggest "Paris" or "Park City"
+- Typing "JFK" for `flights://search/{airport}` might suggest "JFK - John F. Kennedy International"
 
 The system helps discover valid values without requiring exact format knowledge.
 
@@ -9587,10 +9493,10 @@ The system helps discover valid values without requiring exact format knowledge.
 
 Resources are application-driven, giving them flexibility in how they retrieve, process, and present available context. Common interaction patterns include:
 
-* Tree or list views for browsing resources in familiar folder-like structures
-* Search and filter interfaces for finding specific resources
-* Automatic context inclusion or smart suggestions based on heuristics or AI selection
-* Manual or bulk selection interfaces for including single or multiple resources
+- Tree or list views for browsing resources in familiar folder-like structures
+- Search and filter interfaces for finding specific resources
+- Automatic context inclusion or smart suggestions based on heuristics or AI selection
+- Manual or bulk selection interfaces for including single or multiple resources
 
 Applications are free to implement resource discovery through any interface pattern that suits their needs. The protocol doesn't mandate specific UI patterns, allowing for resource pickers with preview capabilities, smart suggestions based on current conversation context, bulk selection for including multiple resources, or integration with existing file browsers and data explorers.
 
@@ -9615,7 +9521,7 @@ Prompts provide structured templates for common tasks. In the travel planning co
 
 **"Plan a vacation" prompt:**
 
-```json  theme={null}
+```json theme={null}
 {
   "name": "plan-vacation",
   "title": "Plan a vacation",
@@ -9639,17 +9545,17 @@ Rather than unstructured natural language input, the prompt system enables:
 
 Prompts are user-controlled, requiring explicit invocation. The protocol gives implementers freedom to design interfaces that feel natural within their application. Key principles include:
 
-* Easy discovery of available prompts
-* Clear descriptions of what each prompt does
-* Natural argument input with validation
-* Transparent display of the prompt's underlying template
+- Easy discovery of available prompts
+- Clear descriptions of what each prompt does
+- Natural argument input with validation
+- Transparent display of the prompt's underlying template
 
 Applications typically expose prompts through various UI patterns such as:
 
-* Slash commands (typing "/" to see available prompts like /plan-vacation)
-* Command palettes for searchable access
-* Dedicated UI buttons for frequently used prompts
-* Context menus that suggest relevant prompts
+- Slash commands (typing "/" to see available prompts like /plan-vacation)
+- Command palettes for searchable access
+- Dedicated UI buttons for frequently used prompts
+- Context menus that suggest relevant prompts
 
 ## Bringing Servers Together
 
@@ -9659,15 +9565,15 @@ The real power of MCP emerges when multiple servers work together, combining the
 
 Consider a personalized AI travel planner application, with three connected servers:
 
-* **Travel Server** - Handles flights, hotels, and itineraries
-* **Weather Server** - Provides climate data and forecasts
-* **Calendar/Email Server** - Manages schedules and communications
+- **Travel Server** - Handles flights, hotels, and itineraries
+- **Weather Server** - Provides climate data and forecasts
+- **Calendar/Email Server** - Manages schedules and communications
 
 #### The Complete Flow
 
 1. **User invokes a prompt with parameters:**
 
-   ```json  theme={null}
+   ```json theme={null}
    {
      "prompt": "plan-vacation",
      "arguments": {
@@ -9681,24 +9587,22 @@ Consider a personalized AI travel planner application, with three connected serv
    ```
 
 2. **User selects resources to include:**
-   * `calendar://my-calendar/June-2024` (from Calendar Server)
-   * `travel://preferences/europe` (from Travel Server)
-   * `travel://past-trips/Spain-2023` (from Travel Server)
+   - `calendar://my-calendar/June-2024` (from Calendar Server)
+   - `travel://preferences/europe` (from Travel Server)
+   - `travel://past-trips/Spain-2023` (from Travel Server)
 
 3. **AI processes the request using tools:**
 
    The AI first reads all selected resources to gather context - identifying available dates from the calendar, learning preferred airlines and hotel types from travel preferences, and discovering previously enjoyed locations from past trips.
 
    Using this context, the AI then executes a series of Tools:
-
-   * `searchFlights()` - Queries airlines for NYC to Barcelona flights
-   * `checkWeather()` - Retrieves climate forecasts for travel dates
+   - `searchFlights()` - Queries airlines for NYC to Barcelona flights
+   - `checkWeather()` - Retrieves climate forecasts for travel dates
 
    The AI then uses this information to create the booking and following steps, requesting approval from the user where necessary:
-
-   * `bookHotel()` - Finds hotels within the specified budget
-   * `createCalendarEvent()` - Adds the trip to the user's calendar
-   * `sendEmail()` - Sends confirmation with trip details
+   - `bookHotel()` - Finds hotels within the specified budget
+   - `createCalendarEvent()` - Adds the trip to the user's calendar
+   - `sendEmail()` - Sends confirmation with trip details
 
 **The result:** Through multiple MCP servers, the user researched and booked a Barcelona trip tailored to their schedule. The "Plan a Vacation" prompt guided the AI to combine Resources (calendar availability and travel history) with Tools (searching flights, booking hotels, updating calendars) across different servers—gathering context and executing the booking. A task that could've taken hours was completed in minutes using MCP.
 
@@ -9720,10 +9624,10 @@ For specific implementation details, please refer to the documentation for your 
 
 The Model Context Protocol includes the following projects:
 
-* [MCP Specification](https://modelcontextprotocol.io/specification/latest): A specification of MCP that outlines the implementation requirements for clients and servers.
-* [MCP SDKs](/docs/sdk): SDKs for different programming languages that implement MCP.
-* **MCP Development Tools**: Tools for developing MCP servers and clients, including the [MCP Inspector](https://github.com/modelcontextprotocol/inspector)
-* [MCP Reference Server Implementations](https://github.com/modelcontextprotocol/servers): Reference implementations of MCP servers.
+- [MCP Specification](https://modelcontextprotocol.io/specification/latest): A specification of MCP that outlines the implementation requirements for clients and servers.
+- [MCP SDKs](/docs/sdk): SDKs for different programming languages that implement MCP.
+- **MCP Development Tools**: Tools for developing MCP servers and clients, including the [MCP Inspector](https://github.com/modelcontextprotocol/inspector)
+- [MCP Reference Server Implementations](https://github.com/modelcontextprotocol/servers): Reference implementations of MCP servers.
 
   MCP focuses solely on the protocol for context exchange—it does not dictate
   how AI applications use LLMs or manage the provided context.
@@ -9736,15 +9640,15 @@ MCP follows a client-server architecture where an MCP host — an AI application
 
 The key participants in the MCP architecture are:
 
-* **MCP Host**: The AI application that coordinates and manages one or multiple MCP clients
-* **MCP Client**: A component that maintains a connection to an MCP server and obtains context from an MCP server for the MCP host to use
-* **MCP Server**: A program that provides context to MCP clients
+- **MCP Host**: The AI application that coordinates and manages one or multiple MCP clients
+- **MCP Client**: A component that maintains a connection to an MCP server and obtains context from an MCP server for the MCP host to use
+- **MCP Server**: A program that provides context to MCP clients
 
 **For example**: Visual Studio Code acts as an MCP host. When Visual Studio Code establishes a connection to an MCP server, such as the [Sentry MCP server](https://docs.sentry.io/product/sentry-mcp/), the Visual Studio Code runtime instantiates an MCP client object that maintains the connection to the Sentry MCP server.
 When Visual Studio Code subsequently connects to another MCP server, such as the [local filesystem server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem), the Visual Studio Code runtime instantiates an additional MCP client object to maintain this connection, hence maintaining a one-to-one
 relationship of MCP clients to MCP servers.
 
-```mermaid  theme={null}
+```mermaid theme={null}
 graph TB
     subgraph "MCP Host (AI Application)"
         Client1["MCP Client 1"]
@@ -9781,8 +9685,8 @@ referred to as a "remote" MCP server.
 
 MCP consists of two layers:
 
-* **Data layer**: Defines the JSON-RPC based protocol for client-server communication, including lifecycle management, and core primitives, such as tools, resources, prompts and notifications.
-* **Transport layer**: Defines the communication mechanisms and channels that enable data exchange between clients and servers, including transport-specific connection establishment, message framing, and authorization.
+- **Data layer**: Defines the JSON-RPC based protocol for client-server communication, including lifecycle management, and core primitives, such as tools, resources, prompts and notifications.
+- **Transport layer**: Defines the communication mechanisms and channels that enable data exchange between clients and servers, including transport-specific connection establishment, message framing, and authorization.
 
 Conceptually the data layer is the inner layer, while the transport layer is the outer layer.
 
@@ -9791,10 +9695,10 @@ Conceptually the data layer is the inner layer, while the transport layer is the
 The data layer implements a [JSON-RPC 2.0](https://www.jsonrpc.org/) based exchange protocol that defines the message structure and semantics.
 This layer includes:
 
-* **Lifecycle management**: Handles connection initialization, capability negotiation, and connection termination between clients and servers
-* **Server features**: Enables servers to provide core functionality including tools for AI actions, resources for context data, and prompts for interaction templates from and to the client
-* **Client features**: Enables servers to ask the client to sample from the host LLM, elicit input from the user, and log messages to the client
-* **Utility features**: Supports additional capabilities like notifications for real-time updates and progress tracking for long-running operations
+- **Lifecycle management**: Handles connection initialization, capability negotiation, and connection termination between clients and servers
+- **Server features**: Enables servers to provide core functionality including tools for AI actions, resources for context data, and prompts for interaction templates from and to the client
+- **Client features**: Enables servers to ask the client to sample from the host LLM, elicit input from the user, and log messages to the client
+- **Utility features**: Supports additional capabilities like notifications for real-time updates and progress tracking for long-running operations
 
 #### Transport layer
 
@@ -9802,8 +9706,8 @@ The transport layer manages communication channels and authentication between cl
 
 MCP supports two transport mechanisms:
 
-* **Stdio transport**: Uses standard input/output streams for direct process communication between local processes on the same machine, providing optimal performance with no network overhead.
-* **Streamable HTTP transport**: Uses HTTP POST for client-to-server messages with optional Server-Sent Events for streaming capabilities. This transport enables remote server communication and supports standard HTTP authentication methods including bearer tokens, API keys, and custom headers. MCP recommends using OAuth to obtain authentication tokens.
+- **Stdio transport**: Uses standard input/output streams for direct process communication between local processes on the same machine, providing optimal performance with no network overhead.
+- **Streamable HTTP transport**: Uses HTTP POST for client-to-server messages with optional Server-Sent Events for streaming capabilities. This transport enables remote server communication and supports standard HTTP authentication methods including bearer tokens, API keys, and custom headers. MCP recommends using OAuth to obtain authentication tokens.
 
 The transport layer abstracts communication details from the protocol layer, enabling the same JSON-RPC 2.0 message format across all transport mechanisms.
 
@@ -9821,11 +9725,11 @@ MCP is a stateful protocol that requires lifecycle management. The purpose of li
 
 MCP primitives are the most important concept within MCP. They define what clients and servers can offer each other. These primitives specify the types of contextual information that can be shared with AI applications and the range of actions that can be performed.
 
-MCP defines three core primitives that *servers* can expose:
+MCP defines three core primitives that _servers_ can expose:
 
-* **Tools**: Executable functions that AI applications can invoke to perform actions (e.g., file operations, API calls, database queries)
-* **Resources**: Data sources that provide contextual information to AI applications (e.g., file contents, database records, API responses)
-* **Prompts**: Reusable templates that help structure interactions with language models (e.g., system prompts, few-shot examples)
+- **Tools**: Executable functions that AI applications can invoke to perform actions (e.g., file operations, API calls, database queries)
+- **Resources**: Data sources that provide contextual information to AI applications (e.g., file contents, database records, API responses)
+- **Prompts**: Reusable templates that help structure interactions with language models (e.g., system prompts, few-shot examples)
 
 Each primitive type has associated methods for discovery (`*/list`), retrieval (`*/get`), and in some cases, execution (`tools/call`).
 MCP clients will use the `*/list` methods to discover available primitives. For example, a client can first list all available tools (`tools/list`) and then execute them. This design allows listings to be dynamic.
@@ -9834,11 +9738,11 @@ As a concrete example, consider an MCP server that provides context about a data
 
 For more details about server primitives see [server concepts](./server-concepts).
 
-MCP also defines primitives that *clients* can expose. These primitives allow MCP server authors to build richer interactions.
+MCP also defines primitives that _clients_ can expose. These primitives allow MCP server authors to build richer interactions.
 
-* **Sampling**: Allows servers to request language model completions from the client's AI application. This is useful when servers' authors want access to a language model, but want to stay model independent and not include a language model SDK in their MCP server. They can use the `sampling/complete` method to request a language model completion from the client's AI application.
-* **Elicitation**: Allows servers to request additional information from users. This is useful when servers' authors want to get more information from the user, or ask for confirmation of an action. They can use the `elicitation/request` method to request additional information from the user.
-* **Logging**: Enables servers to send log messages to clients for debugging and monitoring purposes.
+- **Sampling**: Allows servers to request language model completions from the client's AI application. This is useful when servers' authors want access to a language model, but want to stay model independent and not include a language model SDK in their MCP server. They can use the `sampling/complete` method to request a language model completion from the client's AI application.
+- **Elicitation**: Allows servers to request additional information from users. This is useful when servers' authors want to get more information from the user, or ask for confirmation of an action. They can use the `elicitation/request` method to request additional information from the user.
+- **Logging**: Enables servers to send log messages to clients for debugging and monitoring purposes.
 
 For more details about client primitives see [client concepts](./client-concepts).
 
@@ -9851,7 +9755,6 @@ The protocol supports real-time notifications to enable dynamic updates between 
 ### Data Layer
 
 This section provides a step-by-step walkthrough of an MCP client-server interaction, focusing on the data layer protocol. We'll demonstrate the lifecycle sequence, tool operations, and notifications using JSON-RPC 2.0 messages.
-
 
     MCP begins with lifecycle management through a capability negotiation handshake. As described in the [lifecycle management](#lifecycle-management) section, the client sends an `initialize` request to establish the connection and negotiate supported features.
 
@@ -10177,25 +10080,22 @@ Using MCP, AI applications like Claude or ChatGPT can connect to data sources (e
 
 Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
 
-
-
 ## What can MCP enable?
 
-* Agents can access your Google Calendar and Notion, acting as a more personalized AI assistant.
-* Claude Code can generate an entire web app using a Figma design.
-* Enterprise chatbots can connect to multiple databases across an organization, empowering users to analyze data using chat.
-* AI models can create 3D designs on Blender and print them out using a 3D printer.
+- Agents can access your Google Calendar and Notion, acting as a more personalized AI assistant.
+- Claude Code can generate an entire web app using a Figma design.
+- Enterprise chatbots can connect to multiple databases across an organization, empowering users to analyze data using chat.
+- AI models can create 3D designs on Blender and print them out using a 3D printer.
 
 ## Why does MCP matter?
 
 Depending on where you sit in the ecosystem, MCP can have a range of benefits.
 
-* **Developers**: MCP reduces development time and complexity when building, or integrating with, an AI application or agent.
-* **AI applications or agents**: MCP provides access to an ecosystem of data sources, tools and apps which will enhance capabilities and improve the end-user experience.
-* **End-users**: MCP results in more capable AI applications or agents which can access your data and take actions on your behalf when necessary.
+- **Developers**: MCP reduces development time and complexity when building, or integrating with, an AI application or agent.
+- **AI applications or agents**: MCP provides access to an ecosystem of data sources, tools and apps which will enhance capabilities and improve the end-user experience.
+- **End-users**: MCP results in more capable AI applications or agents which can access your data and take actions on your behalf when necessary.
 
 ## Start Building
-
 
     Create MCP servers to expose your data and tools
 
@@ -10203,11 +10103,8 @@ Depending on where you sit in the ecosystem, MCP can have a range of benefits.
 
     Develop applications that connect to MCP servers
 
-
 ## Learn more
-
 
     Learn the core concepts and architecture of MCP
 
 ---
-
