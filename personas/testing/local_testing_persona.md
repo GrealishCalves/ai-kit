@@ -198,6 +198,137 @@ const receipt = await publicClient.waitForTransactionReceipt({
 // ❌ NEVER: Arbitrary time delays
 await new Promise((resolve) => setTimeout(resolve, 2000)); // FORBIDDEN
 
+---
+
+## Quick Reference (Golden Rules)
+
+- AAA structure only: Arrange → Act → Assert.
+- Use chain time (e.g., `publicClient.getBlock().timestamp`), never `Date.now()`.
+- Use block‑scoped `publicClient.getLogs` with explicit ABI and `fromBlock`/`toBlock`.
+- Assert exact wei values (no approximations) and sum all flows to zero where applicable.
+- Validate state and balances for ALL affected parties (player, provider, treasury, ReferralManager, referrer).
+- One behavior per test; keep tests minimal, deterministic, and evidence‑backed.
+- Prefer `simulateContract` for readbacks of non‑view mutating functions.
+
+---
+
+## Canonical Snippets (Copy/Paste)
+
+### Setup Contracts & Wallets
+
+```ts
+const { contracts, publicClient, viem } = await setupLocalEnvironment();
+const walletClients = await viem.getWalletClients();
+const owner = walletClients[0];
+const provider = walletClients[1];
+const player = walletClients[2];
+const referrer = walletClients[3];
+
+await setupTokensForWallet(contracts, publicClient, owner, provider, 20_000_000n);
+await setupTokensForWallet(contracts, publicClient, owner, player, 1_000_000n);
+```
+
+### Create Lottery & Buy Tickets (with Referral Params)
+
+```ts
+const { lotteryId } = await createLotteryNative(contracts, publicClient, provider, {
+  prizeAmount: 10_000_000n, ticketPrice: 100_000n, pickRange: 10, duration: 3600,
+});
+
+const vrfFee = await contracts.lottery.read.getEntropyFee();
+await contracts.token.write.approve([contracts.lottery.address, 100_000n], { account: player.account });
+
+const ZERO32 = "0x" + "0".repeat(64) as const;
+const emptyPermit = { value: 0n, deadline: 0n, v: 0, r: ZERO32, s: ZERO32 } as const;
+
+const buyTx = await contracts.lottery.write.buyTicketsPacked([
+  lotteryId,
+  "0x000005",
+  referrer.account.address,
+  deadline,
+  signature,
+  emptyPermit,
+], { account: player.account, value: vrfFee });
+
+await publicClient.waitForTransactionReceipt({ hash: buyTx, confirmations: 1 });
+```
+
+### Deterministic VRF Fulfillment
+
+```ts
+const seq = await getLatestMockSequenceNumber(contracts.mockEntropy);
+const fulfillTx = await fulfillMockVRFWithLoss(contracts.mockEntropy, publicClient, player, seq, 10);
+const fulfillRcpt = await publicClient.waitForTransactionReceipt({ hash: fulfillTx, confirmations: 1 });
+```
+
+### Event Assertions (Block‑Scoped)
+
+```ts
+const logs = await publicClient.getLogs({
+  address: contracts.referralManager.address,
+  fromBlock: fulfillRcpt.blockNumber,
+  toBlock: fulfillRcpt.blockNumber,
+  event: {
+    type: "event",
+    name: "ReferralCommissionRecorded",
+    inputs: [
+      { type: "address", name: "referrer", indexed: true },
+      { type: "address", name: "referee", indexed: true },
+      { type: "address", name: "token", indexed: true },
+      { type: "uint256", name: "commission" },
+      { type: "uint256", name: "lotteryId" },
+    ],
+  },
+});
+expect(logs.length).to.equal(1);
+```
+
+### Wei‑Exact Financials
+
+```ts
+const ticketPrice = 100_000n;
+const platformFee = (ticketPrice * 500n) / 10_000n; // 5%
+const expectedCommission = (platformFee * 100n) / 10_000n; // 1%
+
+const earnings = await contracts.referralManager.read.referralEarnings([referrer.account.address, contracts.token.address]);
+expect(earnings).to.equal(expectedCommission);
+```
+
+---
+
+## Adding New Tests (Checklist)
+
+1) Pick scope: unit (single behavior) vs E2E (cross‑contract flow).
+2) Start from a minimal working example (use the snippets above).
+3) Enforce AAA; only one Act per test.
+4) Use chain time and block‑scoped logs; no `Date.now()`, no unscoped event queries.
+5) Validate:
+   - Balances for all parties (player, provider, treasury, manager, referrer)
+   - Events with exact args and counts
+   - State reads (e.g., mappings) and invariants (sum of flows = 0)
+6) Prefer `simulateContract` for non‑view functions when reading return values.
+
+---
+
+## Adversarial Patterns (Must Cover Where Relevant)
+
+- Invalid/malleable signatures → zero attribution, no events.
+- ERC‑1271 non‑compliant wallets → zero attribution (works after manager swap too).
+- Out‑of‑order fulfillments → first fulfillment wins lock for referral mapping.
+- Rate changed between buy & fulfill → commission uses committed rate at fulfill time.
+- Refund path (hasWinner=true) → no referral effects for later purchases.
+- Malicious manager:
+  - Reverting manager must not break buys (soft‑fail).
+  - Forced referrer/commission demonstrates admin risk; document and monitor.
+
+---
+
+## Shared Constants
+
+```ts
+export const ZERO32 = "0x" + "0".repeat(64) as const;
+```
+
 // ❌ NEVER: Missing confirmations parameter
 await publicClient.waitForTransactionReceipt({ hash: tx }); // INCOMPLETE
 ```

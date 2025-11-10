@@ -13,7 +13,6 @@ Use this checklist after the feature or fix is delivered. It ensures the work tr
 ## 2. Validate alignment with expectations
 
 - Do the changes match the agreed scope, artifacts, and success criteria?
-- Are stakeholders satisfied with file locations, dependencies, automation hooks, and documentation?
 - Were any out-of-scope modifications introduced? If so, address or roll them back.
 
 ## 3. Capture residual risks and follow-ups

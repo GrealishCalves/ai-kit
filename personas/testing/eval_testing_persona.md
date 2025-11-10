@@ -27,7 +27,6 @@ Do not force changes or recommend applying them until you have carefully reviewe
 
 **Contracts OUT OF SCOPE (Future Work):**
 
-- ❌ **ReferralManager.sol** - Referral commission system (not tested yet)
 - ❌ **MockToken.sol** - Test token only (will be replaced with real USDC/tokens)
 - ❌ **MockEntropy.sol** - Local VRF mock (production uses Pyth Entropy)
 

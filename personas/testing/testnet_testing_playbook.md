@@ -27,6 +27,397 @@ The playbook is now:
 
 ---
 
+## Critical Testnet Pitfalls & Prevention
+
+**Purpose**: Document common testnet testing mistakes that cause test failures, wasted time, and false negatives. These are real issues encountered during Referral System v3 testnet testing that can be easily avoided.
+
+### Pitfall 0: ABI Mismatch Between Test Files and Deployed Contracts
+
+**Problem**: Test ABI files (`apps/hardhat/test/abis/*.abi.ts`) become outdated when contracts are redeployed, causing event filtering to fail silently even though events are emitted correctly on-chain.
+
+**Example of WRONG approach**:
+
+```typescript
+// ❌ WRONG: Manually maintaining ABI files
+// apps/hardhat/test/abis/referralManager.abi.ts
+{
+  name: "ReferralCommissionRecorded",
+  inputs: [
+    { name: "contextId", type: "uint256" }  // OUTDATED! Contract uses "lotteryId"
+  ]
+}
+
+// Event signature hash won't match deployed contract
+// getLogs() returns 0 events even though events are emitted
+```
+
+**Root Cause**: Test ABI files are manually maintained and drift from actual deployed contract ABIs in `apps/hardhat/ignition/deployments/chain-84532/artifacts/`.
+
+**Solution**: Always use Hardhat Ignition deployment artifacts as single source of truth for ABIs.
+
+```typescript
+// ✅ CORRECT: Import ABI from Hardhat Ignition artifacts
+import ReferralManagerArtifact from "../../ignition/deployments/chain-84532/artifacts/ReferralManagerModule#ReferralManager.json" assert { type: "json" };
+
+const referralManagerAbi = ReferralManagerArtifact.abi;
+
+// Use in contract instance
+const referralManager = getContract({
+  address: deployedAddresses.referralManager,
+  abi: referralManagerAbi,
+  client: publicClient,
+});
+```
+
+**Prevention Rule**:
+
+- **NEVER manually maintain test ABI files** - always import from `apps/hardhat/ignition/deployments/chain-84532/artifacts/`
+- **ALWAYS verify ABI source** before writing event filters or contract calls
+- **ALWAYS update imports** after contract redeployments
+
+**Verification Checklist**:
+
+- [ ] Test ABIs imported from `apps/hardhat/ignition/deployments/chain-84532/artifacts/`
+- [ ] Event parameter names match deployed contract exactly
+- [ ] Function signatures match deployed contract exactly
+- [ ] No manual ABI maintenance in `apps/hardhat/test/abis/` directory
+
+---
+
+### Pitfall 1: Self-Referral Rejection
+
+**Problem**: Using the same wallet for both referrer and player causes contract to reject referral and return `address(0)`.
+
+**Example of WRONG code**:
+
+```typescript
+// ❌ WRONG: Same wallet for referrer and player
+const referrer = walletClients[1];
+const player = walletClients[1];  // Self-referral!
+
+// Contract rejects this and returns address(0)
+const signature = await signReferralEIP712(referrer, lotteryId, deadline, ...);
+await buyTicketsWithReferral(player, lotteryId, numbers, referrer.account.address, deadline, signature);
+```
+
+**Root Cause**: Contract has self-referral prevention logic that returns `address(0)` when `msg.sender == referrer`.
+
+**Solution**: Always use different wallets for different roles.
+
+```typescript
+// ✅ CORRECT: Different wallets for different roles
+const referrer = walletClients[0];
+const player = walletClients[1];  // Different wallet
+
+const signature = await signReferralEIP712(referrer, lotteryId, deadline, ...);
+await buyTicketsWithReferral(player, lotteryId, numbers, referrer.account.address, deadline, signature);
+```
+
+**Prevention Rule**: Never assign the same wallet to multiple roles in a single test unless explicitly testing self-referral rejection.
+
+---
+
+### Pitfall 2: Wallet ETH Depletion for VRF Fees
+
+**Problem**: Using wallets without ETH for players causes transaction reverts because VRF callbacks require ETH for entropy fees, not just USDC tokens.
+
+**Example of WRONG code**:
+
+```typescript
+// ❌ WRONG: walletClients[2] might not have ETH
+const player = walletClients[2];
+
+// This will REVERT if player has USDC but no ETH
+await buyTicketsWithPermit(contracts, publicClient, player, lotteryId, numbers);
+// Error: Insufficient ETH for VRF fee
+```
+
+**Root Cause**: Pyth Entropy VRF requires ETH payment for randomness generation. Tests fund wallets with USDC but forget ETH.
+
+**Solution**: Use wallets with ETH (walletClients[0] or walletClients[1]) for any role that sends transactions.
+
+```typescript
+// ✅ CORRECT: Use wallets with ETH
+const provider = walletClients[0]; // Has ETH
+const player = walletClients[1]; // Has ETH
+const referrer = walletClients[0]; // Only signs messages, doesn't need ETH
+
+await buyTicketsWithPermit(contracts, publicClient, player, lotteryId, numbers);
+```
+
+**Prevention Rule**:
+
+- **Transaction senders** (provider, player): Use `walletClients[0]` or `walletClients[1]` (have ETH)
+- **Message signers** (referrer): Can use any wallet (only signs, doesn't send transactions)
+
+---
+
+### Pitfall 3: Insufficient Wallet Funding for Multi-Operation Tests
+
+**Problem**: Tests that perform multiple expensive operations (creating multiple lotteries) fail mid-test due to insufficient token balance.
+
+**Example of WRONG code**:
+
+```typescript
+// ❌ WRONG: Insufficient funding for 2 lotteries
+const prizeAmount = 10_000_000n;  // 10 USDC per lottery
+await ensureMultipleWalletBalances(contracts.token, publicClient, provider, [
+  { address: provider.account.address, requiredBalance: 25_000_000n, label: "provider" }
+]);
+
+// First lottery: OK (15M remaining)
+await createLotteryWithPermit(contracts, publicClient, provider, { prizeAmount, ... });
+
+// Second lottery: REVERTS (insufficient balance)
+await createLotteryWithPermit(contracts, publicClient, provider, { prizeAmount, ... });
+```
+
+**Root Cause**: Minimal funding (2.5x single operation) doesn't account for multiple operations + gas fees.
+
+**Solution**: Over-fund wallets generously for testnet smoke tests.
+
+```typescript
+// ✅ CORRECT: Generous funding for multiple operations
+const prizeAmount = 10_000_000n;
+await ensureMultipleWalletBalances(contracts.token, publicClient, provider, [
+  { address: provider.account.address, requiredBalance: 500_000_000n, label: "provider" }
+]);
+
+// Both lotteries succeed with plenty of buffer
+await createLotteryWithPermit(contracts, publicClient, provider, { prizeAmount, ... });
+await createLotteryWithPermit(contracts, publicClient, provider, { prizeAmount, ... });
+```
+
+**Prevention Rule**: For N operations, fund wallets with `50x * operationCost` to prevent depletion across test runs.
+
+---
+
+### Pitfall 4: Test Isolation - Accumulated State
+
+**Problem**: Tests running sequentially accumulate state (commission earnings, balances), causing later tests to fail when expecting absolute values.
+
+**Example of WRONG code**:
+
+```typescript
+// ❌ WRONG: Expects absolute zero, fails if previous tests added commissions
+it("should not record commission with invalid signature", async () => {
+  const earnings = await contracts.referralManager.read.referralEarnings([referrer, token]);
+  expect(earnings).to.equal(0n); // Fails if Test N ran before and added 50n
+});
+```
+
+**Root Cause**: Tests share wallets and blockchain state persists between tests.
+
+**Solution**: Capture baseline state and verify no change instead of expecting absolute values.
+
+```typescript
+// ✅ CORRECT: Capture baseline and verify no change
+let initialEarnings: bigint;
+
+it("should create lottery", async () => {
+  // Capture baseline before test
+  initialEarnings = await contracts.referralManager.read.referralEarnings([referrer, token]);
+  // ... test logic ...
+});
+
+it("should not record commission with invalid signature", async () => {
+  const currentEarnings = await contracts.referralManager.read.referralEarnings([referrer, token]);
+  expect(currentEarnings).to.equal(initialEarnings, "No new commission should be recorded");
+});
+```
+
+**Prevention Rule**: Always capture initial state and verify deltas, never expect absolute values in sequential tests.
+
+---
+
+### Pitfall 5: Small Token Amounts Are Fine for Testnet
+
+**Misconception**: "We need large token amounts to properly test the system."
+
+**Reality**: Small token amounts (10M prize = 0.01 USDC, 100k ticket = 0.0001 USDC) work perfectly for testnet smoke tests.
+
+**Why Small Amounts Work**:
+
+- ✅ Tests focus on **core logic**, not edge cases
+- ✅ Prevents wallet depletion across test runs
+- ✅ Faster test execution (less token minting)
+- ✅ Easier to reason about financial flows
+- ✅ Matches production behavior (deterministic math)
+
+**Example**:
+
+```typescript
+// ✅ CORRECT: Small amounts for testnet smoke tests
+const TESTNET_VALUES = {
+  prizeAmount: 10_000_000n, // 10 USDC (0.01 USDC with 6 decimals)
+  ticketPrice: 100_000n, // 0.1 USDC (0.0001 USDC)
+  providerBalance: 50_000_000n, // 50 USDC
+  playerBalance: 5_000_000n, // 5 USDC
+};
+```
+
+**Prevention Rule**: Use minimal token amounts for testnet smoke tests; save large amounts for local edge case testing.
+
+---
+
+### Pitfall 6: Lottery Status Behavior Misunderstanding
+
+**Problem**: Expecting lottery status to be ENDED (2) after a player loses, when it should remain ACTIVE (1) for multi-player design.
+
+**Example of WRONG expectation**:
+
+```typescript
+// ❌ WRONG: Expects ENDED after loss
+await waitForVRFCompletion(lotteryId);
+const lotteryInfo = await contracts.lottery.read.getLotteryInfo([lotteryId]);
+expect(lotteryInfo.status).to.equal(2); // WRONG! Should be 1 (ACTIVE) after loss
+```
+
+**Root Cause**: Misunderstanding of multi-player lottery design.
+
+**Correct Behavior**:
+
+- **Player WINS**: Status becomes ENDED (2), `hasWinner = true`
+- **Player LOSES**: Status remains ACTIVE (1), `hasWinner = false` (allows more players)
+
+**Solution**: Understand and test correct status transitions.
+
+```typescript
+// ✅ CORRECT: Verify correct status based on outcome
+await waitForVRFCompletion(lotteryId);
+const lotteryInfo = await contracts.lottery.read.getLotteryInfo([lotteryId]);
+
+if (lotteryInfo.hasWinner) {
+  expect(lotteryInfo.status).to.equal(2, "Lottery should be ENDED when player wins");
+} else {
+  expect(lotteryInfo.status).to.equal(1, "Lottery should remain ACTIVE when player loses (multi-player design)");
+}
+```
+
+**Prevention Rule**: Always verify status based on `hasWinner` flag, not assumptions about win/loss outcomes.
+
+---
+
+### Pitfall 7: Commission Calculation Errors
+
+**Problem**: Calculating commission as 1% of ticket price instead of 1% of platform fee (5% of total cost).
+
+**Example of WRONG calculation**:
+
+```typescript
+// ❌ WRONG: 1% of ticket price
+const ticketPrice = 100_000n;
+const expectedCommission = (ticketPrice * 100n) / 10_000n; // WRONG!
+```
+
+**Root Cause**: Misunderstanding of commission calculation formula.
+
+**Correct Formula**: Commission = 1% of platform fee, where platform fee = 5% of total cost.
+
+**Solution**: Use correct multi-step calculation.
+
+```typescript
+// ✅ CORRECT: 1% of platform fee (5% of total cost)
+const ticketPrice = 100_000n;
+const totalCost = ticketPrice * BigInt(numbers.length);
+const platformFee = (totalCost * 500n) / 10_000n; // 5% platform fee
+const expectedCommission = (platformFee * 100n) / 10_000n; // 1% of platform fee
+```
+
+**Prevention Rule**: Always calculate commission as `1% of (5% of totalCost)`, not `1% of ticketPrice`.
+
+---
+
+### Pitfall 8: Subgraph Query Field Mismatches
+
+**Problem**: Querying for fields that don't exist in the actual subgraph schema causes GraphQL errors.
+
+**Example of WRONG query**:
+
+```graphql
+# ❌ WRONG: Fields don't exist in schema
+query GetReferralCommission {
+  referralCommission {
+    buyer # Should be: referee
+    amount # Should be: commission
+  }
+}
+```
+
+**Root Cause**: Writing queries without checking actual schema from `apps/goldsky/schema.graphql`.
+
+**Solution**: Always verify field names against actual schema.
+
+```graphql
+# ✅ CORRECT: Use actual schema field names
+query GetReferralCommission {
+  referralCommission {
+    referee # Correct field name
+    commission # Correct field name
+    token
+    blockNumber
+  }
+}
+```
+
+**Prevention Rule**: Always check `apps/goldsky/schema.graphql` before writing GraphQL queries.
+
+---
+
+### Pitfall 9: Subgraph ID-Based Lookup vs Where Filters
+
+**Problem**: Using `where` filters for unique entity lookups instead of direct ID-based queries.
+
+**Example of WRONG query**:
+
+```typescript
+// ❌ WRONG: Using where filter for unique lookup
+const query = `
+  query GetReferralEarnings($referrer: String!, $token: String!) {
+    referralEarnings(where: { referrer: $referrer, token: $token }) {
+      totalEarnings
+    }
+  }
+`;
+```
+
+**Root Cause**: Subgraph entities have composite IDs that should be used directly.
+
+**Solution**: Use ID-based lookup with composite key.
+
+```typescript
+// ✅ CORRECT: Direct ID-based lookup
+const id = `${referrer.toLowerCase()}-${token.toLowerCase()}`;
+const query = `
+  query GetReferralEarnings($id: ID!) {
+    referralEarnings(id: $id) {
+      totalEarnings
+    }
+  }
+`;
+```
+
+**Prevention Rule**: For unique entity lookups, use direct ID queries instead of `where` filters.
+
+---
+
+### Pitfall Prevention Checklist
+
+Before running testnet tests, verify:
+
+- [ ] **ABI source correctness** - Import from `apps/hardhat/ignition/deployments/chain-84532/artifacts/`, not manual test files
+- [ ] **Different wallets for different roles** - No self-referral scenarios
+- [ ] **Transaction senders have ETH** - Use `walletClients[0]` or `walletClients[1]`
+- [ ] **Generous wallet funding** - 50x operation cost for multi-operation tests
+- [ ] **Baseline state capture** - Track initial values, verify deltas
+- [ ] **Small token amounts** - 10M prize, 100k ticket for smoke tests
+- [ ] **Correct status expectations** - ACTIVE after loss, ENDED after win
+- [ ] **Correct commission formula** - 1% of (5% of totalCost)
+- [ ] **Schema field verification** - Check `schema.graphql` before queries
+- [ ] **ID-based subgraph lookups** - Use composite IDs for unique entities
+
+---
+
 ## Core Philosophy: Deterministic Logic Stays Local
 
 **Fundamental Principle**: If logic is deterministic and works 100% locally, it will work 100% on testnet. Don't waste testnet resources re-testing deterministic behavior.

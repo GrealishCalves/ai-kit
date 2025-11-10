@@ -4,6 +4,12 @@
 
 ## 🤖 AI agent Instructions
 
+**🚨 CRITICAL COMMENT RULE:**
+
+- ❌ NEVER put technical details, specs, or implementation details in comments
+- ✅ ALL technical content MUST go in the issue description (this template)
+- Comments are ONLY for: brief status updates during work + DoD when marking Done
+
 ### Title Format
 
 - **Format:** `[Brief Description]`

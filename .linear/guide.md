@@ -298,6 +298,22 @@ Each template includes:
 
 ## AI agent Workflow
 
+**🚨 CRITICAL COMMENT RULE FOR AI AGENTS:**
+
+**❌ NEVER put technical details, specifications, or implementation details in comments.**
+
+**✅ ALL technical content MUST go in the issue description.**
+
+**Comments are ONLY for:**
+
+1. Brief status updates during active work (2-3 sentences max)
+2. DoD (Definition of Done) when marking issue as Done
+3. Brief blocker notes
+
+See [Comments](#comments) section for complete rules.
+
+---
+
 ### Linear MCP Tools
 
 | Tool                           | Purpose                      |
@@ -815,42 +831,44 @@ mutation MoveFromTriage {
 
 ## Comments
 
-Comments are the primary tool for updating issue status, sharing context, and documenting completion. Linear supports rich markdown formatting and @mentions for collaboration.
+**CRITICAL RULE:** Comments are ONLY for quick progress updates during active work and DoD (Definition of Done) when completing issues.
+
+**❌ NEVER put in comments:**
+
+- Technical specifications or implementation details
+- Contract rules, validation logic, or business requirements
+- Code examples, file references, or architecture decisions
+- Detailed checklists or acceptance criteria
+
+**✅ ALL technical details MUST go in the issue description**, not comments.
 
 ### Comment Types and Use Cases
 
-| Comment Type        | When to Use                            | Required Format             |
-| ------------------- | -------------------------------------- | --------------------------- |
-| **Status Update**   | Progress updates, blockers, next steps | `## 📊 Status Update`       |
-| **Context Sharing** | Technical details, decisions, links    | `## 📝 Context`             |
-| **DoD Comment**     | Marking issue as Done with evidence    | `## ✅ Definition of Done`  |
-| **Question**        | Asking for clarification or help       | `## ❓ Question`            |
-| **Decision**        | Documenting technical decisions        | `## 🎯 Decision`            |
-| **Blocker**         | Reporting blocking issues              | `## 🚫 Blocker`             |
-| **General Comment** | Any other communication                | No specific format required |
+| Comment Type      | When to Use                                       | Required Format            |
+| ----------------- | ------------------------------------------------- | -------------------------- |
+| **Status Update** | Brief progress updates during active work         | `## 📊 Status Update`      |
+| **DoD Comment**   | REQUIRED when marking issue as Done with evidence | `## ✅ Definition of Done` |
+| **Blocker**       | Reporting blocking issues (concise)               | `## 🚫 Blocker`            |
+
+**Removed Comment Types (Use Issue Description Instead):**
+
+- ❌ Context Sharing - Put in issue description
+- ❌ Question - Ask in issue description or separate issue
+- ❌ Decision - Document in issue description
+- ❌ General Comment - Update issue description
 
 ### 1. Status Update Comments
 
-Use status update comments to communicate progress, blockers, and next steps.
+**Purpose:** Brief, concise progress updates during active work. Keep it short - 2-3 sentences max.
 
 **Format:**
 
 ```markdown
 ## 📊 Status Update
 
-**Progress:**
-
-- ✅ Completed: [What's done]
-- 🔄 In Progress: [What's being worked on]
-- ⏳ Next: [What's coming next]
-
-**Blockers:**
-
-- [Any blockers or dependencies]
-
-**ETA:**
-
-- [Expected completion date/time]
+- ✅ Completed: [Brief what's done]
+- 🔄 In Progress: [Brief what's being worked on]
+- ⏳ Next: [Brief next step]
 ```
 
 **Example:**
@@ -858,80 +876,19 @@ Use status update comments to communicate progress, blockers, and next steps.
 ```markdown
 ## 📊 Status Update
 
-**Progress:**
-
-- ✅ Completed: OAuth provider configuration for Google and GitHub
-- 🔄 In Progress: Implementing OAuth callback endpoints
-- ⏳ Next: Add OAuth login buttons to UI
-
-**Blockers:**
-
-- Waiting for Microsoft OAuth app approval (ETA: 2 days)
-
-**ETA:**
-
-- Backend complete by EOD today
-- Frontend complete by tomorrow
+- ✅ Completed: Validation functions implemented
+- 🔄 In Progress: Adding UI error messages
+- ⏳ Next: Testing edge cases
 ```
 
-### 2. Context Sharing Comments
+**Rules:**
 
-Use context comments to share technical details, decisions, links, and relevant information.
+- ✅ Keep it concise (2-3 sentences max)
+- ✅ Focus on progress, not technical details
+- ❌ NO code examples, file paths, or technical specs
+- ❌ NO detailed explanations (put in issue description)
 
-**Format:**
-
-````markdown
-## 📝 Context
-
-**Summary:**
-[Brief summary of the context]
-
-**Details:**
-
-- [Detail 1]
-- [Detail 2]
-
-**Links:**
-
-- [Relevant links, docs, PRs]
-
-**Code:**
-
-```[language]
-[Code snippet if relevant]
-```
-````
-
-````
-
-**Example:**
-
-```markdown
-## 📝 Context
-
-**Summary:**
-OAuth callback endpoint implementation uses PKCE flow for enhanced security.
-
-**Details:**
-- Using `authorization_code` grant type with PKCE
-- State parameter validated to prevent CSRF attacks
-- Tokens stored in httpOnly cookies (not localStorage)
-
-**Links:**
-- OAuth 2.0 PKCE RFC: https://tools.ietf.org/html/rfc7636
-- PR: https://github.com/org/repo/pull/123
-
-**Code:**
-```ts
-router.post('/oauth/callback', async (req, res) => {
-  const { code, state } = req.body;
-  validateState(state);
-  const token = await exchangeCodeForToken(code);
-  return res.cookie('auth_token', token, { httpOnly: true });
-});
-````
-
-### 3. Definition of Done (DoD) Comments
+### 2. Definition of Done (DoD) Comments
 
 **DoD comments are REQUIRED when marking an issue as "Done".** This is the final comment before closing an issue.
 
@@ -970,110 +927,18 @@ router.post('/oauth/callback', async (req, res) => {
 3. Verifiable (anyone can verify completion)
 4. Complete (all sections filled or marked N/A)
 
-### 4. Question Comments
+### 3. Blocker Comments
 
-Use question comments to ask for clarification or help.
-
-**Format:**
-
-```markdown
-## ❓ Question
-
-**Question:**
-[Your question]
-
-**Context:**
-[Why you're asking, what you've tried]
-
-**Urgency:**
-[Blocking / Non-blocking]
-```
-
-**Example:**
-
-```markdown
-## ❓ Question
-
-**Question:**
-Should OAuth tokens be stored in database or in-memory cache?
-
-**Context:**
-Currently implementing token storage. Database provides persistence but adds latency. In-memory cache is faster but tokens lost on restart.
-
-**Urgency:**
-Blocking - need decision before proceeding with implementation
-```
-
-### 5. Decision Comments
-
-Use decision comments to document technical decisions.
-
-**Format:**
-
-```markdown
-## 🎯 Decision
-
-**Decision:**
-[What was decided]
-
-**Rationale:**
-[Why this decision was made]
-
-**Alternatives Considered:**
-
-- [Alternative 1] - [Why not chosen]
-- [Alternative 2] - [Why not chosen]
-
-**Impact:**
-[What this affects]
-```
-
-**Example:**
-
-```markdown
-## 🎯 Decision
-
-**Decision:**
-Store OAuth tokens in database with Redis cache layer
-
-**Rationale:**
-
-- Persistence ensures tokens survive server restarts
-- Redis cache provides fast access for frequent reads
-- Best of both worlds: reliability + performance
-
-**Alternatives Considered:**
-
-- Database only - Too slow for frequent token validation
-- In-memory only - Tokens lost on restart, poor UX
-
-**Impact:**
-
-- Requires Redis setup in infrastructure
-- Adds ~10ms latency vs in-memory (acceptable)
-- Improves reliability significantly
-```
-
-### 6. Blocker Comments
-
-Use blocker comments to report blocking issues.
+**Purpose:** Report blocking issues that prevent progress. Keep it concise.
 
 **Format:**
 
 ```markdown
 ## 🚫 Blocker
 
-**Blocker:**
-[What's blocking progress]
-
-**Impact:**
-[How this affects the issue]
-
-**Action Needed:**
-[What needs to happen to unblock]
-
-**Owner:**
-[@mention person responsible]
+**Blocker:** [Brief description]
+**Action Needed:** [What needs to happen]
+**Owner:** [@mention if applicable]
 ```
 
 **Example:**
@@ -1081,75 +946,75 @@ Use blocker comments to report blocking issues.
 ```markdown
 ## 🚫 Blocker
 
-**Blocker:**
-Microsoft OAuth app approval pending for 3 days
-
-**Impact:**
-Cannot complete OAuth integration testing for Microsoft provider
-
-**Action Needed:**
-
-- Follow up with Microsoft support
-- Consider using test credentials for now
-
-**Owner:**
-@john-doe to follow up with Microsoft
+**Blocker:** Waiting for API key approval
+**Action Needed:** Follow up with platform support
+**Owner:** @john-doe
 ```
 
-### Comment Formatting Standards
+**Rules:**
 
-**Markdown Support:**
+- ✅ Keep it brief (1-2 sentences)
+- ✅ Focus on what's blocking and what's needed
+- ❌ NO detailed technical explanations
 
-Linear comments support full markdown:
+### Comment Best Practices
 
-- **Headers:** `## Header`, `### Subheader`
-- **Lists:** `- Item`, `1. Item`
-- **Code:** `` `inline` ``, ` ```language\ncode\n``` `
-- **Links:** `[text](url)`
-- **Bold/Italic:** `**bold**`, `*italic*`
-- **Checkboxes:** `- [ ] Todo`, `- [x] Done`
-- **Tables:** Standard markdown tables
-- **Mentions:** `@username`
+**✅ DO:**
 
-**Best Practices:**
+- Keep comments brief and concise (2-3 sentences max for status updates)
+- Use status updates to communicate progress during active work
+- ALWAYS add DoD comment before marking issue as Done
+- Use @mentions for visibility when needed
+- Link to PRs when relevant
 
-1. **Use headers** - Start comments with `##` header for clarity
-2. **Be concise** - Keep comments focused and scannable
-3. **Use formatting** - Bold, lists, code blocks for readability
-4. **Add context** - Link to PRs, docs, related issues
-5. **@mention** - Tag relevant people for visibility
-6. **Update regularly** - Post status updates frequently
-7. **Document decisions** - Record why, not just what
+**❌ DON'T:**
 
-**Anti-Patterns:**
+- Put technical specifications in comments (use issue description)
+- Add code examples, file paths, or architecture details in comments
+- Write long explanations or detailed checklists in comments
+- Use comments for questions or decisions (update issue description instead)
+- Skip DoD comment when marking Done
 
-- ❌ Long paragraphs without structure
-- ❌ No formatting (wall of text)
-- ❌ Missing context or links
-- ❌ Vague status updates ("working on it")
-- ❌ No @mentions when input needed
-- ❌ Skipping DoD comment when marking Done
+**CRITICAL ANTI-PATTERNS:**
+
+- ❌ Adding "Technical Implementation Details" comments
+- ❌ Adding "Context" comments with code snippets
+- ❌ Adding "Related Issue" reference comments
+- ❌ Adding specification details or contract rules in comments
+- ❌ Using comments as a substitute for proper issue description
 
 ### AI Agent Implementation
 
-**Creating Comments via Linear MCP:**
+**CRITICAL RULES FOR AI AGENTS:**
+
+1. **NEVER create comments with technical details** - All specs go in issue description
+2. **ONLY create comments for:**
+   - Brief status updates during active work (2-3 sentences max)
+   - DoD comment when marking issue as Done
+   - Blocker comments (brief, concise)
+3. **If you need to add technical details** - Update the issue description, NOT comments
+
+**Creating Status Update Comments:**
 
 ```typescript
-// Status update comment
+// ✅ CORRECT: Brief status update
 await linear({
-  query: `Add status update comment to issue CHA-100: "Progress: OAuth backend complete. Next: Frontend UI"`,
+  query: `Add status update comment to issue CHA-100: "Completed validation functions. In progress: UI error messages. Next: Testing edge cases."`,
   is_read_only: false,
   summary: "Add status update comment",
 });
 
-// Context sharing comment
+// ❌ WRONG: Technical details in comment
 await linear({
-  query: `Add context comment to issue CHA-100 with technical details about PKCE flow implementation`,
-  is_read_only: false,
-  summary: "Add context comment",
+  query: `Add comment with technical implementation details, contract rules, code examples...`,
+  // DON'T DO THIS - Update issue description instead
 });
+```
 
-// DoD comment (required before marking Done)
+**Creating DoD Comments:**
+
+```typescript
+// ✅ CORRECT: DoD comment when marking Done
 await linear({
   query: `Add DoD comment to issue CHA-100 with implementation evidence, test results, and deployment status`,
   is_read_only: false,
@@ -1157,30 +1022,14 @@ await linear({
 });
 ```
 
-**GraphQL Example:**
-
-```graphql
-mutation AddComment {
-  commentCreate(input: { issueId: "issue-uuid", body: "## 📊 Status Update\n\n**Progress:**\n- ✅ Backend complete\n- 🔄 Frontend in progress" }) {
-    success
-    comment {
-      id
-      createdAt
-    }
-  }
-}
-```
-
 ### Comment Workflow Summary
 
 **During Development:**
 
-1. **Start work** → Add status update comment
-2. **Make progress** → Add status update comments regularly
-3. **Make decisions** → Add decision comments
-4. **Hit blockers** → Add blocker comments
-5. **Share context** → Add context comments
-6. **Ask questions** → Add question comments
+1. **Start work** → Optional: Add brief status update comment
+2. **Make progress** → Optional: Add brief status update comments
+3. **Hit blockers** → Add brief blocker comment
+4. **Need to add technical details** → Update issue description, NOT comments
 
 **Before Marking Done:**
 
